@@ -1,0 +1,30 @@
+name: CI for bloom webiste
+
+on:
+  # We must do a trigger on a push: instead of a types: closed so GitHub Secrets
+  # are available to the workflow run
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:
+
+env:
+  # Safeguard to prevent pushing images to registeries after build
+  PUSH_TO_REGISTRIES: true
+
+jobs:
+  build-runners:
+    name: Trigger Build and Push of Runner Images
+    runs-on: [self-hosted, python3]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set Docker auth
+        run: |
+          gcloud auth configure-docker --quiet
+          gcloud auth configure-docker asia-south1-docker.pkg.dev
+      - name: Build docker image
+        run: |
+          docker build -t europe-docker.pkg.dev/divine-bonbon-446705-p9/boolmx-docker/bloom-website:$(git rev-parse --short "$GITHUB_SHA") . --network=host
+      - name: Push docker image
+        run: |
+          docker push europe-docker.pkg.dev/divine-bonbon-446705-p9/boolmx-docker/bloom-website:$(git rev-parse --short "$GITHUB_SHA")
