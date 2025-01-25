@@ -28,3 +28,25 @@ jobs:
       - name: Push docker image
         run: |
           docker push europe-docker.pkg.dev/divine-bonbon-446705-p9/boolmx-docker/bloom-website:$(git rev-parse --short "$GITHUB_SHA")
+  deploy_livestage:
+      name: Deploy to Livestage
+      runs-on: [self-hosted, python3]
+      needs: build-runners
+      if: github.ref == 'refs/heads/main'
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+          with:
+            repository: bloomxlab/helm-chart
+            ref: main
+            token: ${{ secrets.PUSH_TOKEN }}
+  
+        - name: Update version and commit
+          run: |
+            cd ./bloom-website
+            sed -i "s/tag: \S*/tag: $BUILD_TAG/g" values.yaml
+            git config --global user.email "devops@bloomx.com"
+            git config --global user.name "Automation"
+            git add values.yaml
+            git commit -m "updating image tag version"
+            git push
