@@ -29,7 +29,7 @@ jobs:
         run: |
           docker push europe-docker.pkg.dev/divine-bonbon-446705-p9/boolmx-docker/bloom-website:$(git rev-parse --short "$GITHUB_SHA")
   deploy_livestage:
-      name: Deploy to Livestage
+      name: Deploy to stage
       runs-on: [self-hosted, python3]
       needs: build-runners
       if: github.ref == 'refs/heads/main'
