@@ -11,7 +11,7 @@ const Teams = () => {
   return (
     <div id="teams" className="  bg-[#F2F2F2] pb-16">
       <h1 className="text-4xl text-[#00A59B] font-semibold text-center pt-16">
-        Meet Our Team
+      la nostra team
       </h1>
 
       <div className="flex justify-center gap-10 mt-5">

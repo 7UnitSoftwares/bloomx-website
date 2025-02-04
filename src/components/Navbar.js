@@ -29,7 +29,7 @@ const Navbar = () => {
   const data = [
     { title: "Chi siamo", to: "/about" },
     {
-      title: "Comunità",
+      title: "Community",
       to: "/community",
       items: [
         { title: "Buds", to: "Buds" },

@@ -13,8 +13,8 @@ const page = () => {
   return (
     <section className="bg-[#F2F2F2] min-h-screen overflow-hidden">
       <SectionWithBackground
-        title="Our Community"
-        description="A space to nurture your potential, connect <br /> with others, and explore your creativity."
+        title="Le nostre community"
+        description="In Bloom trovi tutto ciò che serve per <br />il tuo benessere e la tua crescita"
       />
       <Container>
         <div class={`flex  flex-col mt-16 lg:mt-10 gap-16 justify-center items-center `}>
@@ -44,6 +44,18 @@ const page = () => {
                 <div className="flex  justify-center items-start  gap-5  ">
                   <p className="text-[#373737] text-center lg:text-start  text-2xl font-normal ">
                     {item.desc}
+                    <br/><br/>
+                    {item.meeting?.length > 0? <p className="text-xl"><i>Quando ci Incontriamo:</i> <b>{item.meeting}</b></p>:<></>}
+                    {item.howitworks?.length > 0? <p className="text-xl">
+                    {item.section === "Women" && <i>Le Nostre Esperienze:</i>}
+                    {item.section === "Parents" && <i>Cosa Offriamo:</i>}
+                    {(item.section === "Buds" || item.section === "Students") && <i>Come Funziona:</i>}
+                    <ul style={{listStyle:'disc', marginLeft:'20px'}}>
+                      {item.howitworks?.map((i, index) => (
+                        <li key={index} className="text-xl">{i}</li>
+                      ))}
+                    </ul>
+                    </p>:<></>}
                   </p>
                 </div>
               </div>

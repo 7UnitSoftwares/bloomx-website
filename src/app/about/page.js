@@ -17,19 +17,18 @@ const page = () => {
   return (
     <section className="bg-[#F2F2F2] overflow-hidden">
       <SectionWithBackground
-        title="About Us"
-        description="A space to nurture your potential, connect <br /> with others, and explore your creativity."
+        title="Cosa è Bloom"
+        description="Bloom è un centro di pedagogia moderna che <br /> accompagna le persone nel loro percorso di vita."
       />
       <Container>
         <div className="mt-16 lg:mt-10 mb-10">
-          <h1 className="typography">Our Mission</h1>
+          <h1 className="typography">Il progetto</h1>
           <div className="bg-[#F2F2F2]  flex flex-col-reverse lg:flex-row justify-center items-center lg:gap-16">
-            <p className="lg:text-xl text-center lg:text-start font-normal text-[#373737] lg:leading-[40px]">
-              Our mission at Bloom is to create a nurturing environment where
-              individuals can grow, learn, and connect with their inner
-              potential. We believe in fostering creativity, mindfulness, and
-              personal development through transformative experiences.{" "}
-            </p>
+            <span className="lg:text-xl text-[#373737] font- lg:leading-[1.5]">
+              <p>Bloom è un centro di pedagogia moderna che accompagna le persone nel loro percorso di vita. Aiutiamo bambini e studenti a conoscersi meglio, gestire le emozioni e apprendere in modo efficace. Supportiamo gli adulti a riappropriarsi dei loro spazi e tempi, attraverso mindfulness e crescita intenzionale. Affianchiamo i genitori con comprensione e senza giudizio, creando uno spazio dove sentirsi accolti e supportati nel loro ruolo educativo.</p>
+              <br/>
+              <p>Bloom integra pedagogia, educazione emozionale e pratiche olistiche come mindfulness e YogaArt per creare esperienze di apprendimento profonde e trasformative. Ogni strumento che utilizziamo ha una forte valenza pedagogica, pensata per accompagnare le persone a riscoprire e attivare le proprie risorse interiori.</p>
+            </span>
             <img src="/about/mission1.png" alt="" />
           </div>
         </div>
@@ -56,42 +55,19 @@ const page = () => {
       </div>
       <div className="mt-10 mb-10">
         <Container>
-          <h1 className="typography mt-10">Our Vission</h1>
+          <h1 className="typography mt-10">La visione</h1>
           <div className="bg-[#F2F2F2]  flex flex-col mt-5 lg:flex-row justify-center items-center lg:gap-16 gap-5">
             <img src="/about/vision.png" alt="" />
 
-            <p className="lg:text-xl font-normal text-center lg:text-start text-[#373737] lg:leading-[40px]">
-              Our mission at Bloom is to create a nurturing environment where
-              individuals can grow, learn, and connect with their inner
-              potential. We believe in fostering creativity, mindfulness, and
-              personal development through transformative experiences.{" "}
+            <p className="lg:text-xl font-normal text-center lg:text-start text-[#373737] lg:leading-[1.5]">
+            Un mondo dove la pedagogia moderna diventa motore di trasformazione collettiva, dove ogni persona - bambino, studente, genitore o adulto - intraprende un viaggio di crescita autentica attraverso l'apprendimento condiviso e le esperienze che nutrono mente, cuore e talenti. Un percorso che porta ciascuno a realizzare pienamente il proprio potenziale, creando un impatto positivo che si estende dalla sfera personale a quella sociale.{" "}
             </p>
           </div>
         </Container>
       </div>
       <Container>
-        <div className="flex flex-col justify-center items-center">
-          <h1 className="typography mt-10">Our Programs </h1>
-          <p className="text-center mt-10 lg:w-[50%] text-xl font-normal text-[#808080]  ">
-            Participate in transformative workshops, community gatherings, and
-            creative sessions designed to help you relax and grow. Every evening
-            at Bloom is an opportunity to connect, learn, and rejuvenate in a
-            welcoming environment.
-          </p>
-        </div>
-        <div className=" mt-10 grid justify-center items-center lg:grid-cols-3  gap-20 ">
-          {EventData.map((item, index) => (
-            <Eventcard key={index} item={item} />
-          ))}
-        </div>
-
         <Teams />
       </Container>
-      <div className=" pt-10 pb-10 bg-white">
-        <h1 className="typography mb-10"> Collaboration</h1>
-        <Collabration />
-      </div>
-
       <Banner />
     </section>
   );

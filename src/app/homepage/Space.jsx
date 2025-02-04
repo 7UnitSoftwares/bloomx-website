@@ -49,19 +49,12 @@ const Space = () => {
       <div className="overflow-hidden">
         <Container>
           <div id="space" className="px-5 md:px-28 pb-16">
-            <h1 className="typography pt-16"> Nostro Spazio</h1>
+            <h1 className="typography pt-16">Lo  SPAZIO</h1>
             <p className="text-center  lg:mt-5 mt-2  lg:text-xl font-light text-[#808080] ">
-              Un Rifugio per la Crescita e la Creatività
+              Tutto ciò di cui hai bisogno per il tuo benessere e la tua crescita
             </p>
-            <p className="font- lg:text-xl text-[#373737] lg:leading-10 lg:text-center mt-3">
-              Situato nel cuore di Biella, Bloom offre oltre 200 metri quadrati
-              di spazio versatile e luminoso, progettato per ispirare e nutrire.
-              Che tu sia qui per studiare, partecipare a workshop o attività
-              olistiche, il nostro ambiente si adatta alle tue esigenze. Ogni
-              stanza è dotata di materiali creativi, libri e giochi per
-              stimolare l’esplorazione e la sperimentazione. A Bloom, lo spazio
-              non è solo un contesto è un catalizzatore per la connessione,
-              l’apprendimento e la crescita personale
+            <p className="font- lg:text-xl text-[#373737] leading-[1.5] lg:text-center mt-3">
+            Un posto per tutti Bloom è il tuo spazio tra casa e impegni quotidiani: un ambiente accogliente dove puoi essere te stesso, rilassarti, imparare e crescere nei tuoi tempi e modi. Qui troverai tutto ciò di cui hai bisogno per nutrire la tua mente, il tuo corpo e la tua creatività, in un'atmosfera che ti fa sentire a casa.
             </p>
           </div>
           <div className="mt-16">

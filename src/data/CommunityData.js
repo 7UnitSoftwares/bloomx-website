@@ -3,35 +3,45 @@ export const CommunityData = [
     id: 1,
     icon: "/community/icon1.png",
     section: "Students",
-    title: "Students: Empowering Learning",
-    desc: "The Students community at Bloom offers a range of personalized learning experiences to help students succeed academically and grow personally. From study sessions to creative workshops.",
+    title: "Studenti: Crescere con Consapevolezza",
+    desc: "Una comunità dove gli studenti sviluppano consapevolezza di sé, delle proprie emozioni e del proprio modo di apprendere. Attraverso metodologie pedagogiche innovative e mindfulness, accompagniamo ogni studente a scoprire i propri talenti, costruire strategie di studio personalizzate e coltivare un pensiero autonomo e critico.",
+    meeting: "Lunedì, Mercoledì e Giovedì: 14:00 - 17:00",
+    howitworks: ["Studio individuale e di gruppo", "Supporto del supervisore didattico", "aboratori tematici e pratiche olistiche", "Esperienze personalizzate in base alle esigenze"]
   },
   {
     id: 2,
     icon: "/community/icon2.png",
-    title: "Buds: Growing Together",
+    title: "Piccoli Bloom: Semi di Meraviglia",
     section: "Buds",
-    desc: "Our Buds community is designed to give young children a safe and imaginative space to learn through play. From art activities to storytelling, we encourage creativity and exploration in a nurturing environment.",
+    desc: "Una comunità dove i bambini esplorano, scoprono e crescono insieme. Attraverso gioco, YogaArt e attività creative, accompagniamo ogni piccolo nel viaggio alla scoperta delle emozioni e nell'espressione autentica di sé.",
+    meeting: "Tutti i giorni 16:00 - 18:00 con attività tematiche",
+    howitworks: ["Lunedì: Creattività", "Martedì: Educazione emozionale", "Mercoledì: Culture del mondo", "Giovedì: YogArt", "Venerdì: Yoga bambini e metodo di studio"]
   },
   {
     id: 3,
     icon: "/community/icon2.png",
     section: "Parents",
-    title: "Parents: Supporting Growth Together",
-    desc: "Our Parents community is a space for caregivers to connect, share experiences, and find support. With workshops, discussions, and a supportive environment",
+    title: "Genitori: Insieme nel Viaggio",
+    desc: "Una comunità dove i genitori condividono esperienze e trovano supporto reciproco in un ambiente libero da giudizi.",
+    meeting: "",
+    howitworks: ["Accesso a creators e pedagogista","Pillole pedagogiche", "YogArt mensile genitori-figli", "Laboratori di Creattività", "Risorse esclusive: carte delle emozioni, yoga box, mindful box"]
   },
   {
     id: 4,
     icon: "/community/icon4.png",
     section: "Women",
-    title: "Bloomher: Women Thriving Together",
-    desc: "Bloomher is a supportive community for women, offering space for self-discovery, collaboration, and growth. Whether through leadership workshops, creative sessions, or personal development.",
+    title: "BloomHer: Fiorire al Femminile",
+    desc: "Una comunità di donne che si sostengono nel percorso di crescita personale.",
+    meeting: "",
+    howitworks:["Mindfulness tra le righe: lunedì alterni (serale)", "Sotto il glicine: mercoledì alterni 18:30 - 19:30", "Il profumo del suono: secondo sabato del mese"]
   },
   {
     id: 5,
     icon: "/community/icon5.png",
     section: "Creators",
-    title: "Creators: Building a Network of Innovators",
-    desc: "Our Creators community brings together talented individuals from various fields to collaborate, share, and innovate. From art to technology, we help creators nurture their talents and bring new ideas to life",
+    title: "Creators: La Rete dei Saperi",
+    desc: "Una rete preziosa di professionisti che arricchisce Bloom con competenze, passioni e visioni uniche. Integrando i loro saperi con la nostra expertise pedagogica, creiamo esperienze innovative di crescita e consapevolezza che nutrono lo sviluppo personale di tutta la comunità Bloom.",
+    meeting: "",
+    howitworks: []
   },
 ];
