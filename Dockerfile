@@ -5,7 +5,9 @@ FROM node:18-alpine
 WORKDIR /app
 
 # Copy package.json and package-lock.json first
-COPY package*.json ./
+# COPY package*.json ./
+# Copy the rest of the application code
+COPY . ./
 
 # Clear npm cache
 RUN npm cache clean --force
@@ -13,8 +15,6 @@ RUN npm cache clean --force
 # Install dependencies
 RUN npm install  # Ensure dependencies are installed correctly
 
-# Copy the rest of the application code
-COPY . .
 
 # Ensure next is installed
 RUN ls -la node_modules/.bin/  # Debugging step to check if `next` is available
