@@ -11,6 +11,7 @@ on:
 env:
   # Safeguard to prevent pushing images to registeries after build
   PUSH_TO_REGISTRIES: true
+  BUILD_TAG: ${{ github.ref_name }}-${{ github.run_number }}
 
 jobs:
   build-runners:
@@ -24,10 +25,10 @@ jobs:
           gcloud auth configure-docker europe-docker.pkg.dev
       - name: Build docker image
         run: |
-          docker build -t europe-docker.pkg.dev/divine-bonbon-446705-p9/boolmx-docker/bloom-website:$(git rev-parse --short "$GITHUB_SHA") . --network=host
+          docker build -t europe-docker.pkg.dev/divine-bonbon-446705-p9/boolmx-docker/bloom-website:$BUILD_TAG . --network=host
       - name: Push docker image
         run: |
-          docker push europe-docker.pkg.dev/divine-bonbon-446705-p9/boolmx-docker/bloom-website:$(git rev-parse --short "$GITHUB_SHA")
+          docker push europe-docker.pkg.dev/divine-bonbon-446705-p9/boolmx-docker/bloom-website:$BUILD_TAG
   deploy_livestage:
       name: Deploy to stage
       runs-on: [self-hosted, python3]
