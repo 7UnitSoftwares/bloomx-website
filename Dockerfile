@@ -4,23 +4,15 @@ FROM node:18-alpine
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json first
+# Install dependencies first (better caching)
 COPY package*.json ./
+RUN npm ci
 
-# Clear npm cache
-RUN npm cache clean --force
-
-# Install dependencies
-RUN npm install  # Ensure dependencies are installed correctly
-
-# Copy the rest of the application code
+# Copy rest of the application
 COPY . .
 
-# Ensure next is installed
-RUN ls -la node_modules/.bin/  # Debugging step to check if `next` is available
-
-# Build the Next.js application
-RUN npm run build  # Now this should work
+# Build application
+RUN npm run build
 
 # Expose the port
 EXPOSE 3000
