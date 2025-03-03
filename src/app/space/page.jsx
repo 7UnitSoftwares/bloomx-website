@@ -39,7 +39,7 @@ const page = () => {
                 className="flex flex-col justify-center items-center gap-5"
               >
                 <div className="bg-[#EFFFFD] lg:p-5 p-2 rounded-full w-12 lg:w-auto">
-                  <Image src={item.src} alt="" height={50} width={50} />
+                  <Image src={item.src} alt="bloom space" height={50} width={50} />
                 </div>
                 <div className="flex mb-10">
                   <h1 className="lg:text-2xl text-sm font-normal text-[#00A59B]">

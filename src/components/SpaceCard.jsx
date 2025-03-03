@@ -6,7 +6,7 @@ const SpaceCard = ({ item }) => {
       <Image
         src={item.src}
         className="w-full 96 object-cover rounded-xl"
-        alt={item.alt}
+        alt={item.alt || "Space Image"}
         height={250}
         width={150}
       />
