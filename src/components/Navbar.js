@@ -160,17 +160,17 @@ const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <div className="lg:hidden flex gap-5">
-          <button
-            type="button"
-            onClick={() => setShow(!show)}
-            className="flex h-8 w-8"
-          >
-            <img
-              src={show ? "/Navbar/close.svg" : "/Navbar/open.svg"}
-              alt="Menu Toggle"
-            />
-          </button>
-        </div>
+  <button
+    type="button"
+    onClick={() => setShow((prev) => !prev)}
+    className="flex h-8 w-8"
+  >
+    <img
+      src={show ? "/Navbar/close.svg" : "/Navbar/open.svg"}
+      alt="Menu Toggle"
+    />
+  </button>
+</div>
 
         {/* Mobile Menu */}
         <AnimatePresence>
