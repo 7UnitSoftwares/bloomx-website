@@ -10,8 +10,7 @@ const Navbar = () => {
   // const [show, setShow] = useState(false);
   // const [dropdown, setDropdown] = useState(null);
   const [activeDropdown, setActiveDropdown] = useState(null);
-  
-  
+
   const [dropdown, setDropdown] = useState(null);
   const [show, setShow] = useState(false);
   const pathname = usePathname();
@@ -65,6 +64,24 @@ const Navbar = () => {
     },
     { title: "Eventi", to: "/events" },
     { title: "Spazio", to: "/space" },
+    { title: "Blog", to: "/blog" },
+    {
+      title: "Products",
+      to: "/products",
+      items: [
+        { title: "intùiti", to: "intùiti Creative Cards" },
+        { title: "Favula Deck", to: "Fabula Deck" },
+        {
+          title: "intùitifweq Cards",
+          to: "intùitifweq Creative Cards",
+        },
+        {
+          title: "Fabulafwe Deck",
+          to: "Fabulafwe Deck",
+        },
+        { title: "free resources", link: "/free-resources" },
+      ],
+    },
   ];
 
   const handleMenuClick = (index) => {
@@ -81,7 +98,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <div className="hidden text-md lg:flex gap-5">
+        <div className="hidden text-sm lg:flex gap-5">
           {data.map((item, index) => (
             <div
               key={index}
@@ -136,11 +153,15 @@ const Navbar = () => {
                       {item.items.map((subItem, subIndex) => (
                         <Link
                           key={subIndex}
-                          href={`${item.to || ""}#${subItem.to || ""}`}
+                          href={
+                            subItem.link
+                              ? subItem.link
+                              : `${item.to || ""}#${subItem.to || ""}`
+                          }
                           className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#008C95] transition-colors duration-200"
                           onClick={() => setDropdown(null)}
-                        >
-                          {subItem.title}
+                        > 
+                         {subItem.link ? `${subItem.title}` : `--${subItem.title}`}
                         </Link>
                       ))}
                     </div>
@@ -160,17 +181,17 @@ const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <div className="lg:hidden flex gap-5">
-  <button
-    type="button"
-    onClick={() => setShow((prev) => !prev)}
-    className="flex h-8 w-8"
-  >
-    <img
-      src={show ? "/Navbar/close.svg" : "/Navbar/open.svg"}
-      alt="Menu Toggle"
-    />
-  </button>
-</div>
+          <button
+            type="button"
+            onClick={() => setShow((prev) => !prev)}
+            className="flex h-8 w-8"
+          >
+            <img
+              src={show ? "/Navbar/close.svg" : "/Navbar/open.svg"}
+              alt="Menu Toggle"
+            />
+          </button>
+        </div>
 
         {/* Mobile Menu */}
         <AnimatePresence>
