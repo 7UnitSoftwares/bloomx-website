@@ -1,16 +1,21 @@
 "use client";
 import Link from "next/link";
 import Button from "./Button";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { RiArrowDropDownLine } from "react-icons/ri";
+import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-
+import { ChevronDown } from "lucide-react";
 const Navbar = () => {
-  const [show, setShow] = useState(false);
-  const [dropdown, setDropdown] = useState(null);
+  // const [show, setShow] = useState(false);
+  // const [dropdown, setDropdown] = useState(null);
   const [activeDropdown, setActiveDropdown] = useState(null);
-
+  
+  
+  const [dropdown, setDropdown] = useState(null);
+  const [show, setShow] = useState(false);
   const pathname = usePathname();
+  const dropdownRefs = useRef([]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -68,7 +73,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="flex lg:px-32 px-5 bg-white fixed py-3 z-50 backdrop-blur-2xl border-b-[3px] w-full justify-between items-center">
+      <nav className="flex lg:px-32 px-5 bg-white/90 fixed py-3 z-50 backdrop-blur-2xl border-b border-gray-200 w-full justify-between items-center">
         <div>
           <Link href="/">
             <img className="h-10 lg:w-auto" src="/logo/logo.png" alt="Logo" />
@@ -80,67 +85,169 @@ const Navbar = () => {
           {data.map((item, index) => (
             <div
               key={index}
-              onMouseEnter={() => setDropdown(index)}
-              onMouseLeave={() => setDropdown(null)}
-              className={`relative group cursor-pointer dropdown-container ${
-                pathname === item.to ? "font-bold text-[#008C95]" : ""
-              }`}
+              ref={(el) => (dropdownRefs.current[index] = el)}
+              onMouseEnter={() => item.items && setDropdown(index)}
+              onMouseLeave={() => item.items && setDropdown(null)}
+              className={`relative group cursor-pointer py-2 px-1`}
             >
-              <span
-                className={`h-0.5 ${
-                  pathname === item.to ? "w-full" : ""
-                } bg-[#008C95] absolute bottom-0  ease-in-out duration-300`}
-              ></span>
-
-              {item.items ? (
-                <span
-                  className="flex justify-center items-center"
-                  onClick={() => handleMenuClick(index)}
+              <div className="flex items-center gap-1">
+                <Link
+                  href={item.to || "/"}
+                  className={`relative transition-colors duration-200 ${
+                    pathname === item.to
+                      ? "text-[#008C95] font-semibold"
+                      : "text-gray-700 hover:text-[#008C95]"
+                  }`}
                 >
-                  <Link href={item.to || "/"}>{item.title}</Link>
-                  <RiArrowDropDownLine className="text-xl" />
-                </span>
-              ) : (
-                <Link href={item.to || "/"}>{item.title}</Link>
+                  {item.title}
+                </Link>
+
+                {item.items && (
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform duration-300 ${
+                      dropdown === index
+                        ? "rotate-180 text-[#008C95]"
+                        : "text-gray-500"
+                    }`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleMenuClick(index);
+                    }}
+                  />
+                )}
+              </div>
+
+              {/* Active indicator */}
+              {pathname === item.to && (
+                <span className="h-0.5 bg-[#008C95] absolute bottom-0 left-0 right-0"></span>
               )}
+
               {/* Dropdown Menu */}
-              {item.items && dropdown === index && (
-                <div className="absolute top-full left-0 bg-white shadow-lg rounded-md">
-                  {item.items.map((subItem, subIndex) => (
-                    <Link
-                      key={subIndex}
-                      href={`${item.to || ""}#${subItem.to || ""}`}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      {subItem.title}
-                    </Link>
-                  ))}
-                </div>
-              )}
+              <AnimatePresence>
+                {item.items && dropdown === index && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -5 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-100 min-w-48 overflow-hidden"
+                  >
+                    <div className="py-1">
+                      {item.items.map((subItem, subIndex) => (
+                        <Link
+                          key={subIndex}
+                          href={`${item.to || ""}#${subItem.to || ""}`}
+                          className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#008C95] transition-colors duration-200"
+                          onClick={() => setDropdown(null)}
+                        >
+                          {subItem.title}
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           ))}
         </div>
 
         {/* Desktop Right Section */}
         <div className="hidden lg:flex gap-10 justify-center items-center">
-          <Button>
+          <Button className="bg-[#008C95] hover:bg-[#006A70] text-white py-2 px-4 rounded-lg transition-colors duration-200">
             <Link href="/contact">Contattaci</Link>
           </Button>
         </div>
 
         {/* Mobile Menu Toggle */}
         <div className="lg:hidden flex gap-5">
-          <button
-            type="button"
-            onClick={() => setShow(!show)}
-            className="flex h-8 w-8"
-          >
-            <img
-              src={show ? "/Navbar/close.svg" : "/Navbar/open.svg"}
-              alt="Menu Toggle"
-            />
-          </button>
-        </div>
+  <button
+    type="button"
+    onClick={() => setShow((prev) => !prev)}
+    className="flex h-8 w-8"
+  >
+    <img
+      src={show ? "/Navbar/close.svg" : "/Navbar/open.svg"}
+      alt="Menu Toggle"
+    />
+  </button>
+</div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {show && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="lg:hidden fixed top-16 left-0 right-0 bg-white shadow-lg z-40 border-t border-gray-200"
+            >
+              <div className="flex flex-col py-4 px-6">
+                {data.map((item, index) => (
+                  <div key={index} className="py-2">
+                    <div
+                      className="flex items-center justify-between"
+                      onClick={() => item.items && handleMenuClick(index)}
+                    >
+                      <Link
+                        href={item.to || "/"}
+                        className={`text-base ${
+                          pathname === item.to
+                            ? "text-[#008C95] font-semibold"
+                            : "text-gray-700"
+                        }`}
+                      >
+                        {item.title}
+                      </Link>
+                      {item.items && (
+                        <ChevronDown
+                          className={`h-5 w-5 transition-transform duration-300 ${
+                            dropdown === index
+                              ? "rotate-180 text-[#008C95]"
+                              : "text-gray-500"
+                          }`}
+                        />
+                      )}
+                    </div>
+
+                    {/* Mobile Dropdown */}
+                    <AnimatePresence>
+                      {item.items && dropdown === index && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="pl-4 mt-2 border-l-2 border-gray-100">
+                            {item.items.map((subItem, subIndex) => (
+                              <Link
+                                key={subIndex}
+                                href={`${item.to || ""}#${subItem.to || ""}`}
+                                className="block py-2 text-sm text-gray-600 hover:text-[#008C95]"
+                                onClick={() => setShow(false)}
+                              >
+                                {subItem.title}
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ))}
+
+                <div className="mt-4 pt-4 border-t border-gray-100">
+                  <Button className="w-full bg-[#008C95] hover:bg-[#006A70] text-white py-2 px-4 rounded-lg transition-colors duration-200">
+                    <Link href="/contact" onClick={() => setShow(false)}>
+                      Contattaci
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Mobile Navigation Menu */}

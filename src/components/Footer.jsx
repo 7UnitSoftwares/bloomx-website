@@ -66,7 +66,7 @@ const Footer = () => {
               <Link
                 key={index}
                 href={item.to}
-                activeClass="active-link"
+                // activeClass="active-link"
                 className="font-normal cursor-pointer"
               >
                 {item.title}
