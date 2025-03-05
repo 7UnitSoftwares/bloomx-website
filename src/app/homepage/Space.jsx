@@ -49,7 +49,7 @@ const Space = () => {
       <div className="overflow-hidden">
         <Container>
           <div id="space" className="px-5 md:px-28 pb-16">
-            <h1 className="typography pt-16">Lo  SPAZIO</h1>
+            <h1 className="typography pt-16">Lo  Spazio</h1>
             <p className="text-center  lg:mt-5 mt-2  lg:text-xl font-light text-[#808080] ">
               Tutto ciò di cui hai bisogno per il tuo benessere e la tua crescita
             </p>

@@ -6,12 +6,9 @@ import Carousel from "@/components/CrouselR";
 const Services = () => {
   return (
     <div id="service" className=" mx-5 lg:mx-28">
-      <h1 className="typography lg:pt-20 mt-10"> Nostro Servizi</h1>
+      <h1 className="typography lg:pt-20 mt-10">I Nostri Servizi</h1>
       <p className="text-center lg:mt-10 mt-2 lg:text-xl font-medium text-[#808080]">
-        Un Percorso di Crescita per Tutti Per Genitori e Bambini: Offriamo un
-         <br /> completo per lo sviluppo emotivo e cognitivo dei
-        bambini, aiutando i genitori  <br /> un ambiente ricco di
-        creatività e apprendimento.
+      Trasformiamo l'apprendimento in un'esperienza di crescita consapevole,<br /> dove ogni percorso è personalizzato per valorizzare il potenziale di ciascuno.
       </p>
       <div className="px-28 mt-10">
           <Carousel data={data} />
@@ -24,19 +21,19 @@ export default Services;
 
 const data = [
   {
-    title: "Per Studenti",
+    title: "Percorsi di Studio",
     image: "/service/icon.png",
     description:
       "Potenzia il tuo percorso accademico con risorse educative, mentoring e  attività che ti aiutano a scoprire nuove possibilità e a raggiungere i tuoi  obiettivi.",
   },
   {
-    title: "Per Studenti",
+    title: "Consulenza e Assessment",
     image: "/service/icon.png",
     description:
       "Potenzia il tuo percorso accademico con risorse educative, mentoring e  attività che ti aiutano a scoprire nuove possibilità e a raggiungere i tuoi  obiettivi.",
   },
   {
-    title: "Per Studenti",
+    title: "Laboratori ed Eventi",
     image: "/service/icon.png",
     description:
       "Potenzia il tuo percorso accademico con risorse educative, mentoring e  attività che ti aiutano a scoprire nuove possibilità e a raggiungere i tuoi  obiettivi.",

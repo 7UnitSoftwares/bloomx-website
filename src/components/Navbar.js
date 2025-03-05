@@ -44,7 +44,7 @@ const Navbar = () => {
       ],
     },
     {
-      title: "Servizio",
+      title: "I Nostri Servizi",
       to: "/service",
       items: [
         { title: "One to one tutoring", to: "tutoring" },

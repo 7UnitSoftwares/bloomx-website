@@ -12,6 +12,7 @@ export default function Home() {
       <div className="overflow-hidden">
         <HeroSection />
         <Projects />
+        <Services />
         <Space />
         <Events />
         <Contact />

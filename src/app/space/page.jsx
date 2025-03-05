@@ -15,9 +15,9 @@ const page = () => {
   return (
     <section className="bg-[#F2F2F2] overflow-hidden">
       <SectionWithBackground
-        title="Our Space"
-        description="Join us for exciting activities that promote growth,
-            <br /> learning, and creativity"
+        title="Lo Spazio"
+        description="Un Luogo per Tutti Bloom è il tuo spazio tra casa e impegni quotidiani,
+            <br /> un ambiente accogliente dove puoi essere te stesso"
       />
       <Container>
         <h1 className="lg:text-5xl text-2xl mt-5 font-semibold text-[#00A59B] lg:mt-10 text-start">
