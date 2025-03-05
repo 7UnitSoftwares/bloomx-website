@@ -5,7 +5,7 @@ import Link from "next/link";
 const HeroSection = () => {
   return (
     <section className="flex lg:flex-row lg:min-h-screen 2xl:max-h-full mx-auto flex-col-reverse w-full lg:justify-between justify-center items-center gap-5 lg:gap-0 xl:px-28 max-w-screen-2xl">
-      <div className="lg:px-16 px-5 flex flex-col gap-5 lg:gap-10 lg:max-w-[55%]">
+      <div className="lg:px-16 lg:w-1/2 px-5 flex flex-col gap-5 lg:gap-10 lg:max-w-[55%]">
         <h1 className="text-[#00A59B] text-center lg:text-start text-2xl lg:text-5xl font-medium">
           FIORIRE NEL TUO <br />
           <span className="font-bold">SPAZIO</span>, <br /> COL TUO <br />
