@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 // import { Link as ScrollLink } from "react-scroll";
 
-
 const data = [
   { title: "Chi siamo", to: "/about" },
   {
@@ -59,7 +58,11 @@ const Footer = () => {
           height={48}
           className=""
         />
-        <p className="text-center text-sm lg:text-base">FIORIRE NEL TUO SPAZIO COL TUO TEMPO</p>
+        <p className="text-center text-sm lg:text-base">
+          Address: VIA DELLE ROSE, 2 13900 BIELLA <br />
+          Codice Fiscale: BNOGDI79P62D938B <br />
+          Partita Iva: 02708900028
+        </p>
         <div className="lg:flex flex-col hidden lg:flex-row items-start justify-start gap-5">
           {isClient &&
             data.map((item, index) => (

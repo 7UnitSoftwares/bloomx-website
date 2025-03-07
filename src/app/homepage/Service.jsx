@@ -11,7 +11,7 @@ const Services = () => {
       Trasformiamo l'apprendimento in un'esperienza di crescita consapevole,<br /> dove ogni percorso è personalizzato per valorizzare il potenziale di ciascuno.
       </p>
       <div className="px-28 mt-10">
-          <Carousel data={data} />
+       <Carousel data={data} />
       </div>
     </div>
   );
