@@ -8,6 +8,7 @@ import Container from "@/components/Container";
 import SectionWithBackground from "@/components/SectionWithBackground";
 import GlimpseSection from "@/components/GlimpseSection";
 import { SpacewhyData } from "@/data/SpaceData";
+import Carousel from "@/components/Carousel";
 
 const SpacePage = () => {
   return (
@@ -18,6 +19,9 @@ const SpacePage = () => {
       />
       <Container>
         <SpaceContent />
+        <div className="mt-16 pb-10">
+          <Carousel images={images} />
+        </div>
       </Container>
       <Banner />
     </section>
@@ -136,5 +140,44 @@ const SpaceData = [
     description: [
       "Bloom è il tuo spazio tra casa e impegni quotidiani: un ambiente accogliente dove puoi essere te stesso, rilassarti, imparare e crescere nei tuoi tempi e modi. Qui trovi tutto ciò che serve per nutrire mente, corpo e creatività, in un'atmosfera che ti fa sentire a casa.",
     ],
+  },
+];
+
+const images = [
+  {
+    id: 1,
+    src: "/space/icon1.jpg",
+  },
+  {
+    id: 2,
+    src: "/space/icon2.jpg",
+  },
+  {
+    id: 3,
+    src: "/space/icon3.jpg",
+  },
+  {
+    id: 4,
+    src: "/space/icon4.jpg",
+  },
+  {
+    id: 5,
+    src: "/space/icon5.jpg",
+  },
+  {
+    id: 6,
+    src: "/space/icon6.jpg",
+  },
+  {
+    id: 7,
+    src: "/space/icon7.jpg",
+  },
+  {
+    id: 8,
+    src: "/space/icon8.jpg",
+  },
+  {
+    id: 9,
+    src: "/space/icon9.jpg",
   },
 ];

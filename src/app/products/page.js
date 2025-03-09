@@ -6,6 +6,7 @@ import Container from "@/components/Container";
 import SectionWithBackground from "@/components/SectionWithBackground";
 import { FaGift } from "react-icons/fa";
 import { products } from "@/data/ProductData";
+import Link from "next/link";
 
 // Free Resources Component
 const FreeResources = () => {
@@ -48,10 +49,19 @@ const FreeResources = () => {
 };
 
 const ProductCard = ({ product }) => {
+  const handleBuyNow = (productName) => {
+    const phoneNumber = "919876543210"; // Replace with your WhatsApp number
+    const message = `I want to buy ${productName}`;
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(url, "_blank");
+  };
+
   return (
     <div
       id={product.name}
-      className="flex max-w-screen-xl mx-auto  flex-col md:flex-row items-center gap-6 p-6 bg-white rounded-lg shadow-md"
+      className="flex max-w-screen-xl mx-auto flex-col md:flex-row items-center gap-6 p-6 bg-white rounded-lg shadow-md"
     >
       <div className="md:w-1/2 flex justify-center items-center">
         <Image
@@ -69,18 +79,18 @@ const ProductCard = ({ product }) => {
         </p>
         <p className="text-gray-700 mt-2">{product.description}</p>
         <div className="mt-4 flex flex-wrap gap-2 justify-center md:justify-start">
-          <a
+          <Link
             href={product.discoverLink}
             className="bg-orange-500 text-white px-4 py-2 rounded-md shadow hover:bg-orange-600"
           >
             Discover {product.name.split(" ")[0]}
-          </a>
-          <a
-            href={product.buyLink}
+          </Link>
+          <button
+            onClick={() => handleBuyNow(product.name)}
             className="bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600"
           >
             Buy Now
-          </a>
+          </button>
         </div>
       </div>
     </div>
