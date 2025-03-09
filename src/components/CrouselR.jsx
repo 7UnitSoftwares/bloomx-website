@@ -1,6 +1,7 @@
+import Link from "next/link";
 import React, { useState } from "react";
 
-const Carousel = ({data}) => {
+const Carousel = ({ data }) => {
   const [activeIndex, setActiveIndex] = useState(0); // To track the current active item
 
   const handleNext = () => {
@@ -30,7 +31,7 @@ const Carousel = ({data}) => {
           {data.map((item, index) => (
             <div
               key={index}
-              className="min-w-full justify-center flex flex-col lg:flex-row items-center shadow-xl  bg-wite rounded-xl p-3 gap-10"
+              className="min-w-full justify-center flex flex-col lg:flex-row items-center bg-wite rounded-xl p-3 gap-10"
             >
               <div>
                 <img src={item.image} className="bg-cover w-[20vw] max-w-[300px] lg:max-w-[50vw] object-contain aspect-auto" alt="" />
@@ -43,9 +44,12 @@ const Carousel = ({data}) => {
                   {item.description}
                 </p>
                 <div className="flex gap-5">
-                  <button className="bg-[#00A59B] text-white hover:scale-110 duration-300 ease-in-out px-4 py-2 rounded-lg mt-4">
-                    Contattaci
-                  </button>
+                  <Link href='/service'>
+                    <button className="bg-[#00A59B] text-white hover:scale-110 duration-300 ease-in-out px-4 py-2 rounded-lg mt-4">
+                      Scopri di più
+                    </button>
+                  </Link>
+
                 </div>
               </div>
             </div>
@@ -58,9 +62,8 @@ const Carousel = ({data}) => {
         {data.map((_, index) => (
           <button
             key={index}
-            className={`w-4 h-4 mx-2 rounded-full ${
-              index === activeIndex ? "bg-[#00A59B]" : "bg-gray-300"
-            }`}
+            className={`w-4 h-4 mx-2 rounded-full ${index === activeIndex ? "bg-[#00A59B]" : "bg-gray-300"
+              }`}
             onClick={() => goToSlide(index)}
           />
         ))}

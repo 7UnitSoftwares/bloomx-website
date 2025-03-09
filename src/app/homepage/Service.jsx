@@ -23,19 +23,16 @@ const data = [
   {
     title: "Percorsi di Studio",
     image: "/service/service_1.jpg",
-    description:
-      "Potenzia il tuo percorso accademico con risorse educative, mentoring e  attività che ti aiutano a scoprire nuove possibilità e a raggiungere i tuoi  obiettivi.",
+    description: "Percorsi personalizzati e collaborativi per sviluppare un metodo di studio efficace, con supporto individuale o in gruppo.",
   },
   {
     title: "Consulenza e Assessment",
     image: "/service/service_2.jpg",
-    description:
-      "Potenzia il tuo percorso accademico con risorse educative, mentoring e  attività che ti aiutano a scoprire nuove possibilità e a raggiungere i tuoi  obiettivi.",
+    description: "Supporto pedagogico per genitori ed educatori con valutazioni personalizzate sullo stile di apprendimento e le strategie di studio.",
   },
   {
     title: "Laboratori ed Eventi",
     image: "/service/service_3.jpg",
-    description:
-      "Potenzia il tuo percorso accademico con risorse educative, mentoring e  attività che ti aiutano a scoprire nuove possibilità e a raggiungere i tuoi  obiettivi.",
+    description: "Attività creative per bambini e percorsi formativi personalizzati per privati, aziende e scuole, favorendo apprendimento e consapevolezza.",
   },
 ];
