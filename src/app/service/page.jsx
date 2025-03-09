@@ -31,37 +31,71 @@ function page() {
                 <p className="text-3xl font-semibold text-[#008C95] leading-[40px]">
                   {item.title}
                 </p>
-                <div className="text-[#373737] lg:text-xl space-y-2">
+                <ul className="text-[#373737] lg:text-xl space-y-2 list-disc pl-5">
                   {item.description.map((desc, i) => (
-                    <p key={i}>{desc}</p>
+                    <li key={i}>{desc.replace("• ", "")}</li>
                   ))}
-                </div>
+                </ul>
               </div>
             </div>
           ))}
         </div>
-        <div className="mt-10">
-          <h2 className="text-2xl font-bold text-center text-[#008C95]">
-            📅 Come Accedere ai Nostri Servizi
-          </h2>
-          <div className="mt-6 space-y-4">
-            {AccessData.map((item, index) => (
-              <div key={index} className="bg-white p-5 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold text-[#008C95]">
-                  {item.title}
-                </h3>
-                <p className="text-[#373737] mt-2">{item.description}</p>
+        <div className="mx-auto pt-16 bg-gradient-to-b">
+          <div className="flex flex-col md:flex-row items-start gap-12">
+            {/* Left Side - How it works */}
+            <div className="md:w-1/2">
+              <div className="sticky top-24">
+                <h2 className="text-4xl font-bold text-[#008C95] mb-6 leading-tight">
+                  Come Accedere ai Nostri Servizi
+                </h2>
+
+                <p className="text-[#333333] mb-10 text-lg">
+                  I nostri servizi sono progettati per essere accessibili e
+                  personalizzati in base alle tue esigenze specifiche.
+                </p>
+
+                <button className="bg-[#008C95] hover:bg-[#007A82] transition-colors text-white px-8 py-3 font-medium rounded-md shadow-md hover:shadow-lg flex items-center gap-2">
+                  Scopri di più
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
               </div>
-            ))}
+            </div>
+
+            {/* Right Side - Numbered Items */}
+            <div className="md:w-2/3">
+              {AccessData.map((item, index) => (
+                <div key={index} className="flex mb-16 group">
+                  <div className="mr-8 flex-shrink-0">
+                    <div className="w-20 h-20 rounded-full border-3 border-[#008C95] bg-white flex items-center justify-center shadow-md group-hover:shadow-lg transition-all group-hover:scale-105">
+                      <span className="text-3xl font-bold text-[#008C95]">
+                        {index + 1}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="pt-2">
+                    <h3 className="text-2xl font-bold text-[#008C95] mb-3 group-hover:translate-x-1 transition-transform">
+                      {item.title}
+                    </h3>
+                    <p className="text-[#454545] text-lg leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="mt-10 text-center">
-          <a
-            href="#contact"
-            className="bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-white px-6 py-3 rounded-md shadow-lg transform transition-transform duration-300 hover:scale-105"
-          >
-            Parliamone Insieme
-          </a>
         </div>
       </Container>
       <Banner />

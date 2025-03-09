@@ -6,38 +6,50 @@ import Container from "@/components/Container";
 import SectionWithBackground from "@/components/SectionWithBackground";
 import { FaGift } from "react-icons/fa";
 import { products } from "@/data/ProductData";
+import Link from "next/link";
 
 // Free Resources Component
 const FreeResources = () => {
   return (
-    <div className="bg-[#F2F2F2]">
-      <div className=" mx-auto px-4 mt-5 sm:px-8 md:px-16 lg:px-28 xl:px-36 py-12">
-        <h2 className="text-xl font-semibold mb-6">
-          This is what we came up till now:
-        </h2>
-        <div className="space-y-8">
+    <div className="bg-[#F2F2F2] w-full">
+      <div className="mx-auto max-w-screen-xl px-4 mt-5 w-full ">
+        <div className="flex flex-col gap-6">
           {resources.map((item, index) => (
-            <div key={index} className="flex items-start space-x-4">
-              <div className="w-32 flex-shrink-0">
+            <div
+              key={index}
+              className="flex max-w-screen-xl mx-auto flex-col md:flex-row items-center gap-6 p-6 w-full bg-white rounded-lg shadow-md relative"
+            >
+              {/* Free Tag */}
+              <div className="absolute -top-3 -right-3 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-white px-4 py-1 rounded-full shadow-lg z-10 font-bold transform rotate-12">
+                FREE
+              </div>
+
+              <div className="md:w-1/2 flex justify-center items-center">
                 <Image
                   src={item.image}
                   alt={item.title}
-                  width={220}
-                  height={220}
-                  className="rounded-lg border border-gray-300 shadow-sm"
+                  width={400}
+                  height={300}
+                  className="object-cover rounded-lg shadow-sm"
                 />
               </div>
-              <div>
-                <h3 className="font-bold text-lg">{item.title}</h3>
-                <p className="text-gray-700">{item.description}</p>
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 font-semibold hover:underline"
-                >
-                  👉 {item.linkText}
-                </a>
+
+              <div className="text-center md:w-1/2 md:text-left">
+                <h2 className="text-2xl font-bold">{item.title}</h2>
+                <p className="text-lg text-pink-600 font-semibold">
+                  🎁 Free Resource
+                </p>
+                <p className="text-gray-700 mt-2">{item.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2 justify-center md:justify-start">
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-green-500 text-white px-4 py-2 rounded-md shadow hover:bg-green-600 inline-flex items-center"
+                  >
+                    👉 {item.linkText}
+                  </a>
+                </div>
               </div>
             </div>
           ))}
@@ -46,12 +58,20 @@ const FreeResources = () => {
     </div>
   );
 };
-
 const ProductCard = ({ product }) => {
+  const handleBuyNow = (productName) => {
+    const phoneNumber = "919876543210"; // Replace with your WhatsApp number
+    const message = `I want to buy ${productName}`;
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      message
+    )}`;
+    window.open(url, "_blank");
+  };
+
   return (
     <div
       id={product.name}
-      className="flex max-w-screen-xl mx-auto  flex-col md:flex-row items-center gap-6 p-6 bg-white rounded-lg shadow-md"
+      className="flex max-w-screen-xl mx-auto flex-col md:flex-row items-center gap-6 p-6 bg-white rounded-lg shadow-md"
     >
       <div className="md:w-1/2 flex justify-center items-center">
         <Image
@@ -69,18 +89,18 @@ const ProductCard = ({ product }) => {
         </p>
         <p className="text-gray-700 mt-2">{product.description}</p>
         <div className="mt-4 flex flex-wrap gap-2 justify-center md:justify-start">
-          <a
+          <Link
             href={product.discoverLink}
             className="bg-orange-500 text-white px-4 py-2 rounded-md shadow hover:bg-orange-600"
           >
             Discover {product.name.split(" ")[0]}
-          </a>
-          <a
-            href={product.buyLink}
+          </Link>
+          <button
+            onClick={() => handleBuyNow(product.name)}
             className="bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600"
           >
             Buy Now
-          </a>
+          </button>
         </div>
       </div>
     </div>
@@ -197,22 +217,27 @@ const ProductPage = () => {
       </Container>
 
       {/* Display Free Resources when selected */}
-      {filters.showFreeResources && <FreeResources />}
+      {filters.showFreeResources && (
+        <div className="mt-5 w-full lg:px-28 px-5 flex flex-col gap-6">
+          <FreeResources />
+        </div>
+      )}
 
       {/* Products List */}
-      <div className="mt-5 w-full lg:px-28 px-5 flex flex-col gap-6">
-        {filteredProducts.map((product) => (
-          <div key={product.id}>
-            <ProductCard product={product} />
-          </div>
-        ))}
-      </div>
+      {!filters.showFreeResources && (
+        <div className="mt-5 w-full lg:px-28 px-5 flex flex-col gap-6">
+          {filteredProducts.map((product) => (
+            <div key={product.id}>
+              <ProductCard product={product} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
 export default ProductPage;
-
 
 const resources = [
   {
