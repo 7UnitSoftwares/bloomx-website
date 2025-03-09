@@ -1,7 +1,7 @@
 // data/TeamData.js
 export const Bloom = [
   {
-    name: "John Doe",
+    name: "Chiara Moranino",
     position: "CEO",
     desc: "Lorem ipsum dolor sit amet consectetur. Massa ut venenatis odio hendrerit. Phasellus sed nibh ",
     facebook: "https://www.facebook.com",
@@ -10,7 +10,7 @@ export const Bloom = [
     img: "/teams/icon1.png",
   },
   {
-    name: "Jane Doe",
+    name: "Barbara",
     position: "CTO",
     desc: "Lorem ipsum dolor sit amet consectetur. Massa ut venenatis odio hendrerit. Phasellus sed nibh ",
     facebook: "https://www.facebook.com",
@@ -19,7 +19,7 @@ export const Bloom = [
     img: "/teams/icon2.png",
   },
   {
-    name: "Jane Doe",
+    name: "Celeste Cammarella",
     position: "CTO",
     facebook: "https://www.facebook.com",
     desc: "Lorem ipsum dolor sit amet consectetur. Massa ut venenatis odio hendrerit. Phasellus sed nibh ",
@@ -28,7 +28,7 @@ export const Bloom = [
     img: "/teams/icon3.png",
   },
   {
-    name: "Jane Doe",
+    name: "Giada Bono",
     position: "CTO",
     desc: "Lorem ipsum dolor sit amet consectetur. Massa ut venenatis odio hendrerit. Phasellus sed nibh ",
     facebook: "https://www.facebook.com",
@@ -37,7 +37,7 @@ export const Bloom = [
     img: "/teams/icon4.png",
   },
   {
-    name: "John Doe",
+    name: "Francesca",
     position: "CEO",
     team: "Creativity team",
     desc: "Lorem ipsum dolor sit amet consectetur. Massa ut venenatis odio hendrerit. Phasellus sed nibh ",
@@ -47,7 +47,7 @@ export const Bloom = [
     img: "/teams/icon5.png",
   },
   {
-    name: "Jane Doe",
+    name: "Marika",
     position: "CTO",
     desc: "Lorem ipsum dolor sit amet consectetur. Massa ut venenatis odio hendrerit. Phasellus sed nibh ",
     facebook: "https://www.facebook.com",

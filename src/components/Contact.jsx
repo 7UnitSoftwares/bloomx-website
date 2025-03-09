@@ -80,12 +80,12 @@ const Contact = () => {
       <Container>
         <div className="overflow-hidden">
           <h1 className="text-4xl font-bold text-[#00A59B]">
-            Have Questions? <br /> Get in Touch! 👋{" "}
+            Hai domande? <br />Contattaci! 👋{" "}
           </h1>
           <p className="mt-3  text-lg font-light text-[#808080]">
-            We’re here to answer any questions you may have about Bloom or our
-            programs. Please feel free to <br /> reach out via the form below,
-            and we will respond as soon as possible!
+            Siamo qui per rispondere a qualsiasi domanda tu possa avere su Bloom o sui nostri
+            programmi. Non esitare a <br /> contattarci tramite il modulo qui sotto,
+            e ti risponderemo il prima possibile!
           </p>
 
           <div className="mt-10">

@@ -14,7 +14,7 @@ const Teams = () => {
       la nostra team
       </h1>
 
-      <div className="flex justify-center gap-10 mt-5">
+      {/* <div className="flex justify-center gap-10 mt-5">
         <button
           className={`${
             team === "bloom" ? "bg-[#00A59B] text-white" : ""
@@ -31,7 +31,7 @@ const Teams = () => {
         >
           Creator Team
         </button>
-      </div>
+      </div> */}
 
       <div className="grid lg:grid-cols-3 gap-5">
         {data.map((member, index) => (

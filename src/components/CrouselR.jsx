@@ -33,7 +33,7 @@ const Carousel = ({data}) => {
               className="min-w-full justify-center flex flex-col lg:flex-row items-center shadow-xl  bg-wite rounded-xl p-3 gap-10"
             >
               <div>
-                <img src={item.image} className="bg-cover " alt="" />
+                <img src={item.image} className="bg-cover w-[20vw] max-w-[300px] lg:max-w-[50vw] object-contain aspect-auto" alt="" />
               </div>
               <div className="flex justify-start flex-col gap-3 items-start">
                 <h1 className="text-xl font-semibold text-black">

@@ -22,19 +22,19 @@ export default Services;
 const data = [
   {
     title: "Percorsi di Studio",
-    image: "/service/icon.png",
+    image: "/service/service_1.jpg",
     description:
       "Potenzia il tuo percorso accademico con risorse educative, mentoring e  attività che ti aiutano a scoprire nuove possibilità e a raggiungere i tuoi  obiettivi.",
   },
   {
     title: "Consulenza e Assessment",
-    image: "/service/icon.png",
+    image: "/service/service_2.jpg",
     description:
       "Potenzia il tuo percorso accademico con risorse educative, mentoring e  attività che ti aiutano a scoprire nuove possibilità e a raggiungere i tuoi  obiettivi.",
   },
   {
     title: "Laboratori ed Eventi",
-    image: "/service/icon.png",
+    image: "/service/service_3.jpg",
     description:
       "Potenzia il tuo percorso accademico con risorse educative, mentoring e  attività che ti aiutano a scoprire nuove possibilità e a raggiungere i tuoi  obiettivi.",
   },
