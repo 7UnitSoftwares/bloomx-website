@@ -1,6 +1,7 @@
 import Banner from "@/components/Banner";
 import Container from "@/components/Container";
 import SectionWithBackground from "@/components/SectionWithBackground";
+import Image from "next/image";
 import React from "react";
 
 export const metadata = {
@@ -40,60 +41,66 @@ function page() {
             </div>
           ))}
         </div>
-        <div className="mx-auto pt-16 bg-gradient-to-b">
-          <div className="flex flex-col md:flex-row items-start gap-12">
-            {/* Left Side - How it works */}
-            <div className="md:w-1/2">
-              <div className="sticky top-24">
-                <h2 className="text-4xl font-bold text-[#008C95] mb-6 leading-tight">
+        <div className="mx-auto pt-16 ">
+          <div className="mx-auto py-16 bg-gradient-to-b from-[#f8fdfd] to-[#F2F2F2] rounded-2xl shadow-sm my-10">
+            <div className="mx-auto flex flex-col md:flex-row gap-12 px-6 max-w-7xl">
+              {/* Left Side - Heading, Text and Image Grid */}
+              <div className="md:w-1/2">
+                <h2 className="text-3xl md:text-4xl font-bold text-[#008C95] mb-4 relative">
                   Come Accedere ai Nostri Servizi
+                  <span className="absolute bottom-0 left-0 w-24 h-1 bg-gradient-to-r from-[#008C95] to-[#00C2CB]"></span>
                 </h2>
 
-                <p className="text-[#333333] mb-10 text-lg">
+                <p className="text-gray-600 mb-8 max-w-md text-lg">
                   I nostri servizi sono progettati per essere accessibili e
                   personalizzati in base alle tue esigenze specifiche.
                 </p>
 
-                <button className="bg-[#008C95] hover:bg-[#007A82] transition-colors text-white px-8 py-3 font-medium rounded-md shadow-md hover:shadow-lg flex items-center gap-2">
-                  Scopri di più
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            {/* Right Side - Numbered Items */}
-            <div className="md:w-2/3">
-              {AccessData.map((item, index) => (
-                <div key={index} className="flex mb-16 group">
-                  <div className="mr-8 flex-shrink-0">
-                    <div className="w-20 h-20 rounded-full border-3 border-[#008C95] bg-white flex items-center justify-center shadow-md group-hover:shadow-lg transition-all group-hover:scale-105">
-                      <span className="text-3xl font-bold text-[#008C95]">
-                        {index + 1}
-                      </span>
+                {/* Image Grid - 2x2 Layout */}
+                <div className="grid grid-cols-2 gap-4 p-5">
+                  {serviceImages.map((image) => (
+                    <div
+                      key={image.id}
+                      className="relative h-36 rounded-xl overflow-hidden shadow-md group transform transition duration-300 hover:scale-105 hover:shadow-xl"
+                    >
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        fill
+                        style={{ objectFit: "cover" }}
+                        className="transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
-                  </div>
-
-                  <div className="pt-2">
-                    <h3 className="text-2xl font-bold text-[#008C95] mb-3 group-hover:translate-x-1 transition-transform">
-                      {item.title}
-                    </h3>
-                    <p className="text-[#454545] text-lg leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              {/* Right Side - Numbered Features */}
+              <div className="md:w-1/2 mt-10 ">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {AccessData.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col p-5 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-[#008C95] h-full"
+                    >
+                      <div className="flex  items-center mb-3">
+                        <div className="flex  justify-center items-center w-12 h-12 rounded-full bg-gradient-to-r from-[#008C95] to-[#00C2CB] text-white shadow-md mr-3">
+                          <span className="text-xl font-bold">
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
+                        </div>
+                        <h3 className="text-xl font-bold text-gray-800">
+                          {item.title}
+                        </h3>
+                      </div>
+                      <p className="text-gray-600 mt-2 pl-15">
+                        {item.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -169,4 +176,10 @@ const AccessData = [
     description:
       "Percorsi continuativi per garantire risultati duraturi, pacchetti personalizzabili in base alle esigenze, e facilità di recupero lezioni perse.",
   },
+];
+const serviceImages = [
+  { id: 1, src: "/service/image1.jpg", alt: "Servizio 1" },
+  { id: 2, src: "/service/image2.jpg", alt: "Servizio 2" },
+  { id: 3, src: "/service/image2.jpg", alt: "Servizio 3" },
+  { id: 4, src: "/service/image2.jpg", alt: "Servizio 4" },
 ];
