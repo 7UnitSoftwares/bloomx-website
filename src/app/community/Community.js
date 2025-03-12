@@ -64,14 +64,14 @@ const CommunityItem = ({ item, index }) => {
     >
       {/* Image and Title Section */}
       <div className="flex flex-col justify-center items-center lg:items-start gap-6 lg:w-2/5">
-        <div className="w-full max-w-md h-64 relative rounded-xl overflow-hidden shadow-md group">
+        <div className="w-full flex justify-center items-center relative rounded-xl p-2 shadow-md group">
           <Image
             src={item.icon}
             alt={item.title || "Community image"}
-            fill
+            height={300}
+            width={300}
             priority={index < 2}
-            sizes="(max-width: 768px) 100vw, 40vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            className="object-cover transition-transform duration-500 group-hover:scale-95"
           />
         </div>
 
