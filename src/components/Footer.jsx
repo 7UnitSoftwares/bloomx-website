@@ -8,7 +8,7 @@ import Button from "./Button";
 const data = [
   { title: "Chi siamo", to: "/about" },
   {
-    title: "Comunità",
+    title: "Community",
     to: "/community",
     items: [
       { title: "Buds", to: "Buds" },
@@ -18,7 +18,44 @@ const data = [
       { title: "Creators", to: "Creators" },
     ],
   },
-  // ... other data items
+  {
+    title: "I Nostri Servizi",
+    to: "/service",
+    items: [
+      { title: "One to one tutoring", to: "tutoring" },
+      { title: "Consulans pedagogica", to: "pedagogica" },
+      { title: "Organize events", to: "events" },
+      { title: "Projectzione", to: "projection" },
+    ],
+  },
+  {
+    title: "Products",
+    to: "/products",
+    items: [
+      { title: "intùiti", to: "intùiti Creative Cards" },
+      { title: "Favula Deck", to: "Fabula Deck" },
+      {
+        title: "intùitifweq Cards",
+        to: "intùitifweq Creative Cards",
+      },
+      {
+        title: "Fabulafwe Deck",
+        to: "Fabulafwe Deck",
+      },
+    ],
+  },
+  {
+    title: "Network",
+    to: "/network",
+    items: [
+      { title: "Bloom e Scuole", to: "schools" },
+      { title: "Bloom e ISTITUZIONI ASSOCIAZIONI", to: "associations" },
+      { title: "Bloom e Aziende", to: "companies" },
+    ],
+  },
+  { title: "Eventi", to: "/events" },
+  { title: "Spazio", to: "/space" },
+  { title: "Blog", to: "/blog" },
 ];
 
 const Footer = () => {
@@ -102,40 +139,75 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Navigation Links */}
+            {/* Navigation Links - Updated with proper spacing */}
             <div className="md:col-span-4">
-              <div className="grid grid-cols-2 gap-6">
-                {isClient &&
-                  data.map((item, index) => (
-                    <div key={index} className="flex flex-col gap-2">
-                      <h3 className="font-semibold text-lg mb-2">
-                        {item.title}
-                      </h3>
-                      {item.items ? (
-                        item.items.map((subItem, subIndex) => (
+              <div className="grid grid-cols-2 gap-x-4">
+                <div className="flex flex-col space-y-3">
+                  {isClient &&
+                    data
+                      .filter((_, i) => i % 2 === 0)
+                      .map((item, index) => (
+                        <div key={index} className="flex flex-col">
                           <Link
-                            key={subIndex}
-                            href={subItem.to}
-                            className="text-gray-600 hover:text-blue-600 transition-colors text-sm"
+                            href={item.to}
+                            className="text-gray-700 hover:text-blue-600 transition-colors font-semibold mb-1"
                           >
-                            {subItem.title}
+                            {item.title}
                           </Link>
-                        ))
-                      ) : (
-                        <Link
-                          href={item.to}
-                          className="text-gray-600 hover:text-blue-600 transition-colors text-sm"
-                        >
-                          {item.title}
-                        </Link>
-                      )}
-                    </div>
-                  ))}
+
+                          {/* Display submenu items if they exist */}
+                          {item.items && (
+                            <div className="flex flex-col pl-2 space-y-1 mb-2">
+                              {item.items.map((subItem, subIndex) => (
+                                <Link
+                                  key={subIndex}
+                                  href={subItem.to || subItem.link || "#"}
+                                  className="text-gray-500 hover:text-blue-500 transition-colors text-xs"
+                                >
+                                  {subItem.title}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                </div>
+
+                <div className="flex flex-col space-y-3">
+                  {isClient &&
+                    data
+                      .filter((_, i) => i % 2 === 1)
+                      .map((item, index) => (
+                        <div key={index} className="flex flex-col">
+                          <Link
+                            href={item.to}
+                            className="text-gray-700 hover:text-blue-600 transition-colors font-semibold mb-1"
+                          >
+                            {item.title}
+                          </Link>
+
+                          {/* Display submenu items if they exist */}
+                          {item.items && (
+                            <div className="flex flex-col pl-2 space-y-1 mb-2">
+                              {item.items.map((subItem, subIndex) => (
+                                <Link
+                                  key={subIndex}
+                                  href={subItem.to || subItem.link || "#"}
+                                  className="text-gray-500 hover:text-blue-500 transition-colors text-xs"
+                                >
+                                  {subItem.title}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                </div>
               </div>
             </div>
 
-            {/* Newsletter Section - Moved next to Comunità */}
-            <div className="md:col-span-4  rounded-lg shadow-sm">
+            {/* Newsletter Section */}
+            <div className="md:col-span-4 rounded-lg shadow-sm">
               <div>
                 <h3 className="text-xl font-bold text-gray-800 mb-3">
                   Newsletter Bloom
@@ -156,7 +228,8 @@ const Footer = () => {
                     className="px-4 py-3 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                     required
                   />
-                 <Button className="w-full bg-[#008C95] hover:bg-[#006A70] text-white py-2 px-4 rounded-lg transition-colors duration-200"
+                  <Button
+                    className="w-full bg-[#008C95] hover:bg-[#006A70] text-white py-2 px-4 rounded-lg transition-colors duration-200"
                     type="submit"
                   >
                     Iscriviti
