@@ -28,31 +28,15 @@ const data = [
       { title: "Projectzione", to: "projection" },
     ],
   },
-  {
-    title: "Products",
-    to: "/products",
-    items: [
-      { title: "intùiti", to: "intùiti Creative Cards" },
-      { title: "Favula Deck", to: "Fabula Deck" },
-      {
-        title: "intùitifweq Cards",
-        to: "intùitifweq Creative Cards",
-      },
-      {
-        title: "Fabulafwe Deck",
-        to: "Fabulafwe Deck",
-      },
-    ],
-  },
-  {
-    title: "Network",
-    to: "/network",
-    items: [
-      { title: "Bloom e Scuole", to: "schools" },
-      { title: "Bloom e ISTITUZIONI ASSOCIAZIONI", to: "associations" },
-      { title: "Bloom e Aziende", to: "companies" },
-    ],
-  },
+  // {
+  //   title: "Network",
+  //   to: "/network",
+  //   items: [
+  //     { title: "Bloom e Scuole", to: "schools" },
+  //     { title: "Bloom e ISTITUZIONI ASSOCIAZIONI", to: "associations" },
+  //     { title: "Bloom e Aziende", to: "companies" },
+  //   ],
+  // },
   { title: "Eventi", to: "/events" },
   { title: "Spazio", to: "/space" },
   { title: "Blog", to: "/blog" },
