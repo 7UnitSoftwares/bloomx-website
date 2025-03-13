@@ -6,26 +6,31 @@ import Container from "./Container";
 import Button from "./Button";
 
 const data = [
-  { title: "Chi siamo", to: "/about" },
+  { title: "Chi siamo", to: "/about",
+    items: [
+      { title: "Il progetto", to: "/about" },
+      { title: "La visione", to: "/about" },
+      { title: "la nostra team", to: "/about" }
+    ]
+   },
   {
     title: "Community",
     to: "/community",
     items: [
-      { title: "Buds", to: "Buds" },
-      { title: "Students", to: "Students" },
-      { title: "Parents", to: "Parents" },
-      { title: "Bloomher", to: "Women" },
-      { title: "Creators", to: "Creators" },
+      { title: "Studenti", to: "/community" },
+      { title: "Piccoli Bloom", to: "/community" },
+      { title: "Genitori", to: "/community" },
+      { title: "BloomHer", to: "/community" },
+      { title: "Creators", to: "/community" }
     ],
   },
   {
     title: "I Nostri Servizi",
     to: "/service",
     items: [
-      { title: "One to one tutoring", to: "tutoring" },
-      { title: "Consulans pedagogica", to: "pedagogica" },
-      { title: "Organize events", to: "events" },
-      { title: "Projectzione", to: "projection" },
+      { title: "Percorsi di Studio", to: "/service" },
+      { title: "Consulenza e Assessment", to: "/service" },
+      { title: "Laboratori ed Eventi", to: "/service" }
     ],
   },
   // {
@@ -37,9 +42,6 @@ const data = [
   //     { title: "Bloom e Aziende", to: "companies" },
   //   ],
   // },
-  { title: "Eventi", to: "/events" },
-  { title: "Spazio", to: "/space" },
-  { title: "Blog", to: "/blog" },
 ];
 
 const Footer = () => {

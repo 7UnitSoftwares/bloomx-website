@@ -8,7 +8,7 @@ const TestimonialCard = ({ data }) => {
       href="https://maps.app.goo.gl/mXWKwW4m24KTEdDB9"
       target="_blank"
       rel="noopener noreferrer"
-      className="block max-w-sm mx-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+      className="block max-w-sm mx-auto rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white"
     >
       <div className="p-4 flex flex-col space-y-4">
         <div className="flex items-center justify-between space-x-4">
@@ -42,7 +42,6 @@ const TestimonialCard = ({ data }) => {
         </div>
 
         <p className="text-gray-600">{data.review}</p>
-        <p className="text-right text-sm text-gray-400">{data.date}</p>
       </div>
     </a>
   );

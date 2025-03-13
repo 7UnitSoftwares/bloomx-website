@@ -84,12 +84,12 @@ const CommunityItem = ({ item, index }) => {
 
       {/* Description Section */}
       <div className="flex justify-center items-start gap-5 lg:w-3/5">
-        <div className="text-[#373737] text-center lg:text-start text-xl lg:text-2xl font-normal space-y-6">
+        <div className="text-[#373737] text-center lg:text-start font-normal space-y-6">
           <p>{item.desc}</p>
 
           {item.meeting?.length > 0 && (
             <div className="p-4 bg-[#f8f9fa] rounded-lg border-l-4 border-[#00A896] mt-6">
-              <p className="text-xl flex flex-wrap gap-2 items-center">
+              <p className="flex flex-wrap gap-2 items-center">
                 <span className="italic text-[#00A896]">
                   Quando ci Incontriamo:
                 </span>
@@ -100,7 +100,7 @@ const CommunityItem = ({ item, index }) => {
 
           {item.howitworks?.length > 0 && (
             <div className="mt-6">
-              <h3 className="text-xl font-medium italic text-[#00A896] mb-4 text-left">
+              <h3 className="font-medium italic text-[#00A896] mb-4 text-left">
                 {item.section === "Women" && "Le Nostre Esperienze:"}
                 {item.section === "Parents" && "Cosa Offriamo:"}
                 {(item.section === "Buds" || item.section === "Students") &&
@@ -109,8 +109,8 @@ const CommunityItem = ({ item, index }) => {
 
               <ul className="space-y-3 text-left">
                 {item.howitworks?.map((point, idx) => (
-                  <li key={idx} className="flex items-start text-xl">
-                    <span className="inline-block w-4 h-4 mt-2 mr-3 rounded-full bg-[#00A896] flex-shrink-0"></span>
+                  <li key={idx} className="flex items-start">
+                    <span className="inline-block w-2 h-2 mt-2 mr-3 rounded-full bg-[#00A896] flex-shrink-0"></span>
                     <span>{point}</span>
                   </li>
                 ))}

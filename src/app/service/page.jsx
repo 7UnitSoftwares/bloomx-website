@@ -32,7 +32,7 @@ function page() {
                 <p className="text-3xl font-semibold text-[#008C95] leading-[40px]">
                   {item.title}
                 </p>
-                <ul className="text-[#373737] lg:text-xl space-y-2 list-disc pl-5">
+                <ul className="text-[#373737] space-y-2 list-disc pl-5">
                   {item.description.map((desc, i) => (
                     <li key={i}>{desc.replace("• ", "")}</li>
                   ))}
