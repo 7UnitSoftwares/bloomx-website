@@ -13,6 +13,18 @@ const page = () => {
         description="We are here to help you. <br /> Contact us for any queries."
       />
       <Container>
+        {/* Google maps frame  */}
+        <div className="w-full h-[400px] rounded-xl mt-16 lg:mt-10 overflow-hidden shadow-lg mb-16">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.9406935911855!2d72.5592774!3d23.022474999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84e8f8295a89%3A0xbbc57db26bf80211!2sAlphabet!5e0!3m2!1sen!2sin!4v1652252811086!5m2!1sen!2sin"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
         <div className="grid mt-16 lg:mt-10 grid-cols-1 lg:grid-cols-3 gap-10">
           {ContactData.map((item, index) => {
             return (
