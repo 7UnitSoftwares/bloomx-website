@@ -7,7 +7,7 @@ export const Bloom = [
     facebook: "https://www.facebook.com",
     insta: "https://www.instagram.com",
     linkedin: "https://www.linkedin.com",
-    img: "/teams/icon1.png",
+    img: "/teams/chiara.png",
   },
   {
     name: "Barbara",
@@ -16,16 +16,7 @@ export const Bloom = [
     facebook: "https://www.facebook.com",
     insta: "https://www.instagram.com",
     linkedin: "https://www.linkedin.com",
-    img: "/teams/icon2.png",
-  },
-  {
-    name: "Celeste Cammarella",
-    position: "CTO",
-    facebook: "https://www.facebook.com",
-    desc: "Lorem ipsum dolor sit amet consectetur. Massa ut venenatis odio hendrerit. Phasellus sed nibh ",
-    insta: "https://www.instagram.com",
-    linkedin: "https://www.linkedin.com",
-    img: "/teams/icon3.png",
+    img: "/teams/barbara.png",
   },
   {
     name: "Giada Bono",
@@ -34,7 +25,7 @@ export const Bloom = [
     facebook: "https://www.facebook.com",
     insta: "https://www.instagram.com",
     linkedin: "https://www.linkedin.com",
-    img: "/teams/icon4.png",
+    img: "/teams/giada.png",
   },
   {
     name: "Francesca",
@@ -44,7 +35,7 @@ export const Bloom = [
     facebook: "https://www.facebook.com",
     insta: "https://www.instagram.com",
     linkedin: "https://www.linkedin.com",
-    img: "/teams/icon5.png",
+    img: "/teams/francesca.png",
   },
   {
     name: "Marika",
@@ -53,7 +44,7 @@ export const Bloom = [
     facebook: "https://www.facebook.com",
     insta: "https://www.instagram.com",
     linkedin: "https://www.linkedin.com",
-    img: "/teams/icon1.png",
+    img: "/teams/marika.png",
   },
   // ...add more team members
 ];

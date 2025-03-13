@@ -64,7 +64,7 @@ const CommunityItem = ({ item, index }) => {
     >
       {/* Image and Title Section */}
       <div className="flex flex-col justify-center items-center lg:items-start gap-6 lg:w-2/5">
-        <div className="w-full flex justify-center items-center relative rounded-xl p-2 shadow-md group">
+        <div className="w-full flex justify-center items-center relative rounded-xl p-2 group">
           <Image
             src={item.icon}
             alt={item.title || "Community image"}

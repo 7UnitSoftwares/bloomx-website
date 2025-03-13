@@ -29,7 +29,7 @@ const page = () => {
               <br/>
               <p>Bloom integra pedagogia, educazione emozionale e pratiche olistiche come mindfulness e YogaArt per creare esperienze di apprendimento profonde e trasformative. Ogni strumento che utilizziamo ha una forte valenza pedagogica, pensata per accompagnare le persone a riscoprire e attivare le proprie risorse interiori.</p>
             </span>
-            <img src="/about/mission1.png" alt="" />
+            <img src="/about/mission1.png" alt="" style={{width:'30rem'}} />
           </div>
         </div>
       </Container>
@@ -57,7 +57,7 @@ const page = () => {
         <Container>
           <h1 className="typography mt-10">La visione</h1>
           <div className="bg-[#F2F2F2]  flex flex-col mt-5 lg:flex-row justify-center items-center lg:gap-16 gap-5">
-            <img src="/about/vision.png" alt="" />
+            <img src="/about/vision.png" alt="" style={{width:'30rem'}}/>
 
             <p className="lg:text-xl font-normal text-center lg:text-start text-[#373737] lg:leading-[1.5]">
             Un mondo dove la pedagogia moderna diventa motore di trasformazione collettiva, dove ogni persona - bambino, studente, genitore o adulto - intraprende un viaggio di crescita autentica attraverso l'apprendimento condiviso e le esperienze che nutrono mente, cuore e talenti. Un percorso che porta ciascuno a realizzare pienamente il proprio potenziale, creando un impatto positivo che si estende dalla sfera personale a quella sociale.{" "}
