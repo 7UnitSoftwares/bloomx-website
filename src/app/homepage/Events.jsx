@@ -26,7 +26,7 @@ function Events() {
       <div className="bg-[#F2F2F2] mt-10 lg:mt-10">
         <Container>
           <h1 className="typography pt-5 lg:pt-16">What customer says</h1>
-           <div className=" bg-gray-100 grid lg:grid-cols-3 gap-10 lg:mt-16 p-4 pb-16">
+           <div className="bg-gray-100 grid lg:grid-cols-3 gap-10 lg:mt-16 p-4 pb-16">
             {TestimonialData.map((data, index) => {
               return <TestimonialCard data={data} key={index} />;
             })}
