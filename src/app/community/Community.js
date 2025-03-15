@@ -9,8 +9,8 @@ import SectionWithBackground from "@/components/SectionWithBackground";
 import { CommunityData } from "@/data/CommunityData";
 
 // export const metadata = {
-//   title: "Bloom Community",
-//   description: "Bloom Community",
+//   title: "Le nostre community",
+//   description: "In Bloom trovi tutto ciò che serve per il tuo benessere e la tua crescita",
 // };
 
 const CommunityPage = () => {
@@ -76,7 +76,7 @@ const CommunityItem = ({ item, index }) => {
         </div>
 
         <div className="w-full">
-          <h1 className="text-3xl font-semibold text-[#00A896] text-center lg:text-left">
+          <h1 className="text-3xl font-semibold text-[#00A896] text-center">
             {item.title}
           </h1>
         </div>

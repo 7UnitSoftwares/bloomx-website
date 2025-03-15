@@ -10,11 +10,11 @@ const TeamCard = ({ member }) => {
       </div>
       <div>
         <h1 className="text-2xl text-center font-semibold">{member.name}</h1>
-        <h2 className="text-lg text-[#00A59B] text-center font-medium">
+        <h2 className="text-lg text-[#00A59B] text-center font-medium font-bold">
           {member.position}
         </h2>
-        <p className="text-center">{member.desc}</p>
-        <div className="flex justify-center mt-3 mb-3 gap-3">
+        <p className="text-center mb-3 mt-5">{member.desc}</p>
+        {/* <div className="flex justify-center mt-3 mb-3 gap-3">
           <a href={member.insta} target="_blank" rel="noopener noreferrer">
             <Image
               src="/footer/insta.png"
@@ -39,7 +39,7 @@ const TeamCard = ({ member }) => {
               height={24}
             />
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );

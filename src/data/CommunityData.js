@@ -2,7 +2,7 @@ export const CommunityData = [
   {
     id: 1,
     icon: "/community/icon1.png",
-    section: "Students",
+    section: "Studenti",
     title: "Studenti: Crescere con Consapevolezza",
     desc: "Una comunità dove gli studenti sviluppano consapevolezza di sé, delle proprie emozioni e del proprio modo di apprendere. Attraverso metodologie pedagogiche innovative e mindfulness, accompagniamo ogni studente a scoprire i propri talenti, costruire strategie di studio personalizzate e coltivare un pensiero autonomo e critico.",
     meeting: "Lunedì, Mercoledì e Giovedì: 14:00 - 17:00",
@@ -20,7 +20,7 @@ export const CommunityData = [
   {
     id: 3,
     icon: "/community/icon2.png",
-    section: "Parents",
+    section: "Genitori",
     title: "Genitori: Insieme nel Viaggio",
     desc: "Una comunità dove i genitori condividono esperienze e trovano supporto reciproco in un ambiente libero da giudizi.",
     meeting: "",
@@ -29,7 +29,7 @@ export const CommunityData = [
   {
     id: 4,
     icon: "/community/icon4.png",
-    section: "Women",
+    section: "BloomHer",
     title: "BloomHer: Fiorire al Femminile",
     desc: "Una comunità di donne che si sostengono nel percorso di crescita personale.",
     meeting: "",

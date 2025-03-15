@@ -6,31 +6,31 @@ import Container from "./Container";
 import Button from "./Button";
 
 const data = [
-  { title: "Chi siamo", to: "/about",
+  { title: "Chi siamo", to: "/siamo",
     items: [
-      { title: "Il progetto", to: "/about" },
-      { title: "La visione", to: "/about" },
-      { title: "la nostra team", to: "/about" }
+      { title: "Il progetto", to: "/siamo" },
+      { title: "La visione", to: "/siamo" },
+      { title: "la nostra team", to: "/siamo" }
     ]
    },
   {
     title: "Community",
     to: "/community",
     items: [
-      { title: "Studenti", to: "/community" },
-      { title: "Piccoli Bloom", to: "/community" },
-      { title: "Genitori", to: "/community" },
-      { title: "BloomHer", to: "/community" },
-      { title: "Creators", to: "/community" }
+      { title: "Studenti", to: "/community#studenti" },
+      { title: "Piccoli Bloom", to: "/community#buds" },
+      { title: "Genitori", to: "/community#genitori" },
+      { title: "BloomHer", to: "/community#bloomHer" },
+      { title: "Creators", to: "/community#creators" }
     ],
   },
   {
     title: "I Nostri Servizi",
     to: "/service",
     items: [
-      { title: "Percorsi di Studio", to: "/service" },
-      { title: "Consulenza e Assessment", to: "/service" },
-      { title: "Laboratori ed Eventi", to: "/service" }
+      { title: "Percorsi di Studio", to: "/service#studio" },
+      { title: "Consulenza e Assessment", to: "/service#consulenza" },
+      { title: "Laboratori ed Eventi", to: "/service#eventi" }
     ],
   },
   // {

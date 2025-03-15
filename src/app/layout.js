@@ -11,8 +11,8 @@ const montserrat = Montserrat({
   weights: [400, 500, 600, 700, 800, 900],
 });
 export const metadata = {
-  title: "Bloom",
-  description: "Bloom App",
+  title: "Fiorire nel tuo spazio, col tuo tempo | Bloom",
+  description: "Bloom è un centro di pedagogia moderna che accompagna le persone nel loro percorso di vita. Aiutiamo bambini e studenti a conoscersi meglio, gestire le emozioni e apprendere in modo efficace.",
 };
 
 export default function RootLayout({ children }) {

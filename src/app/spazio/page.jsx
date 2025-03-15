@@ -103,7 +103,7 @@ const SpaceData = [
   {
     section: "Relax",
     title: "Aree Relax e Comfort",
-    icon: "/space/image1.jpg",
+    icon: "/space/space2.png",
     description: [
       "• Zone morbide con cuscini e tappeti",
       "• Angoli silenziosi per la lettura",
@@ -114,7 +114,7 @@ const SpaceData = [
   {
     section: "Creativity",
     title: "Strumenti per la Creatività",
-    icon: "/space/image2.jpg",
+    icon: "/space/space3.png",
     description: [
       "• Art supply sempre disponibili",
       "• Mandala e materiali per colorare",
@@ -125,7 +125,7 @@ const SpaceData = [
   {
     section: "Learning",
     title: "Spazi di Apprendimento",
-    icon: "/space/image3.jpg",
+    icon: "/space/space4.png",
     description: [
       "• Aree studio confortevoli",
       "• Libri e risorse educative",
@@ -136,7 +136,7 @@ const SpaceData = [
   {
     section: "Everyone",
     title: "Un Luogo per Tutti",
-    icon: "/space/image1.jpg",
+    icon: "/space/space1.png",
     description: [
       "Bloom è il tuo spazio tra casa e impegni quotidiani: un ambiente accogliente dove puoi essere te stesso, rilassarti, imparare e crescere nei tuoi tempi e modi. Qui trovi tutto ciò che serve per nutrire mente, corpo e creatività, in un'atmosfera che ti fa sentire a casa.",
     ],

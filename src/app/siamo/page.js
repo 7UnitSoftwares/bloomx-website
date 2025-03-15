@@ -9,8 +9,8 @@ import Image from "next/image";
 import React from "react";
 
 export const metadata = {
-  title: "About Bloom",
-  description: "About Bloom",
+  title: "Cosa è Bloom",
+  description: "Bloom è un centro di pedagogia moderna che accompagna le persone nel loro percorso di vita.",
 };
 
 const page = () => {

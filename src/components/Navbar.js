@@ -31,25 +31,25 @@ const Navbar = () => {
   }, []);
 
   const data = [
-    { title: "Chi siamo", to: "/about" },
+    { title: "Chi siamo", to: "/siamo" },
     {
       title: "Community",
       to: "/community",
       items: [
-        { title: "Studenti", to: "Students" },
-        { title: "Piccoli Bloom", to: "Parents" },
-        { title: "Genitori", to: "Women" },
-        { title: "BloomHer", to: "Creators" },
-        { title: "Creators", to: "Buds" },
+        { title: "Studenti", to: "studenti" },
+        { title: "Piccoli Bloom", to: "buds" },
+        { title: "Genitori", to: "genitori" },
+        { title: "BloomHer", to: "bloomHer" },
+        { title: "Creators", to: "creators" },
       ],
     },
     {
       title: "I Nostri Servizi",
-      to: "/service",
+      to: "/servizi",
       items: [
-        { title: "Percorsi di Studio", to: "tutoring" },
-        { title: "Consulenza e Assessment", to: "pedagogica" },
-        { title: "Laboratori ed Eventi", to: "events" }
+        { title: "Percorsi di Studio", to: "studio" },
+        { title: "Consulenza e Assessment", to: "consulenza" },
+        { title: "Laboratori ed Eventi", to: "eventi" }
       ],
     },
     // {
@@ -61,12 +61,13 @@ const Navbar = () => {
     //     { title: "Bloom e Aziende", to: "companies" },
     //   ],
     // },
-    { title: "Eventi", to: "/events" },
-    { title: "Spazio", to: "/space" },
+    
+    { title: "Spazio", to: "/spazio" },
+    { title: "Eventi", to: "/eventi" },
     { title: "Blog", to: "/blog" },
     {
-      title: "Products",
-      to: "/products",
+      title: "Risorse",
+      to: "/risorse",
       items: [
         { title: "intùiti", to: "intùiti Creative Cards" },
         { title: "Favula Deck", to: "Fabula Deck" },
@@ -78,7 +79,7 @@ const Navbar = () => {
           title: "Fabulafwe Deck",
           to: "Fabulafwe Deck",
         },
-        { title: "free resources", link: "/free-resources" },
+        { title: "risorse gratuite", link: "/free-resources" },
       ],
     },
   ];
