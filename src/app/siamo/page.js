@@ -18,16 +18,20 @@ const page = () => {
     <section className="bg-[#F2F2F2] overflow-hidden">
       <SectionWithBackground
         title="Cosa è Bloom"
-        description="Bloom è un centro di pedagogia moderna che <br /> accompagna le persone nel loro percorso di vita."
+        description="Un luogo dove crescere e fiorire insieme. <br /> Percorsi educativi unici per valorizzare il potenziale di ognuno."
       />
       <Container>
         <div className="mt-16 lg:mt-10 mb-10">
           <h1 className="typography">Il progetto</h1>
           <div className="bg-[#F2F2F2]  flex flex-col-reverse lg:flex-row justify-center items-center lg:gap-16">
             <span className="lg:text-xl text-[#373737] font- lg:leading-[1.5]">
-              <p>Bloom è un centro di pedagogia moderna che accompagna le persone nel loro percorso di vita. Aiutiamo bambini e studenti a conoscersi meglio, gestire le emozioni e apprendere in modo efficace. Supportiamo gli adulti a riappropriarsi dei loro spazi e tempi, attraverso mindfulness e crescita intenzionale. Affianchiamo i genitori con comprensione e senza giudizio, creando uno spazio dove sentirsi accolti e supportati nel loro ruolo educativo.</p>
+              <p>Bloom è il Centro di Pedagogia Moderna che accompagna bambini, studenti, adulti e famiglie nel loro percorso di crescita personale e relazionale , dove si integra pedagogia, educazione emozionale e pratiche olistiche come mindfulness e YogaArt per creare esperienze di apprendimento profonde e trasformative. Ogni strumento che utilizziamo ha una forte valenza pedagogica, pensata per accompagnare le persone a riscoprire e attivare le proprie risorse interiori.</p>
               <br/>
-              <p>Bloom integra pedagogia, educazione emozionale e pratiche olistiche come mindfulness e YogaArt per creare esperienze di apprendimento profonde e trasformative. Ogni strumento che utilizziamo ha una forte valenza pedagogica, pensata per accompagnare le persone a riscoprire e attivare le proprie risorse interiori.</p>
+              <p>Aiutiamo i più piccoli a conoscersi, a gestire le emozioni e ad apprendere in modo efficace e sereno. Sosteniamo studenti nello studio e nell’autonomia, con strumenti pratici e motivanti. Affianchiamo gli adulti nel ritrovare i propri spazi, tempi e bisogni, attraverso percorsi di mindfulness e crescita intenzionale.</p>
+              <br/>
+              <p>Siamo al fianco dei genitori con empatia e senza giudizio, offrendo uno spazio sicuro in cui sentirsi ascoltati, compresi e valorizzati nel loro ruolo educativo.</p>
+              <br/>
+              <p><b>Ogni attività che proponiamo ha un solido fondamento pedagogico ed è pensata per aiutare le persone a riscoprire e attivare le proprie risorse interiori, in modo concreto, creativo e duraturo.</b></p>
             </span>
             <img src="/about/mission1.png" alt="" style={{width:'30rem'}} />
           </div>

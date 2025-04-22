@@ -11,11 +11,7 @@ const HeroSection = () => {
           <span className="font-bold">SPAZIO</span>, <br /> COL TUO <br />
           <span className="font-bold">TEMPO</span>.
         </h1>
-        <p className="text-[#1B1B1B] lg:text-2xl font-medium text-center lg:text-start">
-          Bloom è un centro di pedagogia moderna che accompagna le persone nel
-          loro percorso di vita. <br className="hidden lg:block" />
-          Aiutiamo bambini e studenti a conoscersi meglio, gestire le emozioni e
-          apprendere in modo efficace.
+        <p className="text-[#1B1B1B] lg:text-2xl font-medium text-center lg:text-start">Bloom è un centro di pedagogia moderna che accompagna bambini, ragazzi e famiglie nel loro percorso di crescita. <br className="hidden lg:block" /><br className="hidden lg:block" />Li aiutiamo a conoscersi meglio, a gestire le emozioni e ad apprendere in modo più sereno, efficace e consapevole.
         </p>
         <div className="flex lg:gap-7 gap-5 justify-center lg:justify-start mb-10">
           <Link href="/books">

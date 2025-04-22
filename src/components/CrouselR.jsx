@@ -40,9 +40,10 @@ const Carousel = ({ data }) => {
                 <h1 className="text-xl font-semibold text-black">
                   {item.title}
                 </h1>
-                <p className="text-start text-sm font-normal">
-                  {item.description}
-                </p>
+                <div 
+                  className="text-start text-sm font-normal"
+                  dangerouslySetInnerHTML={{ __html: item.description }}
+                />
                 <div className="flex gap-5">
                   <Link href='/service'>
                     <button className="bg-[#00A59B] text-white hover:scale-110 duration-300 ease-in-out px-4 py-2 rounded-lg mt-4">

@@ -49,18 +49,12 @@ const Space = () => {
       <div className="overflow-hidden bg-[#F2F2F2] mt-10">
         <Container>
           <div id="space" className="px-5 md:px-28 pb-10">
-            <h1 className="typography pt-16">Lo Spazio</h1>
+            <h1 className="typography pt-16">Il tuo luogo ideale per stare bene e crescere insieme.</h1>
             <p className="text-center  lg:mt-5 mt-2  lg:text-xl font-light text-[#808080] ">
-              Tutto ciò di cui hai bisogno per il tuo benessere e la tua
-              crescita
+            Tutto ciò di cui hai bisogno per il tuo benessere e la tua crescita
             </p>
             <p className="font- lg:text-xl text-[#373737] leading-[1.5] lg:text-center mt-3">
-              Un posto per tutti Bloom è il tuo spazio tra casa e impegni
-              quotidiani: un ambiente accogliente dove puoi essere te stesso,
-              rilassarti, imparare e crescere nei tuoi tempi e modi. Qui
-              troverai tutto ciò di cui hai bisogno per nutrire la tua mente, il
-              tuo corpo e la tua creatività, in un'atmosfera che ti fa sentire a
-              casa.
+            Un posto per tutti Bloom è il tuo spazio tra casa e impegni quotidiani: un ambiente accogliente dove puoi essere te stesso, rilassarti, imparare e crescere nei tuoi tempi e modi. Qui troverai tutto ciò di cui hai bisogno per nutrire la tua mente, il tuo corpo e la tua creatività, in un'atmosfera che ti fa sentire accolto e valorizzato.
             </p>
           </div>
           <div className="mt-16 pb-10">

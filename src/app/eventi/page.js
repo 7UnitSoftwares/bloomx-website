@@ -18,8 +18,7 @@ const page = () => {
     <div className="overflow-hidden">
       <SectionWithBackground
         title="Events"
-        description="Join us for exciting activities that promote growth,
-            <br /> learning, and creativity"
+        description="Partecipa ai nostri eventi per vivere attività stimolanti<br /> che favoriscono la crescita, l'apprendimento e la creatività."
       />
       <div className="bg-[#F2F2F2]">
         <Container>

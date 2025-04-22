@@ -14,7 +14,7 @@ function page() {
     <section className="bg-[#F2F2F2]">
       <SectionWithBackground
         title="I Nostri Servizi"
-        description="Trasformiamo l'apprendimento in un'esperienza di crescita consapevole, <br /> dove ogni percorso è personalizzato per valorizzare il potenziale di ciascuno."
+        description="Trasformiamo l’apprendimento in un’esperienza viva e consapevole,<br /> dove ogni percorso è costruito su misura per valorizzare il potenziale unico di ciascuno."
       />
       <Container>
         <div className="lg:mt-10 mt-16 flex flex-col justify-center lg:gap-16 gap-5 items-center">

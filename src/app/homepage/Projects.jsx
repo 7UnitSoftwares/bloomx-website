@@ -23,9 +23,34 @@ const Projects = () => {
         <div className="flex flex-col-reverse lg:flex-row gap-10 items-center mt-7">
           <div className="lg:w-1/2">
             <span className="lg:text-xl text-[#373737] font- lg:leading-[1.5]">
-              <p>Bloom è un centro di pedagogia moderna che accompagna le persone nel loro percorso di vita. Aiutiamo bambini e studenti a conoscersi meglio, gestire le emozioni e apprendere in modo efficace. Supportiamo gli adulti a riappropriarsi dei loro spazi e tempi, attraverso mindfulness e crescita intenzionale. Affianchiamo i genitori con comprensione e senza giudizio, creando uno spazio dove sentirsi accolti e supportati nel loro ruolo educativo.</p>
-              <br/>
-              <p>Bloom integra pedagogia, educazione emozionale e pratiche olistiche come mindfulness e YogaArt per creare esperienze di apprendimento profonde e trasformative. Ogni strumento che utilizziamo ha una forte valenza pedagogica, pensata per accompagnare le persone a riscoprire e attivare le proprie risorse interiori.</p>
+              <p>
+                Bloom è un centro di pedagogia moderna che accompagna bambini, ragazzi e adulti nel loro percorso di crescita personale e scolastica.
+              </p>
+              <br />
+              <p>
+                Aiutiamo i più piccoli e gli studenti a conoscersi meglio, a gestire le emozioni e ad apprendere in modo efficace e sereno.
+              </p>
+              <br />
+              <p>
+                Sosteniamo gli adulti nel ritrovare equilibrio, tempo e spazio per sé, attraverso percorsi di mindfulness e crescita intenzionale.
+              </p>
+              <br />
+              <p>
+                Affianchiamo i genitori con empatia e senza giudizio, offrendo uno spazio accogliente in cui sentirsi ascoltati, compresi e supportati nel loro ruolo educativo.
+              </p>
+              <br />
+              <p>
+                In Bloom uniamo pedagogia, educazione emozionale e pratiche olistiche come la mindfulness e la YogaArt, per creare esperienze di apprendimento profonde e trasformative.
+              </p>
+              <br />
+              <p>
+                Ogni proposta è pensata per aiutare le persone a riscoprire le proprie risorse interiori e attivarle nel quotidiano, con strumenti dal forte valore pedagogico.
+              </p>
+              <br />
+              <p>
+                Bloom integra pedagogia, educazione emozionale e pratiche olistiche come mindfulness e YogaArt per creare esperienze di apprendimento profonde e trasformative. 
+                Ogni strumento che utilizziamo ha una forte valenza pedagogica, pensata per accompagnare le persone a riscoprire e attivare le proprie risorse interiori.
+              </p>
             </span>
           </div>
           <div className="flex justify-center items-center lg:w-1/2">
@@ -38,7 +63,7 @@ const Projects = () => {
 };
 
 export default Projects;
- 
+
 
 {
   /* <div className="flex flex-col lg:flex-row justify-cente gap-12 mt-10">

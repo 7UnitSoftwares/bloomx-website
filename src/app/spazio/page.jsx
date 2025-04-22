@@ -15,7 +15,7 @@ const SpacePage = () => {
     <section className="bg-[#F2F2F2] min-h-screen overflow-hidden">
       <SectionWithBackground
         title="Lo Spazio"
-        description="Un Luogo per Tutti Bloom è il tuo spazio tra casa e impegni quotidiani, <br /> un ambiente accogliente dove puoi essere te stesso"
+        description="Bloom è un posto per Tutti: uno spazio accogliente tra casa e impegni, dove puoi sentirti te stesso. <br />Qui trovi tempo, ascolto e opportunità di crescita, in un contesto che ti sostiene e ti accompagna con cura."
       />
       <Container>
         <SpaceContent />

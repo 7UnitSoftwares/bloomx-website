@@ -1,10 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    output: 'standalone', // Ensure it's not interfering with dev mode
-    experimental: {
-      // Disable caching
-      incrementalCacheHandlerPath: false,
-    },
-  }
+    output: 'standalone',
+}
 
 export default nextConfig;

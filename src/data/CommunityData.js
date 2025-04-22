@@ -6,14 +6,14 @@ export const CommunityData = [
     title: "Studenti: Crescere con Consapevolezza",
     desc: "Una comunità dove gli studenti sviluppano consapevolezza di sé, delle proprie emozioni e del proprio modo di apprendere. Attraverso metodologie pedagogiche innovative e mindfulness, accompagniamo ogni studente a scoprire i propri talenti, costruire strategie di studio personalizzate e coltivare un pensiero autonomo e critico.",
     meeting: "Lunedì, Mercoledì e Giovedì: 14:00 - 17:00",
-    howitworks: ["Studio individuale e di gruppo", "Supporto del supervisore didattico", "aboratori tematici e pratiche olistiche", "Esperienze personalizzate in base alle esigenze"]
+    howitworks: ["Studio individuale e di gruppo", "Supporto del supervisore didattico", "Tematici e pratiche olistiche", "Esperienze personalizzate in base alle esigenze"]
   },
   {
     id: 2,
     icon: "/community/icon2.png",
     title: "Piccoli Bloom: Semi di Meraviglia",
     section: "Buds",
-    desc: "Una comunità dove i bambini esplorano, scoprono e crescono insieme. Attraverso gioco, YogaArt e attività creative, accompagniamo ogni piccolo nel viaggio alla scoperta delle emozioni e nell'espressione autentica di sé.",
+    desc: "Uno spazio sicuro e stimolante, dove i bambini possono esplorare, scoprire e crescere insieme. Attraverso il gioco, la YogaArt e attività creative pensate con cura, accompagniamo ogni bambino in un viaggio unico alla scoperta delle emozioni, dell’immaginazione e dell’espressione autentica di sé.",
     meeting: "Tutti i giorni 16:00 - 18:00 con attività tematiche",
     howitworks: ["Lunedì: Creattività", "Martedì: Educazione emozionale", "Mercoledì: Culture del mondo", "Giovedì: YogArt", "Venerdì: Yoga bambini e metodo di studio"]
   },
@@ -39,8 +39,8 @@ export const CommunityData = [
     id: 5,
     icon: "/community/icon5.png",
     section: "Creators",
-    title: "Creators: La Rete dei Saperi",
-    desc: "Una rete preziosa di professionisti che arricchisce Bloom con competenze, passioni e visioni uniche. Integrando i loro saperi con la nostra expertise pedagogica, creiamo esperienze innovative di crescita e consapevolezza che nutrono lo sviluppo personale di tutta la comunità Bloom.",
+    title: "Professionisti, artisti, educatori, visionari.",
+    desc: "Una rete preziosa di persone che arricchiscono Bloom con competenze, passioni e visioni uniche. Integrando i loro saperi con la nostra esperienza pedagogica, diamo vita a esperienze educative innovative, che ispirano consapevolezza e favoriscono lo sviluppo personale di tutta la comunità Bloom.",
     meeting: "",
     howitworks: []
   },
