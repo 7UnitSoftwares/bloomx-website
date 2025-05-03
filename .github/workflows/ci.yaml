@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'stage'
   workflow_dispatch:
 
 env:
@@ -33,7 +34,7 @@ jobs:
       name: Deploy to stage
       runs-on: [self-hosted, python3]
       needs: build-runners
-      if: github.ref == 'refs/heads/main'
+      if: github.ref == 'refs/heads/stage'
       steps:
         - name: Checkout code
           uses: actions/checkout@v3
