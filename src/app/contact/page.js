@@ -16,7 +16,7 @@ const page = () => {
         {/* Google maps frame  */}
         <div className="w-full h-[400px] rounded-xl mt-16 lg:mt-10 overflow-hidden shadow-lg mb-16">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.9406935911855!2d72.5592774!3d23.022474999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84e8f8295a89%3A0xbbc57db26bf80211!2sAlphabet!5e0!3m2!1sen!2sin!4v1652252811086!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2793.5411141188!2d8.060589100000001!3d45.559556!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786212d8e4611d3%3A0xe158b1e297d7794c!2sBloom%20Biella!5e0!3m2!1sen!2sin!4v1746258917683!5m2!1sen!2sin"
             width="100%"
             height="100%"
             style={{ border: 0 }}

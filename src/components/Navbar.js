@@ -63,25 +63,25 @@ const Navbar = () => {
     // },
     
     { title: "Spazio", to: "/spazio" },
-    { title: "Eventi", to: "/eventi" },
-    { title: "Blog", to: "/blog" },
-    {
-      title: "Risorse",
-      to: "/risorse",
-      items: [
-        { title: "intùiti", to: "intùiti Creative Cards" },
-        { title: "Favula Deck", to: "Fabula Deck" },
-        {
-          title: "intùitifweq Cards",
-          to: "intùitifweq Creative Cards",
-        },
-        {
-          title: "Fabulafwe Deck",
-          to: "Fabulafwe Deck",
-        },
-        { title: "risorse gratuite", link: "/free-resources" },
-      ],
-    },
+    // { title: "Eventi", to: "/eventi" },
+    // { title: "Blog", to: "/blog" },
+    // {
+    //   title: "Risorse",
+    //   to: "/risorse",
+    //   items: [
+    //     { title: "intùiti", to: "intùiti Creative Cards" },
+    //     { title: "Favula Deck", to: "Fabula Deck" },
+    //     {
+    //       title: "intùitifweq Cards",
+    //       to: "intùitifweq Creative Cards",
+    //     },
+    //     {
+    //       title: "Fabulafwe Deck",
+    //       to: "Fabulafwe Deck",
+    //     },
+    //     { title: "risorse gratuite", link: "/free-resources" },
+    //   ],
+    // },
   ];
 
   const handleMenuClick = (index) => {

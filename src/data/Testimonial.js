@@ -1,6 +1,6 @@
 export const TestimonialData = [
   {
-    profilePic: "/event/avtar.png", // Update with the correct path
+    profilePic: "", // Update with the correct path
     name: "Francesca Vottero",
     location: "Biella",
     rating: "5",
@@ -8,7 +8,7 @@ export const TestimonialData = [
     date: "a week ago",
   },
   {
-    profilePic: "/event/avtar.png", // Update with the correct path
+    profilePic: "", // Update with the correct path
     name: "Stefania Zampese",
     location: "Biella",
     rating: "5",
@@ -17,7 +17,7 @@ export const TestimonialData = [
     date: "a week ago",
   },
   {
-    profilePic: "/event/avtar.png", // Update with the correct path
+    profilePic: "", // Update with the correct path
     name: "ADRIANE SELLE",
     location: "Biella",
     rating: "5",

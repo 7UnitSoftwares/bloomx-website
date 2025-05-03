@@ -85,7 +85,7 @@ const CommunityItem = ({ item, index }) => {
       {/* Description Section */}
       <div className="flex justify-center items-start gap-5 lg:w-3/5">
         <div className="text-[#373737] text-center lg:text-start font-normal space-y-6">
-          <p>{item.desc}</p>
+          <p dangerouslySetInnerHTML={{ __html: item.desc }} />
 
           {item.meeting?.length > 0 && (
             <div className="p-4 bg-[#f8f9fa] rounded-lg border-l-4 border-[#00A896] mt-6">
