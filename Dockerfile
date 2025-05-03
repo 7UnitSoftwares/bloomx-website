@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Install dependencies first (better caching)
 COPY package*.json ./
+
 RUN npm ci
 
 # Copy rest of the application
