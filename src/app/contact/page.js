@@ -9,8 +9,8 @@ const page = () => {
   return (
     <section className="bg-[#F2F2F2] min-h-screen overflow-hidden">
       <SectionWithBackground
-        title="Contact Us"
-        description="We are here to help you. <br /> Contact us for any queries."
+        title="Contattaci"
+        description="Siamo qui per aiutarti. <br /> Contattaci per qualsiasi domanda."
       />
       <Container>
         {/* Google maps frame  */}
@@ -47,7 +47,7 @@ const page = () => {
           })}
         </div>
       </Container>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Caricamento...</div>}>
         <Contact />
       </Suspense>
     </section>
@@ -59,20 +59,20 @@ export default page;
 const ContactData = [
   {
     icon: "/contact/icon1.png",
-    title: "Chat to support",
-    desc: "We are here to help.",
+    title: "Chatta con il supporto",
+    desc: "Siamo qui per aiutarti.",
     additional: "bloom@bloom-bi.it",
   },
   {
     icon: "/contact/icon2.png",
-    title: "Visit Us",
-    desc: "Visit our office",
-    additional: "1234 Street Name, City Name",
+    title: "Visita la nostra sede",
+    desc: "Vieni a trovarci in ufficio",
+    additional: "VIA TORINO 35, BIELLE, ITALY 13900",
   },
   {
     icon: "/contact/icon3.png",
-    title: "Contact Us",
-    desc: "Mor-Fri 9am-12pm",
-    additional: "+123 456 7890",
+    title: "Contattaci",
+    desc: "Lun-Ven 9:00 - 18:00",
+    additional: "+39 3382256056",
   },
 ];

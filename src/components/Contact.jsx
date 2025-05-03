@@ -96,7 +96,7 @@ const Contact = () => {
                     htmlFor="name"
                     className="block font-semibold text-gray-700"
                   >
-                    Name
+                    Nome e Cognome
                   </label>
                   <input
                     type="text"
@@ -130,7 +130,7 @@ const Contact = () => {
                     htmlFor="phone"
                     className="block font-semibold text-gray-700"
                   >
-                    Phone no
+                    Numero di telefono
                   </label>
                   <input
                     type="text"
@@ -147,17 +147,24 @@ const Contact = () => {
                     htmlFor="companyName"
                     className="block font-semibold text-gray-700"
                   >
-                    Subject
+                    Oggetto
                   </label>
-                  <input
-                    type="text"
+                  <select
                     id="companyName"
                     name="companyName"
                     required
                     value={formData.companyName}
                     onChange={handleChange}
                     className="mt-1 p-2 w-full border focus:outline-none border-gray-300 rounded-md bg-[#F3F3F3]"
-                  />
+                  >
+                    <option value="">Seleziona un oggetto</option>
+                    <option value="Buds">Buds</option>
+                    <option value="Studenti">Studenti</option>
+                    <option value="Genitori">Genitori</option>
+                    <option value="BloomHer">BloomHer</option>
+                    <option value="Creator">Creator</option>
+                    <option value="Altro">Altro</option>
+                  </select>
                 </div>
               </div>
 
@@ -166,7 +173,7 @@ const Contact = () => {
                   htmlFor="message"
                   className="block font-semibold text-gray-700"
                 >
-                  Message
+                  Messaggio
                 </label>
                 <textarea
                   id="message"
@@ -180,9 +187,9 @@ const Contact = () => {
               <div className="mt-4 flex justify-center lg:justify-start">
                 <Button
                   type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded-md"
+                  className="px-4 py-2 bg-[#00A59B] text-white rounded-md"
                 >
-                  Contact Us
+                  Contattaci
                 </Button>
               </div>
             </form>

@@ -23,7 +23,7 @@ const page = () => {
       <div className="bg-[#F2F2F2]">
         <Container>
           <CalendarView />
-          <h1 className="typography pt-10 lg:pt-16">What customer says</h1>
+          <h1 className="typography pt-10 lg:pt-16">Le voci di chi ci ha scelto</h1>
 
           <div className=" bg-gray-100 grid grid-cols-1 lg:grid-cols-3 gap-10 lg:mt-16 p-4">
             {TestimonialData.map((data, index) => {

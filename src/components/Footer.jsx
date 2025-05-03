@@ -81,14 +81,15 @@ const Footer = () => {
                 className="mb-4"
               />
               <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                Address: VIA DELLE ROSE, 2 13900 BIELLA <br />
+                Address: VIA TORINO 35, BIELLE, ITALY 13900 <br />
                 Codice Fiscale: BNOGDI79P62D938B <br />
                 Partita Iva: 02708900028
               </p>
               <div className="flex gap-4 mt-4">
                 <a
-                  href="#"
+                  href="https://www.instagram.com/bloom_biella"
                   className="transform hover:scale-110 transition-transform"
+                  target="_blank"
                 >
                   <Image
                     src="/footer/insta.png"
@@ -99,24 +100,13 @@ const Footer = () => {
                   />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.facebook.com/profile.php?id=61560352317391"
                   className="transform hover:scale-110 transition-transform"
+                  target="_blank"
                 >
                   <Image
                     src="/footer/facebook.png"
                     alt="Facebook"
-                    width={28}
-                    height={28}
-                    className="hover:opacity-80 transition-opacity"
-                  />
-                </a>
-                <a
-                  href="#"
-                  className="transform hover:scale-110 transition-transform"
-                >
-                  <Image
-                    src="/footer/linkedin.png"
-                    alt="LinkedIn"
                     width={28}
                     height={28}
                     className="hover:opacity-80 transition-opacity"

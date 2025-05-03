@@ -6,7 +6,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 const montserrat = Montserrat({
-  // weight: [], // Adjust weights as needed
   subsets: ["latin"], 
   weights: [400, 500, 600, 700, 800, 900],
 });
@@ -17,11 +16,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="it">
+      <head>
+        {/* Iubenda script for privacy policy and cookie banner */}
+        <script
+          type="text/javascript"
+          src="YOUR_IUBENDA_SCRIPT_URL"
+        ></script>
+      </head>
       <body className={`${montserrat.className} overflow-x-hidden antialiased`}>
-      <Navbar/> 
-      {children}
-      <Footer/>
+        <Navbar /> 
+        {children}
+        <Footer />
       </body>
     </html>
   );
