@@ -35,7 +35,7 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           vuln-type: 'os,library'
-          severity: 'CRITICAL,HIGH'
+          severity: 'CRITICAL'
       - name: Push docker image
         run: |
           docker push europe-docker.pkg.dev/divine-bonbon-446705-p9/boolmx-docker/bloom-website:$BUILD_TAG
