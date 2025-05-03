@@ -27,11 +27,10 @@ jobs:
       - name: Build docker image
         run: |
           docker build -t europe-docker.pkg.dev/divine-bonbon-446705-p9/boolmx-docker/bloom-website:$BUILD_TAG . --network=host
-          trivy --version
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@0.28.0
         with:
-          image-ref: europe-docker.pkg.dev/divine-bonbon-446705-p9/boolmx-docker/bloom-website:$BUILD_TAG
+          image-ref: 'europe-docker.pkg.dev/divine-bonbon-446705-p9/boolmx-docker/bloom-website:$BUILD_TAG'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
