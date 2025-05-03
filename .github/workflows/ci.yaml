@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'stage'
   workflow_dispatch:
 
 env:
@@ -33,7 +34,7 @@ jobs:
       name: Deploy to stage
       runs-on: [self-hosted, python3]
       needs: build-runners
-      if: github.ref == 'refs/heads/main'
+      if: github.ref == 'refs/heads/stage'
       steps:
         - name: Checkout code
           uses: actions/checkout@v3
@@ -49,5 +50,27 @@ jobs:
             git config --global user.email "devops@bloomx.com"
             git config --global user.name "Automation"
             git add values.yaml
+            git commit -m "updating image tag version"
+            git push
+  deploy_prod:
+      name: Deploy to prod
+      runs-on: [self-hosted, python3]
+      needs: build-runners
+      if: github.ref == 'refs/heads/main'
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+          with:
+            repository: bloomxlab/helm-chart
+            ref: main
+            token: ${{ secrets.PUSH_TOKEN }}
+  
+        - name: Update version and commit
+          run: |
+            cd ./bloom-website
+            sed -i "s/tag: \S*/tag: $BUILD_TAG/g" prod-values.yaml
+            git config --global user.email "devops@bloomx.com"
+            git config --global user.name "Automation"
+            git add prod-values.yaml
             git commit -m "updating image tag version"
             git push
