@@ -23,7 +23,7 @@ const page = () => {
       <Container>
         <div className="mt-16 lg:mt-10 mb-10">
           <h1 className="typography">Il progetto</h1>
-          <div className="bg-[#F2F2F2]  flex flex-col-reverse lg:flex-row justify-center items-center lg:gap-16">
+          <div className="bg-[#F2F2F2]  flex flex-col-reverse lg:flex-row justify-center items-center lg:gap-16 mt-10">
             <span className="lg:text-xl text-[#373737] font- lg:leading-[1.5]">
               <p>Bloom è il Centro di Pedagogia Moderna che accompagna bambini, studenti, adulti e famiglie nel loro percorso di crescita personale e relazionale , dove si integra pedagogia, educazione emozionale e pratiche olistiche come mindfulness e YogaArt per creare esperienze di apprendimento profonde e trasformative. Ogni strumento che utilizziamo ha una forte valenza pedagogica, pensata per accompagnare le persone a riscoprire e attivare le proprie risorse interiori.</p>
               <br/>

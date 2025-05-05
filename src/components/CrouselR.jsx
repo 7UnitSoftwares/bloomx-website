@@ -45,7 +45,7 @@ const Carousel = ({ data }) => {
                   dangerouslySetInnerHTML={{ __html: item.description }}
                 />
                 <div className="flex gap-5">
-                  <Link href='/service'>
+                  <Link href='/servizi'>
                     <button className="bg-[#00A59B] text-white hover:scale-110 duration-300 ease-in-out px-4 py-2 rounded-lg mt-4">
                       Scopri di più
                     </button>

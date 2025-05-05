@@ -45,31 +45,18 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    emailjs
-      .send(YOUR_SERVICE_ID, YOUR_TEMPLATE_ID, formData, YOUR_USER_ID)
-      .then(
-        (response) => {
-          console.log("Email sent successfully!", response);
-          setShowToast(true);
-          setFormData({
-            name: "",
-            email: "",
-            companyName: "",
-            message: "",
-            phone: "",
-          });
-          setTimeout(() => {
-            setShowToast(false);
-          }, 3000);
-        },
-        (error) => {
-          console.error("Email sending failed:", error);
-          setShowError(true);
-          setTimeout(() => {
-            setShowError(false);
-          }, 3000);
-        }
-      );
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      to_name: "Bloom",
+      to_email: "bloom@bloom-bi.it",
+      subject: formData.companyName,
+      message: formData.message,
+      phone: formData.phone,
+    };
+
+    sendEmail(templateParams.to_email, templateParams.subject, templateParams.message);
+    
   };
 
   return (

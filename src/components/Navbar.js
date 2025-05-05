@@ -64,7 +64,7 @@ const Navbar = () => {
     
     { title: "Spazio", to: "/spazio" },
     { title: "Eventi", to: "/eventi" },
-    // { title: "Blog", to: "/blog" },
+    { title: "Blog", to: "/blog" },
     // {
     //   title: "Risorse",
     //   to: "/risorse",

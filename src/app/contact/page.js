@@ -40,7 +40,7 @@ const page = () => {
                     {item.title}
                   </h1>
                   <p className="font-extralight">{item.desc}</p>
-                  <p>{item.additional}</p>
+                  <p dangerouslySetInnerHTML={{ __html: item.additional }} />
                 </div>
               </div>
             );
@@ -67,7 +67,7 @@ const ContactData = [
     icon: "/contact/icon2.png",
     title: "Visita la nostra sede",
     desc: "Vieni a trovarci in ufficio",
-    additional: "VIA TORINO 35, BIELLE, ITALY 13900",
+    additional: "VIA TORINO 35, BIELLE, ITALY 13900 <br/> Codice Fiscale: BNOGDI79P62D938B <br/>Partita Iva: 02708900028",
   },
   {
     icon: "/contact/icon3.png",

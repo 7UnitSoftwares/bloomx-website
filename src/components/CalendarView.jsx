@@ -55,6 +55,11 @@ const jsonData = {
       name: "Aperitivo in Villa",
       date: "2025-06-19",
     },
+    {
+      name: "ESTATE FELICE – Aperitivo Educativo per Genitori",
+      date: "2025-05-22",
+      time: "18:00-20:00",
+    },
   ],
 };
 // --- END: JSON DATA PLACEHOLDER ---
