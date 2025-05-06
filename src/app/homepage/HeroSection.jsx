@@ -20,6 +20,7 @@ const HeroSection = () => {
             </button>
           </Link>
         </div>
+        
       </div>
 
       <div className="lg:block hidden relative w-1/2 h-[85vh]">
