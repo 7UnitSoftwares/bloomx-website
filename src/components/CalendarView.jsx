@@ -4,6 +4,8 @@ import moment from "moment";
 import "moment/locale/it";
 moment.locale("it");
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { sendEnquiry } from "@/utils/api";
+import Spinner from "./Spinner";
 
 // --- BEGIN: JSON DATA PLACEHOLDER ---
 const jsonData = {
@@ -159,21 +161,40 @@ const CalendarView = () => {
   const [showInterestForm, setShowInterestForm] = useState(false);
   const [interestData, setInterestData] = useState({ nome: '', cognome: '', telefono: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
   const events = generateCalendarEvents(jsonData);
 
   const handleInterestChange = (e) => {
     setInterestData({ ...interestData, [e.target.name]: e.target.value });
   };
 
-  const handleInterestSubmit = (e) => {
+  const handleInterestSubmit = async (e) => {
     e.preventDefault();
-    console.log('Interesse evento:', { evento: selectedEvent.title, ...interestData });
-    setSubmitted(true);
-    setTimeout(() => {
-      setShowInterestForm(false);
-      setSubmitted(false);
-      setInterestData({ nome: '', cognome: '', telefono: '' });
-    }, 2000);
+    setIsSubmitting(true);
+    setError("");
+
+    const formData = {
+      name: `${interestData.nome}`,
+      mobileNumber: interestData.telefono,
+      interest: selectedEvent.title
+    };
+
+    try {
+      await sendEnquiry(formData);
+      setSubmitted(true);
+      setInterestData({ nome: '', telefono: '' });
+      
+      setTimeout(() => {
+        setShowInterestForm(false);
+        setSubmitted(false);
+      }, 2000);
+    } catch (error) {
+      setError("Si è verificato un errore. Riprova più tardi.");
+      console.error('Error submitting interest:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -275,36 +296,68 @@ const CalendarView = () => {
               </div>
             )}
             {showInterestForm && !submitted && (
-              <form className="mt-6 flex flex-col gap-3" onSubmit={handleInterestSubmit}>
-                <input
-                  type="text"
-                  name="nome"
-                  value={interestData.nome}
-                  onChange={handleInterestChange}
-                  placeholder="Nome e Cognome"
-                  className="px-4 py-2 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                  required
-                />
-                <input
-                  type="tel"
-                  name="telefono"
-                  value={interestData.telefono}
-                  onChange={handleInterestChange}
-                  placeholder="Telefono"
-                  className="px-4 py-2 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="px-6 py-2 bg-blue-600 text-white font-medium text-sm rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300"
-                >
-                  Invia
-                </button>
-              </form>
-            )}
-            {submitted && (
-              <div className="mt-6 text-green-600 text-center font-semibold">
-                Grazie per il tuo interesse! Ti ricontatteremo presto.
+              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+                <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full relative mx-4">
+                  <button
+                    type="button"
+                    className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl"
+                    onClick={() => setShowInterestForm(false)}
+                    aria-label="Chiudi"
+                  >
+                    &times;
+                  </button>
+                  <h3 className="text-xl font-bold text-[#008C95] mb-4">
+                    Esprimi interesse per {selectedEvent.title}
+                  </h3>
+                  {!submitted ? (
+                    <form onSubmit={handleInterestSubmit} className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700">
+                          Nome e Cognome
+                        </label>
+                        <input
+                          type="text"
+                          required
+                          className="mt-1 px-4 py-2 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-[#008C95] focus:border-transparent"
+                          value={interestData.nome}
+                          onChange={(e) => setInterestData({ ...interestData, nome: e.target.value })}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700">
+                          Telefono
+                        </label>
+                        <input
+                          type="tel"
+                          required
+                          pattern="^[0-9\s\+\-]{7,15}$"
+                          className="mt-1 px-4 py-2 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-[#008C95] focus:border-transparent"
+                          value={interestData.telefono}
+                          onChange={(e) => setInterestData({ ...interestData, telefono: e.target.value })}
+                        />
+                      </div>
+                      {error && <div className="text-red-600 text-sm">{error}</div>}
+                      <button
+                        type="submit"
+                        className="w-full bg-[#008C95] hover:bg-[#006C73] text-white font-bold py-2 px-4 rounded-lg transition disabled:opacity-50 flex items-center justify-center gap-2"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <Spinner size="sm" className="text-white" />
+                            <span>Invio in corso...</span>
+                          </>
+                        ) : (
+                          "Invia"
+                        )}
+                      </button>
+                    </form>
+                  ) : (
+                    <div className="text-center text-[#008C95] font-semibold">
+                      Grazie per il tuo interesse! Ti ricontatteremo presto.
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </div>

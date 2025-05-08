@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Container from "./Container";
 
 const Banner = () => {
@@ -17,12 +18,12 @@ const Banner = () => {
           <p className="text-[#F3FDFD] font-semibold lg:text-2xl">
           Esplora il percorso perfetto per te con soluzioni su misura per le tue esigenze e obiettivi. <br/>Scopri nuove opportunità e inizia oggi il tuo viaggio!
           </p>
-          <button
-            type="button"
+          <Link
+            href="/contattaci"
             className="focus:outline-none rounded-xl bg-white text-[#00A896] hover:scale-95 duration-300 py-2 px-4"
           >
             Parliamone Insieme
-          </button>
+          </Link>
         </div>
       </div>
     </Container>

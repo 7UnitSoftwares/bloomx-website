@@ -176,7 +176,7 @@ const Navbar = () => {
         {/* Desktop Right Section */}
         <div className="hidden lg:flex gap-10 justify-center items-center">
           <Button className="bg-[#008C95] hover:bg-[#006A70] text-white py-2 px-4 rounded-lg transition-colors duration-200">
-            <Link href="/contact">Contattaci</Link>
+            <Link href="/contattaci">Contattaci</Link>
           </Button>
         </div>
 
@@ -261,7 +261,7 @@ const Navbar = () => {
 
                 <div className="mt-4 pt-4 border-t border-gray-100">
                   <Button className="w-full bg-[#008C95] hover:bg-[#006A70] text-white py-2 px-4 rounded-lg transition-colors duration-200">
-                    <Link href="/contact" onClick={() => setShow(false)}>
+                    <Link href="/contattaci" onClick={() => setShow(false)}>
                       Contattaci
                     </Link>
                   </Button>
@@ -335,7 +335,7 @@ const Navbar = () => {
             <div className="p-4 w-full">
               <Button>
                 <Link
-                  href="/contact"
+                  href="/contattaci"
                   onClick={() => setShow(false)}
                   className="text-white"
                 >

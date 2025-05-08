@@ -4,6 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import Container from "./Container";
 import Button from "./Button";
+import { subscribeToNewsletter } from "../utils/api";
+import Toast from './Toast';
+import Spinner from "./Spinner";
 
 const data = [
   { title: "Chi siamo", to: "/siamo",
@@ -47,23 +50,39 @@ const data = [
 const Footer = () => {
   const [isClient, setIsClient] = useState(false);
   const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  const handleSubscribe = (e) => {
+  const handleSubscribe = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     if (email && email.includes("@")) {
-      console.log("Subscribing:", email);
-      setSubscribed(true);
-      setEmail("");
-
-      setTimeout(() => {
-        setSubscribed(false);
-      }, 5000);
+      try {
+        await subscribeToNewsletter(email);
+        setToast({
+          show: true,
+          message: 'Grazie per l\'iscrizione!',
+          type: 'success'
+        });
+        setEmail(""); // Reset form
+      } catch (error) {
+        setToast({
+          show: true,
+          message: 'Si è verificato un errore. Riprova più tardi.',
+          type: 'error'
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
     }
+  };
+
+  const closeToast = () => {
+    setToast(prev => ({ ...prev, show: false }));
   };
 
   return (
@@ -207,26 +226,18 @@ const Footer = () => {
                   <Button
                     className="w-full bg-[#008C95] hover:bg-[#006A70] text-white py-2 px-4 rounded-lg transition-colors duration-200"
                     type="submit"
+                    disabled={!email}
                   >
-                    Iscriviti
+                    {isSubmitting ? (
+                      <>
+                        <Spinner size="sm" className="text-white justify-center" />
+                        <span>Invio in corso...</span>
+                      </>
+                    ) : (
+                      'Iscriviti'
+                    )}
                   </Button>
                 </form>
-                {subscribed && (
-                  <p className="mt-3 text-green-600 font-medium flex items-center">
-                    <svg
-                      className="w-5 h-5 mr-2"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    Grazie per l'iscrizione!
-                  </p>
-                )}
               </div>
             </div>
           </div>
@@ -254,6 +265,15 @@ const Footer = () => {
           </div>
         </Container>
       </div>
+      
+      {/* Replace the existing success message with Toast */}
+      {toast.show && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={closeToast}
+        />
+      )}
     </footer>
   );
 };

@@ -3,6 +3,9 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import Button from "../components/Button";
 import Container from "./Container";
+import { submitContactForm } from "@/utils/api";
+import Toast from "./Toast";
+import Spinner from './Spinner';
 
 const data = [
   {
@@ -24,14 +27,15 @@ const data = [
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    nomecognome: "",
     email: "",
-    companyName: "",
-    phone: "",
-    message: "",
+    subject: "",
+    mobile: "",
+    body: "",
   });
   const [showToast, setShowToast] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const YOUR_SERVICE_ID = process.env.NEXT_PUBLIC_YOUR_SERVICE_ID;
   const YOUR_TEMPLATE_ID = process.env.NEXT_PUBLIC_YOUR_TEMPLATE_ID;
@@ -42,21 +46,29 @@ const Contact = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      await submitContactForm(formData);
+      setShowToast(true);
+      setFormData({
+        nomecognome: "",
+        email: "",
+        subject: "",
+        mobile: "",
+        body: "",
+      });
+    } catch (error) {
+      setShowError(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-    const templateParams = {
-      from_name: formData.name,
-      from_email: formData.email,
-      to_name: "Bloom",
-      to_email: "bloom@bloom-bi.it",
-      subject: formData.companyName,
-      message: formData.message,
-      phone: formData.phone,
-    };
-
-    sendEmail(templateParams.to_email, templateParams.subject, templateParams.message);
-    
+  const closeToast = () => {
+    setShowToast(false);
+    setShowError(false);
   };
 
   return (
@@ -87,10 +99,10 @@ const Contact = () => {
                   </label>
                   <input
                     type="text"
-                    id="name"
+                    id="nomecognome"
                     required
-                    name="name"
-                    value={formData.name}
+                    name="nomecognome"
+                    value={formData.nomecognome}
                     onChange={handleChange}
                     className="mt-1 p-2 w-full border focus:outline-none border-gray-300 rounded-md bg-[#F3F3F3]"
                   />
@@ -114,33 +126,33 @@ const Contact = () => {
                 </div>
                 <div className="">
                   <label
-                    htmlFor="phone"
+                    htmlFor="mobile"
                     className="block font-semibold text-gray-700"
                   >
                     Numero di telefono
                   </label>
                   <input
                     type="text"
-                    id="phone"
-                    name="phone"
+                    id="mobile"
+                    name="mobile"
                     required
-                    value={formData.phone}
+                    value={formData.mobile}
                     onChange={handleChange}
                     className="mt-1 p-2 w-full border focus:outline-none border-gray-300 rounded-md bg-[#F3F3F3]"
                   />
                 </div>
                 <div className="">
                   <label
-                    htmlFor="companyName"
+                    htmlFor="subject"
                     className="block font-semibold text-gray-700"
                   >
                     Oggetto
                   </label>
                   <select
-                    id="companyName"
-                    name="companyName"
+                    id="subject"
+                    name="subject"
                     required
-                    value={formData.companyName}
+                    value={formData.subject}
                     onChange={handleChange}
                     className="mt-1 p-2 w-full border focus:outline-none border-gray-300 rounded-md bg-[#F3F3F3]"
                   >
@@ -157,16 +169,16 @@ const Contact = () => {
 
               <div className="mt-5">
                 <label
-                  htmlFor="message"
+                  htmlFor="body"
                   className="block font-semibold text-gray-700"
                 >
                   Messaggio
                 </label>
                 <textarea
-                  id="message"
-                  name="message"
+                  id="body"
+                  name="body"
                   required
-                  value={formData.message}
+                  value={formData.body}
                   onChange={handleChange}
                   className="mt-1 p-2 min-h-24 w-full border focus:outline-none border-gray-300 rounded-md bg-[#F3F3F3]"
                 ></textarea>
@@ -174,9 +186,17 @@ const Contact = () => {
               <div className="mt-4 flex justify-center lg:justify-start">
                 <Button
                   type="submit"
-                  className="px-4 py-2 bg-[#00A59B] text-white rounded-md"
+                  className="px-4 py-2 bg-[#00A59B] text-white rounded-md flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={!formData.nomecognome || !formData.email || !formData.mobile || !formData.subject || !formData.body || isSubmitting}
                 >
-                  Contattaci
+                  {isSubmitting ? (
+                    <>
+                      <Spinner size="sm" className="text-white justify-center" />
+                      <span>Invio in corso...</span>
+                    </>
+                  ) : (
+                    'Contattaci'
+                  )}
                 </Button>
               </div>
             </form>
@@ -185,14 +205,18 @@ const Contact = () => {
       </Container>
 
       {showToast && (
-        <div className="fixed bottom-5 right-5 bg-green-500 text-white p-3 rounded-lg">
-          Message sent successfully!
-        </div>
+        <Toast
+          message="Messaggio inviato con successo!"
+          type="success"
+          onClose={closeToast}
+        />
       )}
       {showError && (
-        <div className="fixed bottom-5 right-5 bg-red-500 text-white p-3 rounded-lg">
-          Message sending failed!
-        </div>
+        <Toast
+          message="Errore nell'invio del messaggio!"
+          type="error"
+          onClose={closeToast}
+        />
       )}
     </section>
   );

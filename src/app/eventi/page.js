@@ -7,40 +7,54 @@ import TestimonialCard from "@/components/Testimonial";
 import EventsSection from "@/components/trial";
 import { EventData } from "@/data/EventData";
 import { TestimonialData } from "@/data/Testimonial";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import Spinner from "@/components/Spinner";
+import { sendEnquiry } from "@/utils/api";
 
 // export const metadata = {
 //   title: "Events",
 //   description: "Bloom Events",
 // };
-const page = () => {
+const EventiPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ nome: "", cellulare: "" });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, eventName) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
+    setIsSubmitting(true);
+    const formData = {
+      name: form.nome,
+      mobileNumber: form.cellulare,
+      interest: eventName,
+    };
     try {
-      // Replace '/api/interesse' with your actual endpoint
-      const res = await fetch("/api/interesse", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (!res.ok) throw new Error("Errore nell'invio. Riprova.");
+      await sendEnquiry(formData);
       setSuccess(true);
       setForm({ nome: "", cellulare: "" });
-    } catch (err) {
-      setError(err.message);
+    } catch (error) {
+      setError(error.message);
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
     }
   };
+
+  const handleModalClick = useCallback((e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowModal(true);
+  }, []);
+
+  const handleModalClose = useCallback(() => {
+    setShowModal(false);
+    setShowForm(false);
+    setSuccess(false);
+    setError("");
+  }, []);
 
   return (
     <div className="overflow-hidden">
@@ -52,9 +66,10 @@ const page = () => {
         <Container>
           <div className="flex flex-col gap-10">
             {/* Decorative Banner */}
-            <div
-              className="mt-10 cursor-pointer bg-gradient-to-r from-[#008C95] via-[#F9A1BC] to-[#A7E8E5] rounded-xl shadow-lg p-6 flex flex-col items-center text-center border-4 border-[#008C95] hover:scale-105 transition-transform duration-200"
-              onClick={() => setShowModal(true)}
+            <button
+              type="button"
+              className="mt-10 cursor-pointer bg-gradient-to-r from-[#008C95] via-[#F9A1BC] to-[#A7E8E5] rounded-xl shadow-lg p-6 flex flex-col items-center text-center border-4 border-[#008C95] hover:scale-105 transition-transform duration-200 w-full"
+              onClick={handleModalClick}
             >
               <h2 className="text-2xl font-extrabold text-white mb-2 drop-shadow">
                 ESTATE FELICE – Aperitivo Educativo per Genitori
@@ -65,20 +80,22 @@ const page = () => {
               <span className="mt-2 text-sm text-[#008C95] font-semibold animate-pulse bg-white bg-opacity-80 px-2 py-1 rounded">
                 Clicca per saperne di più!
               </span>
-            </div>
+            </button>
 
             {/* Modal Popup */}
             {showModal && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-                <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full relative">
+              <div 
+                className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40"
+                onClick={handleModalClose}
+              >
+                <div 
+                  className="bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full relative mx-4"
+                  onClick={(e) => e.stopPropagation()}
+                >
                   <button
+                    type="button"
                     className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl"
-                    onClick={() => {
-                      setShowModal(false);
-                      setShowForm(false);
-                      setSuccess(false);
-                      setError("");
-                    }}
+                    onClick={handleModalClose}
                     aria-label="Chiudi"
                   >
                     &times;
@@ -103,10 +120,10 @@ const page = () => {
                     <strong>Obiettivo?</strong> Fornire ai genitori idee, strategie e risorse pratiche per vivere al meglio il tempo libero estivo, rafforzare il legame con i figli e accompagnarli nella crescita con fiducia.<br />
                     <br />
                     <strong>Posti limitati – Prenota il tuo spazio per un'estate più felice!</strong>
-
                   </p>
                   {!showForm && !success && (
                     <button
+                      type="button"
                       className="bg-[#008C95] hover:bg-[#006C73] text-white font-bold py-2 px-4 rounded-lg w-full transition"
                       onClick={() => setShowForm(true)}
                     >
@@ -114,7 +131,7 @@ const page = () => {
                     </button>
                   )}
                   {showForm && !success && (
-                    <form className="mt-6 flex flex-col gap-3" onSubmit={handleSubmit}>
+                    <form className="mt-6 flex flex-col gap-3" onSubmit={(e) => handleSubmit(e, "ESTATE FELICE – Aperitivo Educativo per Genitori")}>
                       <div>
                         <label className="block text-sm font-medium text-gray-700">
                           Nome e Cognome
@@ -145,10 +162,17 @@ const page = () => {
                       {error && <div className="text-red-600 text-sm">{error}</div>}
                       <button
                         type="submit"
-                        className="bg-[#008C95] hover:bg-[#006C73] text-white font-bold py-2 px-4 rounded-lg w-full transition disabled:opacity-50"
-                        disabled={loading}
+                        className="bg-[#008C95] hover:bg-[#006C73] text-white font-bold py-2 px-4 rounded-lg w-full transition disabled:opacity-50 flex items-center justify-center gap-2"
+                        disabled={isSubmitting}
                       >
-                        {loading ? "Invio in corso..." : "Invia"}
+                        {isSubmitting ? (
+                          <>
+                            <Spinner size="sm" className="text-white" />
+                            <span>Invio in corso...</span>
+                          </>
+                        ) : (
+                          "Invia"
+                        )}
                       </button>
                     </form>
                   )}
@@ -164,7 +188,7 @@ const page = () => {
           <CalendarView />
           <h1 className="typography pt-10 lg:pt-16">Le voci di chi ci ha scelto</h1>
 
-          <div className=" bg-gray-100 grid grid-cols-1 lg:grid-cols-3 gap-10 lg:mt-16 p-4">
+          <div className="bg-gray-100 grid grid-cols-1 lg:grid-cols-3 gap-10 lg:mt-16 p-4">
             {TestimonialData.map((data, index) => {
               return <TestimonialCard data={data} key={index} />;
             })}
@@ -175,4 +199,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default EventiPage;
