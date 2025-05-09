@@ -19,15 +19,6 @@ RUN npm ci
 # Copy rest of the application
 COPY . .
 
-# Set build-time arguments
-ARG NEXT_PUBLIC_API_BASE_URL
-ARG NEXT_PUBLIC_API_KEY
-
-# Set environment variables
-ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
-ENV NEXT_PUBLIC_API_KEY=$NEXT_PUBLIC_API_KEY
-ENV NODE_ENV=production
-
 # Build application
 RUN npm run build
 
@@ -35,9 +26,6 @@ RUN npm run build
 FROM node:18-alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV=production
-ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
-ENV NEXT_PUBLIC_API_KEY=$NEXT_PUBLIC_API_KEY
 
 # Copy necessary files from builder
 COPY --from=builder /app/public ./public
