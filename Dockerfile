@@ -12,6 +12,14 @@ RUN npm ci
 # Copy rest of the application
 COPY . .
 
+# Set build-time arguments
+ARG NEXT_PUBLIC_API_BASE_URL
+ARG NEXT_PUBLIC_API_KEY
+
+# Set environment variables
+ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
+ENV NEXT_PUBLIC_API_KEY=$NEXT_PUBLIC_API_KEY
+
 # Build application
 RUN npm run build
 
