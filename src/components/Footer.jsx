@@ -60,6 +60,9 @@ const Footer = () => {
   const handleSubscribe = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
+    console.log(process.env.NEXT_PUBLIC_API_KEY);
+    
     if (email && email.includes("@")) {
       try {
         await subscribeToNewsletter(email);
