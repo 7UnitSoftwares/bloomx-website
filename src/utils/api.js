@@ -1,5 +1,9 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://webbe-stage.bloom-bi.it/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+
+if (!API_BASE_URL || !API_KEY) {
+  console.error('API configuration is missing. Please check your environment variables.');
+}
 
 /**
  * Common fetch utility function for making API calls
@@ -9,8 +13,7 @@ const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
  */
 export const fetchApi = async (endpoint, options = {}) => {
   if (!API_KEY) {
-    console.error('API_KEY is not configured');
-    throw new Error('API configuration is missing');
+    throw new Error('API configuration is missing. Please check your environment variables.');
   }
 
   const defaultHeaders = {
@@ -34,7 +37,8 @@ export const fetchApi = async (endpoint, options = {}) => {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, config);
     
     if (!response.ok) {
-      throw new Error(`API call failed: ${response.statusText}`);
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || `API call failed: ${response.statusText}`);
     }
 
     return await response.json();
