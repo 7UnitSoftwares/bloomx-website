@@ -29,11 +29,11 @@ const data = [
   },
   {
     title: "I Nostri Servizi",
-    to: "/service",
+    to: "/servizi",
     items: [
-      { title: "Percorsi di Studio", to: "/service#studio" },
-      { title: "Consulenza e Assessment", to: "/service#consulenza" },
-      { title: "Laboratori ed Eventi", to: "/service#eventi" }
+      { title: "Percorsi di Studio", to: "/servizi#studio" },
+      { title: "Consulenza e Assessment", to: "/servizi#consulenza" },
+      { title: "Laboratori ed Eventi", to: "/servizi#eventi" }
     ],
   },
   // {
