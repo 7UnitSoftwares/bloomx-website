@@ -27,6 +27,13 @@ const page = () => {
         </div>
         <div className="grid mt-16 lg:mt-10 grid-cols-1 lg:grid-cols-3 gap-10">
           {ContactData.map((item, index) => {
+            // Detect if the item is an email or a phone number
+            const isEmail = item.type === 'email';
+            const isPhone = item.type === 'phone';
+
+            // For WhatsApp, use the international format without spaces or dashes
+            const whatsappNumber = item.value.replace(/\D/g, '');
+
             return (
               <div
                 key={index}
@@ -40,7 +47,25 @@ const page = () => {
                     {item.title}
                   </h1>
                   <p className="font-extralight">{item.desc}</p>
-                  <p dangerouslySetInnerHTML={{ __html: item.additional }} />
+                  {isEmail && (
+                    <a
+                      href={`mailto:${item.value}`}
+                      className="text-teal-600 underline"
+                      dangerouslySetInnerHTML={{ __html: item.additional }}
+                    />
+                  )}
+                  {isPhone && (
+                    <a
+                      href={`https://wa.me/${whatsappNumber}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-teal-600 underline"
+                      dangerouslySetInnerHTML={{ __html: item.additional }}
+                    />
+                  )}
+                  {!isEmail && !isPhone && (
+                    <p dangerouslySetInnerHTML={{ __html: item.additional }} />
+                  )}
                 </div>
               </div>
             );
@@ -61,18 +86,24 @@ const ContactData = [
     icon: "/contact/icon1.png",
     title: "Chatta con il supporto",
     desc: "Siamo qui per aiutarti.",
-    additional: "bloom@bloom-bi.it",
+    additional: "+39 3382256056",
+    type: 'phone',
+    value: '+39 3382256056',
   },
   {
     icon: "/contact/icon2.png",
     title: "Visita la nostra sede",
     desc: "Vieni a trovarci in ufficio",
     additional: "VIA TORINO 35, BIELLA, ITALIA 13900",
+    type: '',
+    value: '',
   },
   {
     icon: "/contact/icon3.png",
     title: "Contattaci",
     desc: "Lun-Ven 9:00 - 18:00",
-    additional: "+39 3382256056",
+    additional: "bloom@bloom-bi.it",
+    type: 'email',
+    value: 'bloom@bloom-bi.it',
   },
 ];

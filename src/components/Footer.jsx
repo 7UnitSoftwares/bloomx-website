@@ -11,20 +11,20 @@ import Spinner from "./Spinner";
 const data = [
   { title: "Chi siamo", to: "/siamo",
     items: [
-      { title: "Il progetto", to: "/siamo" },
-      { title: "La visione", to: "/siamo" },
-      { title: "la nostra team", to: "/siamo" }
+      { title: "Il progetto", to: "/siamo/#progetto" },
+      { title: "La visione", to: "/siamo/#visione" },
+      { title: "Il nostro team", to: "/siamo/#team" }
     ]
    },
   {
     title: "Community",
     to: "/community",
     items: [
-      { title: "Studenti", to: "/community#studenti" },
-      { title: "Piccoli Bloom", to: "/community#buds" },
-      { title: "Genitori", to: "/community#genitori" },
-      { title: "BloomHer", to: "/community#bloomHer" },
-      { title: "Creators", to: "/community#creators" }
+      { title: "Studenti", to: "/community#Studenti" },
+      { title: "Buds", to: "/community#Buds" },
+      { title: "Genitori", to: "/community#Genitori" },
+      { title: "BloomHer", to: "/community#BloomHer" },
+      { title: "Creators", to: "/community#Creators" }
     ],
   },
   {
@@ -52,13 +52,31 @@ const Footer = () => {
   const [email, setEmail] = useState("");
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailError, setEmailError] = useState("");
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      setEmailError("Campo obbligatorio");
+      return false;
+    }
+    if (!emailRegex.test(email)) {
+      setEmailError("Inserisci un indirizzo email valido");
+      return false;
+    }
+    setEmailError("");
+    return true;
+  };
+
   const handleSubscribe = async (e) => {
     e.preventDefault();
+    if (!validateEmail(email)) {
+      return;
+    }
     setIsSubmitting(true);
     console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
     console.log(process.env.NEXT_PUBLIC_API_KEY);
@@ -148,7 +166,7 @@ const Footer = () => {
                         <div key={index} className="flex flex-col">
                           <Link
                             href={item.to}
-                            className="text-gray-700 hover:text-blue-600 transition-colors font-semibold mb-1"
+                            className="text-gray-700 hover:text-teal-600 transition-colors font-semibold mb-1"
                           >
                             {item.title}
                           </Link>
@@ -160,7 +178,7 @@ const Footer = () => {
                                 <Link
                                   key={subIndex}
                                   href={subItem.to || subItem.link || "#"}
-                                  className="text-gray-500 hover:text-blue-500 transition-colors text-xs"
+                                  className="text-gray-500 hover:text-teal-500 transition-colors text-xs"
                                 >
                                   {subItem.title}
                                 </Link>
@@ -179,7 +197,7 @@ const Footer = () => {
                         <div key={index} className="flex flex-col">
                           <Link
                             href={item.to}
-                            className="text-gray-700 hover:text-blue-600 transition-colors font-semibold mb-1"
+                            className="text-gray-700 hover:text-teal-600 transition-colors font-semibold mb-1"
                           >
                             {item.title}
                           </Link>
@@ -191,7 +209,7 @@ const Footer = () => {
                                 <Link
                                   key={subIndex}
                                   href={subItem.to || subItem.link || "#"}
-                                  className="text-gray-500 hover:text-blue-500 transition-colors text-xs"
+                                  className="text-gray-500 hover:text-teal-500 transition-colors text-xs"
                                 >
                                   {subItem.title}
                                 </Link>
@@ -221,21 +239,29 @@ const Footer = () => {
                   <input
                     type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (emailError) validateEmail(e.target.value);
+                    }}
                     placeholder="La tua email"
-                    className="px-4 py-3 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className={`px-4 py-3 rounded-lg border ${
+                      emailError ? 'border-red-500' : 'border-gray-300'
+                    } w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
                     required
                   />
+                  {emailError && (
+                    <label className="text-red-500 text-sm mt-1">{emailError}</label>
+                  )}
                   <Button
                     className="w-full bg-[#008C95] hover:bg-[#006A70] text-white py-2 px-4 rounded-lg transition-colors duration-200"
                     type="submit"
                     disabled={!email}
                   >
                     {isSubmitting ? (
-                      <>
-                        <Spinner size="sm" className="text-white justify-center" />
+                      <div className="flex items-center gap-2">
+                        <Spinner size="sm" className="text-white" />
                         <span>Invio in corso...</span>
-                      </>
+                      </div>
                     ) : (
                       'Iscriviti'
                     )}

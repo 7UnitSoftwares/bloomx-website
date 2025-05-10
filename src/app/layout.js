@@ -4,6 +4,7 @@ import "./globals.css";
 import { Montserrat } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { validateEnv } from '@/utils/config';
 
 const montserrat = Montserrat({
@@ -41,6 +42,7 @@ export default function RootLayout({ children }) {
         <Navbar /> 
         {children}
         <Footer />
+        <WhatsAppButton />
       </body>
     </html>
   );

@@ -36,11 +36,11 @@ const Navbar = () => {
       title: "Community",
       to: "/community",
       items: [
-        { title: "Studenti", to: "studenti" },
-        { title: "Piccoli Bloom", to: "buds" },
-        { title: "Genitori", to: "genitori" },
-        { title: "BloomHer", to: "bloomHer" },
-        { title: "Creators", to: "creators" },
+        { title: "Studenti", to: "Studenti" },
+        { title: "Piccoli Bloom", to: "Buds" },
+        { title: "Genitori", to: "Genitori" },
+        { title: "BloomHer", to: "BloomHer" },
+        { title: "Creators", to: "Creators" },
       ],
     },
     {

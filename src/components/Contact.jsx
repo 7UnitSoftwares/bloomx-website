@@ -95,7 +95,7 @@ const Contact = () => {
                     htmlFor="name"
                     className="block font-semibold text-gray-700"
                   >
-                    Nome e Cognome
+                    Nome e Cognome <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
@@ -112,7 +112,7 @@ const Contact = () => {
                     htmlFor="email"
                     className="block font-semibold text-gray-700"
                   >
-                    Email
+                    Email <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
@@ -129,13 +129,14 @@ const Contact = () => {
                     htmlFor="mobile"
                     className="block font-semibold text-gray-700"
                   >
-                    Numero di telefono
+                    Numero di telefono <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
                     id="mobile"
                     name="mobile"
                     required
+                    pattern="^\d{10}$"
                     value={formData.mobile}
                     onChange={handleChange}
                     className="mt-1 p-2 w-full border focus:outline-none border-gray-300 rounded-md bg-[#F3F3F3]"
@@ -146,7 +147,7 @@ const Contact = () => {
                     htmlFor="subject"
                     className="block font-semibold text-gray-700"
                   >
-                    Oggetto
+                    Oggetto <span className="text-red-500">*</span> 
                   </label>
                   <select
                     id="subject"
@@ -172,7 +173,7 @@ const Contact = () => {
                   htmlFor="body"
                   className="block font-semibold text-gray-700"
                 >
-                  Messaggio
+                  Messaggio <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   id="body"
@@ -190,10 +191,10 @@ const Contact = () => {
                   disabled={!formData.nomecognome || !formData.email || !formData.mobile || !formData.subject || !formData.body || isSubmitting}
                 >
                   {isSubmitting ? (
-                    <>
-                      <Spinner size="sm" className="text-white justify-center" />
+                    <div className="flex items-center gap-2">
+                      <Spinner size="sm" className="text-white" />
                       <span>Invio in corso...</span>
-                    </>
+                    </div>
                   ) : (
                     'Contattaci'
                   )}

@@ -11,7 +11,7 @@ export const CommunityData = [
   {
     id: 2,
     icon: "/community/icon2.png",
-    title: "Piccoli Bloom: Semi di Meraviglia",
+    title: "Buds: Semi di Meraviglia",
     section: "Buds",
     desc: "Uno spazio sicuro e stimolante, dove i bambini possono esplorare, scoprire e crescere insieme. Attraverso il gioco, la YogaArt e attività creative pensate con cura, accompagniamo ogni bambino in un viaggio unico alla scoperta delle emozioni, dell’immaginazione e dell’espressione autentica di sé.",
     meeting: "Tutti i giorni 16:00 - 18:00 con attività tematiche",
