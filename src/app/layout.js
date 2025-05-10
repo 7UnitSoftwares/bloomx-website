@@ -4,11 +4,24 @@ import "./globals.css";
 import { Montserrat } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { validateEnv } from '@/utils/config';
 
 const montserrat = Montserrat({
   subsets: ["latin"], 
   weights: [400, 500, 600, 700, 800, 900],
 });
+
+// Server-side logging
+if (typeof window === 'undefined') {
+    console.log('[BLOOM-SERVER]', new Date().toISOString(), 'Application starting...');
+    const envValid = validateEnv();
+    if (!envValid) {
+        console.error('[BLOOM-SERVER]', new Date().toISOString(), 'Application started with invalid environment configuration');
+    } else {
+        console.log('[BLOOM-SERVER]', new Date().toISOString(), 'Application started successfully');
+    }
+}
+
 export const metadata = {
   title: "Fiorire nel tuo spazio, col tuo tempo | Bloom",
   description: "Bloom è un centro di pedagogia moderna che accompagna le persone nel loro percorso di vita. Aiutiamo bambini e studenti a conoscersi meglio, gestire le emozioni e apprendere in modo efficace.",
