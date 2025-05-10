@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+const API_BASE_URL = 'https://webbe-stage.bloom-bi.it/api';
 const API_KEY = 'c0fBMQ9Fxokt3OqgD2hYWHkLkbBgTgYCaIfw4kOARWodj6sbLJ2a2oyVfJWlQR';
 
 if (!API_BASE_URL || !API_KEY) {

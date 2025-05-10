@@ -19,7 +19,7 @@ RUN npm ci
 # Copy rest of the application
 COPY . .
 
-# Set build-time arguments
+# Set build-time arguments with defaults
 ARG NEXT_PUBLIC_API_BASE_URL
 ARG NEXT_PUBLIC_API_KEY
 
