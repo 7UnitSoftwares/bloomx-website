@@ -67,7 +67,7 @@ const ContactData = [
     icon: "/contact/icon2.png",
     title: "Visita la nostra sede",
     desc: "Vieni a trovarci in ufficio",
-    additional: "VIA TORINO 35, BIELLE, ITALY 13900 <br/> Codice Fiscale: BNOGDI79P62D938B <br/>Partita Iva: 02708900028",
+    additional: "VIA TORINO 35, BIELLA, ITALIA 13900",
   },
   {
     icon: "/contact/icon3.png",

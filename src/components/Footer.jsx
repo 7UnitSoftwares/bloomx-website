@@ -62,7 +62,7 @@ const Footer = () => {
     setIsSubmitting(true);
     console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
     console.log(process.env.NEXT_PUBLIC_API_KEY);
-    
+
     if (email && email.includes("@")) {
       try {
         await subscribeToNewsletter(email);
@@ -103,7 +103,7 @@ const Footer = () => {
                 className="mb-4"
               />
               <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                Address: VIA TORINO 35, BIELLE, ITALY 13900 <br />
+                Address: VIA TORINO 35, BIELLA, ITALIA 13900 <br />
                 Codice Fiscale: BNOGDI79P62D938B <br />
                 Partita Iva: 02708900028
               </p>
