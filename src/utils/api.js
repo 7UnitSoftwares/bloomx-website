@@ -1,5 +1,5 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
+const API_KEY = 'c0fBMQ9Fxokt3OqgD2hYWHkLkbBgTgYCaIfw4kOARWodj6sbLJ2a2oyVfJWlQR';
 
 if (!API_BASE_URL || !API_KEY) {
   console.error('API configuration is missing. Please check your environment variables.');
