@@ -10,6 +10,7 @@ import { TestimonialData } from "@/data/Testimonial";
 import React, { useState, useCallback } from "react";
 import Spinner from "@/components/Spinner";
 import { sendEnquiry } from "@/utils/api";
+import InterestFormModal from "@/components/InterestFormModal";
 
 // export const metadata = {
 //   title: "Events",
@@ -18,30 +19,6 @@ import { sendEnquiry } from "@/utils/api";
 const EventiPage = () => {
   const [showModal, setShowModal] = useState(false);
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ nome: "", cellulare: "" });
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [error, setError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e, eventName) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    const formData = {
-      name: form.nome,
-      mobileNumber: form.cellulare,
-      interest: eventName,
-    };
-    try {
-      await sendEnquiry(formData);
-      setSuccess(true);
-      setForm({ nome: "", cellulare: "" });
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   const handleModalClick = useCallback((e) => {
     e.preventDefault();
@@ -52,8 +29,6 @@ const EventiPage = () => {
   const handleModalClose = useCallback(() => {
     setShowModal(false);
     setShowForm(false);
-    setSuccess(false);
-    setError("");
   }, []);
 
   return (
@@ -75,7 +50,7 @@ const EventiPage = () => {
                 ESTATE FELICE – Aperitivo Educativo per Genitori
               </h2>
               <p className="text-lg text-white font-medium">
-                22 Maggio – Ore 18.00 | I Faggi, Biella
+                19 Giugno – Ore 18.00 | I Faggi, Biella
               </p>
               <span className="mt-2 text-sm text-[#008C95] font-semibold animate-pulse bg-white bg-opacity-80 px-2 py-1 rounded">
                 Clicca per saperne di più!
@@ -121,7 +96,7 @@ const EventiPage = () => {
                     <br />
                     <strong>Posti limitati – Prenota il tuo spazio per un'estate più felice!</strong>
                   </p>
-                  {!showForm && !success && (
+                  {!showForm && (
                     <button
                       type="button"
                       className="bg-[#008C95] hover:bg-[#006C73] text-white font-bold py-2 px-4 rounded-lg w-full transition"
@@ -129,57 +104,6 @@ const EventiPage = () => {
                     >
                       Esprimi Interesse
                     </button>
-                  )}
-                  {showForm && !success && (
-                    <form className="mt-6 flex flex-col gap-3" onSubmit={(e) => handleSubmit(e, "ESTATE FELICE – Aperitivo Educativo per Genitori")}>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700">
-                          Nome e Cognome
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          className="px-4 py-2 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                          value={form.nome}
-                          onChange={e => setForm({ ...form, nome: e.target.value })}
-                          placeholder="Inserisci il tuo nome e cognome"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700">
-                          Cellulare
-                        </label>
-                        <input
-                          type="tel"
-                          required
-                          pattern="^[0-9\s\+\-]{7,15}$"
-                          className="px-4 py-2 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
-                          value={form.cellulare}
-                          onChange={e => setForm({ ...form, cellulare: e.target.value })}
-                          placeholder="Inserisci il tuo numero di cellulare"
-                        />
-                      </div>
-                      {error && <div className="text-red-600 text-sm">{error}</div>}
-                      <button
-                        type="submit"
-                        className="bg-[#008C95] hover:bg-[#006C73] text-white font-bold py-2 px-4 rounded-lg w-full transition disabled:opacity-50 flex items-center justify-center gap-2"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <Spinner size="sm" className="text-white" />
-                            <span>Invio in corso...</span>
-                          </>
-                        ) : (
-                          "Invia"
-                        )}
-                      </button>
-                    </form>
-                  )}
-                  {success && (
-                    <div className="mt-6 text-center text-[#008C95] font-semibold">
-                      Grazie per il tuo interesse! Ti ricontatteremo presto.
-                    </div>
                   )}
                 </div>
               </div>
@@ -195,6 +119,13 @@ const EventiPage = () => {
           </div>
         </Container>
       </div>
+
+      {/* Interest Form Modal */}
+      <InterestFormModal
+        isOpen={showForm}
+        onClose={() => setShowForm(false)}
+        interest="ESTATE FELICE – Aperitivo Educativo per Genitori"
+      />
     </div>
   );
 };

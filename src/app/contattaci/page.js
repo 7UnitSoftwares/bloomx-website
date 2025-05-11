@@ -94,7 +94,7 @@ const ContactData = [
     icon: "/contact/icon2.png",
     title: "Visita la nostra sede",
     desc: "Vieni a trovarci in ufficio",
-    additional: "VIA TORINO 35, BIELLA, ITALIA 13900",
+    additional: "VIA TORINO 35B, BIELLA, ITALIA 13900",
     type: '',
     value: '',
   },

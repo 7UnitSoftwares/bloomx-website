@@ -2,10 +2,13 @@ import React, { useState } from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
 import "moment/locale/it";
+import "moment-timezone";
 moment.locale("it");
+moment.tz.setDefault("Europe/Rome");
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { sendEnquiry } from "@/utils/api";
 import Spinner from "./Spinner";
+import InterestFormModal from "./InterestFormModal";
 
 // --- BEGIN: JSON DATA PLACEHOLDER ---
 const jsonData = {
@@ -48,18 +51,26 @@ const jsonData = {
     {
       name: "Corso Animatori Centri Estivi",
       dates: ["2025-05-12", "2025-05-19", "2025-05-26", "2025-06-03"],
+      time: "20:30-22:00"
     },
     {
       name: "Corso Educazione Emozionale – Docenti",
       dates: ["2025-06-09", "2025-06-16", "2025-06-23", "2025-06-30"],
+      time: "18:00-20:00",
     },
     {
       name: "Aperitivo in Villa",
       date: "2025-06-19",
+      time: "18:00-20:00",
     },
     {
       name: "ESTATE FELICE – Aperitivo Educativo per Genitori",
-      date: "2025-05-22",
+      date: "2025-06-19",
+      time: "18:00-20:00",
+    },
+    {
+      name: "Bloom Summer Lab",
+      dates: ["2025-06-09", "2025-06-10", "2025-06-11", "2025-06-12", "2025-06-13", "2025-06-16", "2025-06-17", "2025-06-18", "2025-06-19", "2025-06-20", "2025-06-23", "2025-06-24", "2025-06-25", "2025-06-26", "2025-06-27", "2025-06-30"],
       time: "18:00-20:00",
     },
   ],
@@ -78,8 +89,8 @@ const dayMap = {
 
 function generateCalendarEvents(jsonData) {
   const events = [];
-  const startDate = moment();
-  const endDate = moment(jsonData.periodic_until);
+  const startDate = moment().tz("Europe/Rome");
+  const endDate = moment(jsonData.periodic_until).tz("Europe/Rome");
 
   // Weekly recurring events
   jsonData.weekly_events.forEach(weekEvent => {
@@ -111,19 +122,27 @@ function generateCalendarEvents(jsonData) {
   jsonData.specific_events.forEach(ev => {
     if (ev.dates) {
       ev.dates.forEach(dateStr => {
+        const [startH, startM] = ev.time ? ev.time.split('-')[0].split(':') : ['10', '00'];
+        const [endH, endM] = ev.time ? ev.time.split('-')[1].split(':') : ['12', '00'];
+        const start = moment.tz(dateStr, "Europe/Rome").hour(startH).minute(startM);
+        const end = moment.tz(dateStr, "Europe/Rome").hour(endH).minute(endM);
         events.push({
           title: ev.name,
-          start: moment(dateStr + "T10:00").toDate(),
-          end: moment(dateStr + "T12:00").toDate(),
+          start: start.toDate(),
+          end: end.toDate(),
           type: "Speciale",
           recurring: false,
         });
       });
     } else if (ev.date) {
+      const [startH, startM] = ev.time ? ev.time.split('-')[0].split(':') : ['18', '00'];
+      const [endH, endM] = ev.time ? ev.time.split('-')[1].split(':') : ['20', '00'];
+      const start = moment.tz(ev.date, "Europe/Rome").hour(startH).minute(startM);
+      const end = moment.tz(ev.date, "Europe/Rome").hour(endH).minute(endM);
       events.push({
         title: ev.name,
-        start: moment(ev.date + "T18:00").toDate(),
-        end: moment(ev.date + "T20:00").toDate(),
+        start: start.toDate(),
+        end: end.toDate(),
         type: "Speciale",
         recurring: false,
       });
@@ -156,45 +175,65 @@ const CustomEvent = ({ event }) => (
   </div>
 );
 
+// Custom Toolbar Component
+const CustomToolbar = (toolbar) => {
+  const goToBack = () => {
+    toolbar.onNavigate('PREV');
+  };
+
+  const goToNext = () => {
+    toolbar.onNavigate('NEXT');
+  };
+
+  const goToCurrent = () => {
+    toolbar.onNavigate('TODAY');
+  };
+
+  const label = () => {
+    const date = toolbar.date;
+    return moment(date).format('MMMM YYYY');
+  };
+
+  return (
+    <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center gap-3">
+        <button
+          type="button"
+          onClick={goToBack}
+          className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#008C95] focus:ring-offset-2 transition-colors"
+        >
+          ‹
+        </button>
+        <button
+          type="button"
+          onClick={goToCurrent}
+          className="px-4 py-2 bg-[#008C95] text-white border border-[#008C95] rounded-lg hover:bg-[#006C73] focus:outline-none focus:ring-2 focus:ring-[#008C95] focus:ring-offset-2 transition-colors"
+        >
+          Oggi
+        </button>
+        <button
+          type="button"
+          onClick={goToNext}
+          className="px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#008C95] focus:ring-offset-2 transition-colors"
+        >
+          ›
+        </button>
+      </div>
+      <div className="text-xl font-semibold text-gray-800">
+        {label()}
+      </div>
+    </div>
+  );
+};
+
 const CalendarView = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [showInterestForm, setShowInterestForm] = useState(false);
-  const [interestData, setInterestData] = useState({ nome: '', cognome: '', telefono: '' });
-  const [submitted, setSubmitted] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState("");
+  const [currentDate, setCurrentDate] = useState(new Date());
   const events = generateCalendarEvents(jsonData);
 
-  const handleInterestChange = (e) => {
-    setInterestData({ ...interestData, [e.target.name]: e.target.value });
-  };
-
-  const handleInterestSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError("");
-
-    const formData = {
-      name: `${interestData.nome}`,
-      mobileNumber: interestData.telefono,
-      interest: selectedEvent.title
-    };
-
-    try {
-      await sendEnquiry(formData);
-      setSubmitted(true);
-      setInterestData({ nome: '', telefono: '' });
-      
-      setTimeout(() => {
-        setShowInterestForm(false);
-        setSubmitted(false);
-      }, 2000);
-    } catch (error) {
-      setError("Si è verificato un errore. Riprova più tardi.");
-      console.error('Error submitting interest:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handleNavigate = (newDate) => {
+    setCurrentDate(newDate);
   };
 
   return (
@@ -213,7 +252,8 @@ const CalendarView = () => {
           startAccessor="start"
           endAccessor="end"
           style={{ height: "80vh" }}
-          toolbar={false}
+          date={currentDate}
+          onNavigate={handleNavigate}
           defaultView="month"
           views={["month", "week", "day"]}
           eventPropGetter={(event) => {
@@ -232,6 +272,7 @@ const CalendarView = () => {
           onSelectEvent={setSelectedEvent}
           components={{
             event: CustomEvent,
+            toolbar: CustomToolbar
           }}
         />
       </div>
@@ -271,7 +312,6 @@ const CalendarView = () => {
             </p>
 
             <div className="space-y-4 text-gray-700">
-              {/* <p className="leading-relaxed">{selectedEvent.description}</p> */}
               <div className="text-sm text-center">
                 <p>
                   <span className="font-semibold">Inizio:</span>{" "}
@@ -284,85 +324,25 @@ const CalendarView = () => {
               </div>
             </div>
 
-            {/* Interest Button and Form */}
-            {!showInterestForm && !submitted && (
-              <div className="mt-6 flex justify-center">
-                <button
-                  onClick={() => setShowInterestForm(true)}
-                  className="px-6 py-2 bg-green-600 text-white font-medium text-sm rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-300"
-                >
-                  Esprimi interesse
-                </button>
-              </div>
-            )}
-            {showInterestForm && !submitted && (
-              <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-                <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full relative mx-4">
-                  <button
-                    type="button"
-                    className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl"
-                    onClick={() => setShowInterestForm(false)}
-                    aria-label="Chiudi"
-                  >
-                    &times;
-                  </button>
-                  <h3 className="text-xl font-bold text-[#008C95] mb-4">
-                    Esprimi interesse per {selectedEvent.title}
-                  </h3>
-                  {!submitted ? (
-                    <form onSubmit={handleInterestSubmit} className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700">
-                          Nome e Cognome
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          className="mt-1 px-4 py-2 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-[#008C95] focus:border-transparent"
-                          value={interestData.nome}
-                          onChange={(e) => setInterestData({ ...interestData, nome: e.target.value })}
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700">
-                          Telefono
-                        </label>
-                        <input
-                          type="tel"
-                          required
-                          pattern="^[0-9\s\+\-]{7,15}$"
-                          className="mt-1 px-4 py-2 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-[#008C95] focus:border-transparent"
-                          value={interestData.telefono}
-                          onChange={(e) => setInterestData({ ...interestData, telefono: e.target.value })}
-                        />
-                      </div>
-                      {error && <div className="text-red-600 text-sm">{error}</div>}
-                      <button
-                        type="submit"
-                        className="w-full bg-[#008C95] hover:bg-[#006C73] text-white font-bold py-2 px-4 rounded-lg transition disabled:opacity-50 flex items-center justify-center gap-2"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? (
-                          <>
-                            <Spinner size="sm" className="text-white" />
-                            <span>Invio in corso...</span>
-                          </>
-                        ) : (
-                          "Invia"
-                        )}
-                      </button>
-                    </form>
-                  ) : (
-                    <div className="text-center text-[#008C95] font-semibold">
-                      Grazie per il tuo interesse! Ti ricontatteremo presto.
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
+            {/* Interest Button */}
+            <div className="mt-6 flex justify-center">
+              <button
+                onClick={() => setShowInterestForm(true)}
+                className="px-6 py-2 bg-[#008C95] text-white font-medium text-sm rounded-md hover:bg-[#006C73] focus:outline-none focus:ring-2 focus:ring-[#008C95] focus:ring-offset-2"
+              >
+                Esprimi interesse
+              </button>
+            </div>
           </div>
         </div>
       )}
+
+      {/* Interest Form Modal */}
+      <InterestFormModal
+        isOpen={showInterestForm}
+        onClose={() => setShowInterestForm(false)}
+        interest={selectedEvent?.title}
+      />
     </div>
   );
 };

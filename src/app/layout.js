@@ -37,6 +37,7 @@ export default function RootLayout({ children }) {
           type="text/javascript"
           src="YOUR_IUBENDA_SCRIPT_URL"
         ></script>
+        <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={`${montserrat.className} overflow-x-hidden antialiased`}>
         <Navbar /> 

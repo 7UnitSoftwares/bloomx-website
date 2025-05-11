@@ -114,14 +114,14 @@ const Footer = () => {
             {/* Logo and Info Section */}
             <div className="md:col-span-4">
               <Image
-                src="/logo/logo.png"
+                src="/logo/bloom_logo.svg"
                 alt="Logo"
                 width={120}
                 height={60}
                 className="mb-4"
               />
               <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                Address: VIA TORINO 35, BIELLA, ITALIA 13900 <br />
+                Address: VIA TORINO 35B, BIELLA, ITALIA 13900 <br />
                 Codice Fiscale: BNOGDI79P62D938B <br />
                 Partita Iva: 02708900028
               </p>

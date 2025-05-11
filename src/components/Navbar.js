@@ -94,7 +94,7 @@ const Navbar = () => {
       <nav className="flex lg:px-32 px-5 bg-white/90 fixed py-3 z-50 backdrop-blur-2xl border-b border-gray-200 w-full justify-between items-center">
         <div>
           <Link href="/">
-            <img className="h-10 lg:w-auto" src="/logo/logo.png" alt="Logo" />
+            <img className="h-10 lg:w-auto" src="/logo/bloom_logo.svg" alt="Logo" />
           </Link>
         </div>
 
