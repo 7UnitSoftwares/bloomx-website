@@ -1,101 +1,83 @@
+"use client";
+
 import SectionWithBackground from "@/components/SectionWithBackground";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const blogs = [
   {
-    title: "Minimum Viable Product (MVP): Minimum non è una metafora.",
+    slug: "adhd-a-scuola",
+    title: "ADHD a scuola: meno ansia, più risultati con queste strategie efficaci",
     description:
-      "Invece che costruire l’idea gigantornica che abbiamo in mente, facciamo una versione semplificata che ci permetta...",
-    author: "Matteo di Pascale",
-    date: "Nov 30, 2017",
+      "Questo blog offre strategie pratiche ed empatiche per aiutare gli studenti con ADHD a gestire l'ansia scolastica e migliorare il rendimento durante verifiche e interrogazioni. Vengono presentati strumenti utili come la pianificazione visiva, lo studio a piccoli passi, l'integrazione sensoriale e il rinforzo positivo, con l'obiettivo di creare un ambiente di apprendimento più inclusivo e motivante. Pensato per genitori ed educatori, il blog presenta anche il supporto personalizzato offerto dal Centro Pedagogico Bloom per bambini e ragazzi con ADHD.",
+    author: "Noemi Orologio",
+    date: "17 Maggio 2025",
     readTime: "2 min read",
-    category: "Conoscenza Generale",
-    image: "/blog/icon1.png",
+    category: "ADHD",
+    image: "/blog/adhd.jpg",
   },
   {
-    title: "Qual è il miglior strumento per lo UX/UI Designer",
+    slug: "dsa-strategie-urgenti",
+    title: "DSA: strategie urgenti per affrontare interrogazioni e scritti",
     description:
-      "Photoshop, Illustrator, Sketch, Figma, Adobe Xd, Gimp, e chi più ne ha più ne metta. Qual è il software migliore per la User Experience?",
-    author: "Matteo di Pascale",
-    date: "Dec 11, 2017",
-    readTime: "2 min read",
-    category: "Strumenti",
-    image: "/blog/icon2.png",
+      "Studiare e affrontare interrogazioni o compiti scritti può trasformarsi in un momento di ansia e frustrazione per tanti studenti. Ma per chi convive con un Disturbo Specifico dell'Apprendimento (DSA), le sfide si moltiplicano. Comprensione lenta, difficoltà di esposizione, problemi organizzativi rendono la prestazione scolastica molto più complessa.",
+    author: "Noemi Orologio",
+    date: "17 Maggio 2025",
+    readTime: "3 min read",
+    category: "DSA",
+    image: "/blog/dsa.jpg",
   },
   {
-    title: "Minimum Viable Product (MVP): Minimum non è una metafora.",
+    slug: "esame-di-stato",
+    title: "Esami e verifiche di fine anno? Ecco il metodo di studio che ti aiuta nell’ultimo periodo",
     description:
-      "Invece che costruire l’idea gigantornica che abbiamo in mente, facciamo una versione semplificata che ci permetta...",
-    author: "Matteo di Pascale",
-    date: "Nov 30, 2017",
-    readTime: "2 min read",
-    category: "Conoscenza Generale",
-    image: "/blog/icon3.png",
-  },
-  {
-    title:
-      "Pensare come uno UX Designer può salvare il compleanno di un bambino",
-    description:
-      "Capita spesso che mi chiedano cosa voglia dire fare lo UX Designer. In genere è sufficiente rispondere...",
-    author: "Matteo di Pascale",
-    date: "Nov 30, 2017",
-    readTime: "2 min read",
-    category: "Conoscenza Generale",
-    image: "/blog/icon4.png",
-  },
-  {
-    title: "Minimum Viable Product (MVP): Minimum non è una metafora.",
-    description:
-      "Invece che costruire l’idea gigantornica che abbiamo in mente, facciamo una versione semplificata che ci permetta...",
-    author: "Matteo di Pascale",
-    date: "Nov 30, 2017",
-    readTime: "2 min read",
-    category: "Conoscenza Generale",
-    image: "/blog/icon3.png",
-  },
-  {
-    title:
-      "Pensare come uno UX Designer può salvare il compleanno di un bambino",
-    description:
-      "Capita spesso che mi chiedano cosa voglia dire fare lo UX Designer. In genere è sufficiente rispondere...",
-    author: "Matteo di Pascale",
-    date: "Nov 30, 2017",
-    readTime: "2 min read",
-    category: "Conoscenza Generale",
-    image: "/blog/icon4.png",
-  },
+      "Maggio è il mese che per studenti di ogni età segna l'inizio della corsa finale. Le interrogazioni si moltiplicano, i debiti scolastici bussano alla porta, e per molti iniziano le notti insonni o i pomeriggi interminabili passati sui libri.",
+    author: "Noemi Orologio",
+    date: "17 Maggio 2025",
+    readTime: "4 min read",
+    category: "Learning",
+    image: "/blog/esamie.jpg",
+  }
 ];
 
 export default function BlogPage() {
+  const router = useRouter();
+  
+  const handleClick = (slug) => {
+    router.push(`/blog/${slug}`);
+  };
+
   return (
     <div className="bg-[#F2F2F2]">
       <SectionWithBackground
         title="Blog"
-        description="Discover our latest blog posts."
+        description="Scopri i nostri ultimi post del blog"
       />
       <div className="max-w-6xl mx-auto px-6 py-12">
-        <h1 className="text-3xl font-bold mb-6">Latest Blog Posts</h1>
+        <h1 className="text-3xl font-bold mb-6">Ultimi Post del Blog</h1>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {blogs.map((post, index) => (
             <div
               key={index}
-              className="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden"
+              className="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300"
+              onClick={() => handleClick(post.slug)}
             >
-              <Image
-                src={post.image}
-                alt={post.title}
-                width={600}
-                height={400}
-                className="w-full h-48 object-cover"
-              />
+              <div className="relative w-full h-48">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <div className="p-4">
                 {post.category && (
-                  <p className="text-red-500 uppercase text-xs font-bold mb-2">
+                  <p className="text-[#008C95] uppercase text-xs font-bold mb-2">
                     {post.category}
                   </p>
                 )}
-                <h3 className="text-lg font-bold">{post.title}</h3>
-                <p className="text-gray-700 text-sm mt-1">{post.description}</p>
+                <h3 className="text-lg font-bold mb-2 line-clamp-2">{post.title}</h3>
+                <p className="text-gray-700 text-sm line-clamp-3">{post.description}</p>
                 <div className="flex items-center mt-4 text-gray-500 text-xs">
                   <p>{post.author}</p>
                   <span className="mx-2">•</span>

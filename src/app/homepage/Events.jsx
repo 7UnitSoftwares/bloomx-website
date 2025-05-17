@@ -9,13 +9,10 @@ function Events() {
     <div>
       <Container>
         <h1 className="typography mt-10 lg:mt-16">
-          Upcoming Events: Bloom Days
+          Prossimi Eventi: Bloom Days
         </h1>
         <p className="text-center lg:mt-10  lg:text-xl font-normal text-[#808080]  ">
-          Participate in transformative workshops, community gatherings, and
-          creative sessions designed to help you relax and grow. Every evening
-          at Bloom is an opportunity to connect, learn, and rejuvenate in a
-          welcoming environment.
+          Partecipa a workshop trasformativi, incontri di comunità e sessioni creative pensate per aiutarti a rilassarti e crescere. Ogni serata da Bloom è un’opportunità per connettersi, imparare e rigenerarsi in un ambiente accogliente.
         </p>
         <div className="mt-10 grid justify-center items-center xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-16">
           {EventData.map((item, index) => (
@@ -25,8 +22,8 @@ function Events() {
       </Container>
       <div className="bg-[#F2F2F2] mt-10 lg:mt-10">
         <Container>
-          <h1 className="typography pt-5 lg:pt-16">Cosa dicono i bloomers</h1>
-           <div className=" bg-gray-100 grid lg:grid-cols-3 gap-10 lg:mt-16 p-4 pb-16">
+          <h1 className="typography pt-5 lg:pt-16">Le voci di chi ci ha scelto</h1>
+           <div className="grid lg:grid-cols-3 gap-10 lg:mt-16 p-4 pb-16">
             {TestimonialData.map((data, index) => {
               return <TestimonialCard data={data} key={index} />;
             })}

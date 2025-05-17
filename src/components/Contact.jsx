@@ -3,6 +3,9 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import Button from "../components/Button";
 import Container from "./Container";
+import { submitContactForm } from "@/utils/api";
+import Toast from "./Toast";
+import Spinner from './Spinner';
 
 const data = [
   {
@@ -24,14 +27,15 @@ const data = [
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    nomecognome: "",
     email: "",
-    companyName: "",
-    phone: "",
-    message: "",
+    subject: "",
+    mobile: "",
+    body: "",
   });
   const [showToast, setShowToast] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const YOUR_SERVICE_ID = process.env.NEXT_PUBLIC_YOUR_SERVICE_ID;
   const YOUR_TEMPLATE_ID = process.env.NEXT_PUBLIC_YOUR_TEMPLATE_ID;
@@ -42,34 +46,29 @@ const Contact = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    try {
+      await submitContactForm(formData);
+      setShowToast(true);
+      setFormData({
+        nomecognome: "",
+        email: "",
+        subject: "",
+        mobile: "",
+        body: "",
+      });
+    } catch (error) {
+      setShowError(true);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
-    emailjs
-      .send(YOUR_SERVICE_ID, YOUR_TEMPLATE_ID, formData, YOUR_USER_ID)
-      .then(
-        (response) => {
-          console.log("Email sent successfully!", response);
-          setShowToast(true);
-          setFormData({
-            name: "",
-            email: "",
-            companyName: "",
-            message: "",
-            phone: "",
-          });
-          setTimeout(() => {
-            setShowToast(false);
-          }, 3000);
-        },
-        (error) => {
-          console.error("Email sending failed:", error);
-          setShowError(true);
-          setTimeout(() => {
-            setShowError(false);
-          }, 3000);
-        }
-      );
+  const closeToast = () => {
+    setShowToast(false);
+    setShowError(false);
   };
 
   return (
@@ -96,14 +95,14 @@ const Contact = () => {
                     htmlFor="name"
                     className="block font-semibold text-gray-700"
                   >
-                    Name
+                    Nome e Cognome <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
-                    id="name"
+                    id="nomecognome"
                     required
-                    name="name"
-                    value={formData.name}
+                    name="nomecognome"
+                    value={formData.nomecognome}
                     onChange={handleChange}
                     className="mt-1 p-2 w-full border focus:outline-none border-gray-300 rounded-md bg-[#F3F3F3]"
                   />
@@ -113,7 +112,7 @@ const Contact = () => {
                     htmlFor="email"
                     className="block font-semibold text-gray-700"
                   >
-                    Email
+                    Email <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
@@ -127,52 +126,60 @@ const Contact = () => {
                 </div>
                 <div className="">
                   <label
-                    htmlFor="phone"
+                    htmlFor="mobile"
                     className="block font-semibold text-gray-700"
                   >
-                    Phone no
+                    Numero di telefono <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="text"
-                    id="phone"
-                    name="phone"
+                    id="mobile"
+                    name="mobile"
                     required
-                    value={formData.phone}
+                    pattern="^\d{10}$"
+                    value={formData.mobile}
                     onChange={handleChange}
                     className="mt-1 p-2 w-full border focus:outline-none border-gray-300 rounded-md bg-[#F3F3F3]"
                   />
                 </div>
                 <div className="">
                   <label
-                    htmlFor="companyName"
+                    htmlFor="subject"
                     className="block font-semibold text-gray-700"
                   >
-                    Subject
+                    Oggetto <span className="text-red-500">*</span> 
                   </label>
-                  <input
-                    type="text"
-                    id="companyName"
-                    name="companyName"
+                  <select
+                    id="subject"
+                    name="subject"
                     required
-                    value={formData.companyName}
+                    value={formData.subject}
                     onChange={handleChange}
                     className="mt-1 p-2 w-full border focus:outline-none border-gray-300 rounded-md bg-[#F3F3F3]"
-                  />
+                  >
+                    <option value="">Seleziona un oggetto</option>
+                    <option value="Buds">Buds</option>
+                    <option value="Studenti">Studenti</option>
+                    <option value="Genitori">Genitori</option>
+                    <option value="BloomHer">BloomHer</option>
+                    <option value="Creator">Creator</option>
+                    <option value="Altro">Altro</option>
+                  </select>
                 </div>
               </div>
 
               <div className="mt-5">
                 <label
-                  htmlFor="message"
+                  htmlFor="body"
                   className="block font-semibold text-gray-700"
                 >
-                  Message
+                  Messaggio <span className="text-red-500">*</span>
                 </label>
                 <textarea
-                  id="message"
-                  name="message"
+                  id="body"
+                  name="body"
                   required
-                  value={formData.message}
+                  value={formData.body}
                   onChange={handleChange}
                   className="mt-1 p-2 min-h-24 w-full border focus:outline-none border-gray-300 rounded-md bg-[#F3F3F3]"
                 ></textarea>
@@ -180,9 +187,17 @@ const Contact = () => {
               <div className="mt-4 flex justify-center lg:justify-start">
                 <Button
                   type="submit"
-                  className="px-4 py-2 bg-blue-500 text-white rounded-md"
+                  className="px-4 py-2 bg-[#00A59B] text-white rounded-md flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={!formData.nomecognome || !formData.email || !formData.mobile || !formData.subject || !formData.body || isSubmitting}
                 >
-                  Contact Us
+                  {isSubmitting ? (
+                    <div className="flex items-center gap-2">
+                      <Spinner size="sm" className="text-white" />
+                      <span>Invio in corso...</span>
+                    </div>
+                  ) : (
+                    'Contattaci'
+                  )}
                 </Button>
               </div>
             </form>
@@ -191,14 +206,18 @@ const Contact = () => {
       </Container>
 
       {showToast && (
-        <div className="fixed bottom-5 right-5 bg-green-500 text-white p-3 rounded-lg">
-          Message sent successfully!
-        </div>
+        <Toast
+          message="Messaggio inviato con successo!"
+          type="success"
+          onClose={closeToast}
+        />
       )}
       {showError && (
-        <div className="fixed bottom-5 right-5 bg-red-500 text-white p-3 rounded-lg">
-          Message sending failed!
-        </div>
+        <Toast
+          message="Errore nell'invio del messaggio!"
+          type="error"
+          onClose={closeToast}
+        />
       )}
     </section>
   );

@@ -4,33 +4,36 @@ import Image from "next/image";
 import Link from "next/link";
 import Container from "./Container";
 import Button from "./Button";
+import { subscribeToNewsletter } from "../utils/api";
+import Toast from './Toast';
+import Spinner from "./Spinner";
 
 const data = [
   { title: "Chi siamo", to: "/siamo",
     items: [
-      { title: "Il progetto", to: "/siamo" },
-      { title: "La visione", to: "/siamo" },
-      { title: "la nostra team", to: "/siamo" }
+      { title: "Il progetto", to: "/siamo/#progetto" },
+      { title: "La visione", to: "/siamo/#visione" },
+      { title: "Il nostro team", to: "/siamo/#team" }
     ]
    },
   {
     title: "Community",
     to: "/community",
     items: [
-      { title: "Studenti", to: "/community#studenti" },
-      { title: "Piccoli Bloom", to: "/community#buds" },
-      { title: "Genitori", to: "/community#genitori" },
-      { title: "BloomHer", to: "/community#bloomHer" },
-      { title: "Creators", to: "/community#creators" }
+      { title: "Studenti", to: "/community#Studenti" },
+      { title: "Buds", to: "/community#Buds" },
+      { title: "Genitori", to: "/community#Genitori" },
+      { title: "BloomHer", to: "/community#BloomHer" },
+      { title: "Creators", to: "/community#Creators" }
     ],
   },
   {
     title: "I Nostri Servizi",
-    to: "/service",
+    to: "/servizi",
     items: [
-      { title: "Percorsi di Studio", to: "/service#studio" },
-      { title: "Consulenza e Assessment", to: "/service#consulenza" },
-      { title: "Laboratori ed Eventi", to: "/service#eventi" }
+      { title: "Percorsi di Studio", to: "/servizi#studio" },
+      { title: "Consulenza e Assessment", to: "/servizi#consulenza" },
+      { title: "Laboratori ed Eventi", to: "/servizi#eventi" }
     ],
   },
   // {
@@ -47,23 +50,60 @@ const data = [
 const Footer = () => {
   const [isClient, setIsClient] = useState(false);
   const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
+  const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailError, setEmailError] = useState("");
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email && email.includes("@")) {
-      console.log("Subscribing:", email);
-      setSubscribed(true);
-      setEmail("");
-
-      setTimeout(() => {
-        setSubscribed(false);
-      }, 5000);
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email) {
+      setEmailError("Campo obbligatorio");
+      return false;
     }
+    if (!emailRegex.test(email)) {
+      setEmailError("Inserisci un indirizzo email valido");
+      return false;
+    }
+    setEmailError("");
+    return true;
+  };
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!validateEmail(email)) {
+      return;
+    }
+    setIsSubmitting(true);
+    console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
+    console.log(process.env.NEXT_PUBLIC_API_KEY);
+
+    if (email && email.includes("@")) {
+      try {
+        await subscribeToNewsletter(email);
+        setToast({
+          show: true,
+          message: 'Grazie per l\'iscrizione!',
+          type: 'success'
+        });
+        setEmail(""); // Reset form
+      } catch (error) {
+        setToast({
+          show: true,
+          message: 'Si è verificato un errore. Riprova più tardi.',
+          type: 'error'
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
+  };
+
+  const closeToast = () => {
+    setToast(prev => ({ ...prev, show: false }));
   };
 
   return (
@@ -74,21 +114,22 @@ const Footer = () => {
             {/* Logo and Info Section */}
             <div className="md:col-span-4">
               <Image
-                src="/logo/logo.png"
+                src="/logo/bloom_logo.svg"
                 alt="Logo"
                 width={120}
                 height={60}
                 className="mb-4"
               />
               <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                Address: VIA DELLE ROSE, 2 13900 BIELLA <br />
+                Address: VIA TORINO 35B, BIELLA, ITALIA 13900 <br />
                 Codice Fiscale: BNOGDI79P62D938B <br />
                 Partita Iva: 02708900028
               </p>
               <div className="flex gap-4 mt-4">
                 <a
-                  href="#"
+                  href="https://www.instagram.com/bloom_biella"
                   className="transform hover:scale-110 transition-transform"
+                  target="_blank"
                 >
                   <Image
                     src="/footer/insta.png"
@@ -99,24 +140,13 @@ const Footer = () => {
                   />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.facebook.com/profile.php?id=61560352317391"
                   className="transform hover:scale-110 transition-transform"
+                  target="_blank"
                 >
                   <Image
                     src="/footer/facebook.png"
                     alt="Facebook"
-                    width={28}
-                    height={28}
-                    className="hover:opacity-80 transition-opacity"
-                  />
-                </a>
-                <a
-                  href="#"
-                  className="transform hover:scale-110 transition-transform"
-                >
-                  <Image
-                    src="/footer/linkedin.png"
-                    alt="LinkedIn"
                     width={28}
                     height={28}
                     className="hover:opacity-80 transition-opacity"
@@ -136,7 +166,7 @@ const Footer = () => {
                         <div key={index} className="flex flex-col">
                           <Link
                             href={item.to}
-                            className="text-gray-700 hover:text-blue-600 transition-colors font-semibold mb-1"
+                            className="text-gray-700 hover:text-teal-600 transition-colors font-semibold mb-1"
                           >
                             {item.title}
                           </Link>
@@ -148,7 +178,7 @@ const Footer = () => {
                                 <Link
                                   key={subIndex}
                                   href={subItem.to || subItem.link || "#"}
-                                  className="text-gray-500 hover:text-blue-500 transition-colors text-xs"
+                                  className="text-gray-500 hover:text-teal-500 transition-colors text-xs"
                                 >
                                   {subItem.title}
                                 </Link>
@@ -167,7 +197,7 @@ const Footer = () => {
                         <div key={index} className="flex flex-col">
                           <Link
                             href={item.to}
-                            className="text-gray-700 hover:text-blue-600 transition-colors font-semibold mb-1"
+                            className="text-gray-700 hover:text-teal-600 transition-colors font-semibold mb-1"
                           >
                             {item.title}
                           </Link>
@@ -179,7 +209,7 @@ const Footer = () => {
                                 <Link
                                   key={subIndex}
                                   href={subItem.to || subItem.link || "#"}
-                                  className="text-gray-500 hover:text-blue-500 transition-colors text-xs"
+                                  className="text-gray-500 hover:text-teal-500 transition-colors text-xs"
                                 >
                                   {subItem.title}
                                 </Link>
@@ -209,34 +239,34 @@ const Footer = () => {
                   <input
                     type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (emailError) validateEmail(e.target.value);
+                    }}
                     placeholder="La tua email"
-                    className="px-4 py-3 rounded-lg border border-gray-300 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                    className={`px-4 py-3 rounded-lg border ${
+                      emailError ? 'border-red-500' : 'border-gray-300'
+                    } w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
                     required
                   />
+                  {emailError && (
+                    <label className="text-red-500 text-sm mt-1">{emailError}</label>
+                  )}
                   <Button
                     className="w-full bg-[#008C95] hover:bg-[#006A70] text-white py-2 px-4 rounded-lg transition-colors duration-200"
                     type="submit"
+                    disabled={!email}
                   >
-                    Iscriviti
+                    {isSubmitting ? (
+                      <div className="flex items-center gap-2">
+                        <Spinner size="sm" className="text-white" />
+                        <span>Invio in corso...</span>
+                      </div>
+                    ) : (
+                      'Iscriviti'
+                    )}
                   </Button>
                 </form>
-                {subscribed && (
-                  <p className="mt-3 text-green-600 font-medium flex items-center">
-                    <svg
-                      className="w-5 h-5 mr-2"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    Grazie per l'iscrizione!
-                  </p>
-                )}
               </div>
             </div>
           </div>
@@ -244,26 +274,35 @@ const Footer = () => {
           <div className="border-t border-gray-200 pt-6 mt-4">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-gray-500 text-sm">
-                © 2024 Bloom All rights reserved
+                ©2025 Bloom Tutti i diritti riservati
               </p>
               <div className="flex gap-6 mt-4 md:mt-0">
                 <Link
                   href="/privacy"
                   className="text-gray-500 text-sm hover:text-gray-700 transition-colors"
                 >
-                  Privacy Policy
+                  Privacy
                 </Link>
                 <Link
                   href="/terms"
                   className="text-gray-500 text-sm hover:text-gray-700 transition-colors"
                 >
-                  Terms of Service
+                  Trasparenza
                 </Link>
               </div>
             </div>
           </div>
         </Container>
       </div>
+      
+      {/* Replace the existing success message with Toast */}
+      {toast.show && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={closeToast}
+        />
+      )}
     </footer>
   );
 };

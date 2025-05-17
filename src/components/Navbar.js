@@ -36,11 +36,11 @@ const Navbar = () => {
       title: "Community",
       to: "/community",
       items: [
-        { title: "Studenti", to: "studenti" },
-        { title: "Piccoli Bloom", to: "buds" },
-        { title: "Genitori", to: "genitori" },
-        { title: "BloomHer", to: "bloomHer" },
-        { title: "Creators", to: "creators" },
+        { title: "Studenti", to: "Studenti" },
+        { title: "Piccoli Bloom", to: "Buds" },
+        { title: "Genitori", to: "Genitori" },
+        { title: "BloomHer", to: "BloomHer" },
+        { title: "Creators", to: "Creators" },
       ],
     },
     {
@@ -65,23 +65,24 @@ const Navbar = () => {
     { title: "Spazio", to: "/spazio" },
     { title: "Eventi", to: "/eventi" },
     { title: "Blog", to: "/blog" },
-    {
-      title: "Risorse",
-      to: "/risorse",
-      items: [
-        { title: "intùiti", to: "intùiti Creative Cards" },
-        { title: "Favula Deck", to: "Fabula Deck" },
-        {
-          title: "intùitifweq Cards",
-          to: "intùitifweq Creative Cards",
-        },
-        {
-          title: "Fabulafwe Deck",
-          to: "Fabulafwe Deck",
-        },
-        { title: "risorse gratuite", link: "/free-resources" },
-      ],
-    },
+    { title: "Bloom Summer Lab", to: "/bloom-summer-lab" },
+    // {
+    //   title: "Risorse",
+    //   to: "/risorse",
+    //   items: [
+    //     { title: "intùiti", to: "intùiti Creative Cards" },
+    //     { title: "Favula Deck", to: "Fabula Deck" },
+    //     {
+    //       title: "intùitifweq Cards",
+    //       to: "intùitifweq Creative Cards",
+    //     },
+    //     {
+    //       title: "Fabulafwe Deck",
+    //       to: "Fabulafwe Deck",
+    //     },
+    //     { title: "risorse gratuite", link: "/free-resources" },
+    //   ],
+    // },
   ];
 
   const handleMenuClick = (index) => {
@@ -93,7 +94,7 @@ const Navbar = () => {
       <nav className="flex lg:px-32 px-5 bg-white/90 fixed py-3 z-50 backdrop-blur-2xl border-b border-gray-200 w-full justify-between items-center">
         <div>
           <Link href="/">
-            <img className="h-10 lg:w-auto" src="/logo/logo.png" alt="Logo" />
+            <img className="h-10 lg:w-auto" src="/logo/bloom_logo.svg" alt="Logo" />
           </Link>
         </div>
 
@@ -175,7 +176,7 @@ const Navbar = () => {
         {/* Desktop Right Section */}
         <div className="hidden lg:flex gap-10 justify-center items-center">
           <Button className="bg-[#008C95] hover:bg-[#006A70] text-white py-2 px-4 rounded-lg transition-colors duration-200">
-            <Link href="/contact">Contattaci</Link>
+            <Link href="/contattaci">Contattaci</Link>
           </Button>
         </div>
 
@@ -260,7 +261,7 @@ const Navbar = () => {
 
                 <div className="mt-4 pt-4 border-t border-gray-100">
                   <Button className="w-full bg-[#008C95] hover:bg-[#006A70] text-white py-2 px-4 rounded-lg transition-colors duration-200">
-                    <Link href="/contact" onClick={() => setShow(false)}>
+                    <Link href="/contattaci" onClick={() => setShow(false)}>
                       Contattaci
                     </Link>
                   </Button>
@@ -334,7 +335,7 @@ const Navbar = () => {
             <div className="p-4 w-full">
               <Button>
                 <Link
-                  href="/contact"
+                  href="/contattaci"
                   onClick={() => setShow(false)}
                   className="text-white"
                 >

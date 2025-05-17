@@ -26,12 +26,27 @@
     linear-gradient(to right, rgba(226, 211, 211, 0.2) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
   background-size: 120px 120px; /* Adjust the size of the grid cells */
-  pointer-events: none; /* Ensures it doesn’t interfere with content */
+  pointer-events: none; /* Ensures it doesn't interfere with content */
 }
 .bg-grid-banner {
   background-image: 
     linear-gradient(to right, rgba(226, 211, 211, 0.2) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
   background-size: 150px 150px; /* Adjust the size of the grid cells */
-  pointer-events: none; /* Ensures it doesn’t interfere with content */
+  pointer-events: none; /* Ensures it doesn't interfere with content */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
 }

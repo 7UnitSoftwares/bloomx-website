@@ -2,6 +2,24 @@
 import Image from "next/image";
 // Removed the FaMapMarkerAlt import as it's no longer needed
 
+const avatarColors = [
+  "bg-teal-300",
+  "bg-pink-300",
+  "bg-yellow-300",
+  "bg-purple-300",
+  "bg-blue-300",
+  "bg-green-300",
+  "bg-red-300",
+];
+
+function getAvatarColor(name) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return avatarColors[Math.abs(hash) % avatarColors.length];
+}
+
 const TestimonialCard = ({ data }) => {
   return (
     <a
@@ -13,13 +31,26 @@ const TestimonialCard = ({ data }) => {
       <div className="p-4 flex flex-col space-y-4">
         <div className="flex items-center justify-between space-x-4">
           <div className="flex gap-2 justify-center items-center">
-            <Image
-              src={data.profilePic}
-              alt={`${data.name}'s profile`}
-              width={48}
-              height={48}
-              className="rounded-full h-12 w-12 border-gray-200"
-            />
+            {data.profilePic ? (
+              <Image
+                src={data.profilePic}
+                alt={`${data.name}'s profile`}
+                width={48}
+                height={48}
+                className="rounded-full h-12 w-12 border-gray-200"
+              />
+            ) : (
+              <div
+                className={`rounded-full h-12 w-12 flex items-center justify-center text-gray-700 font-bold text-lg border-gray-200 ${getAvatarColor(data.name)}`}
+                style={{ minWidth: 48, minHeight: 48 }}
+              >
+                {data.name
+                  .split(' ')
+                  .map((n) => n[0])
+                  .join('')
+                  .toUpperCase()}
+              </div>
+            )}
             <div>
               <h3 className="text-lg font-semibold">{data.name}</h3>
               <p className="text-sm text-gray-500">{data.location}</p>

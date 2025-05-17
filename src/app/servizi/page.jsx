@@ -1,25 +1,93 @@
+"use client";
+
 import Banner from "@/components/Banner";
 import Container from "@/components/Container";
 import SectionWithBackground from "@/components/SectionWithBackground";
 import Image from "next/image";
-import React from "react";
-
-export const metadata = {
-  title: "Apprendimento Personalizzato e Crescita Consapevole | Servizi di Bloom",
-  description: "Scopri i servizi di Bloom: apprendimento personalizzato basato sulle neuroscienze, discipline olistiche e supporto continuo. Percorsi su misura per la tua crescita consapevole!",
-};
+import { usePathname } from "next/navigation";
+import React, { useEffect } from "react";
 
 function page() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const scrollToSection = () => {
+      // Get the hash from the URL
+      const hash = window.location.hash;
+      console.log('Current hash:', hash);
+      
+      if (!hash) return;
+
+      // Remove the # from the hash
+      const id = hash.substring(1);
+      console.log('Looking for element with id:', id);
+
+      // Function to attempt scrolling
+      const attemptScroll = (attempts = 0) => {
+        const element = document.getElementById(id);
+        console.log('Found element:', element);
+        
+        if (!element) {
+          // If element not found and we haven't tried too many times, try again
+          if (attempts < 10) {
+            console.log(`Attempt ${attempts + 1}: Element not found, retrying...`);
+            setTimeout(() => attemptScroll(attempts + 1), 200);
+          }
+          return;
+        }
+
+        // Check if element is actually rendered and visible
+        const rect = element.getBoundingClientRect();
+        if (rect.height === 0) {
+          if (attempts < 10) {
+            console.log(`Attempt ${attempts + 1}: Element not rendered, retrying...`);
+            setTimeout(() => attemptScroll(attempts + 1), 200);
+          }
+          return;
+        }
+
+        // Element is found and rendered, scroll to it
+        console.log('Scrolling to element');
+        const offset = 100;
+        const elementPosition = rect.top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      };
+
+      // Start the scroll attempt process
+      attemptScroll();
+    };
+
+    // Scroll on initial load with a longer delay to ensure animations are complete
+    console.log('Initial load - pathname:', pathname);
+    setTimeout(scrollToSection, 500);
+
+    // Scroll when the URL changes
+    window.addEventListener('hashchange', (e) => {
+      console.log('Hash changed:', e.newURL);
+      scrollToSection();
+    });
+
+    return () => {
+      window.removeEventListener('hashchange', scrollToSection);
+    };
+  }, [pathname]);
+
   return (
     <section className="bg-[#F2F2F2]">
       <SectionWithBackground
         title="I Nostri Servizi"
-        description="Trasformiamo l’apprendimento in un’esperienza viva e consapevole,<br /> dove ogni percorso è costruito su misura per valorizzare il potenziale unico di ciascuno."
+        description="Trasformiamo l'apprendimento in un'esperienza viva e consapevole,<br /> dove ogni percorso è costruito su misura per valorizzare il potenziale unico di ciascuno."
       />
       <Container>
         <div className="lg:mt-10 mt-16 flex flex-col justify-center lg:gap-16 gap-5 items-center">
           {ServiceData.map((item, index) => (
             <div
+              id={item.id}
               key={index}
               className={`flex justify-center items-center flex-col ${index % 2 === 0 ? "lg:flex-row-reverse" : "lg:flex-row"
                 } gap-5 lg:gap-20`}
@@ -42,63 +110,33 @@ function page() {
         </div>
         <div className="mx-auto pt-16 ">
           <div className="mx-auto py-16 bg-gradient-to-b from-[#FFFFFF] to-[#FFFFFF] rounded-2xl shadow-sm my-10">
-            <div className="mx-auto flex flex-col md:flex-row gap-12 px-6 max-w-7xl">
-              {/* Left Side - Heading, Text and Image Grid */}
-              <div className="md:w-1/2">
-                <h2 className="text-3xl md:text-4xl font-bold text-[#008C95] mb-4 relative">
-                  Come Accedere ai Nostri Servizi
-                  <span className="absolute bottom-0 left-0 w-24 h-1 bg-gradient-to-r from-[#008C95] to-[#00C2CB]"></span>
-                </h2>
-
-                <p className="text-gray-600 mb-8 max-w-md text-lg">
-                  I nostri servizi sono progettati per essere accessibili e
-                  personalizzati in base alle tue esigenze specifiche.
-                </p>
-
-                {/* Image Grid - 2x2 Layout */}
-                <div className="grid grid-cols-2 gap-4 p-5">
-                  {serviceImages.map((image) => (
-                    <div
-                      key={image.id}
-                      className="relative h-36 rounded-xl overflow-hidden shadow-md group transform transition duration-300 hover:scale-105 hover:shadow-xl"
-                    >
-                      <Image
-                        src={image.src}
-                        alt={image.alt}
-                        fill
-                        style={{ objectFit: "cover" }}
-                        className="transition-transform duration-500 group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="w-full flex flex-col items-center py-12 bg-white rounded-2xl">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#008C95] mb-8 text-center">
+              Il nostro processo di onboarding
+              </h2>
+              <div className="flex flex-col md:flex-row items-stretch justify-center gap-8 w-full max-w-5xl">
+                {AccessData.map((step, idx) => (
+                  <div key={idx} className="flex flex-col items-center relative w-64">
+                    {/* Connector line */}
+                    {idx !== 0 && (
+                      <div className="hidden md:block absolute -left-8 top-8 w-8 h-1 bg-gradient-to-r from-[#008C95] to-[#00C2CB]"></div>
+                    )}
+                    {/* Step circle with icon/number */}
+                    <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 shadow-lg text-white font-bold text-2xl
+                  ${idx === 0 ? 'bg-gradient-to-br from-[#F87171] to-[#FBBF24]' : ''}
+                  ${idx === 1 ? 'bg-gradient-to-br from-[#34D399] to-[#3B82F6]' : ''}
+                  ${idx === 2 ? 'bg-gradient-to-br from-[#FBBF24] to-[#F87171]' : ''}
+                  ${idx === 3 ? 'bg-gradient-to-br from-[#3B82F6] to-[#34D399]' : ''}
+                `}>
+                      {idx + 1}
                     </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Right Side - Numbered Features */}
-              <div className="md:w-1/2 mt-10 ">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {AccessData.map((item, index) => (
-                    <div
-                      key={index}
-                      className="flex flex-col p-5 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-[#008C95] h-full"
-                    >
-                      <div className="flex  items-center mb-3">
-                        <div className="flex  justify-center items-center w-12 h-12 rounded-full bg-gradient-to-r from-[#008C95] to-[#00C2CB] text-white shadow-md mr-3">
-                          <span className="text-xl font-bold">
-                            {String(index + 1).padStart(2, "0")}
-                          </span>
-                        </div>
-                        <h3 className="text-xl font-bold text-gray-800">
-                          {item.title}
-                        </h3>
-                      </div>
-                      <p className="text-gray-600 mt-2 pl-15">
-                        {item.description}
-                      </p>
+                    {/* Step content */}
+                    <div className="bg-white rounded-xl p-4 shadow text-center border-l-4 border-[#008C95] flex-1 flex flex-col justify-start">
+                      <h3 className="text-lg font-bold text-[#008C95] mb-1" dangerouslySetInnerHTML={{ __html: step.title }} />
+                      <p className="text-gray-600 text-sm">{step.description}</p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -112,7 +150,7 @@ function page() {
                   Perché Scegliere Bloom
                 </h2>
 
-                <p className="text-[#333333] mb-10 text-lg">Approccio personalizzato basato sulle neuroscienze, discipline olistiche con pedagogia, supporto continuo e un team di esperti per una crescita consapevole.
+                <p className="text-[#333333] mb-10 text-lg">Con Bloom intraprendi un percorso formativo e trasformativo che mette al centro la tua unicità: un approccio personalizzato basato sulle neuroscienze, un supporto costante da parte di un team di esperti, e l'integrazione armoniosa di pedagogia e discipline olistiche. Un metodo pensato per guidarti verso una crescita consapevole, duratura e autentica.
                 </p>
 
               </div>
@@ -143,6 +181,7 @@ function page() {
             </div>
           </div>
         </div>
+
       </Container>
       <Banner />
     </section>
@@ -153,7 +192,7 @@ export default page;
 
 const ServiceData = [
   {
-    id: 1,
+    id: 'studio',
     title: "Percorsi di Studio",
     icon: "/service/service_1.jpg",
     description: [
@@ -164,7 +203,7 @@ const ServiceData = [
     ],
   },
   {
-    id: 2,
+    id: 'consulenza',
     title: "Consulenza e Assessment",
     icon: "/service/service_2.jpg",
     description: [
@@ -173,7 +212,7 @@ const ServiceData = [
     ],
   },
   {
-    id: 3,
+    id: 'eventi',
     title: "Laboratori ed Eventi",
     icon: "/service/service_3.jpg",
     description: [
@@ -195,7 +234,7 @@ const AccessData = [
       "Ingressi settimanali personalizzati con possibilità di scegliere tra 1, 2 o 3 incontri a settimana.",
   },
   {
-    title: "Supporto Continuo",
+    title: "Supporto <br /> Continuo",
     description:
       "Feedback costante sui progressi, rimandi periodici per monitorare l'andamento, comunicazione diretta con i genitori, e aggiornamenti regolari sul percorso.",
   },
@@ -213,9 +252,9 @@ const whyChooseBloom = [
       "Un metodo su misura che integra le neuroscienze per comprendere al meglio le tue esigenze, favorendo apprendimento e crescita consapevole attraverso strategie scientificamente validate.",
   },
   {
-    title: "Le discipline olistiche, infuse di pedagogia, come strumenti di crescita consapevole.",
+    title: "Team di professionisti specializzati.",
     description:
-      "Un approccio che unisce discipline olistiche e pedagogia per favorire una crescita consapevole, armonizzando mente e corpo attraverso strumenti educativi e pratiche mirate.",
+      "Un team di esperti qualificati, pronti a offrire competenze specializzate e un supporto mirato per guidarti con professionalità e dedizione nel tuo percorso di crescita.",
   },
   {
     title: "Supporto continuo nel percorso di apprendimento.",
@@ -223,9 +262,9 @@ const whyChooseBloom = [
       "Un accompagnamento costante con guide esperte e risorse dedicate per sostenerti in ogni fase del tuo percorso di apprendimento, garantendo crescita e sviluppo continuo.",
   },
   {
-    title: "Team di professionisti specializzati.",
+    title: "Le discipline olistiche, infuse di pedagogia, come strumenti di crescita consapevole.",
     description:
-      "Un team di esperti qualificati, pronti a offrire competenze specializzate e un supporto mirato per guidarti con professionalità e dedizione nel tuo percorso di crescita.",
+      "Un approccio che unisce discipline olistiche e pedagogia per favorire una crescita consapevole, armonizzando mente e corpo attraverso strumenti educativi e pratiche mirate.",
   },
 ];
 const serviceImages = [

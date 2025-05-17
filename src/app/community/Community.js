@@ -1,12 +1,13 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import Banner from "@/components/Banner";
 import Container from "@/components/Container";
 import SectionWithBackground from "@/components/SectionWithBackground";
 import { CommunityData } from "@/data/CommunityData";
+import { usePathname } from 'next/navigation';
 
 // export const metadata = {
 //   title: "Le nostre community",
@@ -14,6 +15,75 @@ import { CommunityData } from "@/data/CommunityData";
 // };
 
 const CommunityPage = () => {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const scrollToSection = () => {
+      // Get the hash from the URL
+      const hash = window.location.hash;
+      console.log('Current hash:', hash);
+      
+      if (!hash) return;
+
+      // Remove the # from the hash
+      const id = hash.substring(1);
+      console.log('Looking for element with id:', id);
+
+      // Function to attempt scrolling
+      const attemptScroll = (attempts = 0) => {
+        const element = document.getElementById(id);
+        console.log('Found element:', element);
+        
+        if (!element) {
+          // If element not found and we haven't tried too many times, try again
+          if (attempts < 10) {
+            console.log(`Attempt ${attempts + 1}: Element not found, retrying...`);
+            setTimeout(() => attemptScroll(attempts + 1), 200);
+          }
+          return;
+        }
+
+        // Check if element is actually rendered and visible
+        const rect = element.getBoundingClientRect();
+        if (rect.height === 0) {
+          if (attempts < 10) {
+            console.log(`Attempt ${attempts + 1}: Element not rendered, retrying...`);
+            setTimeout(() => attemptScroll(attempts + 1), 200);
+          }
+          return;
+        }
+
+        // Element is found and rendered, scroll to it
+        console.log('Scrolling to element');
+        const offset = 100;
+        const elementPosition = rect.top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      };
+
+      // Start the scroll attempt process
+      attemptScroll();
+    };
+
+    // Scroll on initial load with a longer delay to ensure animations are complete
+    console.log('Initial load - pathname:', pathname);
+    setTimeout(scrollToSection, 500);
+
+    // Scroll when the URL changes
+    window.addEventListener('hashchange', (e) => {
+      console.log('Hash changed:', e.newURL);
+      scrollToSection();
+    });
+
+    return () => {
+      window.removeEventListener('hashchange', scrollToSection);
+    };
+  }, [pathname]);
+
   return (
     <section className="bg-[#F2F2F2] min-h-screen overflow-hidden">
       <SectionWithBackground
@@ -85,7 +155,7 @@ const CommunityItem = ({ item, index }) => {
       {/* Description Section */}
       <div className="flex justify-center items-start gap-5 lg:w-3/5">
         <div className="text-[#373737] text-center lg:text-start font-normal space-y-6">
-          <p>{item.desc}</p>
+          <p dangerouslySetInnerHTML={{ __html: item.desc }} />
 
           {item.meeting?.length > 0 && (
             <div className="p-4 bg-[#f8f9fa] rounded-lg border-l-4 border-[#00A896] mt-6">
