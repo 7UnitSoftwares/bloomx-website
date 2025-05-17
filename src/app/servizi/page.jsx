@@ -150,7 +150,7 @@ function page() {
                   Perché Scegliere Bloom
                 </h2>
 
-                <p className="text-[#333333] mb-10 text-lg">Approccio personalizzato basato sulle neuroscienze, discipline olistiche con pedagogia, supporto continuo e un team di esperti per una crescita consapevole.
+                <p className="text-[#333333] mb-10 text-lg">Con Bloom intraprendi un percorso formativo e trasformativo che mette al centro la tua unicità: un approccio personalizzato basato sulle neuroscienze, un supporto costante da parte di un team di esperti, e l'integrazione armoniosa di pedagogia e discipline olistiche. Un metodo pensato per guidarti verso una crescita consapevole, duratura e autentica.
                 </p>
 
               </div>
@@ -252,9 +252,9 @@ const whyChooseBloom = [
       "Un metodo su misura che integra le neuroscienze per comprendere al meglio le tue esigenze, favorendo apprendimento e crescita consapevole attraverso strategie scientificamente validate.",
   },
   {
-    title: "Le discipline olistiche, infuse di pedagogia, come strumenti di crescita consapevole.",
+    title: "Team di professionisti specializzati.",
     description:
-      "Un approccio che unisce discipline olistiche e pedagogia per favorire una crescita consapevole, armonizzando mente e corpo attraverso strumenti educativi e pratiche mirate.",
+      "Un team di esperti qualificati, pronti a offrire competenze specializzate e un supporto mirato per guidarti con professionalità e dedizione nel tuo percorso di crescita.",
   },
   {
     title: "Supporto continuo nel percorso di apprendimento.",
@@ -262,9 +262,9 @@ const whyChooseBloom = [
       "Un accompagnamento costante con guide esperte e risorse dedicate per sostenerti in ogni fase del tuo percorso di apprendimento, garantendo crescita e sviluppo continuo.",
   },
   {
-    title: "Team di professionisti specializzati.",
+    title: "Le discipline olistiche, infuse di pedagogia, come strumenti di crescita consapevole.",
     description:
-      "Un team di esperti qualificati, pronti a offrire competenze specializzate e un supporto mirato per guidarti con professionalità e dedizione nel tuo percorso di crescita.",
+      "Un approccio che unisce discipline olistiche e pedagogia per favorire una crescita consapevole, armonizzando mente e corpo attraverso strumenti educativi e pratiche mirate.",
   },
 ];
 const serviceImages = [
