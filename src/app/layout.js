@@ -44,11 +44,11 @@ export const metadata = {
   openGraph: {
     title: "Fiorire nel tuo spazio, col tuo tempo | Bloom",
     description: "Bloom è un centro di pedagogia moderna che accompagna le persone nel loro percorso di vita. Aiutiamo bambini e studenti a conoscersi meglio, gestire le emozioni e apprendere in modo efficace.",
-    url: '/',
+    url: 'https://bloom-bi.it/',
     siteName: 'Bloom Centro Pedagogico',
     images: [
       {
-        url: '/logo/bloom_logo.svg',
+        url: 'https://bloom-bi.it/logo/bloom_og.png',
         width: 1200,
         height: 630,
         alt: 'Bloom Centro Pedagogico - Logo',
@@ -61,7 +61,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: "Fiorire nel tuo spazio, col tuo tempo | Bloom",
     description: "Bloom è un centro di pedagogia moderna che accompagna le persone nel loro percorso di vita. Aiutiamo bambini e studenti a conoscersi meglio, gestire le emozioni e apprendere in modo efficace.",
-    images: ['/logo/bloom_logo.svg'],
+    images: ['https://bloom-bi.it/logo/bloom_og.png'],
   },
   robots: {
     index: process.env.NODE_ENV === 'production',
@@ -110,6 +110,8 @@ export default function RootLayout({ children }) {
           {`var _iub = _iub || {}; _iub.cons_instructions = _iub.cons_instructions || []; _iub.cons_instructions.push(["init", {api_key: "S7lZ34EUG9S06UUpARbEAxgNTHLCc7J4"}]);`}
         </Script>
         <Script src="https://cdn.iubenda.com/cons/iubenda_cons.js" strategy="afterInteractive" async />
+        <meta property="og:image" content="https://bloom-bi.it/logo/bloom_og.png" />
+        <meta name="twitter:image" content="https://bloom-bi.it/logo/bloom_og.png" />
       </head>
       <body className={`${montserrat.className} overflow-x-hidden antialiased`}>
         <Navbar /> 
