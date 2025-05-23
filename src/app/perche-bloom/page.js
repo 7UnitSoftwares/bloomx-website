@@ -22,7 +22,7 @@ export default function PercheScegliereBloom() {
             Un approccio personalizzato
           </h2>
           <p className="text-gray-700 max-w-2xl">
-            basato sulle neuroscienze, un supporto costante da parte di un team di esperti, e l'integrazione armoniosa di pedagogia e discipline olistiche. Un metodo pensato per guidarti verso una crescita consapevole, duratura e autentica.
+            Basato sulle neuroscienze, un supporto costante da parte di un team di esperti, e l'integrazione armoniosa di pedagogia e discipline olistiche. Un metodo pensato per guidarti verso una crescita consapevole, duratura e autentica.
           </p>
         </div>
 
@@ -42,7 +42,7 @@ export default function PercheScegliereBloom() {
               Un metodo su misura che integra le neuroscienze
             </h3>
             <p className="text-gray-700 text-sm">
-              per comprendere al meglio le tue esigenze, favorendo apprendimento e crescita consapevole attraverso strategie scientificamente validate.
+              Per comprendere al meglio le tue esigenze, favorendo apprendimento e crescita consapevole attraverso strategie scientificamente validate.
             </p>
           </div>
           {/* Card 2 */}
