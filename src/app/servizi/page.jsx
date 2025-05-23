@@ -141,46 +141,7 @@ function page() {
             </div>
           </div>
         </div>
-        <div className="mx-auto pt-16 bg-gradient-to-b">
-          <div className="flex flex-col md:flex-row items-start gap-12">
-            {/* Left Side - How it works */}
-            <div className="md:w-1/2">
-              <div className="sticky top-24">
-                <h2 className="text-4xl font-bold text-[#008C95] mb-6 leading-tight">
-                  Perché Scegliere Bloom
-                </h2>
-
-                <p className="text-[#333333] mb-10 text-lg">Con Bloom intraprendi un percorso formativo e trasformativo che mette al centro la tua unicità: un approccio personalizzato basato sulle neuroscienze, un supporto costante da parte di un team di esperti, e l'integrazione armoniosa di pedagogia e discipline olistiche. Un metodo pensato per guidarti verso una crescita consapevole, duratura e autentica.
-                </p>
-
-              </div>
-            </div>
-
-            {/* Right Side - Numbered Items */}
-            <div className="md:w-2/3">
-              {whyChooseBloom.map((item, index) => (
-                <div key={index} className="flex mb-16 group">
-                  <div className="mr-8 flex-shrink-0">
-                    <div className="w-20 h-20 rounded-full border-3 border-[#008C95] bg-white flex items-center justify-center shadow-md group-hover:shadow-lg transition-all group-hover:scale-105">
-                      <span className="text-3xl font-bold text-[#008C95]">
-                        {index + 1}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="pt-2">
-                    <h3 className="text-2xl font-bold text-[#008C95] mb-3 group-hover:translate-x-1 transition-transform">
-                      {item.title}
-                    </h3>
-                    <p className="text-[#454545] text-lg leading-relaxed">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        {/*  */}
 
       </Container>
       <Banner />
