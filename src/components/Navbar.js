@@ -32,6 +32,7 @@ const Navbar = () => {
 
   const data = [
     { title: "Chi siamo", to: "/siamo" },
+    { title: "Perchè scegliere Bloom", to: "/perche-bloom" },
     {
       title: "Community",
       to: "/community",
