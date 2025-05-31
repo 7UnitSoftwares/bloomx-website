@@ -2,6 +2,7 @@ import Container from "@/components/Container";
 import SectionWithBackground from "@/components/SectionWithBackground";
 import Banner from "@/components/Banner";
 import Image from "next/image";
+import { AcademicCapIcon, UserGroupIcon, UserIcon, UsersIcon } from '@heroicons/react/24/outline';
 
 export const metadata = {
   title: "Perché Scegliere Bloom | Centro Pedagogico",
@@ -32,7 +33,7 @@ export default function PercheScegliereBloom() {
           <div className="bg-white rounded-xl shadow p-4 flex flex-col">
             <div className="w-full h-80 relative rounded-lg overflow-hidden mb-4">
               <Image
-                src="/service/service_1.jpg"
+                src="/service/whybloom_1.jpg"
                 alt="Metodo su misura che integra le neuroscienze"
                 fill
                 className="object-cover"
@@ -49,7 +50,7 @@ export default function PercheScegliereBloom() {
           <div className="bg-white rounded-xl shadow p-4 flex flex-col">
             <div className="w-full h-80 relative rounded-lg overflow-hidden mb-4">
               <Image
-                src="/service/service_2.jpg"
+                src="/service/whybloom_2.jpg"
                 alt="Team di esperti qualificati"
                 fill
                 className="object-cover"
@@ -66,7 +67,7 @@ export default function PercheScegliereBloom() {
           <div className="bg-white rounded-xl shadow p-4 flex flex-col">
             <div className="w-full h-80 relative rounded-lg overflow-hidden mb-4">
               <Image
-                src="/service/service_3.jpg"
+                src="/service/whybloom_3.jpg"
                 alt="Supporto continuo nel percorso di apprendimento"
                 fill
                 className="object-cover"
@@ -83,7 +84,7 @@ export default function PercheScegliereBloom() {
           <div className="bg-white rounded-xl shadow p-4 flex flex-col">
             <div className="w-full h-80 relative rounded-lg overflow-hidden mb-4">
               <Image
-                src="/service/service_3.jpg"
+                src="/service/whybloom_4.jpg"
                 alt="Discipline olistiche e pedagogia"
                 fill
                 className="object-cover"
@@ -99,21 +100,16 @@ export default function PercheScegliereBloom() {
         </div>
       </Container>
       {/* Full-width white background section */}
-      <div className="w-full bg-white py-16 mt-10">
+      <div className="w-full bg-gradient-to-br from-white to-gray-50 py-16 mt-10">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-2xl md:text-3xl font-bold text-[#008C95] mb-8 text-center">
             Percorsi di Studio
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {/* Card 1 */}
-            <div className="flex flex-col items-center">
-              <div className="w-full h-64 relative rounded-2xl overflow-hidden mb-4">
-                <Image
-                  src="/service/service_1.jpg"
-                  alt="Metodo di Studio Individuale"
-                  fill
-                  className="object-cover"
-                />
+            <div className="flex flex-col items-center p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 rounded-full bg-[#008C95]/10 flex items-center justify-center mb-4">
+                <AcademicCapIcon className="w-8 h-8 text-[#008C95]" />
               </div>
               <h3 className="text-[#008C95] font-bold mb-1 text-base text-center">
                 Metodo di Studio Individuale
@@ -123,14 +119,9 @@ export default function PercheScegliereBloom() {
               </p>
             </div>
             {/* Card 2 */}
-            <div className="flex flex-col items-center">
-              <div className="w-full h-64 relative rounded-2xl overflow-hidden mb-4">
-                <Image
-                  src="/service/service_1.jpg"
-                  alt="Metodo di Studio in Gruppo"
-                  fill
-                  className="object-cover"
-                />
+            <div className="flex flex-col items-center p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 rounded-full bg-[#008C95]/10 flex items-center justify-center mb-4">
+                <UserGroupIcon className="w-8 h-8 text-[#008C95]" />
               </div>
               <h3 className="text-[#008C95] font-bold mb-1 text-base text-center">
                 Metodo di Studio in Gruppo
@@ -140,14 +131,9 @@ export default function PercheScegliereBloom() {
               </p>
             </div>
             {/* Card 3 */}
-            <div className="flex flex-col items-center">
-              <div className="w-full h-64 relative rounded-2xl overflow-hidden mb-4">
-                <Image
-                  src="/service/service_1.jpg"
-                  alt="Lezioni Individuali"
-                  fill
-                  className="object-cover"
-                />
+            <div className="flex flex-col items-center p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 rounded-full bg-[#008C95]/10 flex items-center justify-center mb-4">
+                <UserIcon className="w-8 h-8 text-[#008C95]" />
               </div>
               <h3 className="text-[#008C95] font-bold mb-1 text-base text-center">
                 Lezioni Individuali
@@ -157,16 +143,11 @@ export default function PercheScegliereBloom() {
               </p>
             </div>
             {/* Card 4 */}
-            <div className="flex flex-col items-center">
-              <div className="w-full h-64 relative rounded-2xl overflow-hidden mb-4">
-                <Image
-                  src="/service/service_1.jpg"
-                  alt="Gruppi di Studio per Studenti"
-                  fill
-                  className="object-cover"
-                />
+            <div className="flex flex-col items-center p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-16 h-16 rounded-full bg-[#008C95]/10 flex items-center justify-center mb-4">
+                <UsersIcon className="w-8 h-8 text-[#008C95]" />
               </div>
-              <h3 className="text-[#008C95] font-bold mb-1 text-base">
+              <h3 className="text-[#008C95] font-bold mb-1 text-base text-center">
                 Gruppi di Studio per Studenti
               </h3>
               <p className="text-gray-700 text-sm text-center">
