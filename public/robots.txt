@@ -1,0 +1,19 @@
+# Robots.txt for Bloom Centro Pedagogico
+
+# Production environment
+User-agent: *
+Allow: /
+
+# Block staging and development environments
+User-agent: *
+Disallow: /debug/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Sitemap location (update with your actual domain)
+Sitemap: https://bloom-bi.it/sitemap.xml
+
+# Special rules for staging environment
+# If this is a staging environment, block all crawling
+# This will be dynamically handled by Next.js based on environment

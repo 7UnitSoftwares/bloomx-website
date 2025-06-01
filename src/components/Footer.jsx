@@ -9,6 +9,7 @@ import Toast from './Toast';
 import Spinner from "./Spinner";
 
 const data = [
+  { title: "Perchè scegliere Bloom", to: "/perche-bloom" },
   { title: "Chi siamo", to: "/siamo",
     items: [
       { title: "Il progetto", to: "/siamo/#progetto" },
@@ -277,18 +278,20 @@ const Footer = () => {
                 ©2025 Bloom Tutti i diritti riservati
               </p>
               <div className="flex gap-6 mt-4 md:mt-0">
-                <Link
+              <a href="https://www.iubenda.com/privacy-policy/52750623" class="text-gray-500 text-sm hover:text-gray-700 transition-colors" title="Privacy Policy ">Privacy Policy</a>
+              <a href="https://www.iubenda.com/privacy-policy/52750623/cookie-policy" class="text-gray-500 text-sm hover:text-gray-700 transition-colors" title="Cookie Policy ">Cookie Policy</a>
+                {/* <Link
                   href="/privacy"
                   className="text-gray-500 text-sm hover:text-gray-700 transition-colors"
                 >
                   Privacy
-                </Link>
-                <Link
+                </Link> */}
+                {/* <Link
                   href="/terms"
                   className="text-gray-500 text-sm hover:text-gray-700 transition-colors"
                 >
                   Trasparenza
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
