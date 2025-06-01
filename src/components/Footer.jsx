@@ -54,6 +54,7 @@ const Footer = () => {
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [emailError, setEmailError] = useState("");
+  const [hasConsent, setHasConsent] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -75,9 +76,19 @@ const Footer = () => {
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
+    
+    // Validate both email and consent
+    if (!email || !hasConsent) {
+      if (!email) {
+        setEmailError("Campo obbligatorio");
+      }
+      return;
+    }
+    
     if (!validateEmail(email)) {
       return;
     }
+
     setIsSubmitting(true);
     console.log(process.env.NEXT_PUBLIC_API_BASE_URL);
     console.log(process.env.NEXT_PUBLIC_API_KEY);
@@ -253,10 +264,46 @@ const Footer = () => {
                   {emailError && (
                     <label className="text-red-500 text-sm mt-1">{emailError}</label>
                   )}
+                  <div className="text-xs text-gray-600 space-y-3">
+                    <p className="leading-relaxed">
+                      Dichiaro di avere preso attenta visione dell'
+                      <a 
+                        href="https://www.iubenda.com/privacy-policy/52750623" 
+                        className="text-[#008C95] hover:underline"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        informativa sulla privacy
+                      </a>
+                      {' '}e presto il consenso al trattamento dei miei dati personali per le finalità al suo interno ex. Artt. 13-14 Reg.to UE 2016/679.
+                    </p>
+                    
+                    <p className="leading-relaxed">
+                      Vi informiamo inoltre che i Vostri dati anagrafici saranno trattati solo ed esclusivamente da Bloom Centro Pedagogico o da soggetti espressamente incaricati per l'esecuzione di alcuni dei servizi richiesti e non verranno ceduti a terzi senza un Vostro previo consenso in osservanza Reg.to UE 2016/679.
+                    </p>
+
+                    <div className="flex items-start space-x-2">
+                      <input
+                        type="checkbox"
+                        id="newsletter-consent"
+                        checked={hasConsent}
+                        onChange={(e) => setHasConsent(e.target.checked)}
+                        className="mt-0.5 h-3 w-3 text-[#008C95] border-gray-300 rounded focus:ring-[#008C95]"
+                        required
+                      />
+                      <label htmlFor="newsletter-consent" className="text-xs text-gray-600">
+                        ACCONSENTO alla ricezione della newsletter
+                      </label>
+                    </div>
+                  </div>
                   <Button
-                    className="w-full bg-[#008C95] hover:bg-[#006A70] text-white py-2 px-4 rounded-lg transition-colors duration-200"
+                    className={`w-full ${
+                      email && hasConsent 
+                        ? 'bg-[#008C95] hover:bg-[#006A70]' 
+                        : 'bg-gray-300'
+                    } text-white py-2 px-4 rounded-lg transition-colors duration-200`}
                     type="submit"
-                    disabled={!email}
+                    disabled={!email || !hasConsent || isSubmitting}
                   >
                     {isSubmitting ? (
                       <div className="flex items-center gap-2">
@@ -278,8 +325,8 @@ const Footer = () => {
                 ©2025 Bloom Tutti i diritti riservati
               </p>
               <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="https://www.iubenda.com/privacy-policy/52750623" class="text-gray-500 text-sm hover:text-gray-700 transition-colors" title="Privacy Policy ">Privacy Policy</a>
-              <a href="https://www.iubenda.com/privacy-policy/52750623/cookie-policy" class="text-gray-500 text-sm hover:text-gray-700 transition-colors" title="Cookie Policy ">Cookie Policy</a>
+              <a href="https://www.iubenda.com/privacy-policy/52750623" className="text-gray-500 text-sm hover:text-gray-700 transition-colors" title="Privacy Policy " target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+              <a href="https://www.iubenda.com/privacy-policy/52750623/cookie-policy" className="text-gray-500 text-sm hover:text-gray-700 transition-colors" title="Cookie Policy " target="_blank" rel="noopener noreferrer">Cookie Policy</a>
                 {/* <Link
                   href="/privacy"
                   className="text-gray-500 text-sm hover:text-gray-700 transition-colors"
