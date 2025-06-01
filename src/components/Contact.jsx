@@ -36,6 +36,7 @@ const Contact = () => {
   const [showToast, setShowToast] = useState(false);
   const [showError, setShowError] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasConsent, setHasConsent] = useState(false);
 
   const YOUR_SERVICE_ID = process.env.NEXT_PUBLIC_YOUR_SERVICE_ID;
   const YOUR_TEMPLATE_ID = process.env.NEXT_PUBLIC_YOUR_TEMPLATE_ID;
@@ -48,6 +49,9 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!hasConsent) {
+      return;
+    }
     setIsSubmitting(true);
     try {
       await submitContactForm(formData);
@@ -59,6 +63,7 @@ const Contact = () => {
         mobile: "",
         body: "",
       });
+      setHasConsent(false);
     } catch (error) {
       setShowError(true);
     } finally {
@@ -185,10 +190,45 @@ const Contact = () => {
                 ></textarea>
               </div>
               <div className="mt-4 flex justify-center lg:justify-start">
+                <div className="text-xs text-gray-600 space-y-3 mb-4">
+                  <p className="leading-relaxed">
+                    Dichiaro di avere preso attenta visione dell'
+                    <a 
+                      href="https://www.iubenda.com/privacy-policy/52750623" 
+                      className="text-[#008C95] hover:underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      informativa sulla privacy
+                    </a>
+                    {' '}e presto il consenso al trattamento dei miei dati personali per le finalità al suo interno ex. Artt. 13-14 Reg.to UE 2016/679.
+                  </p>
+                  
+                  <p className="leading-relaxed">
+                    Vi informiamo inoltre che i Vostri dati anagrafici saranno trattati solo ed esclusivamente da Bloom Centro Pedagogico o da soggetti espressamente incaricati per l'esecuzione di alcuni dei servizi richiesti e non verranno ceduti a terzi senza un Vostro previo consenso in osservanza Reg.to UE 2016/679.
+                  </p>
+
+                  <div className="flex items-start space-x-2">
+                    <input
+                      type="checkbox"
+                      id="contact-consent"
+                      checked={hasConsent}
+                      onChange={(e) => setHasConsent(e.target.checked)}
+                      className="mt-0.5 h-3 w-3 text-[#008C95] border-gray-300 rounded focus:ring-[#008C95]"
+                      required
+                    />
+                    <label htmlFor="contact-consent" className="text-xs text-gray-600">
+                      ACCONSENTO al trattamento dei dati personali
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 flex justify-center lg:justify-start">
                 <Button
                   type="submit"
                   className="px-4 py-2 bg-[#00A59B] text-white rounded-md flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={!formData.nomecognome || !formData.email || !formData.mobile || !formData.subject || !formData.body || isSubmitting}
+                  disabled={!formData.nomecognome || !formData.email || !formData.mobile || !formData.subject || !formData.body || !hasConsent || isSubmitting}
                 >
                   {isSubmitting ? (
                     <div className="flex items-center gap-2">

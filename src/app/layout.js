@@ -52,6 +52,7 @@ export const metadata = {
         width: 1200,
         height: 630,
         alt: 'Bloom Centro Pedagogico - Logo',
+        type: 'image/png',
       },
     ],
     locale: 'it_IT',
@@ -62,6 +63,13 @@ export const metadata = {
     title: "Fiorire nel tuo spazio, col tuo tempo | Bloom",
     description: "Bloom è un centro di pedagogia moderna che accompagna le persone nel loro percorso di vita. Aiutiamo bambini e studenti a conoscersi meglio, gestire le emozioni e apprendere in modo efficace.",
     images: ['https://bloom-bi.it/logo/bloom_og.png'],
+    creator: '@bloomcentro',
+    site: '@bloomcentro',
+  },
+  linkedin: {
+    title: 'Bloom - Centro Pedagogico',
+    description: 'Bloom è un centro pedagogico che offre percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti.',
+    image: 'https://bloom-bi.it/og-image.jpg',
   },
   robots: {
     index: process.env.NODE_ENV === 'production',
