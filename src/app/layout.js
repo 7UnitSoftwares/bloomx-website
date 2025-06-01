@@ -10,19 +10,19 @@ import { generatePageMetadata, generateStructuredData } from '@/utils/seo';
 import Script from 'next/script';
 
 const montserrat = Montserrat({
-  subsets: ["latin"], 
+  subsets: ["latin"],
   weights: [400, 500, 600, 700, 800, 900],
 });
 
 // Server-side logging
 if (typeof window === 'undefined') {
-    console.log('[BLOOM-SERVER]', new Date().toISOString(), 'Application starting...');
-    const envValid = validateEnv();
-    if (!envValid) {
-        console.error('[BLOOM-SERVER]', new Date().toISOString(), 'Application started with invalid environment configuration');
-    } else {
-        console.log('[BLOOM-SERVER]', new Date().toISOString(), 'Application started successfully');
-    }
+  console.log('[BLOOM-SERVER]', new Date().toISOString(), 'Application starting...');
+  const envValid = validateEnv();
+  if (!envValid) {
+    console.error('[BLOOM-SERVER]', new Date().toISOString(), 'Application started with invalid environment configuration');
+  } else {
+    console.log('[BLOOM-SERVER]', new Date().toISOString(), 'Application started successfully');
+  }
 }
 
 export const metadata = {
@@ -98,7 +98,16 @@ export default function RootLayout({ children }) {
       <head>
         {/* Iubenda script for privacy policy and cookie banner */}
         <link rel="icon" href="/favicon.ico" />
-        
+        <meta property="og:title" content="Fiorire nel tuo spazio, col tuo tempo | Bloom" />
+        <meta property="og:description" content="Bloom è un centro di pedagogia moderna..." />
+        <meta property="og:image" content="https://bloom-bi.it/logo/bloom_og.png" />
+        <meta property="og:url" content="https://bloom-bi.it/" />
+        <meta property="og:type" content="website" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Fiorire nel tuo spazio, col tuo tempo | Bloom" />
+        <meta name="twitter:description" content="Bloom è un centro di pedagogia moderna..." />
+        <meta name="twitter:image" content="https://bloom-bi.it/logo/bloom_og.png" />
         {/* Structured Data */}
         <script
           type="application/ld+json"
@@ -122,7 +131,7 @@ export default function RootLayout({ children }) {
         <meta name="twitter:image" content="https://bloom-bi.it/logo/bloom_og.png" />
       </head>
       <body className={`${montserrat.className} overflow-x-hidden antialiased`}>
-        <Navbar /> 
+        <Navbar />
         {children}
         <Footer />
         <WhatsAppButton />
