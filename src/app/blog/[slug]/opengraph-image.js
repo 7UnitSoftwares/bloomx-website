@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { siteConfig } from '@/utils/seo';
 
 export const runtime = 'edge';
 
@@ -39,9 +40,6 @@ export default async function Image({ params }) {
     image: '/logo/bloom_og.png',
   };
 
-  // Use absolute URL for image
-  const imageUrl = `http://localhost:3000${post.image}`;
-
   return new ImageResponse(
     (
       <div
@@ -55,7 +53,7 @@ export default async function Image({ params }) {
           position: 'relative',
         }}
       >
-        {/* Background image with overlay */}
+        {/* Background color instead of image */}
         <div
           style={{
             position: 'absolute',
@@ -63,10 +61,7 @@ export default async function Image({ params }) {
             left: 0,
             right: 0,
             bottom: 0,
-            backgroundImage: `url(${imageUrl})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: 0.3,
+            background: '#f5f5f5',
           }}
         />
         

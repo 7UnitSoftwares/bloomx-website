@@ -2,7 +2,14 @@
 const nextConfig = {
   output: 'standalone',
   images: {
-    domains: ['bloom-bi.it'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'bloom-bi.it',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
   async headers() {
     return [

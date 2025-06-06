@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { siteConfig } from '@/utils/seo';
 
 export const runtime = 'edge';
 
@@ -35,15 +36,7 @@ export default async function Image() {
             textAlign: 'center',
           }}
         >
-          <img
-            src="https://bloom-bi.it/logo/bloom_og.png"
-            alt="Bloom Logo"
-            style={{
-              width: '400px',
-              height: 'auto',
-              marginBottom: '40px',
-            }}
-          />
+          {/* Removed problematic image */}
           <div
             style={{
               fontSize: '48px',

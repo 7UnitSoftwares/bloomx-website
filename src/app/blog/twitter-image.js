@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { siteConfig } from '@/utils/seo';
 
 export const runtime = 'edge';
 
@@ -35,9 +36,20 @@ export default async function Image() {
             textAlign: 'center',
           }}
         >
+          {/* Logo */}
           <div
             style={{
               fontSize: '64px',
+              fontWeight: 'bold',
+              color: '#00A59B',
+              marginBottom: '20px',
+            }}
+          >
+            Bloom
+          </div>
+          <div
+            style={{
+              fontSize: '48px',
               fontWeight: 'bold',
               color: '#00A59B',
               marginBottom: '20px',
@@ -51,7 +63,6 @@ export default async function Image() {
               color: '#666666',
               textAlign: 'center',
               maxWidth: '800px',
-              marginBottom: '40px',
             }}
           >
             Articoli, guide e risorse per studenti, genitori e professionisti
