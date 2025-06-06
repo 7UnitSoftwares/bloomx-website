@@ -4,7 +4,7 @@ export const siteConfig = {
   name: 'Bloom Centro Pedagogico',
   description: 'Bloom è un centro di pedagogia moderna che accompagna le persone nel loro percorso di vita. Aiutiamo bambini e studenti a conoscersi meglio, gestire le emozioni e apprendere in modo efficace.',
   url: process.env.NODE_ENV === 'production' ? 'https://bloom-bi.it' : 'http://localhost:3000',
-  ogImage: '/logo/bloom_logo.svg',
+  ogImage: '/logo/bloom_og.png', // Changed from SVG to PNG for better social media support
   links: {
     twitter: 'https://twitter.com/bloom_centro', // Replace with actual Twitter
     facebook: 'https://facebook.com/bloomcentro', // Replace with actual Facebook
@@ -80,8 +80,13 @@ export function generatePageMetadata({
       card: 'summary_large_image',
       title: title || siteConfig.name,
       description: fullDescription,
-      images: [fullImage],
-      creator: '@bloom_centro', // Replace with actual Twitter handle
+      images: [
+        {
+          url: fullImage,
+          alt: title || siteConfig.name,
+        }
+      ],
+      creator: '@bloomcentro', // Replace with actual Twitter handle
     },
     robots: {
       index: process.env.NODE_ENV === 'production',
@@ -132,7 +137,12 @@ export function generateBlogMetadata(post) {
       card: 'summary_large_image',
       title: post.title,
       description: post.description,
-      images: [post.image],
+      images: [
+        {
+          url: post.image,
+          alt: post.title,
+        }
+      ],
     },
   };
 }
@@ -160,7 +170,7 @@ export function generateStructuredData(type, data) {
         '@type': 'Organization',
         name: siteConfig.name,
         url: siteConfig.url,
-        logo: `${siteConfig.url}/logo/bloom_logo.svg`,
+        logo: `${siteConfig.url}/logo/bloom_og.png`, // Changed from SVG to PNG for better compatibility
         description: siteConfig.description,
         address: {
           '@type': 'PostalAddress',
@@ -201,7 +211,7 @@ export function generateStructuredData(type, data) {
           name: siteConfig.name,
           logo: {
             '@type': 'ImageObject',
-            url: `${siteConfig.url}/logo/bloom_logo.svg`,
+            url: `${siteConfig.url}/logo/bloom_og.png`, // Changed from SVG to PNG for better compatibility
           },
         },
         datePublished: isoDate,

@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
 
-export const alt = 'Bloom - Centro Pedagogico';
+export const alt = 'Bloom SEO Debug Page';
 export const size = {
   width: 1200,
   height: 630,
@@ -35,24 +35,15 @@ export default async function Image() {
             textAlign: 'center',
           }}
         >
-          <img
-            src="https://bloom-bi.it/logo/bloom_og.png"
-            alt="Bloom Logo"
-            style={{
-              width: '400px',
-              height: 'auto',
-              marginBottom: '40px',
-            }}
-          />
           <div
             style={{
-              fontSize: '48px',
+              fontSize: '64px',
               fontWeight: 'bold',
               color: '#00A59B',
               marginBottom: '20px',
             }}
           >
-            Bloom - Centro Pedagogico
+            Bloom SEO Debug Page
           </div>
           <div
             style={{
@@ -60,9 +51,31 @@ export default async function Image() {
               color: '#666666',
               textAlign: 'center',
               maxWidth: '800px',
+              marginBottom: '40px',
             }}
           >
-            Percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti
+            Testing Open Graph and social media previews
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '20px',
+              background: '#f0f0f0',
+              borderRadius: '10px',
+              width: '80%',
+            }}
+          >
+            <div
+              style={{
+                fontSize: '24px',
+                color: '#333',
+                fontFamily: 'monospace',
+              }}
+            >
+              {`<meta property="og:image" content="..."/>`}
+            </div>
           </div>
         </div>
       </div>

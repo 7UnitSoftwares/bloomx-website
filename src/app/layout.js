@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { validateEnv } from '@/utils/config';
-import { generatePageMetadata, generateStructuredData } from '@/utils/seo';
+import { generatePageMetadata, generateStructuredData, siteConfig } from '@/utils/seo';
 import Script from 'next/script';
 
 const montserrat = Montserrat({
@@ -44,14 +44,15 @@ export const metadata = {
   openGraph: {
     title: 'Fiorire nel tuo spazio, col tuo tempo | Bloom',
     description: 'Bloom è un centro di pedagogia moderna che offre percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti.',
-    url: 'https://bloom-bi.it',
+    url: siteConfig.url,
     siteName: 'Bloom',
     images: [
       {
-        url: 'https://bloom-bi.it/logo/bloom_og.png',
+        url: `${siteConfig.url}${siteConfig.ogImage}`,
         width: 1200,
         height: 630,
         alt: 'Bloom - Centro Pedagogico',
+        type: 'image/png',
       },
     ],
     locale: 'it_IT',
@@ -61,28 +62,32 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Fiorire nel tuo spazio, col tuo tempo | Bloom',
     description: 'Bloom è un centro di pedagogia moderna che offre percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti.',
-    images: ['https://bloom-bi.it/logo/bloom_og.png'],
+    images: [
+      {
+        url: `${siteConfig.url}${siteConfig.ogImage}`,
+        alt: 'Bloom - Centro Pedagogico',
+      }
+    ],
+    creator: '@bloomcentro',
   },
   linkedin: {
     title: 'Fiorire nel tuo spazio, col tuo tempo | Bloom',
     description: 'Bloom è un centro di pedagogia moderna che offre percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti.',
-    image: 'https://bloom-bi.it/logo/bloom_og.png',
+    image: `${siteConfig.url}${siteConfig.ogImage}`,
   },
   robots: {
-    index: process.env.NODE_ENV === 'production',
-    follow: process.env.NODE_ENV === 'production',
-    nocache: process.env.NODE_ENV !== 'production',
+    index: true,
+    follow: true,
     googleBot: {
-      index: process.env.NODE_ENV === 'production',
-      follow: process.env.NODE_ENV === 'production',
-      noimageindex: process.env.NODE_ENV !== 'production',
+      index: true,
+      follow: true,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
     },
   },
   verification: {
-    google: 'your-google-verification-code', // Replace with actual verification code
+    google: 'your-google-site-verification',
   },
 };
 
@@ -95,16 +100,6 @@ export default function RootLayout({ children }) {
       <head>
         {/* Iubenda script for privacy policy and cookie banner */}
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:title" content="Fiorire nel tuo spazio, col tuo tempo | Bloom" />
-        <meta property="og:description" content="Bloom è un centro di pedagogia moderna..." />
-        <meta property="og:image" content="https://bloom-bi.it/logo/bloom_og.png" />
-        <meta property="og:url" content="https://bloom-bi.it/" />
-        <meta property="og:type" content="website" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Fiorire nel tuo spazio, col tuo tempo | Bloom" />
-        <meta name="twitter:description" content="Bloom è un centro di pedagogia moderna..." />
-        <meta name="twitter:image" content="https://bloom-bi.it/logo/bloom_og.png" />
         {/* Structured Data */}
         <script
           type="application/ld+json"
@@ -124,8 +119,6 @@ export default function RootLayout({ children }) {
           {`var _iub = _iub || {}; _iub.cons_instructions = _iub.cons_instructions || []; _iub.cons_instructions.push(["init", {api_key: "S7lZ34EUG9S06UUpARbEAxgNTHLCc7J4"}]);`}
         </Script>
         <Script src="https://cdn.iubenda.com/cons/iubenda_cons.js" strategy="afterInteractive" async />
-        <meta property="og:image" content="https://bloom-bi.it/logo/bloom_og.png" />
-        <meta name="twitter:image" content="https://bloom-bi.it/logo/bloom_og.png" />
       </head>
       <body className={`${montserrat.className} overflow-x-hidden antialiased`}>
         <Navbar />
