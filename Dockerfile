@@ -1,43 +1,27 @@
-# Use an official Node.js runtime as a parent image
+# Build stage
 FROM node:18-alpine AS builder
 
-# Set the working directory
 WORKDIR /app
 
-# Install dependencies required for sharp
-RUN apk add --no-cache python3 make g++ vips-dev
-
-# Install dependencies first (better caching)
+# Copy package files
 COPY package*.json ./
 
-# Install sharp explicitly
-RUN npm install sharp
+# Install dependencies
+RUN npm install
 
-# Install other dependencies
-RUN npm ci
-
-# Copy rest of the application
+# Copy all files
 COPY . .
 
-# Set build-time arguments with defaults
-ARG NEXT_PUBLIC_API_BASE_URL
-ARG NEXT_PUBLIC_API_KEY
-
-# Set environment variables
-ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
-ENV NEXT_PUBLIC_API_KEY=$NEXT_PUBLIC_API_KEY
-ENV NODE_ENV=production
-
-# Build application
+# Build the application
 RUN npm run build
 
-# Production image, copy all the files and run next
+# Production stage
 FROM node:18-alpine AS runner
+
 WORKDIR /app
 
+# Set environment to production
 ENV NODE_ENV=production
-ENV NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL
-ENV NEXT_PUBLIC_API_KEY=$NEXT_PUBLIC_API_KEY
 
 # Copy necessary files from builder
 COPY --from=builder /app/public ./public
@@ -45,13 +29,8 @@ COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 COPY --from=builder /app/package.json ./package.json
 
-# Create a non-root user
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-USER nextjs
-
-# Expose the port
+# Expose the port the app runs on
 EXPOSE 3000
 
-# Start the app using the standalone server
+# Set the command to run the app
 CMD ["node", "server.js"]
