@@ -48,7 +48,7 @@ export const metadata = {
     siteName: 'Bloom',
     images: [
       {
-        url: `${siteConfig.url}${siteConfig.ogImage}`,
+        url: `${siteConfig.url}/opengraph-image`,
         width: 1200,
         height: 630,
         alt: 'Bloom - Centro Pedagogico',
@@ -64,7 +64,7 @@ export const metadata = {
     description: 'Bloom è un centro di pedagogia moderna che offre percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti.',
     images: [
       {
-        url: `${siteConfig.url}${siteConfig.ogImage}`,
+        url: `${siteConfig.url}/twitter-image`,
         alt: 'Bloom - Centro Pedagogico',
       }
     ],
@@ -73,7 +73,7 @@ export const metadata = {
   linkedin: {
     title: 'Fiorire nel tuo spazio, col tuo tempo | Bloom',
     description: 'Bloom è un centro di pedagogia moderna che offre percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti.',
-    image: `${siteConfig.url}${siteConfig.ogImage}`,
+    image: `${siteConfig.url}/opengraph-image`,
   },
   robots: {
     index: true,

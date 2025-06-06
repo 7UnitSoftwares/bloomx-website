@@ -26,7 +26,10 @@ export function generatePageMetadata({
   const fullTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
   const fullDescription = description || siteConfig.description;
   const fullUrl = `${siteConfig.url}${path}`;
-  const fullImage = image || siteConfig.ogImage;
+  // For OpenGraph, we'll use the opengraph-image.js file if available
+  const ogImage = path ? `${path}/opengraph-image` : '/opengraph-image';
+  // For Twitter, we'll use the twitter-image.js file if available
+  const twitterImage = path ? `${path}/twitter-image` : '/twitter-image';
 
   const baseKeywords = [
     'pedagogia moderna',
@@ -64,7 +67,7 @@ export function generatePageMetadata({
       siteName: siteConfig.name,
       images: [
         {
-          url: fullImage,
+          url: `${siteConfig.url}${ogImage}`,
           width: 1200,
           height: 630,
           alt: title || siteConfig.name,
@@ -82,7 +85,7 @@ export function generatePageMetadata({
       description: fullDescription,
       images: [
         {
-          url: fullImage,
+          url: `${siteConfig.url}${twitterImage}`,
           alt: title || siteConfig.name,
         }
       ],
@@ -126,7 +129,7 @@ export function generateBlogMetadata(post) {
       section: post.category,
       images: [
         {
-          url: post.image,
+          url: `${siteConfig.url}/blog/${post.slug}/opengraph-image`,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -139,7 +142,7 @@ export function generateBlogMetadata(post) {
       description: post.description,
       images: [
         {
-          url: post.image,
+          url: `${siteConfig.url}/blog/${post.slug}/twitter-image`,
           alt: post.title,
         }
       ],
@@ -201,7 +204,7 @@ export function generateStructuredData(type, data) {
         '@type': 'Article',
         headline: data.title,
         description: data.description,
-        image: `${siteConfig.url}${data.image}`,
+        image: `${siteConfig.url}/blog/${data.slug}/opengraph-image`,
         author: {
           '@type': 'Person',
           name: data.author,
