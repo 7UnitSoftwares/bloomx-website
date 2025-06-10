@@ -12,6 +12,22 @@ const nextConfig = {
     ],
     domains: ['maps.googleapis.com'],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/opengraph-image',
+        destination: '/logo/bloom_og.png',
+      },
+      {
+        source: '/twitter-image',
+        destination: '/logo/bloom_og.png',
+      },
+      {
+        source: '/social',
+        destination: '/social-preview.html',
+      },
+    ];
+  },
   async headers() {
     return [
       {

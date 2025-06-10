@@ -1,5 +1,4 @@
 import { ImageResponse } from 'next/og';
-import { siteConfig } from '@/utils/seo';
 
 export const runtime = 'edge';
 
@@ -9,59 +8,73 @@ export const size = {
   height: 630,
 };
 
-export const contentType = 'image/png';
+export const contentType = 'image/jpeg';
 
 export default async function Image() {
-  return new ImageResponse(
-    (
-      <div
-        style={{
-          fontSize: 128,
-          background: 'white',
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '40px',
-        }}
-      >
+  try {
+    return new ImageResponse(
+      (
         <div
           style={{
+            background: 'white',
+            width: '100%',
+            height: '100%',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            textAlign: 'center',
+            padding: '40px',
           }}
         >
-          {/* Removed problematic image */}
           <div
             style={{
-              fontSize: '48px',
-              fontWeight: 'bold',
-              color: '#00A59B',
-              marginBottom: '20px',
-            }}
-          >
-            Bloom - Centro Pedagogico
-          </div>
-          <div
-            style={{
-              fontSize: '32px',
-              color: '#666666',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
               textAlign: 'center',
               maxWidth: '800px',
             }}
           >
-            Percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti
+            <div
+              style={{
+                fontSize: '60px',
+                fontWeight: 'bold',
+                color: '#0D9488',
+                marginBottom: '20px',
+                lineHeight: '1.2',
+              }}
+            >
+              Bloom
+            </div>
+            <div
+              style={{
+                fontSize: '40px',
+                color: '#374151',
+                marginBottom: '20px',
+                lineHeight: '1.4',
+              }}
+            >
+              Centro Pedagogico
+            </div>
+            <div
+              style={{
+                fontSize: '32px',
+                color: '#6B7280',
+                lineHeight: '1.4',
+              }}
+            >
+              Fiorire nel tuo spazio, col tuo tempo
+            </div>
           </div>
         </div>
-      </div>
-    ),
-    {
-      ...size,
-    }
-  );
+      ),
+      {
+        ...size,
+      }
+    );
+  } catch (e) {
+    console.error('Error generating OpenGraph image:', e);
+    return new Response('Failed to generate image', { status: 500 });
+  }
 }

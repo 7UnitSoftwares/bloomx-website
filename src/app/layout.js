@@ -1,6 +1,5 @@
 import localFont from "next/font/local";
 import "./globals.css";
-
 import { Montserrat } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -26,54 +25,41 @@ if (typeof window === 'undefined') {
 }
 
 export const metadata = {
-  title: 'Bloom - Centro Pedagogico',
-  description: 'Bloom è un centro pedagogico che offre percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti.',
-  keywords: "pedagogia moderna, centro educativo, supporto studenti, ADHD, DSA, metodo di studio, educazione personalizzata, Bologna",
-  authors: [{ name: "Bloom Centro Pedagogico" }],
-  creator: "Bloom Centro Pedagogico",
-  publisher: "Bloom Centro Pedagogico",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
+  title: {
+    default: 'Bloom - Centro Pedagogico',
+    template: '%s | Bloom - Centro Pedagogico'
   },
+  description: 'Bloom è un centro pedagogico che offre percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti.',
+  keywords: ['pedagogia moderna', 'centro educativo', 'supporto studenti', 'ADHD', 'DSA', 'metodo di studio', 'educazione personalizzata', 'Bologna'],
+  authors: [{ name: 'Bloom Centro Pedagogico' }],
+  creator: 'Bloom Centro Pedagogico',
+  publisher: 'Bloom Centro Pedagogico',
   metadataBase: new URL(process.env.NODE_ENV === 'production' ? 'https://bloom-bi.it' : 'http://localhost:3000'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'Fiorire nel tuo spazio, col tuo tempo | Bloom',
-    description: 'Bloom è un centro di pedagogia moderna che offre percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti.',
+    type: 'website',
+    locale: 'it_IT',
     url: siteConfig.url,
     siteName: 'Bloom',
+    title: 'Bloom - Centro Pedagogico',
+    description: 'Bloom è un centro di pedagogia moderna che offre percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti.',
     images: [
       {
-        url: `${siteConfig.url}/opengraph-image`,
+        url: '/logo/bloom_og.png',
         width: 1200,
         height: 630,
         alt: 'Bloom - Centro Pedagogico',
-        type: 'image/png',
       },
     ],
-    locale: 'it_IT',
-    type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fiorire nel tuo spazio, col tuo tempo | Bloom',
+    title: 'Bloom - Centro Pedagogico',
     description: 'Bloom è un centro di pedagogia moderna che offre percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti.',
-    images: [
-      {
-        url: `${siteConfig.url}/twitter-image`,
-        alt: 'Bloom - Centro Pedagogico',
-      }
-    ],
+    images: ['/logo/bloom_og.png'],
     creator: '@bloomcentro',
-  },
-  linkedin: {
-    title: 'Fiorire nel tuo spazio, col tuo tempo | Bloom',
-    description: 'Bloom è un centro di pedagogia moderna che offre percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti.',
-    image: `${siteConfig.url}/opengraph-image`,
   },
   robots: {
     index: true,
@@ -87,7 +73,7 @@ export const metadata = {
     },
   },
   verification: {
-    google: 'your-google-site-verification',
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || 'google01c4432048631384',
   },
 };
 
@@ -98,7 +84,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="it">
       <head>
-        {/* Iubenda script for privacy policy and cookie banner */}
         <link rel="icon" href="/favicon.ico" />
         {/* Structured Data */}
         <script
@@ -122,7 +107,7 @@ export default function RootLayout({ children }) {
       </head>
       <body suppressHydrationWarning={true} className={`${montserrat.className} overflow-x-hidden antialiased`}>
         <Navbar />
-        {children}
+        <main>{children}</main>
         <Footer />
         <WhatsAppButton />
       </body>

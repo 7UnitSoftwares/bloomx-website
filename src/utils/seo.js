@@ -26,10 +26,10 @@ export function generatePageMetadata({
   const fullTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
   const fullDescription = description || siteConfig.description;
   const fullUrl = `${siteConfig.url}${path}`;
-  // For OpenGraph, we'll use the opengraph-image.js file if available
-  const ogImage = path ? `${path}/opengraph-image` : '/opengraph-image';
-  // For Twitter, we'll use the twitter-image.js file if available
-  const twitterImage = path ? `${path}/twitter-image` : '/twitter-image';
+  // Use static image for better compatibility
+  const ogImage = '/logo/bloom_og.png';
+  // Use static image for better compatibility
+  const twitterImage = '/logo/bloom_og.png';
 
   const baseKeywords = [
     'pedagogia moderna',
@@ -129,7 +129,7 @@ export function generateBlogMetadata(post) {
       section: post.category,
       images: [
         {
-          url: `${siteConfig.url}/blog/${post.slug}/opengraph-image`,
+          url: `${siteConfig.url}/logo/bloom_og.png`,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -142,7 +142,7 @@ export function generateBlogMetadata(post) {
       description: post.description,
       images: [
         {
-          url: `${siteConfig.url}/blog/${post.slug}/twitter-image`,
+          url: `${siteConfig.url}/logo/bloom_og.png`,
           alt: post.title,
         }
       ],
@@ -204,7 +204,7 @@ export function generateStructuredData(type, data) {
         '@type': 'Article',
         headline: data.title,
         description: data.description,
-        image: `${siteConfig.url}/blog/${data.slug}/opengraph-image`,
+        image: `${siteConfig.url}/logo/bloom_og.png`,
         author: {
           '@type': 'Person',
           name: data.author,
