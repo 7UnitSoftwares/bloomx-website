@@ -46,12 +46,13 @@ const nextConfig = {
     async redirects() {
         return [
             {
-                source: 'http://www.bloom-bi.it/:path*',
-                destination: 'https://bloom-bi.it/:path*',
-                permanent: true,
-            },
-            {
-                source: 'https://www.bloom-bi.it/:path*',
+                source: '/:path*',
+                has: [
+                    {
+                        type: 'host',
+                        value: 'www.bloom-bi.it',
+                    },
+                ],
                 destination: 'https://bloom-bi.it/:path*',
                 permanent: true,
             },
