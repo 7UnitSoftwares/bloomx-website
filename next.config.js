@@ -12,6 +12,20 @@ const nextConfig = {
     ],
     domains: ['maps.googleapis.com'],
   },
+  async redirects() {
+    return [
+      {
+        source: 'http://www.bloom-bi.it/:path*',
+        destination: 'https://bloom-bi.it/:path*',
+        permanent: true,
+      },
+      {
+        source: 'https://www.bloom-bi.it/:path*',
+        destination: 'https://bloom-bi.it/:path*',
+        permanent: true,
+      },
+    ];
+  },
   async rewrites() {
     return [
       {

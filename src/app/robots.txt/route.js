@@ -27,14 +27,19 @@ Disallow: /debug/
 Disallow: /api/
 Disallow: /_next/
 Disallow: /admin/
+Disallow: /static/
 
 # Sitemap
-Sitemap: ${baseUrl}/sitemap.xml`;
+Sitemap: ${baseUrl}/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 10`;
   }
 
   return new Response(robotsContent, {
     headers: {
       'Content-Type': 'text/plain',
+      'Cache-Control': 'public, max-age=3600',
     },
   });
 }

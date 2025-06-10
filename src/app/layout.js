@@ -41,7 +41,7 @@ export const metadata = {
   openGraph: {
     type: 'website',
     locale: 'it_IT',
-    url: siteConfig.url,
+    url: 'https://bloom-bi.it',
     siteName: 'Bloom',
     title: 'Bloom - Centro Pedagogico',
     description: 'Bloom è un centro di pedagogia moderna che offre percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti.',

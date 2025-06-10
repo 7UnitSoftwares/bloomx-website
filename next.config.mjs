@@ -24,7 +24,7 @@ const nextConfig = {
                 headers: [
                     {
                         key: 'X-Frame-Options',
-                        value: 'DENY',
+                        value: 'SAMEORIGIN',
                     },
                     {
                         key: 'X-Content-Type-Options',
@@ -32,26 +32,38 @@ const nextConfig = {
                     },
                     {
                         key: 'Referrer-Policy',
-                        value: 'origin-when-cross-origin',
+                        value: 'strict-origin-when-cross-origin',
+                    },
+                    {
+                        key: 'Permissions-Policy',
+                        value: 'camera=(), microphone=(), geolocation=()',
                     },
                 ],
             },
         ];
     },
-    // Redirect staging URLs to production in production environment
+    // Handle domain redirects
     async redirects() {
-        const redirects = [];
-        
-        // Only add staging redirects in production
-        if (process.env.NODE_ENV === 'production' && process.env.VERCEL_URL && !process.env.VERCEL_URL.includes('bloom-bi.it')) {
-            redirects.push({
-                source: '/(.*)',
-                destination: 'https://bloom-bi.it/$1',
+        return [
+            {
+                source: 'http://www.bloom-bi.it/:path*',
+                destination: 'https://bloom-bi.it/:path*',
                 permanent: true,
-            });
-        }
-        
-        return redirects;
+            },
+            {
+                source: 'https://www.bloom-bi.it/:path*',
+                destination: 'https://bloom-bi.it/:path*',
+                permanent: true,
+            },
+            // Redirect staging URLs to production in production environment
+            ...(process.env.NODE_ENV === 'production' && process.env.VERCEL_URL && !process.env.VERCEL_URL.includes('bloom-bi.it')
+                ? [{
+                    source: '/(.*)',
+                    destination: 'https://bloom-bi.it/$1',
+                    permanent: true,
+                }]
+                : []),
+        ];
     },
 }
 

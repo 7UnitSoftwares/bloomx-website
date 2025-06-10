@@ -3,17 +3,18 @@ export async function GET() {
     ? 'https://bloom-bi.it' 
     : 'http://localhost:3000';
 
-  // Static pages
+  // Static pages with their change frequencies
   const staticPages = [
-    '',
-    '/blog',
-    '/servizi',
-    '/spazio',
-    '/eventi',
-    '/community',
-    '/contattaci',
-    '/siamo',
-    '/bloom-summer-lab',
+    { path: '', changefreq: 'weekly', priority: '1.0' },
+    { path: '/blog', changefreq: 'daily', priority: '0.9' },
+    { path: '/servizi', changefreq: 'monthly', priority: '0.8' },
+    { path: '/spazio', changefreq: 'monthly', priority: '0.8' },
+    { path: '/eventi', changefreq: 'weekly', priority: '0.8' },
+    { path: '/community', changefreq: 'weekly', priority: '0.8' },
+    { path: '/contattaci', changefreq: 'monthly', priority: '0.7' },
+    { path: '/siamo', changefreq: 'monthly', priority: '0.7' },
+    { path: '/bloom-summer-lab', changefreq: 'weekly', priority: '0.8' },
+    { path: '/perche-bloom', changefreq: 'monthly', priority: '0.8' },
   ];
 
   // Blog posts
@@ -31,10 +32,10 @@ export async function GET() {
     .map(
       (page) => `
   <url>
-    <loc>${baseUrl}${page}</loc>
+    <loc>${baseUrl}${page.path}</loc>
     <lastmod>${currentDate}</lastmod>
-    <changefreq>${page === '' ? 'weekly' : 'monthly'}</changefreq>
-    <priority>${page === '' ? '1.0' : '0.8'}</priority>
+    <changefreq>${page.changefreq}</changefreq>
+    <priority>${page.priority}</priority>
   </url>`
     )
     .join('')}
@@ -54,6 +55,7 @@ export async function GET() {
   return new Response(sitemap, {
     headers: {
       'Content-Type': 'application/xml',
+      'Cache-Control': 'public, max-age=3600',
     },
   });
 }
