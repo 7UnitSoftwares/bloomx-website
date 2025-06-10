@@ -120,7 +120,7 @@ export default function RootLayout({ children }) {
         </Script>
         <Script src="https://cdn.iubenda.com/cons/iubenda_cons.js" strategy="afterInteractive" async />
       </head>
-      <body className={`${montserrat.className} overflow-x-hidden antialiased`}>
+      <body suppressHydrationWarning={true} className={`${montserrat.className} overflow-x-hidden antialiased`}>
         <Navbar />
         {children}
         <Footer />

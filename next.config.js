@@ -10,6 +10,7 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    domains: ['maps.googleapis.com'],
   },
   async headers() {
     return [
