@@ -24,6 +24,9 @@ const page = () => {
           <div className="max-w-4xl mx-auto px-4 py-12">
             {/* Main Content */}
             <div className="bg-white rounded-2xl shadow-lg p-8 mb-12">
+              <div className="flex flex-col items-center justify-center">
+                <Image src="/event/brain-up-summer.png" alt="Brain Up Summer" width={1000} height={1000} className="w-full h-auto" />
+              </div>
               <div className="space-y-8">
                 <p className="text-gray-600 leading-relaxed text-lg">
                   L'estate è un'occasione preziosa per aiutare tuo figlio a rafforzare le proprie competenze e prepararsi al nuovo anno scolastico. Troppo spesso, infatti, i mesi estivi portano a un calo degli apprendimenti, soprattutto nei momenti di passaggio tra cicli scolastici (elementari-medie, medie-superiori). L'Istituto Nazionale per la Valutazione del Sistema Educativo di Istruzione e di Formazione (INVALSI) sottolinea che le pause scolastiche, e in particolare la lunga interruzione estiva, contribuiscono ad acuire i divari esistenti nelle competenze, specialmente nei momenti di transizione tra ordini di scuola.

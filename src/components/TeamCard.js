@@ -20,7 +20,7 @@ const TeamCard = ({ member }) => {
           {member.position}
         </h2>
       </div>
-      <p className="text-center mb-1">{member.desc}</p>
+      <p className="text-center mb-1" dangerouslySetInnerHTML={{ __html: member.desc }}></p>
     </div>
   );
 };

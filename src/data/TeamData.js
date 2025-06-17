@@ -3,7 +3,7 @@ export const Bloom = [
   {
     name: "Chiara Moranino",
     position: "Community BloomHer / Craft / Amministrazione",
-    desc: "Sono appassionata di attività manuali, di disegno, di cucina. Amo il mare e compro tantissimi libri (adoro quelli per bambini). La mia frase del cuore è 'Non smettere mai di sognare, perché in quei sogni sta la libertà' - Walt Whitman",
+    desc: "Sono appassionata di attività manuali, di disegno, di cucina. Amo il mare e compro tantissimi libri (adoro quelli per bambini). <br /><br /> La mia frase del cuore è 'Non smettere mai di sognare, perché in quei sogni sta la libertà' - Walt Whitman",
     facebook: "https://www.facebook.com",
     insta: "https://www.instagram.com",
     linkedin: "https://www.linkedin.com",
@@ -12,7 +12,7 @@ export const Bloom = [
   {
     name: "Barbara Pella",
     position: "Yoga Bimbi / Discipline Olistiche / Community BloomHer",
-    desc: "Le mie passioni :natura ed animali, pittura ,poesia ,yoga e spiritualità. La mia frase del cuore è 'Se cambi te stesso hai già iniziato a cambiare il mondo' - Osho",
+    desc: "Le mie passioni :natura ed animali, pittura ,poesia ,yoga e spiritualità. <br /><br /> La mia frase del cuore è 'Se cambi te stesso hai già iniziato a cambiare il mondo' - Osho",
     facebook: "https://www.facebook.com",
     insta: "https://www.instagram.com",
     linkedin: "https://www.linkedin.com",
@@ -21,7 +21,7 @@ export const Bloom = [
   {
     name: "Giada Bono",
     position: "Founding, Funding e Business Development",
-    desc: "Team Manager, sognatrice e innamorata della vita. Le mie passioni : lo sviluppo personale, il mondo dell'educazione, il potenziale umano. La mia frase: the way out is in.",
+    desc: "Team Manager, sognatrice e innamorata della vita. Le mie passioni : lo sviluppo personale, il mondo dell'educazione, il potenziale umano. <br /><br /> La mia frase: the way out is in.",
     facebook: "https://www.facebook.com",
     insta: "https://www.instagram.com",
     linkedin: "https://www.linkedin.com",
@@ -31,7 +31,7 @@ export const Bloom = [
     name: "Francesca Guelpa",
     position: "Supervisione e coordinamento pedagogico",
     team: "Creativity team",
-    desc: "Le mie passioni sono le Scienze Umane, la Filosofia e le Neuroscienze. La mia frase preferita è: 'Compenetrati di fantasia, abbi il coraggio della verità, affina il tuo sentimento di animica responsabilità'. - Rudolf Steiner",
+    desc: "Le mie passioni sono le Scienze Umane, la Filosofia e le Neuroscienze. <br /><br /> La mia frase preferita è: 'Compenetrati di fantasia, abbi il coraggio della verità, affina il tuo sentimento di animica responsabilità'. - Rudolf Steiner",
     facebook: "https://www.facebook.com",
     insta: "https://www.instagram.com",
     linkedin: "https://www.linkedin.com",
@@ -40,11 +40,20 @@ export const Bloom = [
   {
     name: "Marika Guida",
     position: "Video e Graphic design, Comunicazione",
-    desc: "Community manager e creator , esteta appassionata di Design, in Bloom mi occupo della comunicazione grafica, la frase che  mi rappresenta è 'If it doesn’t work, work harder (Se non funziona, mettici più impegno)'",
+    desc: "Community manager e creator , esteta appassionata di Design, in Bloom mi occupo della comunicazione grafica, <br /><br /> la frase che  mi rappresenta è 'If it doesn’t work, work harder (Se non funziona, mettici più impegno)'",
     facebook: "https://www.facebook.com",
     insta: "https://www.instagram.com",
     linkedin: "https://www.linkedin.com",
     img: "/teams/marika_n.png",
+  },
+  {
+    name: "Noemi Orologio",
+    position: "Copywriting / Comunicazione / BD Assistant",
+    desc: "Sono appassionata di crescita personale, benessere e funnyfication. Adoro giocare con l’immaginazione e la fantasia. Sono curiosa e mi piace spaziare tra tematiche ad ampio raggio, sempre alla ricerca di nuove idee e ispirazioni. In Bloom mi occupo di coordinare la comunicazione e di copywriting. <br /><br /> La mia frase del cuore è: 'La vita è un immenso gioco, giocatelo.' -  Madre Teresa di Calcutta",
+    facebook: "https://www.facebook.com",
+    insta: "https://www.instagram.com",
+    linkedin: "https://www.linkedin.com",
+    img: "/teams/noemi_n.png",
   },
   // ...add more team members
 ];
