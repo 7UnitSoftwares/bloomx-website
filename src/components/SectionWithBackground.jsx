@@ -15,7 +15,7 @@ const SectionWithBackground = ({ title, description }) => {
             className="absolute w-10 -ml-1 lg:w-auto lg:left-2 mb-10 -translate-x-1/2 z-10"
           />
           <div className="flex flex-col z-30">
-            <p className="heading">{title}</p>
+            <p className="heading" dangerouslySetInnerHTML={{ __html: title }}></p>
           </div>
         </div>
 

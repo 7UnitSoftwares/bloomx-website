@@ -8,6 +8,56 @@ import BlogPostContent from './BlogPostContent';
 // This would typically come from an API or database
 const blogs = [
     {
+        slug: "estate-che-fa-crescere",
+        title: "Estate che fa crescere: partire con un vantaggio <br /> concreto per il prossimo anno scolastico",
+        description:
+            "L’estate, se ben utilizzata, può diventare un vero investimento sul futuro: un modo per distinguersi, per ritrovarsi a settembre con più fiducia, meno fatica e la consapevolezza di non aver perso i traguardi raggiunti. Tutto questo, ovviamente,  farà da volano per affrontare con una marcia in più il nuovo anno scolastico quando inizierà.",
+        author: "Noemi Orologio",
+        date: "10 Luglio 2025",
+        readTime: "5 min read",
+        category: "Educazione",
+        image: "/blog/estate-che-fa-crescere.jpg",
+        content: `
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">L’estate, se ben utilizzata, può diventare un vero investimento sul futuro: un modo per distinguersi, per ritrovarsi a settembre con più fiducia, meno fatica e la consapevolezza di non aver perso i traguardi raggiunti. Tutto questo, ovviamente,  farà da volano per affrontare con una marcia in più il nuovo anno scolastico quando inizierà.</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">L’estate è da sempre sinonimo di pausa, relax e libertà dagli impegni scolastici. È giusto concedersi momenti di riposo e di svago dopo mesi di lezioni, verifiche e studio, ma è altrettanto importante sapere che i mesi estivi possono diventare una vera occasione per rafforzare le competenze acquisite, mantenere la mente attiva e non sprecare gli sforzi fatti durante l’anno.</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Diversi studi parlano di un fenomeno noto come “summer slide”,  o “learning loss”, ovvero la perdita di conoscenze e abilità che può verificarsi nei periodi di lunga pausa dalle attività didattiche. Molti studenti, soprattutto alle medie e superiori, rischiano di perdere fino a due o tre mesi di progressi, specialmente in materie come matematica, lettura e scrittura. Questo rende spesso più faticoso il ritorno sui banchi a settembre, perché riprendere il ritmo richiede più tempo e può minare la fiducia in sé stessi.</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Ma l’estate non deve per forza trasformarsi in un momento di stallo. Se vissuta con consapevolezza, può diventare un periodo di crescita personale, consolidamento e persino potenziamento delle proprie abilità cognitive che può fare la differenza.</p>
+
+        <h2 style="color: #008C95; font-weight: bold; font-size: 1.5rem; margin: 1.5em 0 1em;">Una pausa che fa bene alla mente</h2>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Alternare riposo e attività stimolanti è una delle strategie più efficaci per mantenere il cervello allenato. I ragazzi che dedicano anche solo un’ora al giorno a lettura, scrittura, giochi logici o progetti creativi ripartono a settembre più sicuri, motivati e meno in difficoltà di fronte alle nuove sfide.</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><strong>I vantaggi di mantenere la mente attiva</strong></p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">I mesi estivi offrono un'opportunità unica per sviluppare competenze che durante l'anno scolastico potrebbero essere trascurate. È il momento perfetto per:</p>
+        <ul style="padding-left: 1.5em; margin-bottom: 1.2em;">
+            <li style="margin-bottom: 0.6em;"><strong>Ripartenza più serena</strong>: si evitano blocchi o ansie da “inizio anno” perché non si è perso il ritmo.</li>
+            <li style="margin-bottom: 0.6em;"><strong>Competenze consolidate</strong>: memoria, concentrazione e capacità di ragionamento rimangono solide.</li>
+            <li style="margin-bottom: 0.6em;"><strong>Nuove abilità</strong>: l’estate è il momento ideale per coltivare passioni, sperimentare qualcosa di nuovo, allenare la creatività, e sì, anche sbagliare…</li>
+        </ul>
+
+        <h2 style="color: #008C95; font-weight: bold; font-size: 1.5rem; margin: 1.5em 0 1em;">Consigli per studenti e famiglie</h2>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Non servono schede di compiti infinite: bastano piccole abitudini quotidiane e un piano di studio e di potenziamento cognitivo ben pensato e personalizzato per trasformare l’estate in una vera risorsa. Purtroppo, la maggior parte degli studenti non sfrutta questa opportunità, pensando erroneamente che significhi passare ore a faticare sui libri. Niente di più sbagliato; tutto ciò significa invece andare alla scoperta delle proprie potenzialità nascoste, dei propri talenti.</p>
+
+        <h2 style="color: #008C95; font-weight: bold; font-size: 1.5rem; margin: 1.5em 0 1em;">Cosa fare per partire in vantaggio a settembre</h2>
+        <ol style="padding-left: 1.5em; margin-bottom: 1.2em; list-style-type: decimal;">
+            <li style="margin-bottom: 0.6em;"><span style="font-weight: bold;">Mantenere una routine abbastanza regolare:</span> anche se l’estate è il momento in cui si rompono un po’ le regole e ci si gode la libertà - ed è giusto così - è importante ricordare che un buon riposo, un sonno di qualità e un po’ di attività fisica contribuiscono a mantenere la mente attiva e pronta a ripartire.</li>
+            <li style="margin-bottom: 0.6em;"><span style="font-weight: bold;">Leggere ogni giorno:</span> romanzi, fumetti, articoli di interesse: la lettura alimenta la curiosità e allena la comprensione.</li>
+            <li style="margin-bottom: 0.6em;"><span style="font-weight: bold;">Approfittare per allenarsi sulle materie che si sono trovate più difficili durante l’anno scolastico:</span> L’estate è anche il momento ideale per colmare eventuali lacune accumulate durante l’anno. Riprendere in mano gli argomenti che hanno creato più difficoltà - che sia matematica, una lingua straniera o un’altra materia - permette di affrontare l’inizio del nuovo anno con meno ansia e più sicurezza.
+            <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">
+            Rivedere gradualmente ciò che non è stato compreso del tutto, magari con l’aiuto di un tutor o di un piano di recupero ben strutturato, riduce il rischio di sentirsi inadeguati o in ritardo rispetto al programma. Allenarsi su ciò che ci mette più in difficoltà rafforza la memoria a lungo termine e migliora la fiducia nelle proprie capacità, due aspetti fondamentali per iniziare l’anno scolastico con il piede giusto.
+            </p>
+            </li>
+            <li style="margin-bottom: 0.6em;"><span style="font-weight: bold;">Seguire una giusta alimentazione:</span> mangiare in modo equilibrato è altrettanto importante per la salute del cervello. Diversi studi (ad esempio Harvard Medical School, Nutrition and Brain Health) confermano che una dieta ricca di frutta, verdura, cereali integrali, proteine leggere e grassi buoni favorisce la concentrazione, migliora la memoria e sostiene le funzioni cognitive anche nei periodi di pausa.</li>
+            <li style="margin-bottom: 0.6em;"><span style="font-weight: bold;">Sviluppare interessi personali:</span> imparare una nuova lingua, uno strumento musicale, seguire un corso creativo o dedicarsi a un hobby sono modi concreti per tenere allenata la mente anche lontano dai banchi di scuola. Attività di questo tipo stimolano aree diverse del cervello: la musica, ad esempio, migliora la memoria, la coordinazione e la concentrazione; lo studio di una lingua allena la flessibilità mentale e la capacità di risolvere problemi; un corso creativo o un hobby manuale, come la pittura o la scrittura, potenziano l’immaginazione e la capacità di pensare in modo critico.</li>
+            <li style="margin-bottom: 0.6em;"><span style="font-weight: bold;">Rimanere in contatto con i coetanei:</span> le relazioni aiutano l’equilibrio emotivo e motivano a mettersi in gioco.</li>
+            <li style="margin-bottom: 0.6em;"><span style="font-weight: bold;">Bilanciare schermi e pause:</span> stabilire momenti offline per dare riposo alla mente.</li>
+            <li style="margin-bottom: 0.6em;"><span style="font-weight: bold;">Scrivere obiettivi e progressi:</span> un quaderno estivo aiuta a prendere consapevolezza di ciò che si impara, anche lontano dai banchi di scuola.</li>
+        </ol>
+
+        <h2 style="color: #008C95; font-weight: bold; font-size: 1.5rem; margin: 1.5em 0 1em;">Il ruolo dei genitori</h2>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Il supporto della famiglia è fondamentale. Piccoli gesti, come proporre letture stimolanti e divertenti, organizzare attività di gruppo o semplicemente lasciare spazio alla curiosità e alla scoperta, possono fare davvero la differenza. Offrire ai ragazzi occasioni e stimoli significa aiutarli a sviluppare quel percorso di crescita che dura tutto l’anno, anche quando la scuola è in pausa.</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Bloom accompagna ragazzi e famiglie con attività di potenziamento, percorsi personalizzati e laboratori che trasformano la pausa estiva in un’occasione di crescita concreta.</p>
+        `
+    },
+    {
         slug: "adhd-a-scuola",
         title: "ADHD a scuola: meno ansia, più risultati con queste strategie efficaci",
         description:
@@ -132,7 +182,7 @@ const blogs = [
 // Generate metadata for each blog post
 export async function generateMetadata({ params }) {
     const post = blogs.find(blog => blog.slug === params.slug);
-    
+
     if (!post) {
         return {
             title: 'Post non trovato | Bloom',
@@ -181,7 +231,7 @@ export default function BlogPost({ params }) {
                     __html: JSON.stringify(breadcrumbSchema),
                 }}
             />
-            
+
             <BlogPostContent post={post} blogs={blogs} />
         </>
     );

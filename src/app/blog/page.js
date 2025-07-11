@@ -6,6 +6,17 @@ import { useRouter } from "next/navigation";
 
 const blogs = [
   {
+    slug: "estate-che-fa-crescere",
+    title: "Estate che fa crescere: partire con un vantaggio concreto per il prossimo anno scolastico",
+    description:
+      "L'estate è un periodo ideale per crescere e imparare. Ma come sfruttare questo tempo libero per crescere e imparare?",
+    author: "Noemi Orologio",
+    date: "10 Luglio 2025",
+    readTime: "5 min read",
+    category: "Learning",
+    image: "/blog/estate-che-fa-crescere.jpg",
+  },
+  {
     slug: "adhd-a-scuola",
     title: "ADHD a scuola: meno ansia, più risultati con queste strategie efficaci",
     description:
