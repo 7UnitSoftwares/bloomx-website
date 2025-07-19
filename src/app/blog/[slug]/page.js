@@ -8,6 +8,180 @@ import BlogPostContent from './BlogPostContent';
 // This would typically come from an API or database
 const blogs = [
     {
+        slug: "metodo-studio-bloom",
+        title: "Il Metodo di Studio Bloom: <br /> mente serena, apprendimento efficace",
+        description: "Il metodo di studio Bloom è un approccio personalizzato per aiutare i ragazzi a raggiungere i loro obiettivi di studio. Questo metodo si basa su una serie di principi fondamentali che aiutano a creare un ambiente di apprendimento efficace e motivante.",
+        author: "Noemi Orologio",
+        date: "19 Luglio 2025",
+        readTime: "5 min read",
+        category: "Learning",
+        image: "/blog/metodo-studio-bloom.jpg",
+        content: `
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Molto spesso, nonostante lo studio intenso, ci accorgiamo che il rendimento nelle verifiche o nelle interrogazioni - nostro o dei nostri figli - non è all’altezza delle aspettative, e talvolta risulta addirittura insufficiente.</p>
+
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><strong>Ma perché succede?</strong></p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Perché le emozioni hanno un impatto profondo sul rendimento scolastico, sia durante la fase di preparazione che nel momento dell’esame.</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Se non siamo in grado di gestirle, anche ore - o interi giorni - di studio possono essere vanificati.</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Il nostro cervello, infatti, è estremamente sensibile agli stati emotivi negativi come ansia e stress, e può arrivare a bloccarsi, dimenticando completamente ciò che avevamo appreso.</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">A volte basta una credenza limitante – come “non sono abbastanza bravo ” - per mandare in tilt la nostra capacità di ricordare.</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Ti è mai capitato? O è successo ai tuoi figli?</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><strong>Il Metodo Bloom</strong></p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Il Metodo Bloom è un'esperienza educativa che unisce mente, corpo ed emozioni. È un metodo che insegna a studiare con tranquillità e concentrazione. </p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Studiare non significa solo “mettersi sui libri”. Per apprendere davvero serve molto di più: uno spazio sereno, tecniche adeguate e, soprattutto, un percorso personalizzato. In Bloom, il metodo di studio è pensato per accompagnare ogni bambino o ragazzo nel costruire un modo di studiare su misura, in armonia con il proprio stile cognitivo e con il proprio mondo interiore.</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><strong>Le basi del nostro metodo</strong></p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Alla base del Metodo Bloom c’è l’idea che per studiare bene servano condizioni favorevoli: fisiche, emotive e mentali. Per questo ogni percorso di potenziamento include anche attività di rilassamento e centratura.</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">In Bloom i ragazzi e i bambini sperimentano attività di rilassamento fisico e mentale come:</p>
+<ul style="padding-left: 1.5em; margin-bottom: 1.2em; list-style-type: disc;">
+    <li style="margin-bottom: 0.6em;">la meditazione guidata e individuale,</li>
+    <li style="margin-bottom: 0.6em;">il tapping,</li>
+    <li style="margin-bottom: 0.6em;">lo yoga,</li>
+    <li style="margin-bottom: 0.6em;">attività di riconoscimento e gestione delle emozioni attraverso laboratori artistici</li>
+    <li style="margin-bottom: 0.6em;">stimolazione alla consapevolezza dei concetti che sono alla base della vita umana attraverso il laboratorio di filosofia</li>
+</ul>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Questo approccio crea un terreno fertile per l’apprendimento: il cervello si apre alla concentrazione, e il cuore si prepara a comprendere.</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><strong>Metodo, non solo contenuto</strong></p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Acquisire un metodo di studio efficace significa:</p>
+<ul style="padding-left: 1.5em; margin-bottom: 1.2em; list-style-type: disc;">
+    <li style="margin-bottom: 0.6em;">Prestare attenzione attiva in classe</li>
+    <li style="margin-bottom: 0.6em;">Imparare a prendere appunti (come col Metodo Cornell)</li>
+    <li style="margin-bottom: 0.6em;">Organizzare lo studio nel tempo, evitando il sovraccarico</li>
+    <li style="margin-bottom: 0.6em;">Scegliere ambienti favorevoli, curati e stimolanti</li>
+</ul>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Per questo a Bloom gli spazi sono progettati per favorire il benessere e la concentrazione: luce naturale, arredi confortevoli, piante, musica a 432 Hz, e aree per lo studio individuale o in gruppo con l’affiancamento di tutor esperti.</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><strong>Le fasi operative del Metodo Bloom</strong></p>
+<ol style="padding-left: 1.5em; margin-bottom: 1.2em; list-style-type: decimal;">
+    <li style="margin-bottom: 0.6em;">Lettera veloce del testo per coglierne la struttura</li>
+    <li style="margin-bottom: 0.6em;">Sottolineatura e trascrizione delle parole chiave</li>
+    <li style="margin-bottom: 0.6em;">Schemi e mappe per fissare le informazioni</li>
+    <li style="margin-bottom: 0.6em;">Ripetizione immediata, usando le parole chiave</li>
+    <li style="margin-bottom: 0.6em;">Ripasso dei concetti base a fine capitolo</li>
+</ol>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Ogni passaggio è guidato per aiutare lo studente a sviluppare autonomia, memoria attiva e capacità di sintesi.</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><strong>Gli strumenti del nostro approccio</strong></p>
+<ul style="padding-left: 1.5em; margin-bottom: 1.2em; list-style-type: disc;">
+    <li style="margin-bottom: 0.6em;">Metodo Cornell: appunti divisi in tre sezioni (appunti, parole chiave, riflessioni) per stimolare comprensione e memoria</li>
+    <li style="margin-bottom: 0.6em;">Metodo Feyman: spiegare i concetti con parole semplici, come se si parlasse a un bambino</li>
+    <li style="margin-bottom: 0.6em;">Esposizione magnetica (Metodo OCME): organizzare, comprendere, memorizzare e comunicare in modo efficace</li>
+    <li style="margin-bottom: 0.6em;">Flashcards per il potenziamento delle lingue</li>
+    <li style="margin-bottom: 0.6em;">Tecnica del Pomodoro: sessioni di studio da 25 minuti con pause rigeneranti (dove si pratica anche mindfulness e rilassamento)</li>
+</ul>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><strong>Personalizzazione e stili cognitivi</strong></p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Ogni bambino apprende in modo diverso. Il Metodo Bloom si adatta allo stile di apprendimento individuale:</p>
+<ul style="padding-left: 1.5em; margin-bottom: 1.2em; list-style-type: disc;">
+    <li style="margin-bottom: 0.6em;">Visivo: mappe, disegni, colori, video</li>
+    <li style="margin-bottom: 0.6em;">Uditivo: lettura ad alta voce, audiolibri, ripetizione in gruppo</li>
+    <li style="margin-bottom: 0.6em;">Cinestetico: materiali manipolabili, movimenti, pause frequenti</li>
+</ul>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Il Metodo Bloom, oltre che insegnare come studiare, accompagna ogni studente in un percorso completo che coinvolge mente, corpo ed emozioni. Un approccio che trasforma lo studio in un’esperienza viva, consapevole e armoniosa.</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Vieni a scoprire il tuo stile di apprendimento e il metodo giusto per sbloccare tutto il tuo potenziale e il tuo talento!</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Scrivici o chiamaci per una consulenza personalizzata: il tuo percorso verso uno studio più sereno e di successo, se vuoi, può iniziare anche oggi!</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Ti aspettiamo con gioia!</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Vieni a scoprire il tuo stile di apprendimento e il metodo giusto per sbloccare tutto il tuo potenziale e il tuo talento!</p>
+<p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Scrivici o chiamaci per una consulenza personalizzata: il tuo percorso verso uno studio più sereno e di successo, se vuoi, può iniziare anche oggi!</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Ti aspettiamo con gioia!</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">
+            <span style="color: #008C95; font-weight: 500;">#MetodoDiStudio</span> 
+            <span style="color: #008C95; font-weight: 500;">#Apprendimento</span> 
+            <span style="color: #008C95; font-weight: 500;">#BambiniERagazzi</span> 
+            <span style="color: #008C95; font-weight: 500;">#EmozioniEStudio</span> 
+            <span style="color: #008C95; font-weight: 500;">#Pedagogia</span> 
+            <span style="color: #008C95; font-weight: 500;">#TecnicheDiStudio</span> 
+            <span style="color: #008C95; font-weight: 500;">#StileDiApprendimento</span> 
+            <span style="color: #008C95; font-weight: 500;">#CentroPedagogicoBloom</span>
+        </p>
+        `
+    },
+    {
+        slug: "pomodoro",
+        title: "STOP DISTRAZIONI! SCOPRI LA TECNICA DEL <br /> POMODORO PER STUDIARE MEGLIO SENZA STRESS",
+        description: "La tecnica del Pomodoro è un metodo di gestione del tempo che aiuta a aumentare la produttività e a ridurre lo stress. Scopri come funziona e come puoi applicarla nel tuo studio.",
+        author: "Noemi Orologio",
+        date: "19 Luglio 2025",
+        readTime: "3 min read",
+        category: "Learning",
+        image: "/blog/pomodoro.jpg",
+        content: `
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Quando si parla di metodo di studio efficace, genitori, ragazzi e anche studenti più grandi ci chiedono spesso:</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><i>“Come posso concentrarmi (o aiutare mio figlio a concentrarsi) senza stressarmi?”</i></p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Al centro Bloom, ogni giorno accompagniamo bambini, ragazzi, che vogliono organizzare meglio il tempo e studiare con più serenità.</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">La <b>Tecnica del Pomodoro</b> è uno degli strumenti più semplici ed efficaci: facile da provare subito e adatta a tutte le età.</p>
+        <h2 style="color: #008C95; font-weight: bold; font-size: 1.5rem; margin: 1.5em 0 1em;">Cos’è la Tecnica del Pomodoro?</h2>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">È un metodo pratico per gestire meglio tempo ed energie. Si basa su un principio semplice: alternare momenti di concentrazione piena a pause brevi e rigeneranti, così il cervello resta attivo più a lungo senza sentirsi sopraffatto.</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><strong>In pratica:</strong></p>
+        <ul style="padding-left: 1.5em; margin-bottom: 1.2em; list-style-type: disc;">
+            <li style="margin-bottom: 0.6em;">25 minuti di studio o lavoro intenso</li>
+            <li style="margin-bottom: 0.6em;">5 minuti di pausa</li>
+            <li style="margin-bottom: 0.6em;">Dopo 4 blocchi (“pomodori”), fai una pausa più lunga di 15-30 minuti</li>
+        </ul>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">C’è anche chi personalizza i pomodori lavorando per 50 minuti e facendo 10 minuti di pausa, con una pausa più lunga di 30 minuti ogni 2 pomodori.</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Questo approccio è ideale per:</p>
+        <ul style="padding-left: 1.5em; margin-bottom: 1.2em; list-style-type: disc;">
+            <li style="margin-bottom: 0.6em;">Bambini e ragazzi che si distraggono facilmente</li>
+            <li style="margin-bottom: 0.6em;">Studenti delle superiori o universitari che si scoraggiano davanti a compiti lunghi</li>
+        </ul>
+        <h2 style="color: #008C95; font-weight: bold; font-size: 1.5rem; margin: 1.5em 0 1em;">Perché si chiama così?</h2>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Negli anni ’80, Francesco Cirillo, studente universitario, provò a sfidare le sue distrazioni con un timer da cucina… a forma di pomodoro!</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Quel timer lo aiutò a rispettare il tempo e a non perdersi in inutili interruzioni. <br /> Da lì è nato un metodo oggi usato da milioni di studenti e professionisti in tutto il mondo.</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">
+        <i>“Sai come si mangia un elefante? Un boccone alla volta!”</i> - Detto africano
+        </p>
+        <h2 style="color: #008C95; font-weight: bold; font-size: 1.5rem; margin: 1.5em 0 1em;">Perché funziona</h2>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Studi e ricerche dimostrano che il nostro cervello riesce a mantenere la massima attenzione solo per periodi limitati.</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Se provi a studiare o lavorare ore di fila senza pause, la concentrazione cala e rischi di sprecare più tempo di quanto pensi.</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><strong>Con la Tecnica del Pomodoro:</strong></p>
+        <ul style="padding-left: 1.5em; margin-bottom: 1.2em; list-style-type: disc;">
+            <li style="margin-bottom: 0.6em;">Ricarichi la mente ad ogni pausa</li>
+            <li style="margin-bottom: 0.6em;">Riduci lo stress</li>
+            <li style="margin-bottom: 0.6em;">Torni più motivato</li>
+            <li style="margin-bottom: 0.6em;">Impari a dare valore al tempo</li>
+            <li style="margin-bottom: 0.6em;">Alleni la disciplina, perché il timer diventa un vero alleato</li>
+        </ul>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><strong>Come si usa: 6 passi semplici</strong></p>
+        <ol style="padding-left: 1.5em; margin-bottom: 1.2em; list-style-type: decimal;">
+            <li style="margin-bottom: 0.6em;"><b>Scegli un compito preciso.</b> Può essere ripetere un capitolo, fare esercizi, scrivere un tema o lavorare su un progetto.</li>
+            <li style="margin-bottom: 0.6em;"><b>Prepara ciò che ti serve.</b> Togli di mezzo tutto ciò che può distrarti: telefono silenzioso, notifiche disattivate.</li>
+            <li style="margin-bottom: 0.6em;"><b>Imposta un timer a 25 minuti.</b></li>
+            <li style="margin-bottom: 0.6em;"><b>Lavora con concentrazione totale.</b> Se arriva un pensiero distraente, annotalo su un foglio e continua.</li>
+            <li style="margin-bottom: 0.6em;"><b>Fai 5 minuti di pausa.</b> Alzati, bevi acqua, fai stretching o una passeggiata veloce.</li>
+            <li style="margin-bottom: 0.6em;"><b>Dopo 4 “pomodori”, pausa lunga.</b> 15-30 minuti per ricaricare le batterie.</li>
+        </ol>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><strong>5 consigli extra per sfruttarla al massimo</strong></p>
+        <ol style="padding-left: 1.5em; margin-bottom: 1.2em; list-style-type: decimal;">
+            <li style="margin-bottom: 0.6em;"><b>Collega ogni blocco a un obiettivo chiaro.</b> Esempio: “Faccio 2 pomodori per storia, 2 per inglese…”</li>
+            <li style="margin-bottom: 0.6em;"><b>Personalizza la durata.</b> I 25 minuti sono indicativi: se riesci a restare concentrato 40-50 minuti, benissimo! Ma le pause restano fondamentali.</li>
+            <li style="margin-bottom: 0.6em;"><b>Sii disciplinato.</b> Quando suona il timer, smetti subito. Prolungare rischia di spezzare il ritmo.</li>
+            <li style="margin-bottom: 0.6em;"><b>Usa bene le pause.</b> Niente social o TV: meglio fare due passi, bere qualcosa o ascoltare musica rilassante.</li>
+            <li style="margin-bottom: 0.6em;"><b>Scegli timer semplici.</b> Un timer da cucina o quello dello smartphone basta e avanza: non servono app complesse.</li>
+        </ol>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><strong>A chi è utile la Tecnica del Pomodoro?</strong></p>
+        <ul style="padding-left: 1.5em; margin-bottom: 1.2em; list-style-type: disc;">
+            <li style="margin-bottom: 0.6em;">Bambini e ragazzi che si distraggono facilmente o perdono motivazione.</li>
+            <li style="margin-bottom: 0.6em;">Studenti delle superiori o universitari che vogliono organizzarsi meglio.</li>
+            <li style="margin-bottom: 0.6em;">Genitori che cercano un metodo pratico da insegnare ai figli.</li>
+            <li style="margin-bottom: 0.6em;">Chi lavora da casa o in ufficio e vuole migliorare la gestione del tempo.</li>
+            <li style="margin-bottom: 0.6em;">Chi studia materie impegnative come matematica, scienze o lingue straniere.</li>
+        </ul>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">All’inizio può sembrare strano usare un timer per studiare o lavorare. Ma con un po’ di pratica diventa un alleato prezioso: aiuta a dividere grandi obiettivi in piccoli passi, a sentirsi meno sopraffatti e a risparmiare energie per ciò che conta davvero.</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Un blocco alla volta… <strong>e ogni traguardo diventa possibile!</strong></p>
+
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;"><i>Sai come si mangia un elefante? Un boccone alla volta!</i> - Detto africano</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Anche lo studio si affronta così: un passo alla volta, con il metodo giusto per te.</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">In Bloom ti aiutiamo a scoprire il tuo modo di apprendere, ad allenare la concentrazione e a sentirti più sicuro nelle tue capacità..</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Studia meglio, scopri il tuo potenziale!
+        <br />Vieni a trovarci in Bloom: ti aspettiamo!</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">Scrivici per saperne di più o per una consulenza: troviamo insieme il metodo di studio più adatto a te!</p>
+        <p style="margin-bottom: 1.2em; line-height: 1.6; font-size: 1rem;">
+            <span style="color: #008C95; font-weight: 500;">#TecnicaDelPomodoro</span> 
+            <span style="color: #008C95; font-weight: 500;">#MetodoDiStudioRagazzi</span> 
+            <span style="color: #008C95; font-weight: 500;">#OrganizzazioneStudio</span> 
+            <span style="color: #008C95; font-weight: 500;">#ConcentrazioneNelloStudio</span> 
+            <span style="color: #008C95; font-weight: 500;">#TecnicheDiApprendimento</span> 
+            <span style="color: #008C95; font-weight: 500;">#BloomCentroPedagogico</span> 
+            <span style="color: #008C95; font-weight: 500;">#SupportoCompitiRagazzi</span>
+        </p>
+        `
+    },
+    {
         slug: "estate-che-fa-crescere",
         title: "Estate che fa crescere: partire con un vantaggio <br /> concreto per il prossimo anno scolastico",
         description:

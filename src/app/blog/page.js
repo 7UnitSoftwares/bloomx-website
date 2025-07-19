@@ -6,6 +6,26 @@ import { useRouter } from "next/navigation";
 
 const blogs = [
   {
+    slug: "metodo-studio-bloom",
+    title: "Il Metodo di Studio Bloom: mente serena, apprendimento efficace",
+    description:"Il metodo di studio Bloom è un approccio personalizzato per aiutare i ragazzi a raggiungere i loro obiettivi di studio. Questo metodo si basa su una serie di principi fondamentali che aiutano a creare un ambiente di apprendimento efficace e motivante.",
+    author: "Noemi Orologio",
+    date: "19 Luglio 2025",
+    readTime: "3 min read",
+    category: "Learning",
+    image: "/blog/metodo-studio-bloom.jpg",
+  },
+  {
+    slug: "pomodoro",
+    title: "STOP DISTRAZIONI! SCOPRI LA TECNICA DEL POMODORO PER STUDIARE MEGLIO SENZA STRESS",
+    description:"La tecnica del Pomodoro è un metodo di gestione del tempo che aiuta a aumentare la produttività e a ridurre lo stress. Scopri come funziona e come puoi applicarla nel tuo studio.",
+    author: "Noemi Orologio",
+    date: "19 Luglio 2025",
+    readTime: "3 min read",
+    category: "Learning",
+    image: "/blog/pomodoro.jpg",
+  },
+  {
     slug: "estate-che-fa-crescere",
     title: "Estate che fa crescere: partire con un vantaggio concreto per il prossimo anno scolastico",
     description:

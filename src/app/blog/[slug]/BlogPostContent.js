@@ -77,9 +77,7 @@ export default function BlogPostContent({ post, blogs }) {
                                         <p className="text-[#008C95] uppercase text-xs font-bold mb-2">
                                             {relatedPost.category}
                                         </p>
-                                        <h3 className="text-lg font-bold mb-2 line-clamp-2">
-                                            {relatedPost.title}
-                                        </h3>
+                                        <h3 className="text-lg font-bold mb-2 line-clamp-2" dangerouslySetInnerHTML={{ __html: relatedPost.title }} />
                                         <p className="text-gray-500 text-sm">
                                             {relatedPost.readTime}
                                         </p>
