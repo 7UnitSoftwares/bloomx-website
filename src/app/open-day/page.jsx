@@ -124,8 +124,8 @@ const LaboratoriSection = () => {
           <p className="text-lg text-gray-700 leading-relaxed mb-4">
             Pomeriggi per crescere, imparare e divertirsi! Laboratori per far sbocciare mente, cuore e creatività, rafforzando abilità scolastiche ed emotive.
           </p>
-          <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded-r-lg">
-            <p className="text-green-800 font-semibold">Inglese integrato naturalmente in tutte le attività!</p>
+          <div className="bg-gradient-to-r from-emerald-400 to-teal-400 text-white rounded-xl p-4 mb-6 shadow-lg">
+            <p className="font-bold text-lg">🎉 Inglese integrato naturalmente in tutte le attività!</p>
           </div>
         </div>
 
