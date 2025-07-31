@@ -124,8 +124,8 @@ const LaboratoriSection = () => {
           <p className="text-lg text-gray-700 leading-relaxed mb-4">
             Pomeriggi per crescere, imparare e divertirsi! Laboratori per far sbocciare mente, cuore e creatività, rafforzando abilità scolastiche ed emotive.
           </p>
-          <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
-            <p className="text-yellow-800 font-semibold">Inglese integrato naturalmente in tutte le attività!</p>
+          <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded-r-lg">
+            <p className="text-green-800 font-semibold">Inglese integrato naturalmente in tutte le attività!</p>
           </div>
         </div>
 
@@ -193,8 +193,8 @@ const OpenDaySection = () => {
           Un pomeriggio speciale per divertirti, scoprire le nostre attività e lasciarti sorprendere dalle novità che abbiamo preparato per te!
         </p>
         
-        <div className="bg-yellow-400 text-yellow-900 rounded-xl p-4 mb-6">
-          <p className="font-bold text-lg">Partecipa all'Open Day e ricevi un buono sconto esclusivo da spendere sul tuo corso preferito!</p>
+        <div className="bg-gradient-to-r from-emerald-400 to-teal-400 text-white rounded-xl p-4 mb-6 shadow-lg">
+          <p className="font-bold text-lg">🎉 Partecipa all'Open Day e ricevi un buono sconto esclusivo da spendere sul tuo corso preferito!</p>
         </div>
         
         <p className="text-lg mb-6">

@@ -9,23 +9,6 @@ import { TestimonialData } from "@/data/Testimonial";
 function Events() {
   return (
     <div>
-      {/* Special Events Section */}
-      <div className="bg-[#f0f9f8] py-16">
-        <Container>
-          <h1 className="typography text-center mb-4">
-            Programmi Estivi 2025
-          </h1>
-          <p className="text-center lg:text-xl font-normal text-[#808080] mb-12">
-            Scopri i nostri programmi estivi dedicati alla crescita e al benessere di bambini e ragazzi
-          </p>
-          <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {SpecialEventData.map((event, index) => (
-              <SpecialEventCard key={index} event={event} />
-            ))}
-          </div>
-        </Container>
-      </div>
-
       {/* Regular Events Section */}
       <Container>
         <h1 className="typography mt-10 lg:mt-16">

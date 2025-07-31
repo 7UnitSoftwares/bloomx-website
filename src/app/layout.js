@@ -4,6 +4,7 @@ import { Montserrat, Roboto } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import LayoutWrapper from "@/components/LayoutWrapper";
 import { validateEnv } from '@/utils/config';
 import { generatePageMetadata, generateStructuredData, siteConfig } from '@/utils/seo';
 import Script from 'next/script';
@@ -136,7 +137,14 @@ export default function RootLayout({ children }) {
       </head>
       <body suppressHydrationWarning={true} className={`${montserrat.className} ${roboto.variable} overflow-x-hidden antialiased`}>
         <Navbar />
-        <main>{children}</main>
+        <div className="pt-16">
+          <LayoutWrapper>
+            <main>
+                
+              {children}
+            </main>
+          </LayoutWrapper>
+        </div>
         <Footer />
         <WhatsAppButton />
       </body>
