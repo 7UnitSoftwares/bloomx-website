@@ -50,3 +50,59 @@
 .animate-fade-in {
   animation: fadeIn 0.3s ease-out;
 }
+
+/* Open Day Highlight Block Custom Styles */
+.open-day-highlight {
+  background: linear-gradient(135deg, #ffffff 0%, #f0fdfa 50%, #ffffff 100%);
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+  box-shadow: 
+    0 20px 40px rgba(0, 165, 155, 0.15),
+    0 0 0 1px rgba(0, 165, 155, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.open-day-highlight::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #00A59B, #008C95, #00A59B);
+  border-radius: inherit;
+  z-index: -1;
+  animation: borderGlow 3s ease-in-out infinite alternate;
+}
+
+.open-day-highlight::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(0, 165, 155, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(0, 140, 149, 0.1) 0%, transparent 50%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+@keyframes borderGlow {
+  0% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.open-day-highlight:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 25px 50px rgba(0, 165, 155, 0.25),
+    0 0 0 1px rgba(0, 165, 155, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}

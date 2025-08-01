@@ -28,11 +28,29 @@ const SummerSprintSection = () => {
   return (
     <div className="mt-16 lg:mt-10 mb-16 animate-fade-in">
       <div className="bg-white rounded-2xl shadow-lg p-8 lg:p-12">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl lg:text-4xl font-bold text-[#00A59B] mb-4">
-            Lo Sprint dell'estate per iniziare l'anno scolastico da campioni!
-          </h2>
-          <p className="text-xl font-medium text-gray-600">Dal 25 agosto</p>
+        <div className="text-center mb-8 relative">
+          {/* Decorative elements */}
+          <div className="absolute -top-4 -left-4 w-8 h-8 bg-orange-200 rounded-full opacity-60 animate-pulse"></div>
+          <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#00A59B]/20 rounded-full opacity-80 animate-bounce"></div>
+          <div className="absolute -bottom-4 left-1/4 w-4 h-4 bg-orange-300 rounded-full opacity-70 animate-ping"></div>
+          
+          <div className="mb-4 relative">
+            <div className="inline-block relative">
+              <span className="text-4xl lg:text-6xl font-black text-orange-500 drop-shadow-lg">SUMMER</span>
+            </div>
+            <br />
+            <span className="text-4xl lg:text-6xl font-black text-[#00A59B] drop-shadow-lg">FINAL SPRINT</span>
+            <br />
+            <p className="text-lg lg:text-xl font-medium text-gray-700 mt-4 leading-relaxed">
+              Lo Sprint di fine estate per iniziare l'anno scolastico da campioni!
+            </p>
+          </div>
+          
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <div className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></div>
+            <p className="text-xl font-medium text-gray-600">Dal 25 agosto</p>
+            <div className="w-2 h-2 bg-[#00A59B] rounded-full animate-pulse"></div>
+          </div>
         </div>
         
         <div className="space-y-6">
@@ -111,12 +129,29 @@ const LaboratoriSection = () => {
 
   return (
     <div className="mb-16 animate-fade-in">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl lg:text-4xl font-bold text-[#00A59B] mb-4">
-          SCOPRI I NUOVI LABORATORI BLOOM
-        </h2>
-        <p className="text-xl text-[#00A59B] font-semibold">Fai sbocciare il tuo talento!</p>
-        <p className="text-gray-600 mt-2">Dal 25 agosto - Per bambini dai 5 agli 11 anni</p>
+      <div className="text-center mb-8 relative">
+        {/* Floating decorative elements */}
+        <div className="absolute -top-6 left-1/4 text-2xl animate-bounce">🌸</div>
+        <div className="absolute -top-4 right-1/4 text-xl animate-pulse">✨</div>
+        <div className="absolute top-1/2 -left-4 text-lg animate-spin">🌱</div>
+        <div className="absolute top-1/2 -right-4 text-lg animate-pulse">🎨</div>
+        
+        <div className="relative z-10">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-800 mb-4 relative">
+            <span className="bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">
+              SCOPRI I NUOVI LABORATORI BLOOM
+            </span>
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full"></div>
+          </h2>
+          <p className="text-xl text-pink-500 font-semibold mb-2 animate-pulse">
+            Fai sbocciare il suo talento!
+          </p>
+          <div className="flex items-center justify-center gap-2">
+            <div className="w-3 h-3 bg-pink-400 rounded-full animate-ping"></div>
+            <p className="text-gray-600">Da settembre - Per bambini dai 5 agli 11 anni</p>
+            <div className="w-3 h-3 bg-purple-400 rounded-full animate-ping"></div>
+          </div>
+        </div>
       </div>
 
       <div className="bg-white rounded-2xl shadow-lg p-8 lg:p-12">
@@ -124,16 +159,49 @@ const LaboratoriSection = () => {
           <p className="text-lg text-gray-700 leading-relaxed mb-4">
             Pomeriggi per crescere, imparare e divertirsi! Laboratori per far sbocciare mente, cuore e creatività, rafforzando abilità scolastiche ed emotive.
           </p>
-          <div className="bg-gradient-to-r from-emerald-400 to-teal-400 text-white rounded-xl p-4 mb-6 shadow-lg">
-            <p className="font-bold text-lg">🎉 Inglese integrato naturalmente in tutte le attività!</p>
+          <div className="bg-gradient-to-r from-emerald-400 to-teal-400 text-white rounded-xl p-4 mb-6 shadow-lg relative overflow-hidden">
+            {/* Animated background elements */}
+            <div className="absolute top-0 left-0 w-full h-full opacity-10">
+              <div className="absolute top-2 left-2 text-2xl animate-bounce">🇬🇧</div>
+              <div className="absolute bottom-2 right-2 text-xl animate-pulse">📚</div>
+              <div className="absolute top-1/2 left-1/4 text-lg animate-spin">🎯</div>
+            </div>
+            
+            <div className="relative z-10 flex items-center justify-center gap-3">
+              <span className="text-2xl animate-pulse">🇬🇧</span>
+              <p className="font-bold text-lg">Inglese integrato naturalmente in tutte le attività!</p>
+              <span className="text-xl animate-bounce">✨</span>
+            </div>
+            
+            {/* Shimmer effect */}
+            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 animate-pulse"></div>
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           {laboratori.map((lab, index) => (
-            <div key={index} className="bg-gradient-to-br from-[#00A59B]/5 to-[#008C95]/5 rounded-xl p-6 border border-[#00A59B]/20 hover:shadow-lg transition-all duration-300">
-              <h3 className="text-xl font-bold text-[#00A59B] mb-3">{lab.title}</h3>
-              <p className="text-gray-700 leading-relaxed">{lab.description}</p>
+            <div key={index} className="group bg-gradient-to-br from-[#00A59B]/5 to-[#008C95]/5 rounded-xl p-6 border border-[#00A59B]/20 hover:shadow-lg transition-all duration-300 relative overflow-hidden">
+              {/* Decorative corner element */}
+              <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-[#00A59B]/10 to-transparent rounded-bl-full"></div>
+              
+              {/* Animated icon based on index */}
+              <div className="text-3xl mb-3 opacity-60 group-hover:opacity-100 transition-opacity">
+                {index === 0 && "🎨"}
+                {index === 1 && "💖"}
+                {index === 2 && "✍️"}
+                {index === 3 && "🧘"}
+                {index === 4 && "🚀"}
+              </div>
+              
+              <h3 className="text-xl font-bold text-[#00A59B] mb-3 group-hover:text-[#008C95] transition-colors">
+                {lab.title}
+              </h3>
+              <p className="text-gray-700 leading-relaxed group-hover:text-gray-800 transition-colors">
+                {lab.description}
+              </p>
+              
+              {/* Hover effect line */}
+              <div className="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-[#00A59B] to-[#008C95] group-hover:w-full transition-all duration-300"></div>
             </div>
           ))}
         </div>
@@ -184,9 +252,27 @@ const OpenDaySection = () => {
       <div className="bg-gradient-to-br from-[#00A59B] to-[#008C95] text-white rounded-2xl shadow-lg p-8 lg:p-12 text-center">
         <h2 className="text-3xl lg:text-4xl font-bold mb-6">VIENI ALL'OPEN DAY!</h2>
         
-        <div className="bg-white/10 rounded-xl p-6 mb-6">
-          <h3 className="text-2xl font-bold mb-2">AperiBloom Open Day!</h3>
-          <p className="text-xl">Martedì 3 Settembre - ore 17:30</p>
+        <div className="bg-white rounded-xl p-8 mb-6 shadow-2xl transform hover:scale-105 transition-all duration-300 relative overflow-hidden border-l-4 border-[#00A59B]">
+          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#00A59B]/20 to-[#008C95]/20 rounded-full -translate-y-10 translate-x-10"></div>
+          <div className="absolute bottom-0 left-0 w-16 h-16 bg-gradient-to-br from-[#008C95]/20 to-[#00A59B]/20 rounded-full translate-y-8 -translate-x-8"></div>
+          <div className="relative z-10">
+            <div className="flex items-center justify-center mb-4">
+              <div className="w-2 h-2 bg-[#00A59B] rounded-full mr-3 animate-pulse"></div>
+              <h3 className="text-4xl font-bold text-orange-500 text-center">AperiBloom Open Day!</h3>
+              <div className="w-2 h-2 bg-[#008C95] rounded-full ml-3 animate-pulse"></div>
+            </div>
+            <p className="text-xl text-gray-700 mb-6 text-center font-semibold">Martedì 3 Settembre - ore 17:30</p>
+            <div className="text-center">
+              <a 
+                href="https://bloom-one.odoo.com/en/event/open-day-bloom-bi-3/register" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block bg-pink-500 text-white font-bold py-4 px-8 rounded-lg hover:bg-[#008C95] transition-all duration-300 shadow-lg transform hover:scale-105 hover:shadow-xl text-lg"
+              >
+                REGISTRATI QUI
+              </a>
+            </div>
+          </div>
         </div>
         
         <p className="text-lg mb-6 leading-relaxed">

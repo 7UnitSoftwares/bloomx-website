@@ -68,23 +68,23 @@ const Navbar = () => {
     { title: "Blog", to: "/blog" },
     // { title: "Bloom Summer Lab", to: "/bloom-summer-lab" },
     // { title: "Brain Up Summer", to: "/brain-up-summer" },
-    {
-      title: "Risorse",
-      to: "/risorse",
-      items: [
-        { title: "intùiti", to: "intùiti Creative Cards" },
-        { title: "Favula Deck", to: "Fabula Deck" },
-        {
-          title: "intùitifweq Cards",
-          to: "intùitifweq Creative Cards",
-        },
-        {
-          title: "Fabulafwe Deck",
-          to: "Fabulafwe Deck",
-        },
-        { title: "risorse gratuite", link: "/free-resources" },
-      ],
-    },
+    // {
+    //   title: "Risorse",
+    //   to: "/risorse",
+    //   items: [
+    //     { title: "intùiti", to: "intùiti Creative Cards" },
+    //     { title: "Favula Deck", to: "Fabula Deck" },
+    //     {
+    //       title: "intùitifweq Cards",
+    //       to: "intùitifweq Creative Cards",
+    //     },
+    //     {
+    //       title: "Fabulafwe Deck",
+    //       to: "Fabulafwe Deck",
+    //     },
+    //     { title: "risorse gratuite", link: "/free-resources" },
+    //   ],
+    // },
   ];
 
   const handleMenuClick = (index) => {
