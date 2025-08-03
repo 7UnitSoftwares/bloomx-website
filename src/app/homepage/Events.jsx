@@ -1,18 +1,21 @@
 import Container from "@/components/Container";
 import Eventcard from "@/components/Eventcard";
+import SpecialEventCard from "@/components/SpecialEventCard";
 import TestimonialCard from "@/components/Testimonial";
 import { EventData } from "@/data/EventData";
+import { SpecialEventData } from "@/data/SpecialEventData";
 import { TestimonialData } from "@/data/Testimonial";
 
 function Events() {
   return (
     <div>
+      {/* Regular Events Section */}
       <Container>
         <h1 className="typography mt-10 lg:mt-16">
           Prossimi Eventi: Bloom Days
         </h1>
         <p className="text-center lg:mt-10  lg:text-xl font-normal text-[#808080]  ">
-          Partecipa a workshop trasformativi, incontri di comunità e sessioni creative pensate per aiutarti a rilassarti e crescere. Ogni serata da Bloom è un’opportunità per connettersi, imparare e rigenerarsi in un ambiente accogliente.
+          Partecipa a workshop trasformativi, incontri di comunità e sessioni creative pensate per aiutarti a rilassarti e crescere. Ogni serata da Bloom è un'opportunità per connettersi, imparare e rigenerarsi in un ambiente accogliente.
         </p>
         <div className="mt-10 grid justify-center items-center xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-16">
           {EventData.map((item, index) => (

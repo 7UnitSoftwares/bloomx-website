@@ -1,5 +1,6 @@
 import Image from "next/image";
 import HeroSection from "./homepage/HeroSection";
+import OpenDayBanner from "./homepage/OpenDayBanner";
 import Projects from "./homepage/Projects";
 import Space from "./homepage/Space";
 import Services from "./homepage/Service";
@@ -11,6 +12,7 @@ export default function Home() {
     <>
       <div className="overflow-hidden">
         <HeroSection />
+        <OpenDayBanner />
         <Projects />
         <Services />
         <Space />
