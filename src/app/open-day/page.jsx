@@ -9,8 +9,8 @@ const OpenDayPage = () => {
   return (
     <section className="bg-[#F2F2F2] min-h-screen">
       <SectionWithBackground
-        title="Summer Final Sprint"
-        description="Rientra a scuola con energia e sicurezza:<br /> approfitta del nostro SUMMER FINAL SPRINT!"
+        title="UN ANNO SCOLASTICO FANTASTICO<br /> INIZIA DA QUI"
+        description="Scopri le novità Bloom e fai sbocciare il talento!"
       />
       <Container>
         <OpenDaySection />
