@@ -354,10 +354,10 @@ const OpenDaySection = () => {
               <h3 className="text-4xl font-bold text-orange-500 text-center">AperiBloom Open Day!</h3>
               <div className="w-2 h-2 bg-[#008C95] rounded-full ml-3 animate-pulse"></div>
             </div>
-            <p className="text-xl text-gray-700 mb-6 text-center font-semibold">Martedì 3 Settembre - ore 17:30</p>
+            <p className="text-xl text-gray-700 mb-6 text-center font-semibold">Mercoledì 3 Settembre - ore 17:30</p>
             <div className="text-center">
               <a 
-                href="https://bloom-one.odoo.com/en/event/open-day-bloom-bi-3/register" 
+                href="https://bloom-one.odoo.com/event/open-day-bloom-bi-3/register" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-block bg-pink-500 text-white font-bold py-4 px-8 rounded-lg hover:bg-[#008C95] transition-all duration-300 shadow-lg transform hover:scale-105 hover:shadow-xl text-lg"

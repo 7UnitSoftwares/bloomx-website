@@ -6,7 +6,7 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
+# Install all dependencies (including dev dependencies needed for build)
 RUN npm install
 
 # Copy all files
@@ -23,14 +23,17 @@ WORKDIR /app
 # Set environment to production
 ENV NODE_ENV=production
 
+# Create necessary directories
+RUN mkdir -p .next/static
+
 # Copy necessary files from builder
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 
 # Expose the port the app runs on
 EXPOSE 3000
 
 # Set the command to run the app
-CMD ["node", "server.js"]
+CMD ["npm", "start"]
