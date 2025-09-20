@@ -12,7 +12,7 @@ export const Bloom = [
   {
     name: "Barbara Pella",
     position: "Yoga Bimbi / Discipline Olistiche / Community BloomHer",
-    desc: "Le mie passioni :natura ed animali, pittura ,poesia ,yoga e spiritualità. <br /><br /> La mia frase del cuore è 'Se cambi te stesso hai già iniziato a cambiare il mondo' - Osho",
+    desc: "Le mie passioni :natura ed animali, pittura, poesia, yoga e spiritualità. <br /><br /> La mia frase del cuore è 'Se cambi te stesso hai già iniziato a cambiare il mondo' - Osho",
     facebook: "https://www.facebook.com",
     insta: "https://www.instagram.com",
     linkedin: "https://www.linkedin.com",
@@ -26,16 +26,6 @@ export const Bloom = [
     insta: "https://www.instagram.com",
     linkedin: "https://www.linkedin.com",
     img: "/teams/giada_n.png",
-  },
-  {
-    name: "Francesca Guelpa",
-    position: "Supervisione e coordinamento pedagogico",
-    team: "Creativity team",
-    desc: "Le mie passioni sono le Scienze Umane, la Filosofia e le Neuroscienze. <br /><br /> La mia frase preferita è: 'Compenetrati di fantasia, abbi il coraggio della verità, affina il tuo sentimento di animica responsabilità'. - Rudolf Steiner",
-    facebook: "https://www.facebook.com",
-    insta: "https://www.instagram.com",
-    linkedin: "https://www.linkedin.com",
-    img: "/teams/francesca_n.png",
   },
   {
     name: "Marika Guida",
