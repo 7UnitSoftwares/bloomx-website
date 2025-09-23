@@ -99,17 +99,17 @@ export default function RootLayout({ children }) {
     <html lang="it">
       <head>
         <link rel="icon" href="/favicon.ico" />
-        
+
         {/* Additional meta tags for better social media support */}
         <meta property="og:image:secure_url" content={process.env.NODE_ENV === 'production' ? 'https://bloom-bi.it/logo/bloom_og.png' : 'http://localhost:3000/logo/bloom_og.png'} />
         <meta property="og:image:type" content="image/png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        
+
         {/* LinkedIn specific tags */}
         <meta property="og:title" content="Bloom - Centro Pedagogico" />
         <meta property="og:description" content="Bloom è un centro di pedagogia moderna che offre percorsi di studio, consulenza e laboratori per studenti, genitori e professionisti." />
-        
+
         {/* Twitter specific tags */}
         <meta name="twitter:image:src" content={process.env.NODE_ENV === 'production' ? 'https://bloom-bi.it/logo/bloom_og.png' : 'http://localhost:3000/logo/bloom_og.png'} />
         <meta name="twitter:domain" content={process.env.NODE_ENV === 'production' ? 'bloom-bi.it' : 'localhost:3000'} />
@@ -134,13 +134,21 @@ export default function RootLayout({ children }) {
           {`var _iub = _iub || {}; _iub.cons_instructions = _iub.cons_instructions || []; _iub.cons_instructions.push(["init", {api_key: "S7lZ34EUG9S06UUpARbEAxgNTHLCc7J4"}]);`}
         </Script>
         <Script src="https://cdn.iubenda.com/cons/iubenda_cons.js" strategy="afterInteractive" async />
+        {/* Google Tag Manager */}
+        <Script id="gtm-script" strategy="afterInteractive">
+          {`(function(w,d,s,l,i){w[l] = w[l] || [];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-TZS4RQJX');`}
+        </Script>
+        {/* End Google Tag Manager */}
       </head>
       <body suppressHydrationWarning={true} className={`${montserrat.className} ${roboto.variable} overflow-x-hidden antialiased`}>
+        {/* Google Tag Manager (noscript) */}
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TZS4RQJX" height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}></iframe></noscript>
+        {/* End Google Tag Manager (noscript) */}
         <Navbar />
         <div className="pt-16">
           <LayoutWrapper>
             <main>
-                
+
               {children}
             </main>
           </LayoutWrapper>
