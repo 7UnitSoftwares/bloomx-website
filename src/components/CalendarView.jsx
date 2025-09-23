@@ -45,13 +45,14 @@ const jsonData = {
         { name: "Buds: Yogart", time: "16:00-18:00" },
         { name: "Buds: Potenziamento-Compiti", time: "16:00-18:00" },
       ],
-    },
+    }
   ],
   specific_events: [
     {
       name: "Corso Animatori Centri Estivi",
       dates: ["2025-05-12", "2025-05-19", "2025-05-26", "2025-06-03"],
-      time: "20:30-22:00"
+      time: "20:30-22:00",
+      description: "Preparati all'estate! Corso pratico per formare animatori pronti a gestire i centri estivi con creatività e responsabilità. Imparerai tecniche di animazione, gestione dei gruppi e attività educative per bambini e ragazzi."
     },
     {
       name: "Corso Educazione Emozionale – Docenti",
@@ -72,6 +73,24 @@ const jsonData = {
       name: "Bloom Summer Lab",
       dates: ["2025-06-09", "2025-06-10", "2025-06-11", "2025-06-12", "2025-06-13", "2025-06-16", "2025-06-17", "2025-06-18", "2025-06-19", "2025-06-20", "2025-06-23", "2025-06-24", "2025-06-25", "2025-06-26", "2025-06-27", "2025-06-30"],
       time: "18:00-20:00",
+    },
+    {
+      name: "Mindfulness tra le righe",
+      dates: ["2025-10-02", "2025-10-09", "2025-10-16", "2025-10-23", "2025-10-30", "2025-11-06", "2025-11-13", "2025-11-20", "2025-11-27", "2025-12-04", "2025-12-11", "2025-12-18", "2025-12-25"],
+      time: "20:30-22:00",
+      description: "Edizione autunnale: un percorso di lettura consapevole e pratiche di presenza per rallentare, ascoltarsi e vivere il presente con maggiore chiarezza e serenità.",
+    },
+    {
+      name: "Pausa Mindful",
+      dates: ["2025-10-01", "2025-10-08", "2025-10-15", "2025-10-22", "2025-10-29", "2025-11-05", "2025-11-12", "2025-11-19", "2025-11-26", "2025-12-03", "2025-12-10", "2025-12-17", "2025-12-24"],
+      time: "13:15-14:15",
+      description: "Prenditi un’ora tutta per te con Pausa Mindful, la camminata guidata che ti aiuta a rallentare, respirare e ritrovare presenza. <br /><br />Ogni mercoledì, dalle 13:15 alle 14:15, partenza da <b>Piazza Gaudenzio Sella</b>. <br /><br />Un momento speciale per staccare dal lavoro, ridurre lo stress e ricaricare energia e chiarezza.<br /><br />In caso di maltempo, l’esperienza si sposta indoor con semplici pratiche di mindfulness.",
+    },
+    {
+      name: "Mindfulness in classe – Gestire emozioni e relazioni con consapevolezza",
+      dates: ["2025-10-06"],
+      time: "18:00-20:00",
+      description: "Un incontro dedicato agli insegnanti per scoprire strumenti di educazione emozionale utili a gestire meglio le dinamiche di classe. Attraverso la mindfulness e pratiche esperienziali, i docenti impareranno a riconoscere e regolare le proprie emozioni, creando un clima sereno e costruttivo che favorisca l’apprendimento e il benessere degli studenti.",
     },
   ],
 };
@@ -105,6 +124,7 @@ function generateCalendarEvents(jsonData) {
         const end = current.clone().hour(endH).minute(endM);
         let type = "Buds";
         if (ev.name.toLowerCase().includes("studenti")) type = "Studenti";
+        if (ev.name.toLowerCase().includes("mindfulness")) type = "Speciale";
         events.push({
           title: ev.name,
           start: start.toDate(),
@@ -132,6 +152,7 @@ function generateCalendarEvents(jsonData) {
           end: end.toDate(),
           type: "Speciale",
           recurring: false,
+          description: ev.description || "",
         });
       });
     } else if (ev.date) {
@@ -145,6 +166,7 @@ function generateCalendarEvents(jsonData) {
         end: end.toDate(),
         type: "Speciale",
         recurring: false,
+        description: ev.description || "",
       });
     }
   });
@@ -322,6 +344,16 @@ const CalendarView = () => {
                   {moment(selectedEvent.end).format("LLL")}
                 </p>
               </div>
+              
+              {selectedEvent.description && (
+                <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <h3 className="font-semibold text-gray-800 mb-2">Descrizione</h3>
+                  <div 
+                    className="text-sm text-gray-600 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: selectedEvent.description }}
+                  />
+                </div>
+              )}
             </div>
 
             {/* Interest Button */}

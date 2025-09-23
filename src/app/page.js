@@ -5,6 +5,7 @@ import Projects from "./homepage/Projects";
 import Space from "./homepage/Space";
 import Services from "./homepage/Service";
 import Events from "./homepage/Events";
+import YouTubeChannel from "./homepage/YouTubeChannel";
 import Contact from "@/components/Contact";
 
 export default function Home() {
@@ -12,11 +13,11 @@ export default function Home() {
     <>
       <div className="overflow-hidden">
         <HeroSection />
-        <OpenDayBanner />
         <Projects />
         <Services />
         <Space />
         <Events />
+        <YouTubeChannel />
         <Contact />
       </div>
     </>
