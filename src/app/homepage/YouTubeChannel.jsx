@@ -98,7 +98,7 @@ const YouTubeChannel = () => {
         {/* Call to Action */}
         <div className="text-center">
           <a
-            href="https://www.youtube.com/@bloomchannel" // Replace with actual YouTube channel URL
+            href="https://www.youtube.com/@BloomCenterBI" // Replace with actual YouTube channel URL
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#00A59B] hover:bg-[#008C95] text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
