@@ -20,7 +20,7 @@ const OpenDayBanner = () => {
                 {/* Badge */}
                 <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#00A59B] to-[#008C95] text-white px-4 py-2 rounded-full text-sm font-semibold mb-6">
                   <span className="text-lg">🎯</span>
-                  <span>Evento Speciale - 3 Settembre</span>
+                  <span>Evento Speciale - Mercoledì 3 Settembre</span>
                 </div>
 
                 {/* Main Heading */}
@@ -80,7 +80,7 @@ const OpenDayBanner = () => {
                     </div>
                     
                     <h3 className="text-xl font-bold text-gray-900 mb-2">
-                      Martedì 3 Settembre
+                      Mercoledì 3 Settembre
                     </h3>
                     <p className="text-lg text-[#00A59B] font-semibold mb-4">
                       Ore 17:30
