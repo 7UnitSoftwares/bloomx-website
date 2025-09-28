@@ -81,12 +81,6 @@ const jsonData = {
       description: "Edizione autunnale: un percorso di lettura consapevole e pratiche di presenza per rallentare, ascoltarsi e vivere il presente con maggiore chiarezza e serenità.",
     },
     {
-      name: "Pausa Mindful",
-      dates: ["2025-10-01", "2025-10-08", "2025-10-15", "2025-10-22", "2025-10-29", "2025-11-05", "2025-11-12", "2025-11-19", "2025-11-26", "2025-12-03", "2025-12-10", "2025-12-17", "2025-12-24"],
-      time: "13:15-14:15",
-      description: "<b>In arrivo questo autunno</b><br/>dalle 13:15 alle 14:15<br/>Prenditi un’ora tutta per te con Pausa Mindful: una camminata guidata che ti aiuta a rallentare, respirare e ritrovare presenza.<br/><br/>Ogni mercoledì, dalle 13:15 alle 14:15 <br/>Partenza da Piazza Gaudenzio Sella<br/><br/>Un momento speciale per staccare dal lavoro, ridurre lo stress e ricaricare energia e chiarezza.<br/><br/>In caso di maltempo, l’esperienza si sposta indoor con semplici pratiche di mindfulness.In caso di maltempo, l’esperienza si sposta indoor con semplici pratiche di mindfulness.<br/><br/>Stay tuned sui nostri canali social o scrivici per maggiori dettagli e date!",
-    },
-    {
       name: "Mindfulness in classe – Gestire emozioni e relazioni con consapevolezza",
       dates: ["2025-10-06"],
       time: "18:00-20:00",
