@@ -40,7 +40,6 @@ const Navbar = () => {
         { title: "Studenti", to: "Studenti" },
         { title: "Piccoli Bloom", to: "Buds" },
         { title: "Genitori", to: "Genitori" },
-        { title: "BloomHer", to: "BloomHer" },
         { title: "Creators", to: "Creators" },
       ],
     },

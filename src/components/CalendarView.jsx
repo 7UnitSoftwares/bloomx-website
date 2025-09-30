@@ -76,7 +76,7 @@ const jsonData = {
     },
     {
       name: "Mindfulness tra le righe",
-      dates: ["2025-10-02", "2025-10-09", "2025-10-16", "2025-10-23", "2025-10-30", "2025-11-06", "2025-11-13", "2025-11-20", "2025-11-27", "2025-12-04", "2025-12-11", "2025-12-18", "2025-12-25"],
+      dates: ["2025-10-02", "2025-10-06", "2025-10-09", "2025-10-16", "2025-10-23", "2025-10-30", "2025-11-06", "2025-11-13", "2025-11-20", "2025-11-27", "2025-12-04", "2025-12-11", "2025-12-18", "2025-12-25"],
       time: "20:30-22:00",
       description: "Edizione autunnale: un percorso di lettura consapevole e pratiche di presenza per rallentare, ascoltarsi e vivere il presente con maggiore chiarezza e serenità.",
     },
