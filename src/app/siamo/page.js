@@ -124,6 +124,52 @@ const page = () => {
           <Teams />
         </Container>
       </div>
+      
+      {/* NextGenerationEU Funding Section */}
+      <div id="nextgenerationeu" className="bg-white py-12">
+        <Container>
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-[#373737] mb-8">
+              Finanziato dall'Unione europea – NextGenerationEU
+            </h2>
+            
+            <div className="flex flex-col lg:flex-row items-center justify-center gap-8 mb-8">
+              <div className="flex items-center gap-4">
+                <img 
+                  src="/eu-logo.png" 
+                  alt="Logo Unione Europea" 
+                  className="h-16 w-auto"
+                />
+                <div className="text-left">
+                  <p className="text-lg font-semibold text-[#373737]">
+                    Finanziato dall'Unione europea – NextGenerationEU
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    Codice progetto: IFS0000002-0000419
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-[#F8F9FA] rounded-lg p-6 max-w-4xl mx-auto">
+              <h3 className="text-lg font-semibold text-[#373737] mb-4">
+                Beneficiario e Titolo del Progetto
+              </h3>
+              <p className="text-[#373737] mb-4">
+                <strong>Giada Bono – Fondo Impresa Femminile</strong>
+              </p>
+              
+              <h3 className="text-lg font-semibold text-[#373737] mb-4">
+                Descrizione del Progetto
+              </h3>
+              <p className="text-[#373737] leading-relaxed text-sm">
+                Giada Bono, relativamente al progetto protocollo IFS0000002-0000419, ha ricevuto un contributo a fondo perduto pari ad € 133.392,00 e un finanziamento agevolato a tasso zero pari a € 133.392,00 a fronte di un programma di spesa pari ad € 333.480,00. Il Progetto è finanziato dall'Unione europea – NextGenerationEU.
+              </p>
+            </div>
+          </div>
+        </Container>
+      </div>
+      
       <Banner />
     </section>
   );
