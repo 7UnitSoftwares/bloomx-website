@@ -27,15 +27,6 @@ export const CommunityData = [
     howitworks: ["Accesso a creators e pedagogista","Pillole pedagogiche", "YogArt mensile genitori-figli", "Laboratori di Creattività", "Risorse esclusive: carte delle emozioni, yoga box, mindful box"]
   },
   {
-    id: 4,
-    icon: "/community/icon4.png",
-    section: "BloomHer",
-    title: "BloomHer: Fiorire al Femminile",
-    desc: "Una comunità di donne che si sostengono nel percorso di crescita personale.",
-    meeting: "",
-    howitworks:["Mindfulness tra le righe: lunedì alterni (serale)", "Sotto il glicine: mercoledì alterni 18:30 - 19:30", "Il profumo del suono: secondo sabato del mese"]
-  },
-  {
     id: 5,
     icon: "/community/icon5.png",
     section: "Creators",

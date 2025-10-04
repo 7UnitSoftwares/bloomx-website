@@ -40,7 +40,6 @@ const Navbar = () => {
         { title: "Studenti", to: "Studenti" },
         { title: "Piccoli Bloom", to: "Buds" },
         { title: "Genitori", to: "Genitori" },
-        { title: "BloomHer", to: "BloomHer" },
         { title: "Creators", to: "Creators" },
       ],
     },
@@ -66,6 +65,7 @@ const Navbar = () => {
     { title: "Spazio", to: "/spazio" },
     { title: "Eventi", to: "/eventi" },
     { title: "Blog", to: "/blog" },
+    { title: "Nuovo anno 2025", to: "/nuovo-anno-2025", isNew: true },
     // { title: "Bloom Summer Lab", to: "/bloom-summer-lab" },
     // { title: "Brain Up Summer", to: "/brain-up-summer" },
     // {
@@ -120,6 +120,11 @@ const Navbar = () => {
                   }`}
                 >
                   {item.title}
+                  {item.isNew && (
+                    <span className="ml-2 px-2 py-0.5 text-xs font-bold text-white bg-[#00A59B] rounded-full">
+                      nuovo
+                    </span>
+                  )}
                 </Link>
 
                 {item.items && (
@@ -221,6 +226,11 @@ const Navbar = () => {
                         }`}
                       >
                         {item.title}
+                        {item.isNew && (
+                          <span className="ml-2 px-2 py-0.5 text-xs font-bold text-white bg-[#00A59B] rounded-full">
+                            nuovo
+                          </span>
+                        )}
                       </Link>
                       {item.items && (
                         <ChevronDown
@@ -330,6 +340,11 @@ const Navbar = () => {
                     onClick={() => setShow(false)}
                   >
                     {item.title}
+                    {item.isNew && (
+                      <span className="ml-2 px-2 py-0.5 text-xs font-bold text-white bg-[#00A59B] rounded-full">
+                        nuovo
+                      </span>
+                    )}
                   </Link>
                 )}
               </div>

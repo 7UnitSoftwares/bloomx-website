@@ -11,8 +11,9 @@ const HeroSection = () => {
           <span className="font-bold">SPAZIO</span>, <br /> COL TUO <br />
           <span className="font-bold">TEMPO</span>.
         </h1>
-        <p className="text-[#1B1B1B] lg:text-2xl font-medium text-center lg:text-start">Bloom è un centro di pedagogia moderna che accompagna bambini, ragazzi e famiglie nel loro percorso di crescita. <br className="hidden lg:block" /><br className="hidden lg:block" />Li aiutiamo a conoscersi meglio, a gestire le emozioni e ad apprendere in modo più sereno, efficace e consapevole.
-        </p>
+        <p className="text-[#1B1B1B] lg:text-2xl font-medium text-center lg:text-start">Bloom è un centro dedicato alla crescita e all’apprendimento che accompagna bambini, ragazzi e famiglie nel loro percorso di sviluppo.
+        <br className="hidden lg:block" /><br className="hidden lg:block" />
+        Li aiutiamo a conoscersi meglio, a gestire le emozioni e ad apprendere in modo più sereno, efficace e consapevole.</p>
         <div className="flex lg:gap-7 gap-5 justify-center lg:justify-start mb-10">
           <Link href="/siamo">
             <button className="bg-transparent border-[3px] border-[#8bc6c2] font-semibold text-[#005E64] px-5 py-3 lg:px-8 lg:py-3 rounded-lg transition-all hover:bg-[#f0f9f8] active:scale-95">

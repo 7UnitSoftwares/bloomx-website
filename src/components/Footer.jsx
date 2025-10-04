@@ -137,6 +137,29 @@ const Footer = () => {
                 Codice Fiscale: BNOGDI79P62D938B <br />
                 Partita Iva: 02708900028
               </p>
+              
+              {/* NextGenerationEU Funding Section */}
+              <div className="bg-[#F8F9FA] rounded-lg p-4 mb-4">
+                <div className="flex items-center gap-3 mb-3">
+                  <img 
+                    src="/eu-logo.png" 
+                    alt="Logo Unione Europea" 
+                    className="h-8 w-auto"
+                  />
+                  <p className="text-xs font-semibold text-[#373737]">
+                    Finanziato dall'Unione europea – NextGenerationEU
+                  </p>
+                </div>
+                <p className="text-xs text-gray-600 mb-2">
+                  Codice progetto: IFS0000002-0000419
+                </p>
+                <p className="text-xs text-gray-600 mb-2">
+                  <strong>Giada Bono – Fondo Impresa Femminile</strong>
+                </p>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                  Progetto finanziato dall'Unione europea – NextGenerationEU
+                </p>
+              </div>
               <div className="flex gap-4 mt-4">
                 <a
                   href="https://www.instagram.com/bloom_biella"

@@ -76,15 +76,9 @@ const jsonData = {
     },
     {
       name: "Mindfulness tra le righe",
-      dates: ["2025-10-02", "2025-10-09", "2025-10-16", "2025-10-23", "2025-10-30", "2025-11-06", "2025-11-13", "2025-11-20", "2025-11-27", "2025-12-04", "2025-12-11", "2025-12-18", "2025-12-25"],
+      dates: ["2025-10-02", "2025-10-06", "2025-10-09", "2025-10-16", "2025-10-23", "2025-10-30", "2025-11-06", "2025-11-13", "2025-11-20", "2025-11-27", "2025-12-04", "2025-12-11", "2025-12-18", "2025-12-25"],
       time: "20:30-22:00",
       description: "Edizione autunnale: un percorso di lettura consapevole e pratiche di presenza per rallentare, ascoltarsi e vivere il presente con maggiore chiarezza e serenità.",
-    },
-    {
-      name: "Pausa Mindful",
-      dates: ["2025-10-01", "2025-10-08", "2025-10-15", "2025-10-22", "2025-10-29", "2025-11-05", "2025-11-12", "2025-11-19", "2025-11-26", "2025-12-03", "2025-12-10", "2025-12-17", "2025-12-24"],
-      time: "13:15-14:15",
-      description: "Prenditi un’ora tutta per te con Pausa Mindful, la camminata guidata che ti aiuta a rallentare, respirare e ritrovare presenza. <br /><br />Ogni mercoledì, dalle 13:15 alle 14:15, partenza da <b>Piazza Gaudenzio Sella</b>. <br /><br />Un momento speciale per staccare dal lavoro, ridurre lo stress e ricaricare energia e chiarezza.<br /><br />In caso di maltempo, l’esperienza si sposta indoor con semplici pratiche di mindfulness.",
     },
     {
       name: "Mindfulness in classe – Gestire emozioni e relazioni con consapevolezza",
@@ -347,7 +341,6 @@ const CalendarView = () => {
               
               {selectedEvent.description && (
                 <div className="mt-4 p-4 bg-gray-50 rounded-lg">
-                  <h3 className="font-semibold text-gray-800 mb-2">Descrizione</h3>
                   <div 
                     className="text-sm text-gray-600 leading-relaxed"
                     dangerouslySetInnerHTML={{ __html: selectedEvent.description }}
