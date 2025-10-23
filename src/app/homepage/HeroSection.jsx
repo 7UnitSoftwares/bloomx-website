@@ -28,7 +28,7 @@ const HeroSection = ({ onBannerClick }) => {
                 onBannerClick();
               }
             }}
-            aria-label="Clicca per visualizzare il documento di finanziamento EU"
+            aria-label="Clicca per visualizzare le informazioni sul finanziamento EU"
           >
             <Image
               src="/NextGenerationEU.jpg"

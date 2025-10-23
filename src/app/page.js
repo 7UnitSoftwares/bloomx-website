@@ -9,38 +9,24 @@ import Services from "./homepage/Service";
 import Events from "./homepage/Events";
 import YouTubeChannel from "./homepage/YouTubeChannel";
 import Contact from "@/components/Contact";
-import PDFModal from "@/components/PDFModal";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
 
   const handleBannerClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+    router.push('/eu-funding');
   };
 
   return (
-    <>
-      <div className="overflow-hidden">
-        <HeroSection onBannerClick={handleBannerClick} />
-        <Projects />
-        <Services />
-        <Space />
-        <Events />
-        <YouTubeChannel />
-        <Contact />
-      </div>
-      
-      {/* PDF Modal */}
-      <PDFModal 
-        isOpen={isModalOpen} 
-        onClose={handleCloseModal} 
-        pdfUrl="/xstampadigitale.pdf" 
-      />
-    </>
+    <div className="overflow-hidden">
+      <HeroSection onBannerClick={handleBannerClick} />
+      <Projects />
+      <Services />
+      <Space />
+      <Events />
+      <YouTubeChannel />
+      <Contact />
+    </div>
   );
 }
