@@ -126,45 +126,67 @@ const page = () => {
       </div>
       
       {/* NextGenerationEU Funding Section */}
-      <div id="nextgenerationeu" className="bg-white py-12">
+      <div id="nextgenerationeu" className="bg-white py-16">
         <Container>
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-[#373737] mb-8">
-              Finanziato dall'Unione europea – NextGenerationEU
-            </h2>
-            
-            <div className="flex flex-col lg:flex-row items-center justify-center gap-8 mb-8">
-              <div className="flex items-center gap-4">
+          <div className="max-w-4xl mx-auto">
+            {/* Header with EU Flag and Title */}
+            <div className="flex items-start gap-6 mb-8">
+              <div className="flex-shrink-0">
                 <img 
                   src="/eu-logo.png" 
                   alt="Logo Unione Europea" 
-                  className="h-16 w-auto"
+                  className="h-20 w-auto"
                 />
-                <div className="text-left">
-                  <p className="text-lg font-semibold text-[#373737]">
-                    Finanziato dall'Unione europea – NextGenerationEU
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    Codice progetto: IFS0000002-0000419
-                  </p>
-                </div>
+              </div>
+              <div className="flex-1">
+                <h2 className="text-2xl font-bold text-[#1B1B1B] mb-2">
+                  Finanziato dall'Unione europea
+                </h2>
+                <p className="text-lg font-semibold text-[#1B1B1B] mb-1">
+                  NextGenerationEU
+                </p>
               </div>
             </div>
-            
-            <div className="bg-[#F8F9FA] rounded-lg p-6 max-w-4xl mx-auto">
-              <h3 className="text-lg font-semibold text-[#373737] mb-4">
-                Beneficiario e Titolo del Progetto
+
+            {/* Beneficiary Information */}
+            <div className="mb-8">
+              <h3 className="text-lg font-semibold text-[#1B1B1B] mb-3">
+                Nome del beneficiario
               </h3>
-              <p className="text-[#373737] mb-4">
-                <strong>Giada Bono – Fondo Impresa Femminile</strong>
+              <p className="text-2xl font-bold text-[#1B1B1B] mb-4">
+                Giada Bono
               </p>
               
-              <h3 className="text-lg font-semibold text-[#373737] mb-4">
-                Descrizione del Progetto
+              <div className="mb-4">
+                <p className="text-sm text-[#1B1B1B] mb-1">
+                  <strong>Codice progetto:</strong> IFS0000002-0000419
+                </p>
+                <p className="text-sm text-[#1B1B1B] mb-1">
+                  <strong>Bloom | Centro per l'apprendimento e la crescita</strong>
+                </p>
+                <p className="text-sm text-[#1B1B1B]">
+                  <strong>Titolo del progetto:</strong> Fondo Impresa Femminile
+                </p>
+              </div>
+            </div>
+
+            {/* Project Objective */}
+            <div className="mb-8">
+              <h3 className="text-lg font-bold text-[#1B1B1B] mb-4">
+                Obiettivo principale dell'operazione
               </h3>
-              <p className="text-[#373737] leading-relaxed text-sm">
-                Giada Bono, relativamente al progetto protocollo IFS0000002-0000419, ha ricevuto un contributo a fondo perduto pari ad € 133.392,00 e un finanziamento agevolato a tasso zero pari a € 133.392,00 a fronte di un programma di spesa pari ad € 333.480,00. Il Progetto è finanziato dall'Unione europea – NextGenerationEU.
+              <p className="text-[#1B1B1B] leading-relaxed">
+                Promuovere la crescita e lo sviluppo di Bloom come centro di formazione e sostegno alla genitorialità, attraverso un sistema integrato di supporto digitale e fisico che accompagni i genitori nella crescita e nello sviluppo dei figli, potenziando l'impatto educativo e sociale mediante percorsi di formazione, mindfulness e supporto alla comunità.
               </p>
+            </div>
+
+            {/* European Commission Footer */}
+            <div className="flex items-center justify-end gap-4 pt-6 border-t border-gray-200">
+              <img 
+                src="/EuropeanCommission.jpg" 
+                alt="European Commission" 
+                className="h-20 w-auto"
+              />
             </div>
           </div>
         </Container>
