@@ -10,13 +10,14 @@ import Spinner from "./Spinner";
 
 const data = [
   { title: "Perchè scegliere Bloom", to: "/perche-bloom" },
-  { title: "Chi siamo", to: "/siamo",
+  {
+    title: "Chi siamo", to: "/siamo",
     items: [
       { title: "Il progetto", to: "/siamo/#progetto" },
       { title: "La visione", to: "/siamo/#visione" },
       { title: "Il nostro team", to: "/siamo/#team" }
     ]
-   },
+  },
   {
     title: "Community",
     to: "/community",
@@ -76,7 +77,7 @@ const Footer = () => {
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
-    
+
     // Validate both email and consent
     if (!email || !hasConsent) {
       if (!email) {
@@ -84,7 +85,7 @@ const Footer = () => {
       }
       return;
     }
-    
+
     if (!validateEmail(email)) {
       return;
     }
@@ -137,13 +138,13 @@ const Footer = () => {
                 Codice Fiscale: BNOGDI79P62D938B <br />
                 Partita Iva: 02708900028
               </p>
-              
+
               {/* NextGenerationEU Funding Section */}
               <div className="bg-[#F8F9FA] rounded-lg p-4 mb-4">
                 <div className="flex items-center gap-3 mb-3">
-                  <img 
-                    src="/eu-logo.png" 
-                    alt="Logo Unione Europea" 
+                  <img
+                    src="/eu-logo.png"
+                    alt="Logo Unione Europea"
                     className="h-8 w-auto"
                   />
                   <p className="text-xs font-semibold text-[#373737]">
@@ -188,6 +189,25 @@ const Footer = () => {
                   />
                 </a>
               </div>
+               <div className="flex items-center justify-center mt-6">
+                 <div className="rounded-xl shadow-lg px-6 py-4 flex flex-col items-center gap-4 border border-teal-400">
+                   <span className="text-base text-teal-900 font-bold text-center">
+                     Puoi pagare anche con i tuoi crediti welfare Edenred e Double You
+                   </span>
+                   <div className="flex items-center gap-6">
+                     <img
+                       src="/DoubleYou_Logo.png"
+                       alt="Double You"
+                       className="h-12 w-auto bg-white rounded-md p-1 shadow"
+                     />
+                     <img
+                       src="/Edenred_Logo.png"
+                       alt="Edenred"
+                       className="h-12 w-auto bg-white rounded-md p-1 shadow"
+                     />
+                   </div>
+                 </div>
+               </div>
             </div>
 
             {/* Navigation Links - Updated with proper spacing */}
@@ -279,9 +299,8 @@ const Footer = () => {
                       if (emailError) validateEmail(e.target.value);
                     }}
                     placeholder="La tua email"
-                    className={`px-4 py-3 rounded-lg border ${
-                      emailError ? 'border-red-500' : 'border-gray-300'
-                    } w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
+                    className={`px-4 py-3 rounded-lg border ${emailError ? 'border-red-500' : 'border-gray-300'
+                      } w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all`}
                     required
                   />
                   {emailError && (
@@ -290,8 +309,8 @@ const Footer = () => {
                   <div className="text-xs text-gray-600 space-y-3">
                     <p className="leading-relaxed">
                       Dichiaro di avere preso attenta visione dell'
-                      <a 
-                        href="https://www.iubenda.com/privacy-policy/52750623" 
+                      <a
+                        href="https://www.iubenda.com/privacy-policy/52750623"
                         className="text-[#008C95] hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
@@ -300,7 +319,7 @@ const Footer = () => {
                       </a>
                       {' '}e presto il consenso al trattamento dei miei dati personali per le finalità al suo interno ex. Artt. 13-14 Reg.to UE 2016/679.
                     </p>
-                    
+
                     <p className="leading-relaxed">
                       Vi informiamo inoltre che i Vostri dati anagrafici saranno trattati solo ed esclusivamente da Bloom Centro Pedagogico o da soggetti espressamente incaricati per l'esecuzione di alcuni dei servizi richiesti e non verranno ceduti a terzi senza un Vostro previo consenso in osservanza Reg.to UE 2016/679.
                     </p>
@@ -320,11 +339,10 @@ const Footer = () => {
                     </div>
                   </div>
                   <Button
-                    className={`w-full ${
-                      email && hasConsent 
-                        ? 'bg-[#008C95] hover:bg-[#006A70]' 
+                    className={`w-full ${email && hasConsent
+                        ? 'bg-[#008C95] hover:bg-[#006A70]'
                         : 'bg-gray-300'
-                    } text-white py-2 px-4 rounded-lg transition-colors duration-200`}
+                      } text-white py-2 px-4 rounded-lg transition-colors duration-200`}
                     type="submit"
                     disabled={!email || !hasConsent || isSubmitting}
                   >
@@ -348,8 +366,8 @@ const Footer = () => {
                 ©2025 Bloom Tutti i diritti riservati
               </p>
               <div className="flex gap-6 mt-4 md:mt-0">
-              <a href="https://www.iubenda.com/privacy-policy/52750623" className="text-gray-500 text-sm hover:text-gray-700 transition-colors" title="Privacy Policy " target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-              <a href="https://www.iubenda.com/privacy-policy/52750623/cookie-policy" className="text-gray-500 text-sm hover:text-gray-700 transition-colors" title="Cookie Policy " target="_blank" rel="noopener noreferrer">Cookie Policy</a>
+                <a href="https://www.iubenda.com/privacy-policy/52750623" className="text-gray-500 text-sm hover:text-gray-700 transition-colors" title="Privacy Policy " target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+                <a href="https://www.iubenda.com/privacy-policy/52750623/cookie-policy" className="text-gray-500 text-sm hover:text-gray-700 transition-colors" title="Cookie Policy " target="_blank" rel="noopener noreferrer">Cookie Policy</a>
                 {/* <Link
                   href="/privacy"
                   className="text-gray-500 text-sm hover:text-gray-700 transition-colors"
@@ -367,7 +385,7 @@ const Footer = () => {
           </div>
         </Container>
       </div>
-      
+
       {/* Replace the existing success message with Toast */}
       {toast.show && (
         <Toast
