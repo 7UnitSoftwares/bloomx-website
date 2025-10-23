@@ -1,16 +1,22 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, Suspense } from 'react';
 import Container from '@/components/Container';
 import AdminNav from '@/components/AdminNav';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import './quill-custom.css';
-import mammoth from 'mammoth';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import dynamic from 'next/dynamic';
 
-export default function BlogEditor() {
+// Dynamically import ReactQuill to avoid SSR issues
+const ReactQuill = dynamic(() => import('react-quill'), { 
+    ssr: false,
+    loading: () => <div className="h-96 bg-gray-100 rounded-md flex items-center justify-center">Loading editor...</div>
+});
+
+// Dynamically import mammoth to avoid SSR issues
+const mammoth = dynamic(() => import('mammoth'), { ssr: false });
+
+function BlogEditorContent() {
     const searchParams = useSearchParams();
     const editSlug = searchParams.get('edit');
     
@@ -27,7 +33,19 @@ export default function BlogEditor() {
     const [isEditingHTML, setIsEditingHTML] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
+    const [isClient, setIsClient] = useState(false);
     const editorRef = useRef(null);
+
+    // Ensure we're on the client side
+    useEffect(() => {
+        setIsClient(true);
+        
+        // Dynamically import CSS only on client side
+        if (typeof window !== 'undefined') {
+            import('react-quill/dist/quill.snow.css');
+            import('./quill-custom.css');
+        }
+    }, []);
 
     // Load existing blog post for editing
     useEffect(() => {
@@ -173,8 +191,10 @@ export default function BlogEditor() {
                 const blogPageCode = `  ${JSON.stringify(blogEntry, null, 4)},\n`;
                 const blogPostCode = `        ${JSON.stringify(blogEntry, null, 8)},\n`;
                 
-                // Copy to clipboard
-                await navigator.clipboard.writeText(blogPageCode);
+                // Copy to clipboard (only if available)
+                if (navigator.clipboard) {
+                    await navigator.clipboard.writeText(blogPageCode);
+                }
                 
                 // Show a preview of the content (first 200 characters)
                 const contentPreview = blogEntry.content.replace(/<[^>]*>/g, '').substring(0, 200) + '...';
@@ -209,6 +229,16 @@ export default function BlogEditor() {
     };
 
     const handlePasteFromWord = () => {
+        if (!isClient) {
+            alert('Please wait for the editor to load completely.');
+            return;
+        }
+
+        if (!navigator.clipboard) {
+            alert('Clipboard access is not available in this browser.');
+            return;
+        }
+
         navigator.clipboard.readText().then(text => {
             setFormData(prev => ({
                 ...prev,
@@ -218,13 +248,23 @@ export default function BlogEditor() {
             setIsEditingHTML(true);
         }).catch(err => {
             console.error('Failed to read clipboard:', err);
+            alert('Failed to read from clipboard. Please try copying the content again.');
         });
     };
 
     const handleWordImport = async (event) => {
+        if (!isClient) {
+            alert('Please wait for the editor to load completely.');
+            return;
+        }
+
         const file = event.target.files[0];
         if (file && file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
             try {
+                // Dynamically import mammoth only when needed
+                const mammothModule = await import('mammoth');
+                const mammoth = mammothModule.default;
+                
                 const arrayBuffer = await file.arrayBuffer();
                 const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
                 
@@ -380,6 +420,24 @@ export default function BlogEditor() {
         'align', 'link', 'image'
     ];
 
+    if (!isClient) {
+        return (
+            <div className="min-h-screen bg-[#F2F2F2]">
+                <AdminNav />
+                <div className="py-12">
+                    <Container>
+                        <div className="max-w-4xl mx-auto">
+                            <div className="text-center">
+                                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#008C95] mx-auto"></div>
+                                <p className="mt-4 text-gray-600">Loading editor...</p>
+                            </div>
+                        </div>
+                    </Container>
+                </div>
+            </div>
+        );
+    }
+
     if (isLoading) {
         return (
             <div className="min-h-screen bg-[#F2F2F2]">
@@ -514,26 +572,28 @@ export default function BlogEditor() {
                                         <button
                                             type="button"
                                             onClick={() => {
-                                                const preview = formData.content;
-                                                const newWindow = window.open('', '_blank');
-                                                newWindow.document.write(`
-                                                    <html>
-                                                        <head>
-                                                            <title>Content Preview</title>
-                                                            <style>
-                                                                body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 20px; line-height: 1.6; }
-                                                                h1, h2, h3, h4, h5, h6 { color: #008C95; font-weight: bold; margin: 1.5em 0 1em; }
-                                                                h1 { font-size: 1.8rem; }
-                                                                h2 { font-size: 1.5rem; }
-                                                                h3 { font-size: 1.2rem; }
-                                                                p { margin-bottom: 1.2em; }
-                                                                ul, ol { padding-left: 1.5em; margin-bottom: 1.2em; }
-                                                                li { margin-bottom: 0.6em; }
-                                                            </style>
-                                                        </head>
-                                                        <body>${preview}</body>
-                                                    </html>
-                                                `);
+                                                if (typeof window !== 'undefined') {
+                                                    const preview = formData.content;
+                                                    const newWindow = window.open('', '_blank');
+                                                    newWindow.document.write(`
+                                                        <html>
+                                                            <head>
+                                                                <title>Content Preview</title>
+                                                                <style>
+                                                                    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 20px; line-height: 1.6; }
+                                                                    h1, h2, h3, h4, h5, h6 { color: #008C95; font-weight: bold; margin: 1.5em 0 1em; }
+                                                                    h1 { font-size: 1.8rem; }
+                                                                    h2 { font-size: 1.5rem; }
+                                                                    h3 { font-size: 1.2rem; }
+                                                                    p { margin-bottom: 1.2em; }
+                                                                    ul, ol { padding-left: 1.5em; margin-bottom: 1.2em; }
+                                                                    li { margin-bottom: 0.6em; }
+                                                                </style>
+                                                            </head>
+                                                            <body>${preview}</body>
+                                                        </html>
+                                                    `);
+                                                }
                                             }}
                                             className="px-3 py-1 text-sm bg-purple-100 hover:bg-purple-200 text-purple-700 rounded"
                                         >
@@ -542,34 +602,36 @@ export default function BlogEditor() {
                                         <button
                                             type="button"
                                             onClick={() => {
-                                                const newWindow = window.open('', '_blank');
-                                                newWindow.document.write(`
-                                                    <html>
-                                                        <head>
-                                                            <title>Raw HTML Content</title>
-                                                            <style>
-                                                                body { font-family: monospace; padding: 20px; background: #f5f5f5; }
-                                                                pre { background: white; padding: 20px; border-radius: 8px; border: 1px solid #ddd; overflow-x: auto; }
-                                                                .rendered { background: white; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-top: 20px; }
-                                                                h1, h2, h3, h4, h5, h6 { color: #008C95; font-weight: bold; margin: 1.5em 0 1em; }
-                                                                h1 { font-size: 1.8rem; }
-                                                                h2 { font-size: 1.5rem; }
-                                                                h3 { font-size: 1.2rem; }
-                                                                p { margin-bottom: 1.2em; line-height: 1.6; }
-                                                                ul, ol { padding-left: 1.5em; margin-bottom: 1.2em; }
-                                                                li { margin-bottom: 0.6em; }
-                                                            </style>
-                                                        </head>
-                                                        <body>
-                                                            <h1>Raw HTML Content</h1>
-                                                            <pre>${formData.content}</pre>
-                                                            <div class="rendered">
-                                                                <h2>How it renders:</h2>
-                                                                <div>${formData.content}</div>
-                                                            </div>
-                                                        </body>
-                                                    </html>
-                                                `);
+                                                if (typeof window !== 'undefined') {
+                                                    const newWindow = window.open('', '_blank');
+                                                    newWindow.document.write(`
+                                                        <html>
+                                                            <head>
+                                                                <title>Raw HTML Content</title>
+                                                                <style>
+                                                                    body { font-family: monospace; padding: 20px; background: #f5f5f5; }
+                                                                    pre { background: white; padding: 20px; border-radius: 8px; border: 1px solid #ddd; overflow-x: auto; }
+                                                                    .rendered { background: white; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-top: 20px; }
+                                                                    h1, h2, h3, h4, h5, h6 { color: #008C95; font-weight: bold; margin: 1.5em 0 1em; }
+                                                                    h1 { font-size: 1.8rem; }
+                                                                    h2 { font-size: 1.5rem; }
+                                                                    h3 { font-size: 1.2rem; }
+                                                                    p { margin-bottom: 1.2em; line-height: 1.6; }
+                                                                    ul, ol { padding-left: 1.5em; margin-bottom: 1.2em; }
+                                                                    li { margin-bottom: 0.6em; }
+                                                                </style>
+                                                            </head>
+                                                            <body>
+                                                                <h1>Raw HTML Content</h1>
+                                                                <pre>${formData.content}</pre>
+                                                                <div class="rendered">
+                                                                    <h2>How it renders:</h2>
+                                                                    <div>${formData.content}</div>
+                                                                </div>
+                                                            </body>
+                                                        </html>
+                                                    `);
+                                                }
                                             }}
                                             className="px-3 py-1 text-sm bg-red-100 hover:bg-red-200 text-red-700 rounded"
                                         >
@@ -740,5 +802,27 @@ export default function BlogEditor() {
                 </Container>
             </div>
         </div>
+    );
+}
+
+export default function BlogEditor() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-[#F2F2F2]">
+                <AdminNav />
+                <div className="py-12">
+                    <Container>
+                        <div className="max-w-4xl mx-auto">
+                            <div className="text-center">
+                                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#008C95] mx-auto"></div>
+                                <p className="mt-4 text-gray-600">Loading editor...</p>
+                            </div>
+                        </div>
+                    </Container>
+                </div>
+            </div>
+        }>
+            <BlogEditorContent />
+        </Suspense>
     );
 }
