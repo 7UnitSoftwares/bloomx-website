@@ -6,6 +6,36 @@ import { useRouter } from "next/navigation";
 
 const blogs = [
   {
+    "slug": "pedagogia-e-psicologia-due-mondi-diversi-un-unico-obiettivo",
+    "title": "Pedagogia e Psicologia: due mondi diversi, un unico obiettivo",
+    "description": "A volte diamo per scontato che educare significhi solo insegnare nozioni o trasmettere regole di comportamento. Ma dietro ogni gesto educativo c’è molto di più: ci sono scelte, conoscenze, strumenti e soprattutto una profonda comprensione della persona.",
+    "author": "Noemi Orologio",
+    "date": "23 ottobre 2025",
+    "readTime": "5 min read",
+    "category": "Learning",
+    "image": "/blog/pedagogia-e-psicologia-due-mondi-diversi-un-unico-obiettivo.jpg",
+  }, 
+  {
+    "slug": "qual-il-tuo-stile-di-apprendimento-ideale",
+    "title": "QUAL È IL TUO STILE DI APPRENDIMENTO IDEALE? ",
+    "description": "Ti sei mai chiesto se esiste un solo modo giusto per studiare? \nMagari ti sei sentito dire che basta applicarsi… che tutti devono studiare allo stesso modo… che ci sono tecniche già “conclamate” e universali.",
+    "author": "Noemi Orologio",
+    "date": "23 ottobre 2025",
+    "readTime": "10 min read",
+    "category": "Learning",
+    "image": "/blog/qual-il-tuo-stile-di-apprendimento-ideale.jpg",
+  },
+  {
+    "slug": "consulenza-psicopedagogica-un-sostegno-concreto-per-famiglie-bambini-e-scuole",
+    "title": "Consulenza psicopedagogica: un sostegno concreto per famiglie, bambini e scuole",
+    "description": "La consulenza psicopedagogica è uno strumento di supporto prezioso che mira a favorire la crescita e l’autonomia della persona, della famiglia e dei gruppi sociali ed educativi. Non si tratta solo di affrontare una difficoltà momentanea, ma di accompagnare il soggetto – bambino, adolescente o adulto – in un percorso di comprensione, consapevolezza e miglioramento del proprio sistema di vita e di apprendimento.",
+    "author": "Noemi Orologio",
+    "date": "23 ottobre 2025",
+    "readTime": "3 min read",
+    "category": "Learning",
+    "image": "/blog/consulenza-psicopedagogica-un-sostegno-concreto-per-famiglie-bambini-e-scuole.jpg",
+  },
+  {
     slug: "metodo-studio-bloom",
     title: "Il Metodo di Studio Bloom: mente serena, apprendimento efficace",
     description:"Il metodo di studio Bloom è un approccio personalizzato per aiutare i ragazzi a raggiungere i loro obiettivi di studio. Questo metodo si basa su una serie di principi fondamentali che aiutano a creare un ambiente di apprendimento efficace e motivante.",

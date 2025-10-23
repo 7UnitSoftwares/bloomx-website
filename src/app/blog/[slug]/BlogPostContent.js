@@ -5,6 +5,7 @@ import Container from "@/components/Container";
 import SectionWithBackground from "@/components/SectionWithBackground";
 import Banner from "@/components/Banner";
 import Link from "next/link";
+import "../blog-content.css";
 
 export default function BlogPostContent({ post, blogs }) {
     return (
@@ -34,7 +35,7 @@ export default function BlogPostContent({ post, blogs }) {
                             <span className="text-gray-500">{post.readTime}</span>
                         </div>
                         
-                        <div className="prose prose-lg max-w-none" 
+                        <div className="blog-content" 
                             dangerouslySetInnerHTML={{ __html: post.content }} 
                         />
                         

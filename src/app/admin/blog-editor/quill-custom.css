@@ -1,0 +1,117 @@
+/* Custom Quill.js styling for Bloom blog editor */
+
+.ql-editor {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    min-height: 400px;
+}
+
+.ql-editor h1, .ql-editor h2, .ql-editor h3, .ql-editor h4, .ql-editor h5, .ql-editor h6 {
+    color: #008C95;
+    font-weight: bold;
+    margin: 1.5em 0 1em;
+}
+
+.ql-editor h1 { font-size: 1.8rem; }
+.ql-editor h2 { font-size: 1.5rem; }
+.ql-editor h3 { font-size: 1.2rem; }
+.ql-editor h4 { font-size: 1.1rem; }
+.ql-editor h5 { font-size: 1rem; }
+.ql-editor h6 { font-size: 0.9rem; }
+
+.ql-editor p {
+    margin-bottom: 1.2em;
+    line-height: 1.6;
+}
+
+.ql-editor ul, .ql-editor ol {
+    padding-left: 1.5em;
+    margin-bottom: 1.2em;
+}
+
+.ql-editor li {
+    margin-bottom: 0.6em;
+}
+
+.ql-editor blockquote {
+    border-left: 4px solid #008C95;
+    padding-left: 1em;
+    margin: 1.5em 0;
+    font-style: italic;
+    color: #666;
+}
+
+.ql-editor a {
+    color: #008C95;
+    text-decoration: underline;
+}
+
+.ql-editor a:hover {
+    color: #006A70;
+}
+
+/* Toolbar styling */
+.ql-toolbar {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-top-left-radius: 0.375rem;
+    border-top-right-radius: 0.375rem;
+    background: #f8f9fa;
+}
+
+.ql-container {
+    border-bottom: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom-left-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+}
+
+.ql-toolbar .ql-stroke {
+    stroke: #008C95;
+}
+
+.ql-toolbar .ql-fill {
+    fill: #008C95;
+}
+
+.ql-toolbar button:hover .ql-stroke {
+    stroke: #006A70;
+}
+
+.ql-toolbar button:hover .ql-fill {
+    fill: #006A70;
+}
+
+.ql-toolbar button.ql-active .ql-stroke {
+    stroke: #006A70;
+}
+
+.ql-toolbar button.ql-active .ql-fill {
+    fill: #006A70;
+}
+
+/* Focus styling */
+.ql-container.ql-snow {
+    border-color: #008C95;
+}
+
+.ql-container.ql-snow:focus-within {
+    border-color: #008C95;
+    box-shadow: 0 0 0 2px rgba(0, 168, 149, 0.2);
+}
+
+/* Custom color palette */
+.ql-picker-label {
+    color: #008C95;
+}
+
+.ql-picker-options {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
