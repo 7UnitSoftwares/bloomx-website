@@ -13,6 +13,7 @@ export async function GET() {
     { path: '/community', changefreq: 'weekly', priority: '0.8' },
     { path: '/contattaci', changefreq: 'monthly', priority: '0.7' },
     { path: '/siamo', changefreq: 'monthly', priority: '0.7' },
+    { path: '/eu-funding', changefreq: 'monthly', priority: '0.6' },
     { path: '/bloom-summer-lab', changefreq: 'weekly', priority: '0.8' },
     { path: '/perche-bloom', changefreq: 'monthly', priority: '0.8' },
   ];
