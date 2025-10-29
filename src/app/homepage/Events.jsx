@@ -110,37 +110,51 @@ function Events() {
               </div>
             </div>
 
-            {/* Mindfulness in classe */}
+            {/* La notte delle luci gentili */}
             <div 
               className="bg-white rounded-2xl shadow-lg border border-[#00A59B]/20 p-6 lg:p-8 cursor-pointer hover:shadow-xl transition-shadow duration-300"
               onClick={handleEventClick}
             >
               <div className="text-center mb-6">
                 <h2 className="text-xl lg:text-2xl font-bold text-[#00A59B] mb-3">
-                  Mindfulness in classe
+                  La notte delle luci gentili
                 </h2>
-                <div className="bg-[#00A59B] text-white px-4 py-2 rounded-full inline-block text-sm font-semibold">
-                  18:00 - 20:00
+                <div className="flex flex-col sm:flex-row gap-2 justify-center">
+                  <div className="bg-[#FF6B35] text-white px-3 py-2 rounded-full inline-block text-xs font-semibold whitespace-nowrap">
+                    30 Ottobre • 16:30-18:00
+                  </div>
+                  <div className="bg-[#FF6B35] text-white px-3 py-2 rounded-full inline-block text-xs font-semibold whitespace-nowrap">
+                    31 Ottobre • 15:30-17:00
+                  </div>
                 </div>
               </div>
               
               <div className="text-center space-y-4">
                 <p className="text-base text-gray-700 leading-relaxed">
-                  Un incontro dedicato agli insegnanti per scoprire strumenti di educazione emozionale utili a gestire meglio le dinamiche di classe.
+                  Un laboratorio di <strong className="text-[#FF6B35]">Halloween soft</strong> tra creatività, emozioni e Yoga Bimbi. Un pomeriggio magico per bambini dai <strong className="text-[#00A59B]">6 agli 11 anni</strong>.
                 </p>
                 
-                <div className="bg-[#f8f9fa] rounded-xl p-4 border border-[#00A59B]/10">
-                  <h3 className="text-sm font-bold text-[#00A59B] mb-2">
-                    6 Ottobre 2025
+                <div className="bg-gradient-to-r from-[#FFF3E0] to-[#FFE0B2] rounded-xl p-4 border border-[#FF6B35]/20">
+                  <h3 className="text-sm font-bold text-[#FF6B35] mb-2">
+                    🎃 Laboratorio Halloween Speciale
                   </h3>
-                  <p className="text-sm text-gray-600">
-                    Attraverso la mindfulness e pratiche esperienziali, i docenti impareranno a riconoscere e regolare le proprie emozioni.
+                  <p className="text-sm text-gray-700 mb-2">
+                    Due giornate dedicate alla creatività e al benessere dei bambini
+                  </p>
+                  <p className="text-xs text-gray-600">
+                    Un'esperienza dolce e coinvolgente che combina arte, mindfulness e movimento.
+                  </p>
+                </div>
+                
+                <div className="bg-[#f0fdfa] rounded-xl p-4 border border-[#00A59B]/20">
+                  <p className="text-xs text-gray-700">
+                    <strong className="text-[#00A59B]">Età consigliata:</strong> 6-11 anni • <strong className="text-[#00A59B]">Durata:</strong> 1h30 per sessione
                   </p>
                 </div>
               </div>
               
               <div className="text-center mt-6">
-                <button className="bg-[#00A59B] hover:bg-[#008C95] text-white font-semibold py-2 px-6 rounded-full transition-colors duration-200">
+                <button className="bg-[#FF6B35] hover:bg-[#E55A2B] text-white font-semibold py-2 px-6 rounded-full transition-colors duration-200">
                   Scopri di più
                 </button>
               </div>

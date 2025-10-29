@@ -113,7 +113,8 @@ const page = () => {
               <img src="/about/vision.png" alt="" style={{ width: '30rem' }} />
 
               <p className="lg:text-xl font-normal text-center lg:text-start text-[#373737] lg:leading-[1.5]">
-                Un mondo dove la pedagogia moderna diventa motore di trasformazione collettiva, dove ogni persona - bambino, studente, genitore o adulto - intraprende un viaggio di crescita autentica attraverso l'apprendimento condiviso e le esperienze che nutrono mente, cuore e talenti. Un percorso che porta ciascuno a realizzare pienamente il proprio potenziale, creando un impatto positivo che si estende dalla sfera personale a quella sociale.{" "}
+              Un mondo dove <b>l’Apprendimento</b> diventa motore di trasformazione collettiva, dove ogni persona, bambino, studente, genitore o adulto, intraprende un viaggio di crescita autentica attraverso l’apprendimento condiviso e le esperienze che nutrono mente, cuore e talenti.<br /><br />
+              Un percorso che guida ciascuno a realizzare pienamente il proprio potenziale, generando un impatto positivo che si espande dalla sfera personale a quella sociale.
               </p>
             </div>
           </div>

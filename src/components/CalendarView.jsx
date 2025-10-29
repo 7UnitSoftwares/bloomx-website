@@ -76,7 +76,7 @@ const jsonData = {
     },
     {
       name: "Mindfulness tra le righe",
-      dates: ["2025-10-02", "2025-10-06", "2025-10-09", "2025-10-16", "2025-10-23", "2025-10-30", "2025-11-06", "2025-11-13", "2025-11-20", "2025-11-27", "2025-12-04", "2025-12-11", "2025-12-18", "2025-12-25"],
+      dates: ["2025-11-06", "2025-11-13", "2025-11-20", "2025-11-27", "2025-12-04"],
       time: "20:30-22:00",
       description: "Edizione autunnale: un percorso di lettura consapevole e pratiche di presenza per rallentare, ascoltarsi e vivere il presente con maggiore chiarezza e serenità.",
     },
@@ -85,6 +85,18 @@ const jsonData = {
       dates: ["2025-10-06"],
       time: "18:00-20:00",
       description: "Un incontro dedicato agli insegnanti per scoprire strumenti di educazione emozionale utili a gestire meglio le dinamiche di classe. Attraverso la mindfulness e pratiche esperienziali, i docenti impareranno a riconoscere e regolare le proprie emozioni, creando un clima sereno e costruttivo che favorisca l’apprendimento e il benessere degli studenti.",
+    },
+    {
+      name: "La notte delle luci gentili",
+      dates: ["2025-10-30"],
+      time: "16:30-18:00",
+      description: "Un laboratorio di Halloween soft tra creatività, emozioni e Yoga Bimbi. Un pomeriggio magico per bambini dai 6 agli 11 anni.",
+    },
+    {
+      name: "Laboratorio Halloween soft",
+      dates: ["2025-10-31"],
+      time: "15:30-17:00",
+      description: "Un laboratorio di Halloween soft tra creatività, emozioni e Yoga Bimbi. Un pomeriggio magico per bambini dai 6 agli 11 anni.",
     },
   ],
 };

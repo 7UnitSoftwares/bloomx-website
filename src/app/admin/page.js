@@ -77,15 +77,21 @@ export default function AdminDashboard() {
                             </div>
 
                             <div className="bg-white rounded-lg shadow-md p-6">
-                                <h3 className="text-lg font-semibold text-gray-800 mb-4">Content Tools</h3>
+                                <h3 className="text-lg font-semibold text-gray-800 mb-4">User Management</h3>
                                 <div className="space-y-3">
+                                    <Link
+                                        href="/admin/users"
+                                        className="block w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors text-center"
+                                    >
+                                        👥 Manage Users
+                                    </Link>
                                     <div className="text-sm text-gray-600">
-                                        <p className="mb-2">Available tools:</p>
+                                        <p className="mb-2">Admin features:</p>
                                         <ul className="list-disc list-inside space-y-1">
-                                            <li>Rich text editor with Quill.js</li>
-                                            <li>Word document import</li>
-                                            <li>Blog post database</li>
-                                            <li>Export to code files</li>
+                                            <li>User authentication</li>
+                                            <li>Session management</li>
+                                            <li>Role-based access</li>
+                                            <li>Secure admin panel</li>
                                         </ul>
                                     </div>
                                 </div>
