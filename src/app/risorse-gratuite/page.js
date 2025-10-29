@@ -27,7 +27,7 @@ const blogs = [
   }, 
   {
     "slug": "qual-il-tuo-stile-di-apprendimento-ideale",
-    "title": "QUAL È IL TUO STILE DI APPRENDIMENTO IDEALE? ",
+    "title": "Qual è il tuo stile di apprendimento ideale? ",
     "description": "Ti sei mai chiesto se esiste un solo modo giusto per studiare? \nMagari ti sei sentito dire che basta applicarsi… che tutti devono studiare allo stesso modo… che ci sono tecniche già “conclamate” e universali.",
     "author": "Noemi Orologio",
     "date": "23 ottobre 2025",
@@ -57,7 +57,7 @@ const blogs = [
   },
   {
     slug: "pomodoro",
-    title: "STOP DISTRAZIONI! SCOPRI LA TECNICA DEL POMODORO PER STUDIARE MEGLIO SENZA STRESS",
+    title: "Stop distrazioni! Scopri la tecnica del pomodoro per studiare meglio senza stress",
     description:"La tecnica del Pomodoro è un metodo di gestione del tempo che aiuta a aumentare la produttività e a ridurre lo stress. Scopri come funziona e come puoi applicarla nel tuo studio.",
     author: "Noemi Orologio",
     date: "19 Luglio 2025",
