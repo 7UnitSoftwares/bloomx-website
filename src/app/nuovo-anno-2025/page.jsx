@@ -56,10 +56,10 @@ const NuovoAnno2025 = () => {
         <Container>
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl lg:text-5xl font-bold text-[#00A59B] mb-6 leading-tight">
-              Nuovo anno, nuove opportunità educative con Bloom
+              Nuove opportunità educative con Bloom
             </h1>
             <p className="text-lg lg:text-xl text-[#373737] leading-relaxed mb-8">
-              Inizia un nuovo anno e con esso tante proposte pensate per accompagnare bambini, ragazzi, genitori e docenti in un cammino di crescita armoniosa.
+              Tante proposte pensate per accompagnare bambini, ragazzi, genitori e docenti in un cammino di crescita armoniosa e sostenibile.
             </p>
             <p className="text-base lg:text-lg text-[#555] leading-relaxed max-w-3xl mx-auto">
               In Bloom crediamo che ogni persona custodisca un potenziale unico e che la crescita autentica nasca dall'equilibrio tra mente, emozioni, corpo e relazioni.
@@ -81,11 +81,11 @@ const NuovoAnno2025 = () => {
           <div className="max-w-6xl mx-auto relative z-10">
             <div className="text-center mb-16">
               <h2 className="text-4xl lg:text-5xl font-bold text-[#00A59B] mb-6 relative">
-                La nostra offerta educativa 2025
+              La nostra offerta educativa
                 <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-[#00A59B] to-[#008C95] rounded-full"></div>
               </h2>
               <p className="text-lg text-[#555] max-w-3xl mx-auto">
-                Scopri tutti i nostri servizi pensati per accompagnare ogni fase della crescita
+              Scopri tutti i nostri servizi pensati per accompagnare ogni fase della crescita
               </p>
             </div>
             
