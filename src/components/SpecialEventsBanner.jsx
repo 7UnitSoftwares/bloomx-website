@@ -31,7 +31,7 @@ const SpecialEventsBanner = () => {
         <div className="flex items-center gap-3 lg:gap-4">
           <div className="flex items-center gap-2">
             <span className="text-lg lg:text-xl">⭐</span>
-            <span className="text-sm lg:text-base font-medium">Evento Speciale</span>
+            <span className="text-sm lg:text-base font-medium"></span>
           </div>
           <div className="hidden lg:block w-px h-6 bg-white/30"></div>
           <div className="flex flex-col lg:flex-row lg:items-center lg:gap-4">

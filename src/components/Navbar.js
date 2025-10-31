@@ -65,7 +65,7 @@ const Navbar = () => {
     { title: "Spazio", to: "/spazio" },
     { title: "Eventi", to: "/eventi" },
     { title: "Risorse gratuite", to: "/risorse-gratuite" },
-    { title: "Nuovo anno 2025", to: "/nuovo-anno-2025" },
+    { title: "Novità Educative", to: "/novita-educative" },
     // { title: "Bloom Summer Lab", to: "/bloom-summer-lab" },
     // { title: "Brain Up Summer", to: "/brain-up-summer" },
     // {
