@@ -34,7 +34,10 @@ function BlogEditorContent() {
     const [isLoading, setIsLoading] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
     const [isClient, setIsClient] = useState(false);
+    const [isUploadingImage, setIsUploadingImage] = useState(false);
+    const [imagePreview, setImagePreview] = useState(null);
     const editorRef = useRef(null);
+    const fileInputRef = useRef(null);
 
     // Ensure we're on the client side
     useEffect(() => {
@@ -71,6 +74,11 @@ function BlogEditorContent() {
                     image: post.image || '/blog/default-blog-image.jpg'
                 });
                 
+                // Set image preview
+                if (post.image) {
+                    setImagePreview(post.image);
+                }
+                
                 setIsEditMode(true);
                 // If content has HTML tags, switch to HTML editor
                 if (post.content && post.content.includes('<')) {
@@ -93,7 +101,70 @@ function BlogEditorContent() {
             ...prev,
             [name]: value
         }));
+        // Update preview when image URL changes
+        if (name === 'image') {
+            setImagePreview(value);
+        }
     };
+
+    const handleImageUpload = async (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        // Validate file type
+        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+        if (!validTypes.includes(file.type)) {
+            alert('Invalid file type. Please upload a JPEG, PNG, WebP, or GIF image.');
+            return;
+        }
+
+        // Validate file size (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            alert('File size too large. Please upload an image smaller than 5MB.');
+            return;
+        }
+
+        setIsUploadingImage(true);
+
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const response = await fetch('/api/blog/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                setFormData(prev => ({
+                    ...prev,
+                    image: data.url
+                }));
+                setImagePreview(data.url);
+                alert('Image uploaded successfully!');
+            } else {
+                alert(data.error || 'Failed to upload image. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            alert('Error uploading image. Please try again.');
+        } finally {
+            setIsUploadingImage(false);
+            // Reset file input
+            if (fileInputRef.current) {
+                fileInputRef.current.value = '';
+            }
+        }
+    };
+
+    // Update preview when formData.image changes
+    useEffect(() => {
+        if (formData.image) {
+            setImagePreview(formData.image);
+        }
+    }, [formData.image]);
 
     const generateSlug = (title) => {
         return title
@@ -726,15 +797,63 @@ function BlogEditorContent() {
                             
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Image URL
+                                    Cover Image
                                 </label>
+                                
+                                {/* Image Preview */}
+                                {imagePreview && (
+                                    <div className="mb-3">
+                                        <img
+                                            src={imagePreview}
+                                            alt="Preview"
+                                            className="w-full h-48 object-cover rounded-md border border-gray-300"
+                                            onError={(e) => {
+                                                e.target.style.display = 'none';
+                                            }}
+                                        />
+                                    </div>
+                                )}
+
+                                {/* Upload Button */}
+                                <div className="mb-3">
+                                    <label className="block w-full px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-md border border-blue-200 cursor-pointer transition-colors text-center">
+                                        {isUploadingImage ? 'Uploading...' : '📤 Upload Image'}
+                                        <input
+                                            ref={fileInputRef}
+                                            type="file"
+                                            accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+                                            onChange={handleImageUpload}
+                                            disabled={isUploadingImage}
+                                            className="hidden"
+                                        />
+                                    </label>
+                                    <p className="text-xs text-gray-500 mt-1">
+                                        Max 5MB • JPEG, PNG, WebP, or GIF
+                                    </p>
+                                </div>
+
+                                {/* Or Divider */}
+                                <div className="relative mb-3">
+                                    <div className="absolute inset-0 flex items-center">
+                                        <div className="w-full border-t border-gray-300"></div>
+                                    </div>
+                                    <div className="relative flex justify-center text-sm">
+                                        <span className="px-2 bg-white text-gray-500">OR</span>
+                                    </div>
+                                </div>
+
+                                {/* Image URL Input */}
                                 <input
                                     type="text"
                                     name="image"
                                     value={formData.image}
                                     onChange={handleInputChange}
+                                    placeholder="/blog/image.jpg or https://example.com/image.jpg"
                                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008C95]"
                                 />
+                                <p className="text-xs text-gray-500 mt-1">
+                                    Enter an image URL (relative path like /blog/image.jpg or full URL)
+                                </p>
                             </div>
                         </div>
 
