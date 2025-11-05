@@ -62,7 +62,7 @@ export default function BlogPostContent({ post, blogs }) {
                             .slice(0, 2)
                             .map((relatedPost, index) => (
                                 <Link 
-                                    href={`/blog/${relatedPost.slug}`}
+                                    href={`/risorse-gratuite/${relatedPost.slug}`}
                                     key={index}
                                     className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                                 >

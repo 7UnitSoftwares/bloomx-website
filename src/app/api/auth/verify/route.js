@@ -27,7 +27,9 @@ export async function GET(request) {
         id: user.id,
         username: user.username,
         email: user.email,
-        role: user.role
+        role: user.role,
+        isRoot: user.isRoot === true || user.email === 'root@bloom-bi.it' || user.role === 'root',
+        passwordTemporary: user.passwordTemporary === true
       }
     });
 

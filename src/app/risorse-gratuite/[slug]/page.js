@@ -6,6 +6,9 @@ import { generateBlogMetadata, generateStructuredData } from '@/utils/seo';
 import BlogPostContent from './BlogPostContent';
 import { getAllPosts, getPostBySlug } from '@/lib/blog-db';
 
+// Force dynamic rendering to always fetch fresh blog posts from database
+export const dynamic = 'force-dynamic';
+
 // Note: Blog posts are now fetched dynamically from the database
 // See generateMetadata and BlogPost component below
 

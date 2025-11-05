@@ -13,11 +13,12 @@ Your `/admin` routes are now fully protected with a simple but effective authent
 - **Middleware Protection**: All `/admin/*` routes are protected
 - **User Management**: Admin interface to manage users
 
-### ✅ **Default Credentials**
+### ✅ **Root Account**
 ```
-Username: admin
-Password: admin123
+Email: root@bloom-bi.it
+Password: rootWinterStrike
 ```
+**Note**: The root account is protected and cannot be deleted. It is only visible to root users.
 
 ### ✅ **Protected Routes**
 - `/admin` - Main dashboard
@@ -70,7 +71,7 @@ Password: admin123
 
 ### **1. First Login**
 1. Navigate to `/admin/login`
-2. Use default credentials: `admin` / `admin123`
+2. Use your root account credentials or credentials provided by your administrator
 3. You'll be redirected to the admin dashboard
 
 ### **2. Accessing Admin Features**
@@ -81,7 +82,8 @@ Password: admin123
 ### **3. User Management**
 - Visit `/admin/users` to manage admin users
 - View user information and last login times
-- Delete users (except the last admin user)
+- Create new admin users as needed
+- Delete users (root account is protected and cannot be deleted)
 
 ### **4. Logout**
 - Click the "Logout" button in the admin navigation
@@ -113,21 +115,22 @@ The authentication system uses a JSON file at `src/data/auth.json`:
 {
   "users": [
     {
-      "id": "admin-1",
-      "username": "admin",
-      "email": "admin@bloom-bi.it",
+      "id": "root-1",
+      "username": "root",
+      "email": "root@bloom-bi.it",
       "password": "hashed_password",
-      "role": "admin",
-      "createdAt": "2025-10-23T...",
-      "lastLogin": "2025-10-23T..."
+      "role": "root",
+      "isRoot": true,
+      "createdAt": "2025-11-05T...",
+      "lastLogin": "2025-11-05T..."
     }
   ],
   "sessions": [
     {
       "id": "session_id",
-      "userId": "admin-1",
-      "expiresAt": "2025-10-24T...",
-      "createdAt": "2025-10-23T..."
+      "userId": "root-1",
+      "expiresAt": "2025-11-06T...",
+      "createdAt": "2025-11-05T..."
     }
   ]
 }
@@ -135,10 +138,16 @@ The authentication system uses a JSON file at `src/data/auth.json`:
 
 ## 🚨 **Important Security Notes**
 
-### **Change Default Password**
-1. After first login, change the default password
-2. Use the user management interface
-3. Create additional admin users as needed
+### **Root Account Protection**
+1. The root account (`root@bloom-bi.it`) is protected and cannot be deleted
+2. Root account is only visible to root users in the user management interface
+3. Root account properties (email, username, role) cannot be modified
+4. Only password and last login can be updated for the root account
+
+### **User Management**
+1. Use the user management interface to create additional admin users
+2. All new users should use strong passwords
+3. Regular users cannot see or modify the root account
 
 ### **Production Deployment**
 - Ensure `src/data/auth.json` is not publicly accessible
@@ -160,9 +169,9 @@ The authentication system uses a JSON file at `src/data/auth.json`:
 ## 🎯 **Next Steps**
 
 1. **Test the system**: Try accessing `/admin` without login
-2. **Login**: Use default credentials to access admin panel
-3. **Change password**: Update default password for security
-4. **Create users**: Add additional admin users if needed
+2. **Login**: Use root credentials to access admin panel
+3. **Create users**: Add additional admin users as needed
+4. **Manage users**: Use the user management interface to maintain your admin team
 5. **Deploy**: The system is ready for production use
 
 ## 🆘 **Troubleshooting**
@@ -185,4 +194,4 @@ The authentication system uses a JSON file at `src/data/auth.json`:
 
 **System Status**: ✅ **Fully Functional**  
 **Security Level**: 🔒 **Production Ready**  
-**Default Access**: `admin` / `admin123`
+**Root Account**: `root@bloom-bi.it` (Protected)
