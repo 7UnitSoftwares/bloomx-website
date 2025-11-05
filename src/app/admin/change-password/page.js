@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Container from '@/components/Container';
+import { useAdminAuth } from '@/hooks/useAdminAuth';
 
 export default function ChangePassword() {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -10,6 +11,10 @@ export default function ChangePassword() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isRequired, setIsRequired] = useState(false);
+  
+  // Verify authentication on client side (handles back button issue)
+  // Note: This will still allow access if user has temporary password
+  useAdminAuth();
 
   useEffect(() => {
     // Check if password change is required

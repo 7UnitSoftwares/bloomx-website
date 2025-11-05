@@ -6,6 +6,7 @@ import AdminNav from '@/components/AdminNav';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
+import { useAdminAuth } from '@/hooks/useAdminAuth';
 
 // Dynamically import ReactQuill to avoid SSR issues
 const ReactQuill = dynamic(() => import('react-quill'), { 
@@ -19,6 +20,9 @@ const mammoth = dynamic(() => import('mammoth'), { ssr: false });
 function BlogEditorContent() {
     const searchParams = useSearchParams();
     const editSlug = searchParams.get('edit');
+    
+    // Verify authentication on client side (handles back button issue)
+    useAdminAuth();
     
     const [formData, setFormData] = useState({
         title: '',
