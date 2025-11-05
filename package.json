@@ -12,7 +12,8 @@
     "blog:word": "node scripts/word-converter.js",
     "blog:editor": "echo 'Visit /admin/blog-editor to use the web interface'",
     "data:backup": "bash scripts/backup-data.sh",
-    "data:verify": "node scripts/verify-data.js"
+    "data:verify": "node scripts/verify-data.js",
+    "debug:auth": "node scripts/debug-auth.js"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

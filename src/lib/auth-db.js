@@ -7,7 +7,10 @@ const AUTH_DB_PATH = path.join(process.cwd(), 'src/data/auth.json');
 
 // Initialize auth database if it doesn't exist
 const initializeAuthDB = () => {
+  console.log(`[AUTH] Initializing auth database at: ${AUTH_DB_PATH}`);
+  
   if (!fs.existsSync(AUTH_DB_PATH)) {
+    console.log('[AUTH] Auth database file does not exist, creating new one...');
     const defaultUsers = {
       users: [
         {
@@ -24,19 +27,30 @@ const initializeAuthDB = () => {
       sessions: []
     };
     
+    // Ensure directory exists
+    const dir = path.dirname(AUTH_DB_PATH);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+      console.log(`[AUTH] Created directory: ${dir}`);
+    }
+    
     fs.writeFileSync(AUTH_DB_PATH, JSON.stringify(defaultUsers, null, 2));
-    console.log('Auth database initialized with root user (root@bloom-bi.it)');
+    console.log('[AUTH] ✅ Auth database initialized with root user (root@bloom-bi.it)');
   } else {
+    console.log('[AUTH] Auth database file exists, checking for root user...');
     // Check if root user exists, if not, add it
     try {
       const data = fs.readFileSync(AUTH_DB_PATH, 'utf8');
       const authDB = JSON.parse(data);
+      
+      console.log(`[AUTH] Current users in database: ${authDB.users ? authDB.users.length : 0}`);
       
       const rootUserExists = authDB.users.some(u => 
         u.isRoot === true || u.email === 'root@bloom-bi.it' || u.role === 'root'
       );
       
       if (!rootUserExists) {
+        console.log('[AUTH] Root user not found, adding root user...');
         const rootUser = {
           id: 'root-1',
           username: 'root',
@@ -51,10 +65,13 @@ const initializeAuthDB = () => {
         // Add root user at the beginning of the array
         authDB.users.unshift(rootUser);
         fs.writeFileSync(AUTH_DB_PATH, JSON.stringify(authDB, null, 2));
-        console.log('Root user added to auth database');
+        console.log('[AUTH] ✅ Root user added to auth database');
+      } else {
+        console.log('[AUTH] ✅ Root user already exists in database');
       }
     } catch (error) {
-      console.error('Error checking for root user:', error);
+      console.error('[AUTH] ❌ Error checking for root user:', error);
+      console.error('[AUTH] Error details:', error.message);
     }
   }
 };
@@ -141,9 +158,18 @@ export const authenticateUser = (username, password) => {
     u.username === username || u.email === username
   );
   
-  if (!user || !verifyPassword(password, user.password)) {
+  if (!user) {
+    console.log(`[AUTH] User not found: ${username}`);
+    console.log(`[AUTH] Available users: ${authDB.users.map(u => u.email).join(', ')}`);
     return null;
   }
+  
+  if (!verifyPassword(password, user.password)) {
+    console.log(`[AUTH] Invalid password for user: ${username}`);
+    return null;
+  }
+  
+  console.log(`[AUTH] Successful login for user: ${username} (${user.email})`);
   
   // Update last login
   user.lastLogin = new Date().toISOString();
