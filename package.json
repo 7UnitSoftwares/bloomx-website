@@ -10,7 +10,9 @@
     "blog:convert": "node scripts/word-to-blog-converter.js",
     "blog:markdown": "node scripts/markdown-blog-generator.js",
     "blog:word": "node scripts/word-converter.js",
-    "blog:editor": "echo 'Visit /admin/blog-editor to use the web interface'"
+    "blog:editor": "echo 'Visit /admin/blog-editor to use the web interface'",
+    "data:backup": "bash scripts/backup-data.sh",
+    "data:verify": "node scripts/verify-data.js"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
