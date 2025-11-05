@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic';
 // Dynamically import ReactQuill to avoid SSR issues
 const ReactQuill = dynamic(() => import('react-quill'), { 
     ssr: false,
-    loading: () => <div className="h-96 bg-gray-100 rounded-md flex items-center justify-center">Loading editor...</div>
+    loading: () => <div className="h-96 bg-gray-100 rounded-md flex items-center justify-center">Caricamento editor...</div>
 });
 
 // Dynamically import mammoth to avoid SSR issues
@@ -26,7 +26,8 @@ function BlogEditorContent() {
         author: 'Noemi Orologio',
         category: 'Learning',
         content: '',
-        image: '/blog/default-blog-image.jpg'
+        image: '/blog/default-blog-image.jpg',
+        date: '' // Date in YYYY-MM-DD format for the input
     });
 
     const [isGenerating, setIsGenerating] = useState(false);
@@ -34,7 +35,10 @@ function BlogEditorContent() {
     const [isLoading, setIsLoading] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
     const [isClient, setIsClient] = useState(false);
+    const [isUploadingImage, setIsUploadingImage] = useState(false);
+    const [imagePreview, setImagePreview] = useState(null);
     const editorRef = useRef(null);
+    const fileInputRef = useRef(null);
 
     // Ensure we're on the client side
     useEffect(() => {
@@ -46,6 +50,18 @@ function BlogEditorContent() {
             import('./quill-custom.css');
         }
     }, []);
+
+    // Set default date for new posts when not in edit mode
+    useEffect(() => {
+        if (isClient && !isEditMode && !formData.date && !editSlug) {
+            const today = new Date();
+            const dateString = today.toISOString().split('T')[0]; // YYYY-MM-DD format
+            setFormData(prev => ({
+                ...prev,
+                date: dateString
+            }));
+        }
+    }, [isClient, isEditMode, editSlug]);
 
     // Load existing blog post for editing
     useEffect(() => {
@@ -68,8 +84,14 @@ function BlogEditorContent() {
                     author: post.author || 'Noemi Orologio',
                     category: post.category || 'Learning',
                     content: post.content || '',
-                    image: post.image || '/blog/default-blog-image.jpg'
+                    image: post.image || '/blog/default-blog-image.jpg',
+                    date: parseItalianDate(post.date) || '' // Parse Italian date to YYYY-MM-DD
                 });
+                
+                // Set image preview
+                if (post.image) {
+                    setImagePreview(post.image);
+                }
                 
                 setIsEditMode(true);
                 // If content has HTML tags, switch to HTML editor
@@ -77,11 +99,11 @@ function BlogEditorContent() {
                     setIsEditingHTML(true);
                 }
             } else {
-                alert('Error loading blog post for editing');
+                alert('Errore nel caricamento del post del blog per la modifica');
             }
         } catch (error) {
             console.error('Error loading blog post:', error);
-            alert('Error loading blog post for editing');
+            alert('Errore nel caricamento del post del blog per la modifica');
         } finally {
             setIsLoading(false);
         }
@@ -93,7 +115,70 @@ function BlogEditorContent() {
             ...prev,
             [name]: value
         }));
+        // Update preview when image URL changes
+        if (name === 'image') {
+            setImagePreview(value);
+        }
     };
+
+    const handleImageUpload = async (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        // Validate file type
+        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif'];
+        if (!validTypes.includes(file.type)) {
+            alert('Invalid file type. Please upload a JPEG, PNG, WebP, or GIF image.');
+            return;
+        }
+
+        // Validate file size (max 5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            alert('File size too large. Please upload an image smaller than 5MB.');
+            return;
+        }
+
+        setIsUploadingImage(true);
+
+        try {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const response = await fetch('/api/blog/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                setFormData(prev => ({
+                    ...prev,
+                    image: data.url
+                }));
+                setImagePreview(data.url);
+                alert('Image uploaded successfully!');
+            } else {
+                alert(data.error || 'Failed to upload image. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error uploading image:', error);
+            alert('Error uploading image. Please try again.');
+        } finally {
+            setIsUploadingImage(false);
+            // Reset file input
+            if (fileInputRef.current) {
+                fileInputRef.current.value = '';
+            }
+        }
+    };
+
+    // Update preview when formData.image changes
+    useEffect(() => {
+        if (formData.image) {
+            setImagePreview(formData.image);
+        }
+    }, [formData.image]);
 
     const generateSlug = (title) => {
         return title
@@ -111,6 +196,49 @@ function BlogEditorContent() {
         const wordCount = textContent.split(/\s+/).length;
         const minutes = Math.ceil(wordCount / wordsPerMinute);
         return `${minutes} min read`;
+    };
+
+    // Convert Italian date format to YYYY-MM-DD for input
+    const parseItalianDate = (italianDate) => {
+        if (!italianDate) return '';
+        
+        // Map Italian month names to numbers
+        const monthMap = {
+            'gennaio': '01', 'febbraio': '02', 'marzo': '03', 'aprile': '04',
+            'maggio': '05', 'giugno': '06', 'luglio': '07', 'agosto': '08',
+            'settembre': '09', 'ottobre': '10', 'novembre': '11', 'dicembre': '12'
+        };
+        
+        // Parse format like "5 novembre 2025"
+        const parts = italianDate.toLowerCase().trim().split(' ');
+        if (parts.length === 3) {
+            const day = parts[0].padStart(2, '0');
+            const month = monthMap[parts[1]];
+            const year = parts[2];
+            if (month && year) {
+                return `${year}-${month}-${day}`;
+            }
+        }
+        return '';
+    };
+
+    // Convert YYYY-MM-DD to Italian date format
+    const formatItalianDate = (dateString) => {
+        if (!dateString) {
+            // Default to current date if no date provided
+            return new Date().toLocaleDateString('it-IT', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+        
+        const date = new Date(dateString + 'T12:00:00'); // Add time to avoid timezone issues
+        return date.toLocaleDateString('it-IT', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+        });
     };
 
     const convertToHTML = (content) => {
@@ -137,18 +265,22 @@ function BlogEditorContent() {
         console.log('Is editing HTML:', isEditingHTML);
         console.log('Generated HTML content:', htmlContent);
         
-        const currentDate = new Date().toLocaleDateString('it-IT', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
-        });
+        // Use the date from formData (already formatted or will be formatted)
+        // If no date is provided, use current date
+        const publicationDate = formData.date 
+            ? formatItalianDate(formData.date) 
+            : new Date().toLocaleDateString('it-IT', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
 
         return {
             slug,
             title: formData.title,
             description: formData.description,
             author: formData.author,
-            date: currentDate,
+            date: publicationDate, // This is the publication date, fixed once set
             readTime,
             category: formData.category,
             image: formData.image,
@@ -199,8 +331,8 @@ function BlogEditorContent() {
                 // Show a preview of the content (first 200 characters)
                 const contentPreview = blogEntry.content.replace(/<[^>]*>/g, '').substring(0, 200) + '...';
                 
-                const action = isEditMode ? 'updated' : 'saved';
-                alert(`Blog entry ${action} successfully!\n\nSlug: ${blogEntry.slug}\nURL: /blog/${blogEntry.slug}\nContent Preview: ${contentPreview}\n\nCode copied to clipboard. You can also manage posts at /admin/blog-manager`);
+                const action = isEditMode ? 'aggiornato' : 'salvato';
+                alert(`Post del blog ${action} con successo!\n\nSlug: ${blogEntry.slug}\nURL: /risorse-gratuite/${blogEntry.slug}\nAnteprima Contenuto: ${contentPreview}\n\nCodice copiato negli appunti. Puoi anche gestire i post su /admin/blog-manager`);
                 
                 // Reset form only if creating new post
                 if (!isEditMode) {
@@ -210,19 +342,20 @@ function BlogEditorContent() {
                         author: 'Noemi Orologio',
                         category: 'Learning',
                         content: '',
-                        image: '/blog/default-blog-image.jpg'
+                        image: '/blog/default-blog-image.jpg',
+                        date: '' // Reset date for new post
                     });
                     setIsEditingHTML(false);
                 }
                 
             } else {
                 const errorData = await saveResponse.json();
-                alert(`Error saving to database: ${errorData.error}`);
+                alert(`Errore nel salvataggio nel database: ${errorData.error}`);
             }
             
         } catch (error) {
             console.error('Error generating blog entry:', error);
-            alert('Error generating blog entry. Please try again.');
+            alert('Errore nella generazione del post del blog. Riprova.');
         } finally {
             setIsGenerating(false);
         }
@@ -230,12 +363,12 @@ function BlogEditorContent() {
 
     const handlePasteFromWord = () => {
         if (!isClient) {
-            alert('Please wait for the editor to load completely.');
+            alert('Attendi il caricamento completo dell\'editor.');
             return;
         }
 
         if (!navigator.clipboard) {
-            alert('Clipboard access is not available in this browser.');
+            alert('L\'accesso agli appunti non è disponibile in questo browser.');
             return;
         }
 
@@ -248,13 +381,13 @@ function BlogEditorContent() {
             setIsEditingHTML(true);
         }).catch(err => {
             console.error('Failed to read clipboard:', err);
-            alert('Failed to read from clipboard. Please try copying the content again.');
+            alert('Impossibile leggere dagli appunti. Prova a copiare nuovamente il contenuto.');
         });
     };
 
     const handleWordImport = async (event) => {
         if (!isClient) {
-            alert('Please wait for the editor to load completely.');
+            alert('Attendi il caricamento completo dell\'editor.');
             return;
         }
 
@@ -290,14 +423,14 @@ function BlogEditorContent() {
                 // Switch to HTML editor mode
                 setIsEditingHTML(true);
                 
-                alert('Word document imported successfully! The content has been converted to HTML with Bloom styling applied.');
+                alert('Documento Word importato con successo! Il contenuto è stato convertito in HTML con lo stile Bloom applicato.');
                 
             } catch (error) {
                 console.error('Error importing Word document:', error);
-                alert('Error importing Word document. Please try copying and pasting the content instead, or use the "Paste from Word" button.');
+                alert('Errore nell\'importazione del documento Word. Prova a copiare e incollare il contenuto invece, o usa il pulsante "Incolla da Word".');
             }
         } else {
-            alert('Please select a .docx file');
+            alert('Seleziona un file .docx');
         }
         
         // Reset the file input
@@ -429,7 +562,7 @@ function BlogEditorContent() {
                         <div className="max-w-4xl mx-auto">
                             <div className="text-center">
                                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#008C95] mx-auto"></div>
-                                <p className="mt-4 text-gray-600">Loading editor...</p>
+                                <p className="mt-4 text-gray-600">Caricamento editor...</p>
                             </div>
                         </div>
                     </Container>
@@ -447,7 +580,7 @@ function BlogEditorContent() {
                         <div className="max-w-4xl mx-auto">
                             <div className="text-center">
                                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#008C95] mx-auto"></div>
-                                <p className="mt-4 text-gray-600">Loading blog post for editing...</p>
+                                <p className="mt-4 text-gray-600">Caricamento post del blog per la modifica...</p>
                             </div>
                         </div>
                     </Container>
@@ -465,17 +598,17 @@ function BlogEditorContent() {
                     <div className="flex justify-between items-center mb-8">
                         <div>
                             <h1 className="text-3xl font-bold text-[#008C95]">
-                                {isEditMode ? 'Edit Blog Post' : 'Blog Editor'}
+                                {isEditMode ? 'Modifica Post del Blog' : 'Editor Blog'}
                             </h1>
                             {isEditMode && (
-                                <p className="text-gray-600 mt-1">Editing: {formData.title}</p>
+                                <p className="text-gray-600 mt-1">Modifica: {formData.title}</p>
                             )}
                         </div>
                         <Link
                             href="/admin/blog-manager"
                             className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md transition-colors"
                         >
-                            📋 Manage Posts
+                            📋 Gestisci Post
                         </Link>
                     </div>
                     
@@ -483,7 +616,7 @@ function BlogEditorContent() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Title *
+                                    Titolo *
                                 </label>
                                 <input
                                     type="text"
@@ -497,7 +630,7 @@ function BlogEditorContent() {
                             
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Category
+                                    Categoria
                                 </label>
                                 <select
                                     name="category"
@@ -513,9 +646,41 @@ function BlogEditorContent() {
                             </div>
                         </div>
 
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    Data di Pubblicazione *
+                                </label>
+                                <input
+                                    type="date"
+                                    name="date"
+                                    value={formData.date}
+                                    onChange={handleInputChange}
+                                    required
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008C95]"
+                                />
+                                <p className="text-xs text-gray-500 mt-1">
+                                    {formData.date ? `Selezionata: ${formatItalianDate(formData.date)}` : 'Seleziona la data di pubblicazione (questa sarà fissa e non cambierà con gli aggiornamenti)'}
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    Autore
+                                </label>
+                                <input
+                                    type="text"
+                                    name="author"
+                                    value={formData.author}
+                                    onChange={handleInputChange}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008C95]"
+                                />
+                            </div>
+                        </div>
+
                         <div className="mb-6">
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Description *
+                                Descrizione *
                             </label>
                             <textarea
                                 name="description"
@@ -529,7 +694,7 @@ function BlogEditorContent() {
 
                         <div className="mb-6">
                             <label className="block text-sm font-medium text-gray-700 mb-2">
-                                Content *
+                                Contenuto *
                             </label>
                             
                             {/* Import Controls */}
@@ -539,11 +704,11 @@ function BlogEditorContent() {
                                     onClick={handlePasteFromWord}
                                     className="px-3 py-1 text-sm bg-blue-100 hover:bg-blue-200 text-blue-700 rounded"
                                 >
-                                    📋 Paste from Word
+                                    📋 Incolla da Word
                                 </button>
                                 
                                 <label className="px-3 py-1 text-sm bg-purple-100 hover:bg-purple-200 text-purple-700 rounded cursor-pointer">
-                                    📄 Import .docx
+                                    📄 Importa .docx
                                     <input
                                         type="file"
                                         accept=".docx"
@@ -557,7 +722,7 @@ function BlogEditorContent() {
                                     onClick={toggleHTMLEditor}
                                     className="px-3 py-1 text-sm bg-green-100 hover:bg-green-200 text-green-700 rounded"
                                 >
-                                    {isEditingHTML ? '📝 Switch to Text' : '✏️ Rich Text Editor'}
+                                    {isEditingHTML ? '📝 Passa al Testo' : '✏️ Editor Rich Text'}
                                 </button>
                                 
                                 {isEditingHTML && (
@@ -567,7 +732,7 @@ function BlogEditorContent() {
                                             onClick={insertWordContent}
                                             className="px-3 py-1 text-sm bg-orange-100 hover:bg-orange-200 text-orange-700 rounded"
                                         >
-                                            🔄 Load Content
+                                            🔄 Carica Contenuto
                                         </button>
                                         <button
                                             type="button"
@@ -578,7 +743,7 @@ function BlogEditorContent() {
                                                     newWindow.document.write(`
                                                         <html>
                                                             <head>
-                                                                <title>Content Preview</title>
+                                                                <title>Anteprima Contenuto</title>
                                                                 <style>
                                                                     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 20px; line-height: 1.6; }
                                                                     h1, h2, h3, h4, h5, h6 { color: #008C95; font-weight: bold; margin: 1.5em 0 1em; }
@@ -597,7 +762,7 @@ function BlogEditorContent() {
                                             }}
                                             className="px-3 py-1 text-sm bg-purple-100 hover:bg-purple-200 text-purple-700 rounded"
                                         >
-                                            👁️ Preview HTML
+                                            👁️ Anteprima HTML
                                         </button>
                                         <button
                                             type="button"
@@ -607,7 +772,7 @@ function BlogEditorContent() {
                                                     newWindow.document.write(`
                                                         <html>
                                                             <head>
-                                                                <title>Raw HTML Content</title>
+                                                                <title>Contenuto HTML Grezzo</title>
                                                                 <style>
                                                                     body { font-family: monospace; padding: 20px; background: #f5f5f5; }
                                                                     pre { background: white; padding: 20px; border-radius: 8px; border: 1px solid #ddd; overflow-x: auto; }
@@ -622,10 +787,10 @@ function BlogEditorContent() {
                                                                 </style>
                                                             </head>
                                                             <body>
-                                                                <h1>Raw HTML Content</h1>
+                                                                <h1>Contenuto HTML Grezzo</h1>
                                                                 <pre>${formData.content}</pre>
                                                                 <div class="rendered">
-                                                                    <h2>How it renders:</h2>
+                                                                    <h2>Come viene renderizzato:</h2>
                                                                     <div>${formData.content}</div>
                                                                 </div>
                                                             </body>
@@ -635,7 +800,7 @@ function BlogEditorContent() {
                                             }}
                                             className="px-3 py-1 text-sm bg-red-100 hover:bg-red-200 text-red-700 rounded"
                                         >
-                                            🔍 Show Raw HTML
+                                            🔍 Mostra HTML Grezzo
                                         </button>
                                     </>
                                 )}
@@ -693,7 +858,7 @@ function BlogEditorContent() {
                                         onChange={handleEditorChange}
                                         modules={quillModules}
                                         formats={quillFormats}
-                                        placeholder="Start writing your blog post..."
+                                        placeholder="Inizia a scrivere il tuo post del blog..."
                                         style={{ minHeight: '400px' }}
                                     />
                                 </div>
@@ -705,7 +870,7 @@ function BlogEditorContent() {
                                     required
                                     rows={15}
                                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008C95]"
-                                    placeholder="Paste your Word document content here..."
+                                    placeholder="Incolla qui il contenuto del documento Word..."
                                 />
                             )}
                         </div>
@@ -713,28 +878,63 @@ function BlogEditorContent() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Author
+                                    Immagine di Copertina
                                 </label>
-                                <input
-                                    type="text"
-                                    name="author"
-                                    value={formData.author}
-                                    onChange={handleInputChange}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008C95]"
-                                />
-                            </div>
-                            
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Image URL
-                                </label>
+                                
+                                {/* Image Preview */}
+                                {imagePreview && (
+                                    <div className="mb-3">
+                                        <img
+                                            src={imagePreview}
+                                            alt="Preview"
+                                            className="w-full h-48 object-cover rounded-md border border-gray-300"
+                                            onError={(e) => {
+                                                e.target.style.display = 'none';
+                                            }}
+                                        />
+                                    </div>
+                                )}
+
+                                {/* Upload Button */}
+                                <div className="mb-3">
+                                    <label className="block w-full px-4 py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-md border border-blue-200 cursor-pointer transition-colors text-center">
+                                        {isUploadingImage ? 'Caricamento in corso...' : '📤 Carica Immagine'}
+                                        <input
+                                            ref={fileInputRef}
+                                            type="file"
+                                            accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+                                            onChange={handleImageUpload}
+                                            disabled={isUploadingImage}
+                                            className="hidden"
+                                        />
+                                    </label>
+                                    <p className="text-xs text-gray-500 mt-1">
+                                        Max 5MB • JPEG, PNG, WebP o GIF
+                                    </p>
+                                </div>
+
+                                {/* Or Divider */}
+                                <div className="relative mb-3">
+                                    <div className="absolute inset-0 flex items-center">
+                                        <div className="w-full border-t border-gray-300"></div>
+                                    </div>
+                                    <div className="relative flex justify-center text-sm">
+                                        <span className="px-2 bg-white text-gray-500">OPPURE</span>
+                                    </div>
+                                </div>
+
+                                {/* Image URL Input */}
                                 <input
                                     type="text"
                                     name="image"
                                     value={formData.image}
                                     onChange={handleInputChange}
+                                    placeholder="/blog/immagine.jpg o https://esempio.com/immagine.jpg"
                                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008C95]"
                                 />
+                                <p className="text-xs text-gray-500 mt-1">
+                                    Inserisci un URL dell'immagine (percorso relativo come /blog/immagine.jpg o URL completo)
+                                </p>
                             </div>
                         </div>
 
@@ -744,7 +944,7 @@ function BlogEditorContent() {
                                     href="/admin/blog-manager"
                                     className="px-6 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-md transition-colors"
                                 >
-                                    Cancel
+                                    Annulla
                                 </Link>
                             )}
                             <button
@@ -753,48 +953,48 @@ function BlogEditorContent() {
                                 className="bg-[#008C95] hover:bg-[#006A70] text-white px-6 py-2 rounded-md disabled:opacity-50"
                             >
                                 {isGenerating 
-                                    ? (isEditMode ? 'Updating...' : 'Generating...') 
-                                    : (isEditMode ? 'Update Blog Post' : 'Generate Blog Entry')
+                                    ? (isEditMode ? 'Aggiornamento in corso...' : 'Generazione in corso...') 
+                                    : (isEditMode ? 'Aggiorna Post del Blog' : 'Genera Post del Blog')
                                 }
                             </button>
                         </div>
                     </form>
 
                     <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-                        <h3 className="text-lg font-semibold text-blue-800 mb-2">How to use:</h3>
+                        <h3 className="text-lg font-semibold text-blue-800 mb-2">Come utilizzare:</h3>
                         <ol className="list-decimal list-inside text-blue-700 space-y-1">
-                            <li><strong>Import from Word:</strong> Copy content from Word and click "Paste from Word" OR select a .docx file</li>
-                            <li><strong>Rich Text Editor:</strong> Click "Rich Text Editor" to switch to TinyMCE editor</li>
-                            <li><strong>Format Content:</strong> Use the professional toolbar to format your content</li>
-                            <li><strong>Preserve Formatting:</strong> Word formatting is automatically preserved and converted</li>
-                            <li>Fill in the title and description</li>
-                            <li>Click "Generate Blog Entry"</li>
-                            <li>Copy the generated code and paste it into both blog files</li>
+                            <li><strong>Importa da Word:</strong> Copia il contenuto da Word e clicca "Incolla da Word" OPPURE seleziona un file .docx</li>
+                            <li><strong>Editor Rich Text:</strong> Clicca "Editor Rich Text" per passare all'editor TinyMCE</li>
+                            <li><strong>Formatta il Contenuto:</strong> Usa la barra degli strumenti professionale per formattare il tuo contenuto</li>
+                            <li><strong>Preserva la Formattazione:</strong> La formattazione di Word viene automaticamente preservata e convertita</li>
+                            <li>Compila il titolo e la descrizione</li>
+                            <li>Clicca "Genera Post del Blog"</li>
+                            <li>Copia il codice generato e incollalo nei file del blog</li>
                         </ol>
                         
                         <div className="mt-4 p-4 bg-green-50 border border-green-200 rounded">
-                            <h4 className="font-semibold text-green-800 mb-2">✨ Professional Quill.js Editor Features:</h4>
+                            <h4 className="font-semibold text-green-800 mb-2">✨ Funzionalità Editor Quill.js Professionale:</h4>
                             <ul className="text-green-700 space-y-1 text-sm">
-                                <li>• <strong>Word Import:</strong> Direct .docx file import with formatting preservation</li>
-                                <li>• <strong>Professional Toolbar:</strong> Full formatting options (bold, italic, headings, lists, etc.)</li>
-                                <li>• <strong>Word Paste:</strong> Paste from Word with automatic formatting conversion</li>
-                                <li>• <strong>Bloom Styling:</strong> Automatic application of brand colors and typography</li>
-                                <li>• <strong>Image Support:</strong> Drag and drop images directly into the editor</li>
-                                <li>• <strong>Color Support:</strong> Text and background color options</li>
-                                <li>• <strong>Alignment:</strong> Text alignment options (left, center, right, justify)</li>
-                                <li>• <strong>Lists & Indentation:</strong> Bullet and numbered lists with indentation</li>
-                                <li>• <strong>Links:</strong> Easy link insertion and editing</li>
-                                <li>• <strong>Clean Interface:</strong> Modern, distraction-free editing experience</li>
+                                <li>• <strong>Importazione Word:</strong> Importazione diretta file .docx con preservazione della formattazione</li>
+                                <li>• <strong>Barra Strumenti Professionale:</strong> Opzioni complete di formattazione (grassetto, corsivo, intestazioni, elenchi, ecc.)</li>
+                                <li>• <strong>Incolla da Word:</strong> Incolla da Word con conversione automatica della formattazione</li>
+                                <li>• <strong>Stile Bloom:</strong> Applicazione automatica dei colori del brand e tipografia</li>
+                                <li>• <strong>Supporto Immagini:</strong> Trascina e rilascia immagini direttamente nell'editor</li>
+                                <li>• <strong>Supporto Colori:</strong> Opzioni per colori del testo e dello sfondo</li>
+                                <li>• <strong>Allineamento:</strong> Opzioni di allineamento del testo (sinistra, centro, destra, giustificato)</li>
+                                <li>• <strong>Elenchi & Indentazione:</strong> Elenchi puntati e numerati con indentazione</li>
+                                <li>• <strong>Link:</strong> Inserimento e modifica facile dei link</li>
+                                <li>• <strong>Interfaccia Pulita:</strong> Esperienza di modifica moderna e senza distrazioni</li>
                             </ul>
                         </div>
                         
                         <div className="mt-4 p-4 bg-purple-50 border border-purple-200 rounded">
-                            <h4 className="font-semibold text-purple-800 mb-2">📄 Word Document Import:</h4>
+                            <h4 className="font-semibold text-purple-800 mb-2">📄 Importazione Documento Word:</h4>
                             <ul className="text-purple-700 space-y-1 text-sm">
-                                <li>• <strong>Method 1:</strong> Copy content from Word → Click "Paste from Word"</li>
-                                <li>• <strong>Method 2:</strong> Click "Import .docx" → Select your Word document</li>
-                                <li>• <strong>Formatting Preserved:</strong> Bold, italic, headings, lists, and colors are maintained</li>
-                                <li>• <strong>Automatic Conversion:</strong> Word styles are converted to proper HTML</li>
+                                <li>• <strong>Metodo 1:</strong> Copia contenuto da Word → Clicca "Incolla da Word"</li>
+                                <li>• <strong>Metodo 2:</strong> Clicca "Importa .docx" → Seleziona il tuo documento Word</li>
+                                <li>• <strong>Formattazione Preservata:</strong> Grassetto, corsivo, intestazioni, elenchi e colori vengono mantenuti</li>
+                                <li>• <strong>Conversione Automatica:</strong> Gli stili di Word vengono convertiti in HTML appropriato</li>
                             </ul>
                         </div>
                     </div>
@@ -815,7 +1015,7 @@ export default function BlogEditor() {
                         <div className="max-w-4xl mx-auto">
                             <div className="text-center">
                                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#008C95] mx-auto"></div>
-                                <p className="mt-4 text-gray-600">Loading editor...</p>
+                                <p className="mt-4 text-gray-600">Caricamento editor...</p>
                             </div>
                         </div>
                     </Container>

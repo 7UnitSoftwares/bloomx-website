@@ -61,10 +61,13 @@ export const savePost = (postData) => {
         const existingIndex = data.posts.findIndex(post => post.slug === postData.slug);
         
         if (existingIndex >= 0) {
-            // Update existing post
+            // Update existing post - preserve createdAt and original date
+            const existingPost = data.posts[existingIndex];
             data.posts[existingIndex] = {
                 ...postData,
-                updatedAt: new Date().toISOString()
+                createdAt: existingPost.createdAt, // Preserve original creation date
+                // date field is preserved from postData (user can change it via date picker if needed)
+                updatedAt: new Date().toISOString() // Track last modification
             };
         } else {
             // Add new post
@@ -114,10 +117,12 @@ export const updatePost = (slug, updates) => {
         
         const postIndex = data.posts.findIndex(post => post.slug === slug);
         if (postIndex >= 0) {
+            const existingPost = data.posts[postIndex];
             data.posts[postIndex] = {
                 ...data.posts[postIndex],
                 ...updates,
-                updatedAt: new Date().toISOString()
+                createdAt: existingPost.createdAt, // Preserve original creation date
+                updatedAt: new Date().toISOString() // Track last modification
             };
             data.lastUpdated = new Date().toISOString();
             fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 2));
