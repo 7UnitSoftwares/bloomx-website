@@ -31,7 +31,9 @@ function BlogEditorContent() {
         category: 'Learning',
         content: '',
         image: '/blog/default-blog-image.jpg',
-        date: '' // Date in YYYY-MM-DD format for the input
+        date: '', // Date in YYYY-MM-DD format for the input
+        forumLink: '', // Forum link for comments
+        showCommentButton: false // Flag to show/hide comment button
     });
 
     const [isGenerating, setIsGenerating] = useState(false);
@@ -89,7 +91,9 @@ function BlogEditorContent() {
                     category: post.category || 'Learning',
                     content: post.content || '',
                     image: post.image || '/blog/default-blog-image.jpg',
-                    date: parseItalianDate(post.date) || '' // Parse Italian date to YYYY-MM-DD
+                    date: parseItalianDate(post.date) || '', // Parse Italian date to YYYY-MM-DD
+                    forumLink: post.forumLink || '',
+                    showCommentButton: post.showCommentButton || false
                 });
                 
                 // Set image preview
@@ -114,10 +118,10 @@ function BlogEditorContent() {
     };
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, type, checked } = e.target;
         setFormData(prev => ({
             ...prev,
-            [name]: value
+            [name]: type === 'checkbox' ? checked : value
         }));
         // Update preview when image URL changes
         if (name === 'image') {
@@ -288,7 +292,9 @@ function BlogEditorContent() {
             readTime,
             category: formData.category,
             image: formData.image,
-            content: htmlContent
+            content: htmlContent,
+            forumLink: formData.forumLink || '',
+            showCommentButton: formData.showCommentButton || false
         };
     };
 
@@ -347,7 +353,9 @@ function BlogEditorContent() {
                         category: 'Learning',
                         content: '',
                         image: '/blog/default-blog-image.jpg',
-                        date: '' // Reset date for new post
+                        date: '', // Reset date for new post
+                        forumLink: '',
+                        showCommentButton: false
                     });
                     setIsEditingHTML(false);
                 }
@@ -940,6 +948,49 @@ function BlogEditorContent() {
                                     Inserisci un URL dell'immagine (percorso relativo come /blog/immagine.jpg o URL completo)
                                 </p>
                             </div>
+                        </div>
+
+                        {/* Forum Comment Section */}
+                        <div className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                            <h3 className="text-lg font-semibold text-gray-800 mb-4">Configurazione Commenti Forum</h3>
+                            
+                            <div className="mb-4">
+                                <label className="flex items-center gap-2 cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        name="showCommentButton"
+                                        checked={formData.showCommentButton}
+                                        onChange={handleInputChange}
+                                        className="w-4 h-4 text-[#008C95] border-gray-300 rounded focus:ring-[#008C95]"
+                                    />
+                                    <span className="text-sm font-medium text-gray-700">
+                                        Mostra pulsante "Lascia un commento" alla fine del post
+                                    </span>
+                                </label>
+                                <p className="text-xs text-gray-500 mt-1 ml-6">
+                                    Se abilitato, verrà mostrato un pulsante che porta al forum per i commenti
+                                </p>
+                            </div>
+
+                            {formData.showCommentButton && (
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                                        Link Forum *
+                                    </label>
+                                    <input
+                                        type="url"
+                                        name="forumLink"
+                                        value={formData.forumLink}
+                                        onChange={handleInputChange}
+                                        required={formData.showCommentButton}
+                                        placeholder="https://forum.example.com/topic/123"
+                                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008C95]"
+                                    />
+                                    <p className="text-xs text-gray-500 mt-1">
+                                        Inserisci l'URL completo del thread/topic del forum per questo post
+                                    </p>
+                                </div>
+                            )}
                         </div>
 
                         <div className="flex justify-end gap-4">
