@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import { useAdminAuth } from '@/hooks/useAdminAuth';
+import Swal from 'sweetalert2';
 
 // Dynamically import ReactQuill to avoid SSR issues
 const ReactQuill = dynamic(() => import('react-quill'), { 
@@ -338,11 +339,13 @@ function BlogEditorContent() {
                     await navigator.clipboard.writeText(blogPageCode);
                 }
                 
-                // Show a preview of the content (first 200 characters)
-                const contentPreview = blogEntry.content.replace(/<[^>]*>/g, '').substring(0, 200) + '...';
-                
-                const action = isEditMode ? 'aggiornato' : 'salvato';
-                alert(`Post del blog ${action} con successo!\n\nSlug: ${blogEntry.slug}\nURL: /risorse-gratuite/${blogEntry.slug}\nAnteprima Contenuto: ${contentPreview}\n\nCodice copiato negli appunti. Puoi anche gestire i post su /admin/blog-manager`);
+                const action = isEditMode ? 'aggiornato' : 'creato';
+                await Swal.fire({
+                    icon: 'success',
+                    title: isEditMode ? 'Post aggiornato' : 'Post creato',
+                    text: `Il post è stato ${action} con successo.`,
+                    confirmButtonText: 'OK'
+                });
                 
                 // Reset form only if creating new post
                 if (!isEditMode) {
