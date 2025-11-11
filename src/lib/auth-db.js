@@ -7,15 +7,19 @@ const AUTH_DB_PATH = path.join(process.cwd(), 'src/data/auth.json');
 
 // Initialize auth database if it doesn't exist
 const initializeAuthDB = () => {
+  console.log(`[AUTH] Initializing auth database at: ${AUTH_DB_PATH}`);
+  
   if (!fs.existsSync(AUTH_DB_PATH)) {
+    console.log('[AUTH] Auth database file does not exist, creating new one...');
     const defaultUsers = {
       users: [
         {
-          id: 'admin-1',
-          username: 'admin',
-          email: 'admin@bloom-bi.it',
-          password: crypto.createHash('sha256').update('admin123').digest('hex'), // Default password
-          role: 'admin',
+          id: 'root-1',
+          username: 'root',
+          email: 'root@bloom-bi.it',
+          password: crypto.createHash('sha256').update('rootWinterStrike').digest('hex'),
+          role: 'root',
+          isRoot: true,
           createdAt: new Date().toISOString(),
           lastLogin: null
         }
@@ -23,8 +27,52 @@ const initializeAuthDB = () => {
       sessions: []
     };
     
+    // Ensure directory exists
+    const dir = path.dirname(AUTH_DB_PATH);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+      console.log(`[AUTH] Created directory: ${dir}`);
+    }
+    
     fs.writeFileSync(AUTH_DB_PATH, JSON.stringify(defaultUsers, null, 2));
-    console.log('Auth database initialized with default admin user (admin/admin123)');
+    console.log('[AUTH] ✅ Auth database initialized with root user (root@bloom-bi.it)');
+  } else {
+    console.log('[AUTH] Auth database file exists, checking for root user...');
+    // Check if root user exists, if not, add it
+    try {
+      const data = fs.readFileSync(AUTH_DB_PATH, 'utf8');
+      const authDB = JSON.parse(data);
+      
+      console.log(`[AUTH] Current users in database: ${authDB.users ? authDB.users.length : 0}`);
+      
+      const rootUserExists = authDB.users.some(u => 
+        u.isRoot === true || u.email === 'root@bloom-bi.it' || u.role === 'root'
+      );
+      
+      if (!rootUserExists) {
+        console.log('[AUTH] Root user not found, adding root user...');
+        const rootUser = {
+          id: 'root-1',
+          username: 'root',
+          email: 'root@bloom-bi.it',
+          password: crypto.createHash('sha256').update('rootWinterStrike').digest('hex'),
+          role: 'root',
+          isRoot: true,
+          createdAt: new Date().toISOString(),
+          lastLogin: null
+        };
+        
+        // Add root user at the beginning of the array
+        authDB.users.unshift(rootUser);
+        fs.writeFileSync(AUTH_DB_PATH, JSON.stringify(authDB, null, 2));
+        console.log('[AUTH] ✅ Root user added to auth database');
+      } else {
+        console.log('[AUTH] ✅ Root user already exists in database');
+      }
+    } catch (error) {
+      console.error('[AUTH] ❌ Error checking for root user:', error);
+      console.error('[AUTH] Error details:', error.message);
+    }
   }
 };
 
@@ -110,15 +158,71 @@ export const authenticateUser = (username, password) => {
     u.username === username || u.email === username
   );
   
-  if (!user || !verifyPassword(password, user.password)) {
+  if (!user) {
+    console.log(`[AUTH] User not found: ${username}`);
+    console.log(`[AUTH] Available users: ${authDB.users.map(u => u.email).join(', ')}`);
     return null;
   }
+  
+  if (!verifyPassword(password, user.password)) {
+    console.log(`[AUTH] Invalid password for user: ${username}`);
+    return null;
+  }
+  
+  console.log(`[AUTH] Successful login for user: ${username} (${user.email})`);
   
   // Update last login
   user.lastLogin = new Date().toISOString();
   writeAuthDB(authDB);
   
   return user;
+};
+
+// Reset password (admin/root only)
+export const resetPassword = (userId, newPassword) => {
+  const authDB = readAuthDB();
+  const userIndex = authDB.users.findIndex(u => u.id === userId);
+  
+  if (userIndex === -1) return null;
+  
+  const user = authDB.users[userIndex];
+  
+  // For root account, allow password reset but keep other restrictions
+  if (user && (user.isRoot === true || user.email === 'root@bloom-bi.it' || user.role === 'root')) {
+    user.password = hashPassword(newPassword);
+    user.passwordTemporary = true; // Mark as temporary so root must change it
+    writeAuthDB(authDB);
+    return user;
+  }
+  
+  // For regular users, reset password and mark as temporary
+  authDB.users[userIndex].password = hashPassword(newPassword);
+  authDB.users[userIndex].passwordTemporary = true;
+  writeAuthDB(authDB);
+  
+  return authDB.users[userIndex];
+};
+
+// Change password (user changes their own password)
+export const changePassword = (userId, currentPassword, newPassword) => {
+  const authDB = readAuthDB();
+  const userIndex = authDB.users.findIndex(u => u.id === userId);
+  
+  if (userIndex === -1) return null;
+  
+  const user = authDB.users[userIndex];
+  
+  // Verify current password
+  if (!verifyPassword(currentPassword, user.password)) {
+    return { error: 'Current password is incorrect' };
+  }
+  
+  // Update password and mark as not temporary
+  authDB.users[userIndex].password = hashPassword(newPassword);
+  authDB.users[userIndex].passwordTemporary = false;
+  writeAuthDB(authDB);
+  
+  return authDB.users[userIndex];
 };
 
 // Get user by ID
@@ -130,10 +234,26 @@ export const getUserById = (userId) => {
 // Create new user (admin only)
 export const createUser = (userData) => {
   const authDB = readAuthDB();
+  
+  // Check if email or username already exists
+  const emailExists = authDB.users.some(u => u.email === userData.email);
+  const usernameExists = authDB.users.some(u => u.username === userData.username);
+  
+  if (emailExists) {
+    throw new Error('Email already exists');
+  }
+  if (usernameExists) {
+    throw new Error('Username already exists');
+  }
+  
   const newUser = {
     id: crypto.randomUUID(),
-    ...userData,
+    name: userData.name || userData.username,
+    username: userData.username,
+    email: userData.email,
     password: hashPassword(userData.password),
+    role: userData.role || 'admin',
+    passwordTemporary: true, // Mark password as temporary
     createdAt: new Date().toISOString(),
     lastLogin: null
   };
@@ -151,8 +271,25 @@ export const updateUser = (userId, updates) => {
   
   if (userIndex === -1) return null;
   
-  if (updates.password) {
-    updates.password = hashPassword(updates.password);
+  const user = authDB.users[userIndex];
+  
+  // Prevent modification of root account properties (except password and lastLogin)
+  if (user && (user.isRoot === true || user.email === 'root@bloom-bi.it' || user.role === 'root')) {
+    // Allow password and lastLogin updates, but prevent role/email/username changes
+    const allowedUpdates = {};
+    if (updates.password) {
+      allowedUpdates.password = hashPassword(updates.password);
+    }
+    if (updates.lastLogin !== undefined) {
+      allowedUpdates.lastLogin = updates.lastLogin;
+    }
+    // Only apply allowed updates
+    updates = allowedUpdates;
+  } else {
+    // Normal user - hash password if provided
+    if (updates.password) {
+      updates.password = hashPassword(updates.password);
+    }
   }
   
   authDB.users[userIndex] = { ...authDB.users[userIndex], ...updates };
@@ -164,6 +301,13 @@ export const updateUser = (userId, updates) => {
 // Delete user
 export const deleteUser = (userId) => {
   const authDB = readAuthDB();
+  const user = authDB.users.find(u => u.id === userId);
+  
+  // Prevent deletion of root account
+  if (user && (user.isRoot === true || user.email === 'root@bloom-bi.it' || user.role === 'root')) {
+    return false; // Cannot delete root account
+  }
+  
   authDB.users = authDB.users.filter(u => u.id !== userId);
   authDB.sessions = authDB.sessions.filter(s => s.userId !== userId);
   writeAuthDB(authDB);
@@ -181,9 +325,28 @@ export const logout = (sessionId) => {
 };
 
 // Get all users (admin only)
-export const getAllUsers = () => {
+// If currentUserId is provided, root users will be hidden from non-root users
+export const getAllUsers = (currentUserId = null) => {
   const authDB = readAuthDB();
-  return authDB.users.map(user => ({
+  
+  // Get current user to check if they're root
+  let currentUser = null;
+  if (currentUserId) {
+    currentUser = authDB.users.find(u => u.id === currentUserId);
+  }
+  
+  const isCurrentUserRoot = currentUser && (currentUser.isRoot === true || currentUser.email === 'root@bloom-bi.it' || currentUser.role === 'root');
+  
+  // Filter users based on visibility rules
+  let filteredUsers = authDB.users;
+  if (!isCurrentUserRoot) {
+    // Hide root users from non-root users
+    filteredUsers = authDB.users.filter(user => 
+      !(user.isRoot === true || user.email === 'root@bloom-bi.it' || user.role === 'root')
+    );
+  }
+  
+  return filteredUsers.map(user => ({
     ...user,
     password: undefined // Don't return password hashes
   }));

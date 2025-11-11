@@ -10,7 +10,10 @@
     "blog:convert": "node scripts/word-to-blog-converter.js",
     "blog:markdown": "node scripts/markdown-blog-generator.js",
     "blog:word": "node scripts/word-converter.js",
-    "blog:editor": "echo 'Visit /admin/blog-editor to use the web interface'"
+    "blog:editor": "echo 'Visit /admin/blog-editor to use the web interface'",
+    "data:backup": "bash scripts/backup-data.sh",
+    "data:verify": "node scripts/verify-data.js",
+    "debug:auth": "node scripts/debug-auth.js"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -30,7 +33,8 @@
     "react-icons": "^5.3.0",
     "react-quill": "^2.0.0",
     "react-scroll": "^1.9.0",
-    "sharp": "^0.33.2"
+    "sharp": "^0.33.2",
+    "sweetalert2": "^11.12.4"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.20",

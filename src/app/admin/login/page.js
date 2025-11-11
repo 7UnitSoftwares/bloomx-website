@@ -42,14 +42,20 @@ export default function AdminLogin() {
         // Set session cookie
         document.cookie = `admin-session=${data.sessionId}; path=/; max-age=${24 * 60 * 60}; secure; samesite=strict`;
         
-        // Redirect to admin dashboard
-        router.push('/admin');
+        // Check if password change is required
+        if (data.requiresPasswordChange) {
+          // Redirect to password change page
+          router.push('/admin/change-password');
+        } else {
+          // Redirect to admin dashboard
+          router.push('/admin');
+        }
       } else {
-        setError(data.error || 'Login failed');
+        setError(data.error || 'Accesso fallito');
       }
     } catch (error) {
       console.error('Login error:', error);
-      setError('An error occurred during login');
+      setError('Si è verificato un errore durante l\'accesso');
     } finally {
       setIsLoading(false);
     }
@@ -61,10 +67,10 @@ export default function AdminLogin() {
         <div className="bg-white rounded-lg shadow-lg p-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-[#008C95] mb-2">
-              Admin Login
+              Accesso Admin
             </h1>
             <p className="text-gray-600">
-              Access the Bloom admin panel
+              Accedi al pannello di amministrazione Bloom
             </p>
           </div>
 
@@ -77,7 +83,7 @@ export default function AdminLogin() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
-                Username or Email
+                Nome utente o Email
               </label>
               <input
                 type="text"
@@ -87,7 +93,7 @@ export default function AdminLogin() {
                 onChange={handleInputChange}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008C95] focus:border-transparent"
-                placeholder="Enter your username or email"
+                placeholder="Inserisci il tuo nome utente o email"
               />
             </div>
 
@@ -103,7 +109,7 @@ export default function AdminLogin() {
                 onChange={handleInputChange}
                 required
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008C95] focus:border-transparent"
-                placeholder="Enter your password"
+                placeholder="Inserisci la tua password"
               />
             </div>
 
@@ -112,18 +118,10 @@ export default function AdminLogin() {
               disabled={isLoading}
               className="w-full bg-[#008C95] hover:bg-[#006A70] text-white font-semibold py-2 px-4 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {isLoading ? 'Signing in...' : 'Sign In'}
+              {isLoading ? 'Accesso in corso...' : 'Accedi'}
             </button>
           </form>
 
-          <div className="mt-8 text-center">
-            <p className="text-sm text-gray-500">
-              Default credentials: <strong>admin</strong> / <strong>admin123</strong>
-            </p>
-            <p className="text-xs text-gray-400 mt-2">
-              Please change the default password after first login
-            </p>
-          </div>
         </div>
       </div>
     </div>

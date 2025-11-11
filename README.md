@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Overview
+
+Bloom è un progetto Next.js 14 che presenta l'offerta educativa di Bloom Centro Pedagogico. Il sito include percorsi, eventi, risorse gratuite e un'area admin per la gestione di blog e utenti.
 
 ## Getting Started
 
-First, run the development server:
+Install the dependencies and launch the development server:
 
 ```bash
+npm install
 npm run dev
-# or
+# oppure
+yarn install
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Il sito sarà disponibile su [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## HeyBloom AI Chat
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+L'endpoint pubblico `/heybloom` espone HeyBloom, l'assistente AI in stile ChatGPT per studenti, genitori ed educatori.
 
-## Learn More
+### Configurazione Ambiente
 
-To learn more about Next.js, take a look at the following resources:
+Per abilitare le risposte AI è necessario impostare almeno una delle variabili seguenti nel file `.env.local` o nell'ambiente di deploy:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# chiave primaria consigliata
+HEYBLOOM_OPENAI_API_KEY=sk-...
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+# opzionali (dispongono di fallback)
+HEYBLOOM_OPENAI_MODEL=gpt-4o-mini
+HEYBLOOM_OPENAI_ENDPOINT=https://api.openai.com/v1/chat/completions
+```
 
-## Deploy on Vercel
+Se queste variabili non sono presenti, il sistema utilizzerà i fallback `OPENAI_API_KEY` e `OPENAI_MODEL` se disponibili. Senza chiave valida, l'endpoint restituirà un errore 503.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### API interna
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Il frontend richiama `POST /api/heybloom` con la lista di messaggi `[ { role: 'user' | 'assistant', content: string } ]`. Il server aggiunge automaticamente un prompt di sistema e inoltra la richiesta al provider AI configurato.
+
+## Available Scripts
+
+```bash
+npm run dev       # avvia il server di sviluppo
+npm run build     # crea la build di produzione
+npm run start     # avvia la build di produzione
+npm run lint      # esegue ESLint
+```
+
+Consulta anche `AUTH_SETUP.md` e `DEPLOYMENT_NOTES.md` per dettagli su autenticazione e gestione dati.

@@ -22,12 +22,31 @@ export async function POST(request) {
       );
     }
 
+    // Check if password is temporary
+    if (user.passwordTemporary === true) {
+      // Create session but mark as requiring password change
+      const sessionId = createSession(user.id);
+      
+      return NextResponse.json({
+        success: true,
+        sessionId,
+        requiresPasswordChange: true,
+        user: {
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          role: user.role
+        }
+      });
+    }
+
     // Create session
     const sessionId = createSession(user.id);
 
     return NextResponse.json({
       success: true,
       sessionId,
+      requiresPasswordChange: false,
       user: {
         id: user.id,
         username: user.username,

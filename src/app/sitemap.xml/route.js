@@ -16,6 +16,7 @@ export async function GET() {
     { path: '/eu-funding', changefreq: 'monthly', priority: '0.6' },
     { path: '/bloom-summer-lab', changefreq: 'weekly', priority: '0.8' },
     { path: '/perche-bloom', changefreq: 'monthly', priority: '0.8' },
+    { path: '/heybloom', changefreq: 'weekly', priority: '0.8' },
   ];
 
   // Blog posts
