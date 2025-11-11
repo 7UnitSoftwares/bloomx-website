@@ -66,7 +66,7 @@ const Navbar = () => {
     { title: "Eventi", to: "/eventi" },
     { title: "Risorse gratuite", to: "/risorse-gratuite" },
     { title: "Novità Educative", to: "/novita-educative" },
-    { title: "HeyBloom", to: "/heybloom", isNew: true },
+    // { title: "HeyBloom", to: "/heybloom", isNew: true },
     // { title: "Bloom Summer Lab", to: "/bloom-summer-lab" },
     // { title: "Brain Up Summer", to: "/brain-up-summer" },
     // {
