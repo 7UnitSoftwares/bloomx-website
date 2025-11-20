@@ -1,14 +1,14 @@
 import SectionWithBackground from "@/components/SectionWithBackground";
 import Image from "next/image";
 import Link from "next/link";
-import { getAllPosts } from '@/lib/blog-db';
+import { getPublishedPosts } from '@/lib/blog-db';
 
 // Force dynamic rendering to always fetch fresh blog posts from database
 export const dynamic = 'force-dynamic';
 
 export default function BlogPage() {
-  // Fetch blog posts from database
-  const blogs = getAllPosts();
+  // Fetch only published blog posts (exclude scheduled posts)
+  const blogs = getPublishedPosts();
 
   return (
     <div className="bg-[#F2F2F2]">
