@@ -33,15 +33,13 @@ export default function AdminLogin() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify(formData),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        // Set session cookie
-        document.cookie = `admin-session=${data.sessionId}; path=/; max-age=${24 * 60 * 60}; secure; samesite=strict`;
-        
         // Check if password change is required
         if (data.requiresPasswordChange) {
           // Redirect to password change page

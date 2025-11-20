@@ -1,4 +1,5 @@
 import { authenticateUser, createSession } from '@/lib/auth-db';
+import { ADMIN_SESSION_COOKIE, getAdminSessionCookieOptions } from '@/lib/cookies';
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
@@ -26,8 +27,7 @@ export async function POST(request) {
     if (user.passwordTemporary === true) {
       // Create session but mark as requiring password change
       const sessionId = createSession(user.id);
-      
-      return NextResponse.json({
+      const response = NextResponse.json({
         success: true,
         sessionId,
         requiresPasswordChange: true,
@@ -38,12 +38,17 @@ export async function POST(request) {
           role: user.role
         }
       });
+      response.cookies.set(
+        ADMIN_SESSION_COOKIE,
+        sessionId,
+        getAdminSessionCookieOptions()
+      );
+      return response;
     }
 
     // Create session
     const sessionId = createSession(user.id);
-
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       sessionId,
       requiresPasswordChange: false,
@@ -54,6 +59,12 @@ export async function POST(request) {
         role: user.role
       }
     });
+    response.cookies.set(
+      ADMIN_SESSION_COOKIE,
+      sessionId,
+      getAdminSessionCookieOptions()
+    );
+    return response;
 
   } catch (error) {
     console.error('Login error:', error);
