@@ -1,5 +1,4 @@
 import { logout } from '@/lib/auth-db';
-import { ADMIN_SESSION_COOKIE, getAdminSessionCookieOptions } from '@/lib/cookies';
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
@@ -13,10 +12,7 @@ export async function POST(request) {
     const response = NextResponse.json({ success: true });
     
     // Clear the session cookie
-    response.cookies.delete(
-      ADMIN_SESSION_COOKIE,
-      getAdminSessionCookieOptions()
-    );
+    response.cookies.delete('admin-session');
     
     return response;
 
