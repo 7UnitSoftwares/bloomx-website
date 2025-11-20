@@ -6,22 +6,25 @@ Benvenuto nella guida all'area amministrativa del sito Bloom! Questa guida ti sp
 
 ## Come Accedere all'Area Amministrativa
 
-### Primo Accesso
+> **Novità:** l'area `/admin` è protetta da un **codice rapido** condiviso
+> internamente. Non è una vera autenticazione, ma evita accessi
+> accidentali di chi non conosce il passcode.  
+> Codice predefinito: `bloom-team-2025` (puoi cambiarlo nello
+> script `src/lib/admin-gate.js`).
 
-1. **Vai alla pagina di login**: Apri il tuo browser e vai all'indirizzo `/admin/login` (esempio: `https://bloom-bi.it/admin/login`)
+### Accesso Diretto
 
-2. **Inserisci le tue credenziali**:
-   - **Email/Username**: Il tuo nome utente o email
-   - **Password**: La tua password di accesso
+1. Apri il browser e vai all'indirizzo `/admin` (esempio: `https://bloom-bi.it/admin`)
+2. Se non hai ancora sbloccato la sessione, verrai reindirizzato alla pagina `Codice di Accesso`
+3. Inserisci il codice condiviso con il team autorizzato
+4. Dopo la verifica si apre automaticamente la dashboard e puoi navigare tra `Blog Editor`, `Blog Manager` o `Utenti`
 
-3. **Clicca su "Accedi"**: Verrai automaticamente reindirizzato alla dashboard principale
+### Note sulla Sicurezza
 
-### Sessioni e Sicurezza
-
-- **Durata della sessione**: Una volta effettuato il login, rimarrai connesso per **24 ore**
-- **Logout automatico**: Dopo 24 ore di inattività, verrai disconnesso automaticamente per motivi di sicurezza
-- **Navigazione fuori dall'area admin**: Se navighi fuori dall'area `/admin` (ad esempio, vai alla homepage o ad altre pagine del sito), la sessione verrà invalidata e dovrai effettuare nuovamente il login per accedere all'area amministrativa
-- **Logout manuale**: Puoi disconnetterti in qualsiasi momento cliccando sul pulsante "Logout" nell'angolo in alto a destra
+- Il codice è definito nell'ambiente server (`ADMIN_ACCESS_CODE`)
+- Il cookie di accesso dura 6 ore e può essere azzerato con il pulsante **Blocca area** nella navbar
+- Chi non conosce il codice verrà sempre reindirizzato alla pagina di blocco
+- Se serve una protezione più forte sarà necessario ripristinare il sistema di autenticazione completo
 
 ---
 

@@ -1,45 +1,25 @@
 "use client";
 
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { useRouter, usePathname } from 'next/navigation';
-import { useState, useEffect } from 'react';
 
 export default function AdminNav() {
-    const [isLoggingOut, setIsLoggingOut] = useState(false);
     const router = useRouter();
-    const pathname = usePathname();
+    const [isLocking, setIsLocking] = useState(false);
 
-    useEffect(() => {
-        // Check if password change is required (except on change-password page itself)
-        if (pathname && !pathname.includes('/admin/change-password') && !pathname.includes('/admin/login')) {
-            fetch('/api/auth/verify')
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success && data.user.passwordTemporary) {
-                        router.push('/admin/change-password');
-                    }
-                })
-                .catch(err => console.error('Error checking password status:', err));
-        }
-    }, [pathname, router]);
-
-    const handleLogout = async () => {
-        setIsLoggingOut(true);
+    const handleLock = async () => {
+        if (isLocking) return;
+        setIsLocking(true);
         try {
-            const response = await fetch('/api/auth/logout', {
-                method: 'POST',
+            await fetch('/api/admin/gate', {
+                method: 'DELETE',
+                credentials: 'include',
             });
-            
-            if (response.ok) {
-                // Clear session cookie
-                document.cookie = 'admin-session=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
-                // Redirect to login page
-                router.push('/admin/login');
-            }
         } catch (error) {
-            console.error('Logout error:', error);
+            // ignore network issues; redirect anyway
         } finally {
-            setIsLoggingOut(false);
+            router.replace('/admin/access?locked=1');
         }
     };
 
@@ -74,21 +54,23 @@ export default function AdminNav() {
                             </Link>
                         </div>
                     </div>
-                    <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2 sm:space-x-4">
+                        <button
+                            type="button"
+                            onClick={handleLock}
+                            disabled={isLocking}
+                            className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+                            title="Rimuove il cookie di accesso e torna al gate"
+                        >
+                            {isLocking ? 'Blocco…' : 'Blocca area'}
+                        </button>
                         <Link
                             href="/"
                             prefetch={false}
-                            className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                            className="text-gray-500 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap"
                         >
                             ← Torna al Sito
                         </Link>
-                        <button
-                            onClick={handleLogout}
-                            disabled={isLoggingOut}
-                            className="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            {isLoggingOut ? 'Disconnessione in corso...' : 'Esci'}
-                        </button>
                     </div>
                 </div>
             </div>

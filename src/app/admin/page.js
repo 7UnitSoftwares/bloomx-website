@@ -4,13 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Container from '@/components/Container';
 import AdminNav from '@/components/AdminNav';
 import Link from 'next/link';
-import { useAdminAuth } from '@/hooks/useAdminAuth';
-
 export default function AdminDashboard() {
     const [stats, setStats] = useState({});
-    
-    // Verify authentication on client side (handles back button issue)
-    useAdminAuth();
 
     useEffect(() => {
         const loadStats = async () => {
