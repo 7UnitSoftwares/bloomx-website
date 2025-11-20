@@ -89,6 +89,27 @@ export default function BlogManager() {
         });
     };
 
+    const isPostScheduled = (post) => {
+        if (!post.scheduledPublishDate) return false;
+        
+        const now = new Date();
+        now.setHours(0, 0, 0, 0);
+        
+        const scheduledDate = new Date(post.scheduledPublishDate);
+        scheduledDate.setHours(0, 0, 0, 0);
+        
+        return scheduledDate > now;
+    };
+
+    const formatScheduledDate = (dateString) => {
+        if (!dateString) return '';
+        return new Date(dateString).toLocaleDateString('it-IT', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+    };
+
     if (loading) {
         return (
             <div className="min-h-screen bg-[#F2F2F2]">
@@ -182,6 +203,11 @@ export default function BlogManager() {
                                                     <span className="px-2 py-1 bg-[#008C95] text-white text-xs font-semibold rounded">
                                                         {post.category}
                                                     </span>
+                                                    {isPostScheduled(post) && (
+                                                        <span className="px-2 py-1 bg-yellow-500 text-white text-xs font-semibold rounded">
+                                                            📅 Programmato: {formatScheduledDate(post.scheduledPublishDate)}
+                                                        </span>
+                                                    )}
                                                     <span className="text-sm text-gray-500">{post.readTime}</span>
                                                 </div>
                                                 <h3 className="text-lg font-semibold text-gray-800 mb-2">

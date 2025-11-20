@@ -33,6 +33,7 @@ function BlogEditorContent() {
         content: '',
         image: '/blog/default-blog-image.jpg',
         date: '', // Date in YYYY-MM-DD format for the input
+        scheduledPublishDate: '', // Scheduled publish date in YYYY-MM-DD format
         forumLink: '', // Forum link for comments
         showCommentButton: false // Flag to show/hide comment button
     });
@@ -93,6 +94,7 @@ function BlogEditorContent() {
                     content: post.content || '',
                     image: post.image || '/blog/default-blog-image.jpg',
                     date: parseItalianDate(post.date) || '', // Parse Italian date to YYYY-MM-DD
+                    scheduledPublishDate: post.scheduledPublishDate || '', // Scheduled publish date
                     forumLink: post.forumLink || '',
                     showCommentButton: post.showCommentButton || false
                 });
@@ -290,6 +292,7 @@ function BlogEditorContent() {
             description: formData.description,
             author: formData.author,
             date: publicationDate, // This is the publication date, fixed once set
+            scheduledPublishDate: formData.scheduledPublishDate || null, // Scheduled publish date (ISO format or null)
             readTime,
             category: formData.category,
             image: formData.image,
@@ -357,6 +360,7 @@ function BlogEditorContent() {
                         content: '',
                         image: '/blog/default-blog-image.jpg',
                         date: '', // Reset date for new post
+                        scheduledPublishDate: '', // Reset scheduled date
                         forumLink: '',
                         showCommentButton: false
                     });
@@ -691,6 +695,25 @@ function BlogEditorContent() {
                                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008C95]"
                                 />
                             </div>
+                        </div>
+
+                        <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                📅 Data di Pubblicazione Programmata (Opzionale)
+                            </label>
+                            <input
+                                type="date"
+                                name="scheduledPublishDate"
+                                value={formData.scheduledPublishDate}
+                                onChange={handleInputChange}
+                                min={new Date().toISOString().split('T')[0]}
+                                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008C95]"
+                            />
+                            <p className="text-xs text-gray-600 mt-2">
+                                {formData.scheduledPublishDate 
+                                    ? `Il post sarà pubblicato il ${formatItalianDate(formData.scheduledPublishDate)}. Fino ad allora, sarà visibile solo nell'area amministrativa.`
+                                    : 'Lascia vuoto per pubblicare immediatamente. Se selezioni una data futura, il post sarà nascosto al pubblico fino a quella data.'}
+                            </p>
                         </div>
 
                         <div className="mb-6">

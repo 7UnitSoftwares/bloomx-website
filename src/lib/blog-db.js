@@ -40,6 +40,37 @@ export const getAllPosts = () => {
     }
 };
 
+// Check if a post is published (not scheduled for future)
+export const isPostPublished = (post) => {
+    if (!post) return false;
+    
+    // If no scheduledPublishDate, post is published
+    if (!post.scheduledPublishDate) {
+        return true;
+    }
+    
+    // Parse scheduled date and compare
+    const now = new Date();
+    now.setHours(0, 0, 0, 0);
+    
+    const scheduledDate = new Date(post.scheduledPublishDate);
+    scheduledDate.setHours(0, 0, 0, 0);
+    
+    // Only published if scheduled date is today or in the past
+    return scheduledDate <= now;
+};
+
+// Get only published posts (exclude scheduled posts that haven't been published yet)
+export const getPublishedPosts = () => {
+    try {
+        const allPosts = getAllPosts();
+        return allPosts.filter(post => isPostPublished(post));
+    } catch (error) {
+        console.error('Error getting published posts:', error);
+        return [];
+    }
+};
+
 // Get a single blog post by slug
 export const getPostBySlug = (slug) => {
     try {

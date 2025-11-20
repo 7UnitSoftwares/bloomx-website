@@ -4,7 +4,7 @@ import SectionWithBackground from "@/components/SectionWithBackground";
 import Banner from "@/components/Banner";
 import { generateBlogMetadata, generateStructuredData } from '@/utils/seo';
 import BlogPostContent from './BlogPostContent';
-import { getAllPosts, getPostBySlug } from '@/lib/blog-db';
+import { getAllPosts, getPostBySlug, isPostPublished, getPublishedPosts } from '@/lib/blog-db';
 
 // Force dynamic rendering to always fetch fresh blog posts from database
 export const dynamic = 'force-dynamic';
@@ -29,16 +29,17 @@ export async function generateMetadata({ params }) {
 export default function BlogPost({ params }) {
     // Fetch the specific post from database
     const post = getPostBySlug(params.slug);
-    // Also get all posts for navigation/related posts
-    const allBlogs = getAllPosts();
+    // Also get published posts for navigation/related posts
+    const allBlogs = getPublishedPosts();
 
-    if (!post) {
+    // Check if post exists and is published
+    if (!post || !isPostPublished(post)) {
         return (
             <div className="min-h-screen bg-[#F2F2F2] flex items-center justify-center">
                 <Container>
                     <div className="text-center">
                         <h1 className="text-3xl font-bold text-[#008C95] mb-4">Post non trovato</h1>
-                        <p className="text-gray-600 mb-6">Il post che stai cercando non esiste o è stato rimosso.</p>
+                        <p className="text-gray-600 mb-6">Il post che stai cercando non esiste, è stato rimosso o non è ancora stato pubblicato.</p>
                     </div>
                 </Container>
             </div>
