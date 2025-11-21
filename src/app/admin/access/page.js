@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Container from '@/components/Container';
 
-export default function AdminAccessGatePage() {
+function AdminAccessGateForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const from = searchParams.get('from') || '/admin';
@@ -110,6 +110,24 @@ export default function AdminAccessGatePage() {
         </div>
       </Container>
     </div>
+  );
+}
+
+export default function AdminAccessGatePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#F2F2F2] flex items-center py-12">
+        <Container>
+          <div className="max-w-md mx-auto bg-white rounded-2xl shadow-lg p-8">
+            <div className="text-center">
+              <p className="text-gray-600">Caricamento...</p>
+            </div>
+          </div>
+        </Container>
+      </div>
+    }>
+      <AdminAccessGateForm />
+    </Suspense>
   );
 }
 
