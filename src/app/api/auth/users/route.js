@@ -1,23 +1,8 @@
-import { getAllUsers, verifySession, createUser } from '@/lib/auth-db';
+import { getAllUsers, createUser } from '@/lib/auth-db';
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
-
 export async function GET(request) {
   try {
-    // Get current user from session
-    const cookieStore = await cookies();
-    const sessionId = cookieStore.get('admin-session')?.value;
-    
-    let currentUserId = null;
-    if (sessionId) {
-      const sessionUser = verifySession(sessionId);
-      if (sessionUser) {
-        currentUserId = sessionUser.id;
-      }
-    }
-    
-    // Get users filtered by visibility rules
-    const users = getAllUsers(currentUserId);
+    const users = getAllUsers();
     
     return NextResponse.json({
       success: true,
@@ -35,25 +20,6 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
-    // Verify session
-    const cookieStore = await cookies();
-    const sessionId = cookieStore.get('admin-session')?.value;
-    
-    if (!sessionId) {
-      return NextResponse.json(
-        { error: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
-    
-    const sessionUser = verifySession(sessionId);
-    if (!sessionUser) {
-      return NextResponse.json(
-        { error: 'Invalid session' },
-        { status: 401 }
-      );
-    }
-    
     const { name, username, email, password } = await request.json();
     
     if (!name || !username || !email || !password) {

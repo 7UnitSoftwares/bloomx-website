@@ -1,129 +1,26 @@
 "use client";
 
-import React, { useState } from 'react';
+import Link from 'next/link';
 import Container from '@/components/Container';
-import AdminNav from '@/components/AdminNav';
-import { useRouter } from 'next/navigation';
 
 export default function AdminLogin() {
-  const [formData, setFormData] = useState({
-    username: '',
-    password: ''
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const router = useRouter();
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError('');
-
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        // Set session cookie
-        document.cookie = `admin-session=${data.sessionId}; path=/; max-age=${24 * 60 * 60}; secure; samesite=strict`;
-        
-        // Check if password change is required
-        if (data.requiresPasswordChange) {
-          // Redirect to password change page
-          router.push('/admin/change-password');
-        } else {
-          // Redirect to admin dashboard
-          router.push('/admin');
-        }
-      } else {
-        setError(data.error || 'Accesso fallito');
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      setError('Si è verificato un errore durante l\'accesso');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-[#F2F2F2] flex items-center justify-center">
-      <div className="max-w-md w-full mx-auto">
-        <div className="bg-white rounded-lg shadow-lg p-8">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-[#008C95] mb-2">
-              Accesso Admin
-            </h1>
-            <p className="text-gray-600">
-              Accedi al pannello di amministrazione Bloom
-            </p>
-          </div>
-
-          {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-md">
-              <p className="text-red-700 text-sm">{error}</p>
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
-                Nome utente o Email
-              </label>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                value={formData.username}
-                onChange={handleInputChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008C95] focus:border-transparent"
-                placeholder="Inserisci il tuo nome utente o email"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={formData.password}
-                onChange={handleInputChange}
-                required
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008C95] focus:border-transparent"
-                placeholder="Inserisci la tua password"
-              />
-            </div>
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-[#008C95] hover:bg-[#006A70] text-white font-semibold py-2 px-4 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isLoading ? 'Accesso in corso...' : 'Accedi'}
-            </button>
-          </form>
-
+    <div className="min-h-screen bg-[#F2F2F2] flex items-center justify-center py-12">
+      <Container>
+        <div className="max-w-md w-full mx-auto bg-white rounded-lg shadow-lg p-8 text-center">
+          <h1 className="text-3xl font-bold text-[#008C95] mb-2">Accesso non necessario</h1>
+          <p className="text-gray-600">
+            Il pannello di amministrazione di Bloom è ora sempre disponibile senza autenticazione.
+            Apri direttamente la dashboard per gestire utenti, post e contenuti.
+          </p>
+          <Link
+            href="/admin"
+            className="inline-flex justify-center mt-6 w-full bg-[#008C95] hover:bg-[#006A70] text-white font-semibold py-2 px-4 rounded-md transition-colors"
+          >
+            Apri il pannello admin
+          </Link>
         </div>
-      </div>
+      </Container>
     </div>
   );
 }

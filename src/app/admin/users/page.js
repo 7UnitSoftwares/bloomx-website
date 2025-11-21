@@ -4,16 +4,11 @@ import React, { useState, useEffect } from 'react';
 import Container from '@/components/Container';
 import AdminNav from '@/components/AdminNav';
 import Link from 'next/link';
-import { useAdminAuth } from '@/hooks/useAdminAuth';
 
 export default function UserManagement() {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-  const [currentUser, setCurrentUser] = useState(null);
-  
-  // Verify authentication on client side (handles back button issue)
-  useAdminAuth();
   const [showAddUser, setShowAddUser] = useState(false);
   const [showResetPassword, setShowResetPassword] = useState(null);
   const [newUser, setNewUser] = useState({
@@ -25,21 +20,8 @@ export default function UserManagement() {
   const [resetPasswordValue, setResetPasswordValue] = useState('');
 
   useEffect(() => {
-    fetchCurrentUser();
     fetchUsers();
   }, []);
-
-  const fetchCurrentUser = async () => {
-    try {
-      const response = await fetch('/api/auth/verify');
-      if (response.ok) {
-        const data = await response.json();
-        setCurrentUser(data.user);
-      }
-    } catch (error) {
-      console.error('Error fetching current user:', error);
-    }
-  };
 
   const fetchUsers = async () => {
     try {

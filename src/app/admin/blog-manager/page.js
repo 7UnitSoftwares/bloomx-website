@@ -4,15 +4,10 @@ import React, { useState, useEffect } from 'react';
 import Container from '@/components/Container';
 import AdminNav from '@/components/AdminNav';
 import Link from 'next/link';
-import { useAdminAuth } from '@/hooks/useAdminAuth';
-
 export default function BlogManager() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [stats, setStats] = useState({});
-    
-    // Verify authentication on client side (handles back button issue)
-    useAdminAuth();
 
     const loadPosts = async () => {
         try {

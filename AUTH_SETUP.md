@@ -4,6 +4,11 @@
 
 The authentication system uses a JSON file at `src/data/auth.json` to store user accounts. This file is **critical** for admin access.
 
+> **Lightweight gate:** even though full login is disabled, set the environment
+> variable `ADMIN_ACCESS_CODE` to enforce the minimal passcode check on every
+> `/admin` page. If you do nothing, the fallback code `bloom-team-2025`
+> (configured in `src/lib/admin-gate.js`) will be used for all environments.
+
 ## Initial Setup
 
 ### Automatic Initialization
