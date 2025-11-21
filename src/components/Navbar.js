@@ -63,7 +63,8 @@ const Navbar = () => {
     // },
     
     { title: "Spazio", to: "/spazio" },
-    { title: "Eventi", to: "/eventi" },
+    { title: "Eventi", to: "https://portal.bloom-bi.it/events" },
+    { title: "Forum", to: "https://portal.bloom-bi.it/forum" },
     { title: "Risorse gratuite", to: "/risorse-gratuite" },
     { title: "Novità Educative", to: "/novita-educative" },
     // { title: "HeyBloom", to: "/heybloom", isNew: true },
