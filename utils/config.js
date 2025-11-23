@@ -1,7 +1,3 @@
-import getConfig from 'next/config';
-
-const { publicRuntimeConfig, serverRuntimeConfig } = getConfig() || {};
-
 // Server-side logger that will be visible in ArgoCD
 const serverLogger = {
     info: (...args) => {
@@ -17,25 +13,21 @@ const serverLogger = {
 };
 
 export const getApiBaseUrl = () => {
+    // Use environment variables directly (App Router compatible)
+    const value = process.env.NEXT_PUBLIC_API_BASE_URL;
     if (typeof window === 'undefined') {
-        // Server-side
-        const value = serverRuntimeConfig?.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_API_BASE_URL;
         serverLogger.info('API Base URL:', value ? 'Found' : 'Missing');
-        return value;
     }
-    // Client-side
-    return publicRuntimeConfig?.NEXT_PUBLIC_API_BASE_URL || process.env.NEXT_PUBLIC_API_BASE_URL;
+    return value;
 };
 
 export const getApiKey = () => {
+    // Use environment variables directly (App Router compatible)
+    const value = process.env.NEXT_PUBLIC_API_KEY;
     if (typeof window === 'undefined') {
-        // Server-side
-        const value = serverRuntimeConfig?.NEXT_PUBLIC_API_KEY || process.env.NEXT_PUBLIC_API_KEY;
         serverLogger.info('API Key:', value ? 'Found' : 'Missing');
-        return value;
     }
-    // Client-side
-    return publicRuntimeConfig?.NEXT_PUBLIC_API_KEY || process.env.NEXT_PUBLIC_API_KEY;
+    return value;
 };
 
 // Validate environment variables
@@ -55,10 +47,6 @@ export const validateEnv = () => {
             NODE_ENV: process.env.NODE_ENV,
             hasApiBaseUrl: !!apiBaseUrl,
             hasApiKey: !!apiKey,
-            runtimeConfig: {
-                hasPublicConfig: !!publicRuntimeConfig,
-                hasServerConfig: !!serverRuntimeConfig
-            }
         });
         
         return false;
