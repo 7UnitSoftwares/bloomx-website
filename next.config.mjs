@@ -31,27 +31,7 @@ const nextConfig = {
     },
     // Handle domain redirects
     async redirects() {
-        return [
-            {
-                source: '/:path*',
-                has: [
-                    {
-                        type: 'host',
-                        value: 'www.bloom-bi.it',
-                    },
-                ],
-                destination: 'https://bloom-bi.it/:path*',
-                permanent: true,
-            },
-            // Redirect staging URLs to production in production environment
-            ...(process.env.NODE_ENV === 'production' && process.env.VERCEL_URL && !process.env.VERCEL_URL.includes('bloom-bi.it')
-                ? [{
-                    source: '/(.*)',
-                    destination: 'https://bloom-bi.it/$1',
-                    permanent: true,
-                }]
-                : []),
-        ];
+        return [];
     },
 }
 
