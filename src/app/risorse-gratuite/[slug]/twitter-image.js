@@ -34,7 +34,8 @@ const blogs = [
 ];
 
 export default async function Image({ params }) {
-  const post = blogs.find(blog => blog.slug === params.slug) || {
+  const { slug } = await params;
+  const post = blogs.find(blog => blog.slug === slug) || {
     title: 'Bloom Blog',
     description: 'Articoli, guide e risorse per studenti, genitori e professionisti',
     image: '/logo/bloom_og.png',

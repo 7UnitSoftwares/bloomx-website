@@ -3,7 +3,7 @@ import { getPostBySlug, updatePost, deletePost } from '@/lib/blog-db';
 
 export async function GET(request, { params }) {
     try {
-        const { slug } = params;
+        const { slug } = await params;
         const post = getPostBySlug(slug);
         
         if (post) {
@@ -18,7 +18,7 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
     try {
-        const { slug } = params;
+        const { slug } = await params;
         const updates = await request.json();
         const result = updatePost(slug, updates);
         
@@ -34,7 +34,7 @@ export async function PUT(request, { params }) {
 
 export async function DELETE(request, { params }) {
     try {
-        const { slug } = params;
+        const { slug } = await params;
         const result = deletePost(slug);
         
         if (result.success) {

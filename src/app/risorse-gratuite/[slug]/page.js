@@ -14,7 +14,8 @@ export const dynamic = 'force-dynamic';
 
 // Generate metadata for each blog post
 export async function generateMetadata({ params }) {
-    const post = getPostBySlug(params.slug);
+    const { slug } = await params;
+    const post = getPostBySlug(slug);
 
     if (!post) {
         return {
@@ -26,9 +27,10 @@ export async function generateMetadata({ params }) {
     return generateBlogMetadata(post);
 }
 
-export default function BlogPost({ params }) {
+export default async function BlogPost({ params }) {
     // Fetch the specific post from database
-    const post = getPostBySlug(params.slug);
+    const { slug } = await params;
+    const post = getPostBySlug(slug);
     // Also get published posts for navigation/related posts
     const allBlogs = getPublishedPosts();
 
